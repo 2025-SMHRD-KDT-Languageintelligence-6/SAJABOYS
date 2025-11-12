@@ -1,0 +1,13 @@
+package com.project.chaser;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class ChaserApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
