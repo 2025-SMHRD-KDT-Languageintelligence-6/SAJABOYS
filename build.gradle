@@ -25,16 +25,26 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-websocket'
-	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.5'
-	compileOnly 'org.projectlombok:lombok'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	runtimeOnly 'com.mysql:mysql-connector-j'
-	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.5'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    // JSP, JSTL, EL 사용에 필요한 라이브러리 추가
+    // jasper : Tomcat의 내장 JSP 컴파일러
+    // Maven Repository 에서 라이브러리 검색 - gradle 코드 복사
+    //                      라이브러리 버전 고르는 기준 : 사용량 많은 것
+    implementation("org.apache.tomcat.embed:tomcat-embed-jasper:11.0.11")
+    implementation("org.apache.tomcat:tomcat-jasper-el:11.0.11")
+    implementation("jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.2")
+    implementation("org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1") // 구현체
+
+    // Spring Initializr 에서 추가해서 넣었던 라이브러리들
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.5'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.5'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 tasks.named('test') {
