@@ -9,10 +9,13 @@ import lombok.*;
 @ToString   // 해당 인스턴스에 대한 정보를 문자열로 반환 -- 결과값 확인할 때 사용
 public class Sns {
     private int SnsIdx;
+    @NonNull
     private String snsTitle;
+    @NonNull
     private String SnsContent;
     private String SnsFile;
     private String CreatedAt;
+    @NonNull
     private int UserIdx;
     private int SnsViews;
     private int SnsLikes;

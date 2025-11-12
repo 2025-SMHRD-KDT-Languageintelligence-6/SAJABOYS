@@ -9,7 +9,10 @@ import lombok.*;
 @ToString   // 해당 인스턴스에 대한 정보를 문자열로 반환 -- 결과값 확인할 때 사용
 public class Stamp {
     private int StampIdx;
+    @NonNull
     private int FesIdx;
+    @NonNull
     private String CreatedAt;
+    @NonNull
     private int UserIdx;
 }

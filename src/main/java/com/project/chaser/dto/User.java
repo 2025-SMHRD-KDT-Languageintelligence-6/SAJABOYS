@@ -18,6 +18,7 @@ public class User {
     @NonNull
     private String Email;
     private String Phone;
+    @NonNull
     private char Gender;
     private String BirthDate;
     private int Point;
