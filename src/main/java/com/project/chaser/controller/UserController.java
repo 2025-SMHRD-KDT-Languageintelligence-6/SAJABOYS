@@ -5,6 +5,7 @@ import com.project.chaser.service.UserMapper;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -53,5 +54,29 @@ public class UserController {
         // 결과는 다시 main 이동
         // 이거 진행하던 메소드 있던데 그 메소드 실행하려면 요청대로 보냄
         return "redirect:/main";
+    }
+    @PostMapping("/join")
+    public String joinUser(User user, Model model){
+        // 스프링에서 requestScope에 저장할 수 있는 공간 : Model
+        // model에 저장할 때는 addAttribute("저장할 이름", 데이터);
+
+
+        // 인터페이스에 정리된대로 DB 처리
+        int cnt = mapper.joinUser(user);
+
+        // 회원가입 성공(cnt > 0) -> joinSuccess.jsp로 이동
+        // 회원가입 실패(cnt <= 0) -> main.jsp로 이동
+        String viewname = "";
+        if (cnt > 0) {
+            model.addAttribute("joinEmail", member.getEmail());
+            viewname = "joinSuccess";
+        }
+        else {
+            viewname = "redirect:/goMain";
+        }
+
+        // 이미 main.jsp를 실행시키는 메소드가 있으면 그 메소드를 실행
+        // 이거 view name 아니고 다른 메소드 redirect:/메소드명
+        return viewname;
     }
 }
