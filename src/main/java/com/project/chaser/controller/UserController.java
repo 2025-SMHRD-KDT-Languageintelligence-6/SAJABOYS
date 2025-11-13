@@ -52,6 +52,6 @@ public class UserController {
 
         // 결과는 다시 main 이동
         // 이거 진행하던 메소드 있던데 그 메소드 실행하려면 요청대로 보냄
-        return "redirect:/goMain";
+        return "redirect:/main";
     }
 }
