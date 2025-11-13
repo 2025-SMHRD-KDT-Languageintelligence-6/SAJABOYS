@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class UserController {
@@ -17,7 +18,7 @@ public class UserController {
     public String goMain() {
         return "index";
     }
-    @GetMapping("/login")
+    @PostMapping("/login")
     public String login(User user, HttpSession session) {
         // 1. e,p가 Member객체에 묶여서 전달, 메소드 안에서 받아옴
         // 2. mapper 인터페이스에 Member객체를 가지고 데이터 조회하는 기능 정의
