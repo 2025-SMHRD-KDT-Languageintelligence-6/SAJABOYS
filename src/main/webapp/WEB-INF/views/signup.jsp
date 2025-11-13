@@ -134,7 +134,7 @@
                     </select>
 
                     <!-- 이메일 (필수) -->
-                    <label for="emailLocal">이메일</label>
+                    <label for="emailLocal">*이메일</label>
                     <div class="row-inline">
                         <input type="text" id="emailLocal" name="emailLocal" placeholder="아이디" required style="max-width:200px;">
                         <span>@</span>
