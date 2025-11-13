@@ -125,7 +125,7 @@
             </div>
             <div class="helper">
                 아직 회원이 아니신가요?
-                <a href="5_1Signup.html">회원가입 하러가기 &raquo;</a>
+                <a href="signup">회원가입 하러가기 &raquo;</a>
             </div>
         </form>
     </section>

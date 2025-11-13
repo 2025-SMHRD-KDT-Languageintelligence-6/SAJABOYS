@@ -55,6 +55,10 @@ public class UserController {
         // 이거 진행하던 메소드 있던데 그 메소드 실행하려면 요청대로 보냄
         return "redirect:/main";
     }
+    @GetMapping("/signup")
+    public String signup(){
+        return "signup";
+    }
     @PostMapping("/join")
     public String joinUser(User user, Model model){
         // 스프링에서 requestScope에 저장할 수 있는 공간 : Model
