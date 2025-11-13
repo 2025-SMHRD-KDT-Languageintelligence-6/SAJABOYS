@@ -51,14 +51,14 @@
 
         <!-- Logo -->
         <div id="logo">
-            <h1><a href="index.jsp">추적자</a></h1>
+            <h1><a href="index.html">추적자</a></h1>
             <span>지역축제 술레잡기 게임</span>
         </div>
 
         <!-- Nav -->
         <nav id="nav">
             <ul>
-                <li class="current"><a href="index.jsp">Home</a></li>
+                <li class="current"><a href="index.html">Home</a></li>
                 <li>
                     <a href="1_Game.html">게임창</a>
                     <ul>
@@ -125,7 +125,7 @@
             </div>
             <div class="helper">
                 아직 회원이 아니신가요?
-                <a href="5_1Signup.jsp">회원가입 하러가기 &raquo;</a>
+                <a href="5_1Signup.html">회원가입 하러가기 &raquo;</a>
             </div>
         </form>
     </section>
@@ -163,3 +163,4 @@
 </script>
 </body>
 </html>
+
