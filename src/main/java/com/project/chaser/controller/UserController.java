@@ -42,4 +42,16 @@ public class UserController {
         // 5. main.jsp에서 로그인한 회원의 정보를 출력
         return "redirect:/main";
     }
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+        // session에 저장된 값 삭제
+        // 삭제 방법 1) 저장된 이름을 알고 있으니까 그 이름으로 저장된 세션 삭제
+        //              session.removeAttribute("저장된 이름")
+        // 삭제 방법 2) 현재 애플리케이션 내위 존재하는 세션 모두 삭제
+        session.invalidate();
+
+        // 결과는 다시 main 이동
+        // 이거 진행하던 메소드 있던데 그 메소드 실행하려면 요청대로 보냄
+        return "redirect:/goMain";
+    }
 }
