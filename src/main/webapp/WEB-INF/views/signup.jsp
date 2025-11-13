@@ -43,14 +43,14 @@
 
         <!-- Logo -->
         <div id="logo">
-            <h1><a href="/main">추적자</a></h1>
+            <h1><a href="main">추적자</a></h1>
             <span>지역축제 술레잡기 게임</span>
         </div>
 
         <!-- Nav -->
         <nav id="nav">
             <ul>
-                <li class="current"><a href="/main">Home</a></li>
+                <li class="current"><a href="main">Home</a></li>
                 <li>
                     <a href="/1_Game.html">게임창</a>
                     <ul>
@@ -92,7 +92,7 @@
                     <!-- 아이디 -->
                     <label for="uid">*아이디</label>
                     <div class="row-inline">
-                        <input type="text" id="uid" name="username" placeholder="예) smart"
+                        <input type="text" id="uid" name="UserId" placeholder="예) smart"
                                required minlength="4" maxlength="16"
                                pattern="[a-zA-Z0-9_]{4,16}" style="flex:1" />
                         <button type="button" class="button alt" id="checkBtn">중복체크</button>
@@ -103,7 +103,7 @@
 
                     <label for="pw">*비밀번호</label>
                     <div>
-                        <input type="password" id="pw" name="password" placeholder="영문/숫자/특수문자 8~20자"
+                        <input type="password" id="pw" name="PasswordHash" placeholder="영문/숫자/특수문자 8~20자"
                                required minlength="8" maxlength="20"
                                pattern="(?=.*[A-Za-z])(?=.*\d)(?=.*[~`!@#$%^&*()_\-+=\[\]{}|\\;:'\,./?]).{8,20}" />
                     </div>
@@ -122,7 +122,7 @@
 
                     <!-- 성별 -->
                     <label for="gender">*성별</label>
-                    <select id="gender" name="gender" required>
+                    <select id="gender" name="Gender" required>
                         <option value="">선택</option>
                         <option>남성</option>
                         <option>여성</option>
@@ -173,11 +173,11 @@
 
                     <!-- 생년월일 (선택) -->
                     <label for="birth">생년월일</label>
-                    <input type="date" id="birth" name="birth"/>
+                    <input type="date" id="birth" name="BirthDate"/>
 
                     <!-- 휴대폰 (선택) -->
                     <label for="phone">핸드폰 번호</label>
-                    <input type="tel" id="phone" name="phone" placeholder="01011112222"
+                    <input type="tel" id="phone" name="Phone" placeholder="01011112222"
                            inputmode="numeric" pattern="^01[016789]\d{7,8}$"  />
 
                     <!-- 약관 동의(샘플) -->
