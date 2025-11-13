@@ -18,6 +18,11 @@ public class UserController {
     public String goMain() {
         return "index";
     }
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
     @PostMapping("/login")
     public String login(User user, HttpSession session) {
         // 1. e,p가 Member객체에 묶여서 전달, 메소드 안에서 받아옴
