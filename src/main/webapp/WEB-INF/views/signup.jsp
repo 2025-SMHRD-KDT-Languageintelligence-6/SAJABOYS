@@ -86,7 +86,7 @@
             <h2 id="signupTitle" class="title">회원가입</h2>
 
             <!-- 실제 서비스에서는 action을 회원가입 처리 URL로 변경 -->
-            <form id="signupForm" action="/signup" method="post" novalidate>
+            <form id="signupForm" action="join" method="post" novalidate>
                 <div class="grid-2">
 
                     <!-- 아이디 -->
@@ -128,9 +128,9 @@
                     <label for="gender">*성별</label>
                     <select id="gender" name="Gender" required>
                         <option value="">선택</option>
-                        <option>남성</option>
-                        <option>여성</option>
-                        <option>기타/선택안함</option>
+                        <option value="M">남성</option>
+                        <option value="W">여성</option>
+                        <option value="N>기타/선택안함</option>
                     </select>
 
                     <!-- 이메일 (필수) -->
