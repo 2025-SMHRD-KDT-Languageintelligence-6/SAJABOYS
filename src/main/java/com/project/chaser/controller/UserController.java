@@ -35,6 +35,6 @@ public class UserController {
             session.setAttribute("user", loginUser);
         }
         // 5. main.jsp에서 로그인한 회원의 정보를 출력
-        return "index";
+        return "redirect:/main";
     }
 }
