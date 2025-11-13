@@ -60,10 +60,7 @@ public class UserController {
         return "signup";
     }
     @PostMapping("/join")
-    public String joinUser(User user, Model model){
-        // 스프링에서 requestScope에 저장할 수 있는 공간 : Model
-        // model에 저장할 때는 addAttribute("저장할 이름", 데이터);
-
+    public String joinUser(User user){
 
         // 인터페이스에 정리된대로 DB 처리
         int cnt = mapper.joinUser(user);
