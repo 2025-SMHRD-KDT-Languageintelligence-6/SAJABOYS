@@ -54,7 +54,17 @@
 									<li><a href="#">스템프 투어창</a></li>
 									<li><a href="/html5up-verti/right-sidebar.html">축제 장</a></li>
 									<li><a href="/html5up-verti/no-sidebar.html">커뮤니티</a></li>
-									<li><a href="login">로그인/회원가입</a></li>
+									<li>
+									<c:choose>
+									    <c:when test = "${!empty user}">
+									        <a href="update">개인정보수정</a>
+									        <a href="logout">로그아웃</a>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <a href="login">로그인/회원가입</a>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    </li>
 								</ul>
 							</nav>
 
