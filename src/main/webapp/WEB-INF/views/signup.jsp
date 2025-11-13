@@ -149,29 +149,6 @@
                         </select>
                     </div>
 
-                    <script>
-                        // 이메일 도메인 선택 처리
-                        const domainSel = document.getElementById('domainSel');
-                        const emailDomain = document.getElementById('emailDomain');
-
-                        // ✅ 페이지 로드 시 항상 입력 가능
-                        emailDomain.readOnly = false;
-
-                        domainSel.addEventListener('change', () => {
-                          const selected = domainSel.value;
-                          if (selected) {
-                            // 선택된 도메인 자동 입력 및 읽기 전용 전환
-                            emailDomain.value = selected;
-                            emailDomain.readOnly = true;
-                          } else {
-                            // "직접입력" 선택 시 입력 가능하도록 복구
-                            emailDomain.value = '';
-                            emailDomain.readOnly = false;
-                            emailDomain.focus();
-                          }
-                        });
-                    </script>
-
 
                     <div class="full muted">*는 필수 입력 사항입니다.</div>
 
@@ -187,7 +164,7 @@
                     <!-- 약관 동의(샘플) -->
                     <label for="agree">약관 동의</label>
                     <label class="row-inline" style="gap:.5rem;">
-                        <input type="checkbox" id="agree" required style="width:auto;"> 이용약관 및 개인정보 처리방침에 동의합니다.
+                        <input type="checkbox" id="agree" style="width:auto;"> 이용약관 및 개인정보 처리방침에 동의합니다.
                     </label>
 
                     <!-- 제출 -->
@@ -278,7 +255,7 @@
       if(!hidden){
         hidden = document.createElement('input');
         hidden.type = 'hidden';
-        hidden.name = 'email';
+        hidden.name = 'Email';
         hidden.id = 'emailFull';
         this.appendChild(hidden);
       }
