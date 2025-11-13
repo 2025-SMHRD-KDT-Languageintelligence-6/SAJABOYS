@@ -204,8 +204,7 @@
       emailDomain.focus();
     });
 
-    // 아이디 중복체크 (데모용 모의)
-    const usedIds = ['admin','test','smart1'];
+    // 아이디 중복체크
     document.getElementById('checkBtn').addEventListener('click', () => {
       const v = document.getElementById('uid').value.trim();
       if(!v){ alert('아이디를 입력하세요.'); return; }
