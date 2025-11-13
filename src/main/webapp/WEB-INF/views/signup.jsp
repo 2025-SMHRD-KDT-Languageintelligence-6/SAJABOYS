@@ -210,11 +210,18 @@
       const v = document.getElementById('uid').value.trim();
       if(!v){ alert('아이디를 입력하세요.'); return; }
       if(!/^[a-zA-Z0-9_]{4,16}$/.test(v)){ alert('아이디 형식을 확인하세요.'); return; }
-      if(usedIds.includes(v.toLowerCase())){
-        alert('이미 사용중인 아이디입니다.');
-      }else{
-        alert('사용 가능한 아이디입니다.');
-      }
+      $.ajax({
+        url: '/idCheck',
+        type: 'GET',
+        data: { userId: v },
+        success: function(count) {
+            if(count > 0){
+                alert('이미 사용중인 아이디입니다.');
+            } else {
+                alert('사용 가능한 아이디입니다.');
+            }
+        }
+      });
     });
 
     // 비밀번호 일치 확인
@@ -263,6 +270,7 @@
       //console.log('submit email:', email);
     });
 </script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 </html>
 

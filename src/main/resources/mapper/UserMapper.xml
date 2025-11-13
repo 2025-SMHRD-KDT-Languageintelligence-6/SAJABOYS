@@ -18,4 +18,8 @@
         values (#{UserId}, #{PasswordHash}, #{Name}, #{Nickname}, #{Email}, #{Phone}, #{Gender}, #{BirthDate})
     </insert>
 
+    <select id="idCheck" parameterType="String">
+        select count(UserId) from user where UserId = #{UserId}
+    </select>
+
 </mapper>

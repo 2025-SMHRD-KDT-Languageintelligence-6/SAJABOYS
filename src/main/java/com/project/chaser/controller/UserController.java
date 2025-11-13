@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class UserController {
@@ -68,5 +69,16 @@ public class UserController {
         // 이미 main.jsp를 실행시키는 메소드가 있으면 그 메소드를 실행
         // 이거 view name 아니고 다른 메소드 redirect:/메소드명
         return "redirect:/main";
+    }
+    @GetMapping("/idCheck")
+    @ResponseBody // 응답을 forwarding 방식이 아니라 바로 응답하려고 표시
+    public int idCheck(User check){
+        // 비동기 통신의 결과물을 직접 다시 보내는 메소드
+        // ajax 통신을 하는 파일에서, 결과 파일 작성 X
+
+        // 1. 데이터 접근
+        int count = mapper.idCheck(check.getUserId());
+        System.out.println("중복체크 결과 : " + count);
+        return count;
     }
 }
