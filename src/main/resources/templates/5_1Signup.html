@@ -1,209 +1,209 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>회원가입 | 축제 게임</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>회원가입 | 축제 게임</title>
 
-  <!-- Verti 기본 CSS (사용자가 준 main.css 경로로 연결) -->
-  <link rel="stylesheet" href="/assets/css/main.css" />
+    <!-- Verti 기본 CSS (사용자가 준 main.css 경로로 연결) -->
+    <link rel="stylesheet" href="/assets/css/main.css" />
 
-  <style>
-    /* 페이지 전용 보강 스타일 */
-    .signup-wrap{
-      min-height: 100dvh;
-      display:flex; align-items:center; justify-content:center;
-      padding: 3rem 1rem;
-    }
-    .signup-card{
-      width:100%; max-width:1000px;
-      border-radius:10px;
-    }
-    .title{ text-align:center; font-weight:800; margin-bottom:1rem; }
-    .grid-2{ display:grid; grid-template-columns:160px 1fr; gap:.75rem 1rem; align-items:center; }
-    .grid-2 .full { grid-column:1 / -1; }
-    .row-inline{ display:flex; gap:.5rem; align-items:center; }
-    .button.full{ width:100%; }
-    .muted{ color:#777; font-size:.9em; }
-    .error{ color:#ef4444; font-size:.9em; margin-top:.25rem; display:none; }
-    @media (max-width:736px){ .grid-2{ grid-template-columns:1fr; } }
-  </style>
+    <style>
+        /* 페이지 전용 보강 스타일 */
+        .signup-wrap{
+          min-height: 100dvh;
+          display:flex; align-items:center; justify-content:center;
+          padding: 3rem 1rem;
+        }
+        .signup-card{
+          width:100%; max-width:1000px;
+          border-radius:10px;
+        }
+        .title{ text-align:center; font-weight:800; margin-bottom:1rem; }
+        .grid-2{ display:grid; grid-template-columns:160px 1fr; gap:.75rem 1rem; align-items:center; }
+        .grid-2 .full { grid-column:1 / -1; }
+        .row-inline{ display:flex; gap:.5rem; align-items:center; }
+        .button.full{ width:100%; }
+        .muted{ color:#777; font-size:.9em; }
+        .error{ color:#ef4444; font-size:.9em; margin-top:.25rem; display:none; }
+        @media (max-width:736px){ .grid-2{ grid-template-columns:1fr; } }
+    </style>
 </head>
 <body class="is-preload">
-  
 
-    <!-- Header -->
-				<div id="header-wrapper">
-					<header id="header" class="container">
 
-						<!-- Logo -->
-							<div id="logo">
-								<h1><a href="/html5up-verti/index.html">추적자</a></h1>
-								<span>지역축제 술레잡기 게임</span>
-							</div>
+<!-- Header -->
+<div id="header-wrapper">
+    <header id="header" class="container">
 
-						<!-- Nav -->
-							<nav id="nav">
-								<ul>
-									<li class="current"><a href="/html5up-verti/index.html">Home</a></li>
-									<li>
-										<a href="/html5up-verti/1_Game.html">게임창</a>
-										<ul>
-											<li><a href="#">좀비게임</a></li>
-											<li><a href="#">윌리를 찾아라</a></li>
-											<li><a href="#">경찰과 도둑</a></li>
-											<li><a href="#">거점점령전</a></li>
-											<li>
-												<a href="/html5up-verti/1_1_5Rule.html">룰 북</a>
-												<ul>
-													<li><a href="/html5up-verti/1_1_1zombie.html">좀비게임</a></li>
-													<li><a href="/html5up-verti/1_1_2wily.html">윌리를 찾아라</a></li>
-													<li><a href="/html5up-verti/1_1_3police.html">경찰과 도둑</a></li>
-													<li><a href="/html5up-verti/1_1_4occupy.html">거점점령전</a></li>
-												</ul>
-											</li>
-										</ul>
-									</li>
-									<li><a href="#">스템프 투어창</a></li>
-									<li><a href="/html5up-verti/right-sidebar.html">축제 장</a></li>
-									<li><a href="/html5up-verti/no-sidebar.html">커뮤니티</a></li>
-									<li><a href="/html5up-verti/5_Login.html">로그인/회원가입</a></li>
-								</ul>
-							</nav>
+        <!-- Logo -->
+        <div id="logo">
+            <h1><a href="/index.html">추적자</a></h1>
+            <span>지역축제 술레잡기 게임</span>
+        </div>
 
-					</header>
-				</div>
+        <!-- Nav -->
+        <nav id="nav">
+            <ul>
+                <li class="current"><a href="/index.html">Home</a></li>
+                <li>
+                    <a href="/1_Game.html">게임창</a>
+                    <ul>
+                        <li><a href="#">좀비게임</a></li>
+                        <li><a href="#">윌리를 찾아라</a></li>
+                        <li><a href="#">경찰과 도둑</a></li>
+                        <li><a href="#">거점점령전</a></li>
+                        <li>
+                            <a href="/1_1_5Rule.html">룰 북</a>
+                            <ul>
+                                <li><a href="/1_1_1zombie.html">좀비게임</a></li>
+                                <li><a href="/1_1_2wily.html">윌리를 찾아라</a></li>
+                                <li><a href="/1_1_3police.html">경찰과 도둑</a></li>
+                                <li><a href="/1_1_4occupy.html">거점점령전</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="#">스템프 투어창</a></li>
+                <li><a href="/right-sidebar.html">축제 장</a></li>
+                <li><a href="/no-sidebar.html">커뮤니티</a></li>
+                <li><a href="/5_Login.html">로그인/회원가입</a></li>
+            </ul>
+        </nav>
 
-   
-    <div id="page-wrapper">
+    </header>
+</div>
+
+
+<div id="page-wrapper">
     <main class="signup-wrap">
-      <section class="box signup-card" aria-labelledby="signupTitle">
-        <h2 id="signupTitle" class="title">회원가입</h2>
+        <section class="box signup-card" aria-labelledby="signupTitle">
+            <h2 id="signupTitle" class="title">회원가입</h2>
 
-        <!-- 실제 서비스에서는 action을 회원가입 처리 URL로 변경 -->
-        <form id="signupForm" action="/signup" method="post" novalidate>
-          <div class="grid-2">
+            <!-- 실제 서비스에서는 action을 회원가입 처리 URL로 변경 -->
+            <form id="signupForm" action="/signup" method="post" novalidate>
+                <div class="grid-2">
 
-            <!-- 아이디 -->
-            <label for="uid">*아이디</label>
-            <div class="row-inline">
-              <input type="text" id="uid" name="username" placeholder="예) smart"
-                     required minlength="4" maxlength="16"
-                     pattern="[a-zA-Z0-9_]{4,16}" style="flex:1" />
-              <button type="button" class="button alt" id="checkBtn">중복체크</button>
-            </div>
-            
-
-            <!-- 비밀번호 -->
-            
-            <label for="pw">*비밀번호</label>
-            <div>
-            <input type="password" id="pw" name="password" placeholder="영문/숫자/특수문자 8~20자"
-                   required minlength="8" maxlength="20"
-                   pattern="(?=.*[A-Za-z])(?=.*\d)(?=.*[~`!@#$%^&*()_\-+=\[\]{}|\\;:'\,./?]).{8,20}" />
-            </div>
-
-            <!-- 비밀번호 확인 -->
-            <label for="pw2">*비밀번호 재확인</label>
-            <div>
-              <input type="password" id="pw2" placeholder="비밀번호를 다시 입력"
-                     required minlength="8" maxlength="20" />
-              <div id="pwErr" class="error">비밀번호가 일치하지 않습니다.</div>
-            </div>
-
-            <!-- 이름 -->
-            <label for="name">*이름</label>
-            <input type="text" id="name" name="name" placeholder="예) 홍길동" required />
-
-            <!-- 성별 -->
-            <label for="gender">*성별</label>
-            <select id="gender" name="gender" required>
-              <option value="">선택</option>
-              <option>남성</option>
-              <option>여성</option>
-              <option>기타/선택안함</option>
-            </select>
-
-            <!-- 이메일 (필수) -->
-            <label for="emailLocal">이메일</label>
-            <div class="row-inline">
-              <input type="text" id="emailLocal" name="emailLocal" placeholder="아이디" required style="max-width:200px;">
-              <span>@</span>
-              <input type="text" id="emailDomain" name="emailDomain" placeholder="도메인 입력" required style="flex:1;max-width:100px;">
-              <select id="domainSel" class="alt">
-                <option value="">직접입력</option>
-                <option>gmail.com</option>
-                <option>naver.com</option>
-                <option>daum.net</option>
-                <option>kakao.com</option>
-                <option>outlook.com</option>
-              </select>
-            </div>
-
-            <script>
-              // 이메일 도메인 선택 처리
-              const domainSel = document.getElementById('domainSel');
-              const emailDomain = document.getElementById('emailDomain');
-
-              // ✅ 페이지 로드 시 항상 입력 가능
-              emailDomain.readOnly = false;
-
-              domainSel.addEventListener('change', () => {
-                const selected = domainSel.value;
-                if (selected) {
-                  // 선택된 도메인 자동 입력 및 읽기 전용 전환
-                  emailDomain.value = selected;
-                  emailDomain.readOnly = true;
-                } else {
-                  // "직접입력" 선택 시 입력 가능하도록 복구
-                  emailDomain.value = '';
-                  emailDomain.readOnly = false;
-                  emailDomain.focus();
-                }
-              });
-            </script>
+                    <!-- 아이디 -->
+                    <label for="uid">*아이디</label>
+                    <div class="row-inline">
+                        <input type="text" id="uid" name="username" placeholder="예) smart"
+                               required minlength="4" maxlength="16"
+                               pattern="[a-zA-Z0-9_]{4,16}" style="flex:1" />
+                        <button type="button" class="button alt" id="checkBtn">중복체크</button>
+                    </div>
 
 
-            <div class="full muted">*는 필수 입력 사항입니다.</div>
+                    <!-- 비밀번호 -->
 
-            <!-- 생년월일 (선택) -->
-            <label for="birth">생년월일</label>
-            <input type="date" id="birth" name="birth"/>
+                    <label for="pw">*비밀번호</label>
+                    <div>
+                        <input type="password" id="pw" name="password" placeholder="영문/숫자/특수문자 8~20자"
+                               required minlength="8" maxlength="20"
+                               pattern="(?=.*[A-Za-z])(?=.*\d)(?=.*[~`!@#$%^&*()_\-+=\[\]{}|\\;:'\,./?]).{8,20}" />
+                    </div>
 
-            <!-- 휴대폰 (선택) -->
-            <label for="phone">핸드폰 번호</label>
-            <input type="tel" id="phone" name="phone" placeholder="01011112222"
-                   inputmode="numeric" pattern="^01[016789]\d{7,8}$"  />
+                    <!-- 비밀번호 확인 -->
+                    <label for="pw2">*비밀번호 재확인</label>
+                    <div>
+                        <input type="password" id="pw2" placeholder="비밀번호를 다시 입력"
+                               required minlength="8" maxlength="20" />
+                        <div id="pwErr" class="error">비밀번호가 일치하지 않습니다.</div>
+                    </div>
 
-            <!-- 약관 동의(샘플) -->
-            <label for="agree">약관 동의</label>
-            <label class="row-inline" style="gap:.5rem;">
-              <input type="checkbox" id="agree" required style="width:auto;"> 이용약관 및 개인정보 처리방침에 동의합니다.
-            </label>
+                    <!-- 이름 -->
+                    <label for="name">*이름</label>
+                    <input type="text" id="name" name="name" placeholder="예) 홍길동" required />
 
-            <!-- 제출 -->
-            <div class="full">
-              <button type="submit" class="button full icon solid fa-user-plus">회원가입</button>
-            </div>
-          </div>
-        </form>
-      </section>
+                    <!-- 성별 -->
+                    <label for="gender">*성별</label>
+                    <select id="gender" name="gender" required>
+                        <option value="">선택</option>
+                        <option>남성</option>
+                        <option>여성</option>
+                        <option>기타/선택안함</option>
+                    </select>
+
+                    <!-- 이메일 (필수) -->
+                    <label for="emailLocal">이메일</label>
+                    <div class="row-inline">
+                        <input type="text" id="emailLocal" name="emailLocal" placeholder="아이디" required style="max-width:200px;">
+                        <span>@</span>
+                        <input type="text" id="emailDomain" name="emailDomain" placeholder="도메인 입력" required style="flex:1;max-width:100px;">
+                        <select id="domainSel" class="alt">
+                            <option value="">직접입력</option>
+                            <option>gmail.com</option>
+                            <option>naver.com</option>
+                            <option>daum.net</option>
+                            <option>kakao.com</option>
+                            <option>outlook.com</option>
+                        </select>
+                    </div>
+
+                    <script>
+                        // 이메일 도메인 선택 처리
+                        const domainSel = document.getElementById('domainSel');
+                        const emailDomain = document.getElementById('emailDomain');
+
+                        // ✅ 페이지 로드 시 항상 입력 가능
+                        emailDomain.readOnly = false;
+
+                        domainSel.addEventListener('change', () => {
+                          const selected = domainSel.value;
+                          if (selected) {
+                            // 선택된 도메인 자동 입력 및 읽기 전용 전환
+                            emailDomain.value = selected;
+                            emailDomain.readOnly = true;
+                          } else {
+                            // "직접입력" 선택 시 입력 가능하도록 복구
+                            emailDomain.value = '';
+                            emailDomain.readOnly = false;
+                            emailDomain.focus();
+                          }
+                        });
+                    </script>
+
+
+                    <div class="full muted">*는 필수 입력 사항입니다.</div>
+
+                    <!-- 생년월일 (선택) -->
+                    <label for="birth">생년월일</label>
+                    <input type="date" id="birth" name="birth"/>
+
+                    <!-- 휴대폰 (선택) -->
+                    <label for="phone">핸드폰 번호</label>
+                    <input type="tel" id="phone" name="phone" placeholder="01011112222"
+                           inputmode="numeric" pattern="^01[016789]\d{7,8}$"  />
+
+                    <!-- 약관 동의(샘플) -->
+                    <label for="agree">약관 동의</label>
+                    <label class="row-inline" style="gap:.5rem;">
+                        <input type="checkbox" id="agree" required style="width:auto;"> 이용약관 및 개인정보 처리방침에 동의합니다.
+                    </label>
+
+                    <!-- 제출 -->
+                    <div class="full">
+                        <button type="submit" class="button full icon solid fa-user-plus">회원가입</button>
+                    </div>
+                </div>
+            </form>
+        </section>
     </main>
 
     <div id="footer-wrapper">
-      <div class="container" id="footer">
-        <div id="copyright">
-          <ul class="menu">
-            <li>&copy; 2025 RunBack</li>
-            <li>Verti 테마 기반 커스텀</li>
-          </ul>
+        <div class="container" id="footer">
+            <div id="copyright">
+                <ul class="menu">
+                    <li>&copy; 2025 RunBack</li>
+                    <li>Verti 테마 기반 커스텀</li>
+                </ul>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>
 
-  <!-- 간단한 클라이언트 검증 & 유틸 -->
-  <script>
+<!-- 간단한 클라이언트 검증 & 유틸 -->
+<script>
     // 이메일 도메인 선택
     const domainSel = document.getElementById('domainSel');
     const emailDomain = document.getElementById('emailDomain');
@@ -276,6 +276,6 @@
       hidden.value = email;
       // console.log('submit email:', email);
     });
-  </script>
+</script>
 </body>
 </html>
