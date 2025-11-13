@@ -14,7 +14,7 @@
 		<title>추적자들(축제 술레잡기 사이트)</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="/assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/main.css" />
 	</head>
 	<body class="is-preload homepage">
 		<div id="page-wrapper">
@@ -87,7 +87,7 @@
 
 								<!-- Box -->
 									<section class="box feature">
-										<a href="#" class="image featured"><img src="/html5up-verti/images/pic01.jpg" alt="" /></a>
+										<a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
 										<div class="inner">
 											<header>
 												<h2>자유채팅</h2>
