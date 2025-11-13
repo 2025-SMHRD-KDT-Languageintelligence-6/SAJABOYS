@@ -130,7 +130,7 @@
                         <option value="">선택</option>
                         <option value="M">남성</option>
                         <option value="W">여성</option>
-                        <option value="N>기타/선택안함</option>
+                        <option value="N">기타/선택안함</option>
                     </select>
 
                     <!-- 이메일 (필수) -->
