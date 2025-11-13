@@ -14,6 +14,8 @@ public class User {
     @NonNull
     private String PasswordHash;
     @NonNull
+    private String Name;
+    @NonNull
     private String Nickname;
     @NonNull
     private String Email;

@@ -14,7 +14,8 @@
     </select>
 
     <insert id="joinUser" parameterType="com.project.chaser.dto.User">
-        insert into user values (#{UserId}, #{PasswordHash}, #{Nickname}, #{Email}, #{Phone}, #{Gender}, #{BirthDate})
+        insert into user (UserId, PasswordHash, Name, Nickname, Email, Phone, Gender, BirthDate)
+        values (#{UserId}, #{PasswordHash}, #{Name}, #{Nickname}, #{Email}, #{Phone}, #{Gender}, #{BirthDate})
     </insert>
 
 </mapper>

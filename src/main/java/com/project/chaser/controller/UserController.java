@@ -64,19 +64,8 @@ public class UserController {
         // 인터페이스에 정리된대로 DB 처리
         int cnt = mapper.joinUser(user);
 
-        // 회원가입 성공(cnt > 0) -> joinSuccess.jsp로 이동
-        // 회원가입 실패(cnt <= 0) -> main.jsp로 이동
-        String viewname = "";
-        if (cnt > 0) {
-            model.addAttribute("joinEmail", member.getEmail());
-            viewname = "joinSuccess";
-        }
-        else {
-            viewname = "redirect:/goMain";
-        }
-
         // 이미 main.jsp를 실행시키는 메소드가 있으면 그 메소드를 실행
         // 이거 view name 아니고 다른 메소드 redirect:/메소드명
-        return viewname;
+        return "redirect:/main";
     }
 }

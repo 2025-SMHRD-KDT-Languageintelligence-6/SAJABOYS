@@ -118,7 +118,11 @@
 
                     <!-- 이름 -->
                     <label for="name">*이름</label>
-                    <input type="text" id="name" name="name" placeholder="예) 홍길동" required />
+                    <input type="text" id="name" name="Name" placeholder="예) 홍길동" required />
+
+                    <!-- Nickname -->
+                                <label for="nickname">*닉네임</label>
+                                <input type="text" id="nickname" name="Nickname" placeholder="예) 피카츄" required />
 
                     <!-- 성별 -->
                     <label for="gender">*성별</label>
