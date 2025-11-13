@@ -99,12 +99,12 @@
         <form id="loginForm" action="/login" method="post" novalidate>
             <div class="field">
                 <label for="userid">아이디</label>
-                <input type="text" id="userid" name="username" placeholder="아이디 입력" required autocomplete="username" />
+                <input type="text" id="userid" name="UserId" placeholder="아이디 입력" required autocomplete="username" />
             </div>
 
             <div class="field">
                 <label for="userpw">비밀번호</label>
-                <input type="password" id="userpw" name="password" placeholder="비밀번호 입력" required autocomplete="current-password" />
+                <input type="password" id="userpw" name="PasswordHash" placeholder="비밀번호 입력" required autocomplete="current-password" />
             </div>
 
             <div class="field" style="margin-top:.5rem;">
