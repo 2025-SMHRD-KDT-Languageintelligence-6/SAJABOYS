@@ -119,5 +119,9 @@ public class UserController {
         // 회원정보 수정하고 main으로 이동
         return "redirect:/main";
     }
+    @GetMapping("/findAcconunt")
+    public String findAcconunt() {
+        return "findAcconunt";
+    }
 }
 
