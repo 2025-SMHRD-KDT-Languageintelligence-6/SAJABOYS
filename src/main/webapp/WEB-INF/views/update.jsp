@@ -69,8 +69,8 @@
                     <!-- 아이디 (숨김) -->
                     <input type="hidden" name = "UserId" value="${user.userId}"/>
 
-                    <!-- 기존 비밀번호 (숨김) -->
-                    <input type="hidden" name = "UserId" value="${user.userId}"/>
+                    <!-- 기존 비밀번호 (숨김 작업중) -->
+                    <input type="hidden" name = "UserId1" value="${user.userId}"/>
 
 
                     <!-- 비밀번호 (선택: 변경 시에만 입력) -->
