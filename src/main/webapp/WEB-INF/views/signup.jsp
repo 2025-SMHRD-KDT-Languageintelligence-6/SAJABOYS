@@ -98,7 +98,6 @@
                         <button type="button" class="button alt" id="checkBtn">중복체크</button>
                     </div>
 
-
                     <!-- 비밀번호 -->
 
                     <label for="pw">*비밀번호</label>
@@ -153,7 +152,6 @@
                         </select>
                     </div>
 
-
                     <div class="full muted">*는 필수 입력 사항입니다.</div>
 
                     <!-- 생년월일 (선택) -->
@@ -164,8 +162,6 @@
                     <label for="phone">핸드폰 번호</label>
                     <input type="tel" id="phone" name="Phone" placeholder="01011112222"
                            inputmode="numeric" pattern="^01[016789]\d{7,8}$"  />
-
-
 
                     <!-- 제출 -->
                     <div class="full">
