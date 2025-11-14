@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>자유게시판 | 추적자</title>
+
+  <!-- Verti 기본 CSS -->
+  <link rel="stylesheet" href="assets/css/main.css" />
+
+  <style>
+    body {
+      background:#f5fafc;
+    }
+
+    .board-wrap{
+      max-width:1100px;
+      margin:2.5rem auto 3rem;
+    }
+
+    .board-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:1rem;
+      margin-bottom:1rem;
+      flex-wrap:wrap;
+    }
+
+    .board-title h2{
+      margin:0;
+      font-size:1.8rem;
+      font-weight:800;
+    }
+    .board-title p{
+      margin:.2rem 0 0;
+      font-size:.9rem;
+      color:#777;
+    }
+
+    .board-tools{
+      display:flex;
+      gap:.5rem;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .board-tools select,
+    .board-tools input{
+      border-radius:6px;
+      border:1px solid #ccc;
+      padding:.35rem .5rem;
+      font-size:.9rem;
+    }
+    .board-tools input{
+      min-width:160px;
+    }
+    .board-tools button{
+      font-size:.9rem;
+      padding:.35rem .8rem;
+    }
+
+    .board-box{
+      background:#fff;
+      border-radius:16px;
+      box-shadow:0 4px 12px rgba(0,0,0,.12);
+      padding:1.2rem 1.4rem 1.4rem;
+    }
+
+    .board-table{
+      width:100%;
+      border-collapse:collapse;
+      font-size:.9rem;
+    }
+    .board-table thead{
+      background:#404248;
+      color:#fff;
+    }
+    .board-table th,
+    .board-table td{
+      padding:.55rem .6rem;
+      border-bottom:1px solid #eee;
+      text-align:center;
+    }
+    .board-table td.title{
+      text-align:left;
+    }
+
+    .board-table a{
+      text-decoration:none;
+    }
+
+    .board-empty{
+      text-align:center;
+      padding:2rem 0;
+      color:#666;
+      font-size:.9rem;
+    }
+
+    .board-bottom{
+      margin-top:1rem;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:.5rem;
+    }
+
+    .pagination{
+      display:flex;
+      gap:.25rem;
+      align-items:center;
+      font-size:.85rem;
+    }
+    .pagination button{
+      padding:.2rem .55rem;
+      font-size:.8rem;
+    }
+    .pagination .current{
+      font-weight:700;
+      color:#0090c5;
+    }
+
+    .write-btn{
+      min-width:100px;
+    }
+
+    @media (max-width:736px){
+      .board-table thead{
+        display:none;
+      }
+      .board-table tr{
+        display:block;
+        border-bottom:1px solid #eee;
+        margin-bottom:.6rem;
+      }
+      .board-table td{
+        display:block;
+        text-align:left;
+        border:none;
+        padding:.25rem 0;
+      }
+      .board-table td::before{
+        content:attr(data-label);
+        display:inline-block;
+        width:70px;
+        font-weight:700;
+        color:#555;
+      }
+    }
+  </style>
+</head>
+<body class="is-preload">
+
+<div id="page-wrapper">
+
+  <!-- 공통 헤더 include -->
+  <div id="site-header"></div>
+  <script src="assets/js/header.js"></script>
+
+  <!-- 자유게시판 영역 -->
+  <main class="board-wrap">
+    <header class="board-header">
+      <div class="board-title">
+        <h2>자유게시판</h2>
+        <p>축제 이야기, 잡담, 질문 등 자유롭게 소통해 보세요.</p>
+      </div>
+      <div class="board-tools">
+        <select id="categorySelect">
+          <option value="all">전체</option>
+          <option value="talk">잡담</option>
+          <option value="review">축제후기</option>
+          <option value="tip">공략/팁</option>
+          <option value="qna">질문</option>
+        </select>
+        <input type="text" id="searchKeyword" placeholder="제목/내용/작성자 검색" />
+        <button type="button" class="button alt" id="searchBtn">검색</button>
+      </div>
+    </header>
+
+    <section class="board-box">
+
+      <!-- 게시판 리스트 -->
+      <table class="board-table">
+        <thead>
+          <tr>
+            <th style="width:60px;">번호</th>
+            <th style="width:90px;">분류</th>
+            <th>제목</th>
+            <th style="width:100px;">작성자</th>
+            <th style="width:120px;">작성일</th>
+            <th style="width:70px;">조회</th>
+          </tr>
+        </thead>
+        <tbody id="boardBody">
+          <!-- 예시 데이터 -->
+          <tr>
+            <td data-label="번호">3</td>
+            <td data-label="분류">축제후기</td>
+            <td class="title" data-label="제목">
+              <a href="4_1_FreeBoardView.html">[순천만가을꽃축제] 오늘 다녀온 후기 남겨요 🌸</a>
+            </td>
+            <td data-label="작성자">runback</td>
+            <td data-label="작성일">2025-11-14</td>
+            <td data-label="조회">123</td>
+          </tr>
+          <tr>
+            <td data-label="번호">2</td>
+            <td data-label="분류">공략/팁</td>
+            <td class="title" data-label="제목">
+              <a href="4_1_FreeBoardView.html">거점 탐험전 포인트 빨리 모으는 루트 공유</a>
+            </td>
+            <td data-label="작성자">tracker99</td>
+            <td data-label="작성일">2025-11-13</td>
+            <td data-label="조회">89</td>
+          </tr>
+          <tr>
+            <td data-label="번호">1</td>
+            <td data-label="분류">잡담</td>
+            <td class="title" data-label="제목">
+              <a href="4_1_FreeBoardView.html">내일 순천 가는 사람? 같이 게임 돌 사람 구해요</a>
+            </td>
+            <td data-label="작성자">현우</td>
+            <td data-label="작성일">2025-11-12</td>
+            <td data-label="조회">57</td>
+          </tr>
+          <!-- 실제 구현에서는 서버에서 게시글 목록을 불러와서 채움 -->
+        </tbody>
+      </table>
+
+      <!-- 게시글 없을 때 표시 (초기엔 display:none) -->
+      <div id="emptyMsg" class="board-empty" style="display:none;">
+        등록된 게시글이 없습니다. 제일 첫 글의 주인공이 되어 보세요!
+      </div>
+
+      <!-- 하단 영역: 페이지네이션 + 글쓰기 -->
+      <div class="board-bottom">
+        <div class="pagination">
+          <button type="button">&laquo;</button>
+          <button type="button">&lsaquo;</button>
+          <span class="current">1</span>
+          <button type="button">2</button>
+          <button type="button">3</button>
+          <button type="button">&rsaquo;</button>
+          <button type="button">&raquo;</button>
+        </div>
+
+        <button type="button" class="button write-btn"
+                onclick="location.href='4_1_FreeBoardWrite.html'">
+          글쓰기
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <!-- 푸터 -->
+  <div id="footer-wrapper">
+    <div class="container" id="footer">
+      <div id="copyright">
+        <ul class="menu">
+          <li>&copy; 2025 RunBack</li>
+          <li>추적자 · 자유게시판</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // 검색 버튼 (데모용)
+  document.getElementById('searchBtn').addEventListener('click', () => {
+    const cat = document.getElementById('categorySelect').value;
+    const q   = document.getElementById('searchKeyword').value.trim();
+    if(!q){
+      alert('검색어를 입력하세요.');
+      return;
+    }
+    alert('[' + cat + '] 범위에서 "' + q + '" 검색 기능은\n서버 연동 시 구현 예정입니다.');
+  });
+</script>
+
+</body>
+</html>
