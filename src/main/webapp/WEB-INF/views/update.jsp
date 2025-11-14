@@ -63,14 +63,14 @@
             <h2 id="profileTitle" class="title">회원 정보 수정</h2>
 
             <!-- 실제 서비스에서는 action을 수정 처리 URL로 변경 -->
-            <form id="profileForm" action="/member/update" method="post" novalidate>
+            <form id="profileForm" action="update" method="post" novalidate>
                 <div class="grid-2">
 
 
                     <!-- 비밀번호 (선택: 변경 시에만 입력) -->
                     <label for="pw">새 비밀번호 (선택)</label>
                     <div>
-                        <input type="password" id="pw" name="password"
+                        <input type="password" id="pw" name="PasswordHash"
                                placeholder="변경할 경우만 입력 (8~20자)"
                                minlength="8" maxlength="20"
                                pattern="(?=.*[A-Za-z])(?=.*\d)(?=.*[~`!@#$%^&*()_\-+=\[\]{}|\\;:'\",./?]).{8,20}" />
@@ -87,21 +87,21 @@
 
                     <!-- 닉네임 -->
                     <label for="nickname">닉네임</label>
-                    <input type="text" id="nickname" name="nickname" placeholder="예) 피카츄" value="피카츄" required />
+                    <input type="text" id="nickname" name="Nickname" placeholder="예) 피카츄" value="피카츄" required />
 
 
                     <!-- 이메일 -->
                     <label for="email">이메일</label>
-                    <input type="email" id="email" name="email" placeholder="예) user@example.com"
+                    <input type="email" id="email" name="Email" placeholder="예) user@example.com"
                            value="user@example.com" required />
 
                     <!-- 생년월일 (선택) -->
                     <label for="birth">생년월일</label>
-                    <input type="date" id="birth" name="birth" />
+                    <input type="date" id="birth" name="BirthDate" />
 
                     <!-- 휴대폰 (선택) -->
                     <label for="phone">핸드폰 번호</label>
-                    <input type="tel" id="phone" name="phone" placeholder="01011112222"
+                    <input type="tel" id="phone" name="Phone" placeholder="01011112222"
                            inputmode="numeric" pattern="^01[016789]\d{7,8}$" />
 
                     <!-- 약관 안내 -->

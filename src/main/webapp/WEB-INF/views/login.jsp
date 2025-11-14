@@ -123,6 +123,11 @@
       // TODO: 실제 제출 전 추가 로직(예: 로딩 표시) 가능
     });
 </script>
+<c:if test="${not empty msg}">
+<script>
+    alert("${msg}");
+</script>
+</c:if>
 </body>
 </html>
 
