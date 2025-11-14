@@ -81,4 +81,8 @@ public class UserController {
         System.out.println("중복체크 결과 : " + count);
         return count;
     }
+    @GetMapping("/update")
+    public String update() {
+        return "update";
+    }
 }
