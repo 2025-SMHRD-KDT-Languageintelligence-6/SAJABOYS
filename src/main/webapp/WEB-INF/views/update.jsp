@@ -69,6 +69,9 @@
                     <!-- 아이디 (숨김) -->
                     <input type="hidden" name = "UserId" value="${user.userId}"/>
 
+                    <!-- 기존 비밀번호 (숨김) -->
+                    <input type="hidden" name = "UserId" value="${user.userId}"/>
+
 
                     <!-- 비밀번호 (선택: 변경 시에만 입력) -->
                     <label for="pw">새 비밀번호 (선택)</label>
@@ -189,7 +192,7 @@
     // 취소 버튼: 마이페이지나 이전 페이지로 이동
     document.getElementById('cancelBtn').addEventListener('click', () => {
       // 필요에 맞게 경로 수정
-      window.location.href = "/7_MyPage.html";
+      window.location.href = "/update";
     });
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
