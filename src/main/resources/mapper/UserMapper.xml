@@ -10,7 +10,7 @@
 
     <select id="loginUser" parameterType="com.project.chaser.dto.User"
             resultType="com.project.chaser.dto.User">
-        select * from user where UserId = #{UserId} and PasswordHash = #{PasswordHash}
+        select * from user where UserId = #{UserId}
     </select>
 
     <insert id="joinUser" parameterType="com.project.chaser.dto.User">

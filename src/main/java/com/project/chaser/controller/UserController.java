@@ -36,8 +36,7 @@ public class UserController {
 
     @PostMapping("/login")
     public String login(User user, HttpSession session, RedirectAttributes redirectAttributes) {
-        // 1. e,p가 Member객체에 묶여서 전달, 메소드 안에서 받아옴
-        // 2. mapper 인터페이스에 Member객체를 가지고 데이터 조회하는 기능 정의
+        // 1. id로만 사용자 조회
         User loginUser = mapper.loginUser(user);
         // 3. XML에서 SQL문 작성
         // 4. (DB처리 잘했는지에 따라) 로그인 성공 -> session 저장 -> main
@@ -46,17 +45,18 @@ public class UserController {
 
         String viewname = "";
         if (loginUser == null){
-            System.out.println("login Fail!");
-            redirectAttributes.addFlashAttribute("msg", "로그인 실패!");
-            viewname = "redirect:/login";
+            redirectAttributes.addFlashAttribute("msg", "아이디가 존재하지 않습니다.");
+            return "redirect:/login";
         }
-        else {
-            System.out.println("login Success~");
-            session.setAttribute("user", loginUser);
-            viewname = "redirect:/main";
+// 비밀번호 matches() 비교
+        if (!passwordEncoder.matches(user.getPasswordHash(), loginUser.getPasswordHash())) {
+            redirectAttributes.addFlashAttribute("msg", "비밀번호가 틀립니다.");
+            return "redirect:/login";
         }
-        // 5. main.jsp에서 로그인한 회원의 정보를 출력
-        return viewname;
+
+        // 로그인 성공
+        session.setAttribute("user", loginUser);
+        return "redirect:/main";
     }
     @GetMapping("/logout")
     public String logout(HttpSession session){
