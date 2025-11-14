@@ -141,7 +141,7 @@
                     <div class="row-inline">
                         <input type="text" id="emailLocal" name="emailLocal" placeholder="아이디" required style="max-width:200px;">
                         <span>@</span>
-                        <input type="text" id="emailDomain" name="emailDomain" placeholder="도메인 입력" required style="flex:1;max-width:100px;">
+                        <input type="text" id="emailDomain" name="emailDomain" placeholder="도메인 입력" required style="max-width:200px;">
                         <select id="domainSel" class="alt">
                             <option value="">직접입력</option>
                             <option value="gmail.com">gmail.com</option>
