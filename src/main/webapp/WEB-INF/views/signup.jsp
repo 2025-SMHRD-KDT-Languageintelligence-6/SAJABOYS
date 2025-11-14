@@ -121,8 +121,12 @@
                     <input type="text" id="name" name="Name" placeholder="예) 홍길동" required />
 
                     <!-- Nickname -->
-                                <label for="nickname">*닉네임</label>
-                                <input type="text" id="nickname" name="Nickname" placeholder="예) 피카츄" required />
+                    <label for="nickname">*닉네임</label>
+                    <div class="row-inline">
+                    <input type="text" id="nickname" name="Nickname" placeholder="예) 피카츄"
+                            required minlength="4" maxlength="16" style="flex:1"/>
+                     <button type="button" class="button alt" id="checkBtn2">중복체크</button>
+                    </div>
 
                     <!-- 성별 -->
                     <label for="gender">*성별</label>
@@ -161,11 +165,7 @@
                     <input type="tel" id="phone" name="Phone" placeholder="01011112222"
                            inputmode="numeric" pattern="^01[016789]\d{7,8}$"  />
 
-                    <!-- 약관 동의(샘플) -->
-                    <label for="agree">약관 동의</label>
-                    <label class="row-inline" style="gap:.5rem;">
-                        <input type="checkbox" id="agree" style="width:auto;"> 이용약관 및 개인정보 처리방침에 동의합니다.
-                    </label>
+
 
                     <!-- 제출 -->
                     <div class="full">
