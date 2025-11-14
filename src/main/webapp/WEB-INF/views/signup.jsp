@@ -85,7 +85,7 @@
                     <label for="nickname">*닉네임</label>
                     <div class="row-inline">
                     <input type="text" id="nickname" name="Nickname" placeholder="예) 피카츄"
-                            required minlength="4" maxlength="16" style="flex:1"/>
+                            required minlength="2" maxlength="16" style="flex:1"/>
                      <button type="button" class="button alt" id="checkBtn2">중복체크</button>
                     </div>
 
@@ -176,6 +176,25 @@
                 alert('이미 사용중인 아이디입니다.');
             } else {
                 alert('사용 가능한 아이디입니다.');
+            }
+        }
+      });
+    });
+
+    // 닉네임 중복체크
+    document.getElementById('checkBtn2').addEventListener('click', () => {
+      const v = document.getElementById('nickname').value.trim();
+      if(!v){ alert('닉네임을 입력하세요.'); return; }
+      if(!/^[a-zA-Z0-9_\uAC00-\uD7A3]{2,16}$/.test(v)){ alert('닉네임 형식을 확인하세요.'); return; }
+      $.ajax({
+        url: '/nickCheck',
+        type: 'GET',
+        data: { Nickname: v },
+        success: function(count) {
+            if(count > 0){
+                alert('이미 사용중인 닉네임입니다.');
+            } else {
+                alert('사용 가능한 닉네임입니다.');
             }
         }
       });

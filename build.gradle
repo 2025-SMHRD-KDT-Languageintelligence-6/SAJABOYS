@@ -25,6 +25,10 @@ repositories {
 }
 
 dependencies {
+    // 암호
+    implementation 'org.springframework.security:spring-security-core:5.8.6'
+    implementation 'org.springframework.security:spring-security-crypto'
+
     // JSP, JSTL, EL 사용에 필요한 라이브러리 추가
     // jasper : Tomcat의 내장 JSP 컴파일러
     // Maven Repository 에서 라이브러리 검색 - gradle 코드 복사

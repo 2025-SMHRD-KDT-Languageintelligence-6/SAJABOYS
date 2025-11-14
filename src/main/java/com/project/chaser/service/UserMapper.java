@@ -12,5 +12,7 @@ public interface UserMapper {
 
     public int idCheck(@NonNull String UserId);
 
+    public int nickCheck(@NonNull String Nickname);
+
     public int updateUser(User user);
 }

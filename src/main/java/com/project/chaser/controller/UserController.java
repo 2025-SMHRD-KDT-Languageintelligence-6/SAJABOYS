@@ -4,6 +4,7 @@ import com.project.chaser.dto.User;
 import com.project.chaser.service.UserMapper;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,9 @@ public class UserController {
 
     @Autowired // 의존성 주입(Dependency Injection : DI)
     private UserMapper mapper;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/main")
     public String goMain() {
@@ -72,12 +76,14 @@ public class UserController {
     }
     @PostMapping("/join")
     public String joinUser(User user){
+        // 1. 비밀번호 해시 처리
+        String hashedPassword = passwordEncoder.encode(user.getPasswordHash());
+        user.setPasswordHash(hashedPassword);
 
-        // 인터페이스에 정리된대로 DB 처리
+        // 2. DB 처리
         int cnt = mapper.joinUser(user);
 
-        // 이미 main.jsp를 실행시키는 메소드가 있으면 그 메소드를 실행
-        // 이거 view name 아니고 다른 메소드 redirect:/메소드명
+        // 3. 가입 후 메인 페이지로 이동
         return "redirect:/main";
     }
     @GetMapping("/idCheck")
@@ -91,6 +97,19 @@ public class UserController {
         System.out.println("중복체크 결과 : " + count);
         return count;
     }
+
+    @GetMapping("/nickCheck")
+    @ResponseBody // 응답을 forwarding 방식이 아니라 바로 응답하려고 표시
+    public int nickCheck(User check){
+        // 비동기 통신의 결과물을 직접 다시 보내는 메소드
+        // ajax 통신을 하는 파일에서, 결과 파일 작성 X
+
+        // 1. 데이터 접근
+        int count = mapper.nickCheck(check.getNickname());
+        System.out.println("중복체크 결과 : " + count);
+        return count;
+    }
+
     @GetMapping("/update")
     public String update() {
         return "update";
@@ -98,11 +117,19 @@ public class UserController {
 
     @PostMapping("/update")
     public String updateUser(User user, HttpSession session) {
-        // 1. update.jsp에서 넘어오는 e, p, t, a 값을 Member객체로 받아옴
-        // 2. mapper에 추상메소드 작성 : updateMember
-        //      2-1. 결과 값
-        //      2-2. 매개변수
-        // 3. XML에서 SQL문 작성
+        // 세션에서 기존 유저 정보 가져오기
+        User existingUser = (User) session.getAttribute("user");
+
+        // 비밀번호 입력 여부 확인
+        if(user.getPasswordHash() == null || user.getPasswordHash().isEmpty()) {
+            // 새 비밀번호 입력이 없으면 기존 비밀번호 유지
+            user.setPasswordHash(existingUser.getPasswordHash());
+        } else {
+            // 새 비밀번호가 입력되었으면 해시 처리
+            String hashed = passwordEncoder.encode(user.getPasswordHash());
+            user.setPasswordHash(hashed);
+        }
+
         int cnt = mapper.updateUser(user);
 
         if (cnt > 0) {
