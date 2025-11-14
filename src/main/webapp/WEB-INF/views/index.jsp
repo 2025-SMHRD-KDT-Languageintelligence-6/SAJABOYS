@@ -19,65 +19,9 @@
 	<body class="is-preload homepage">
 		<div id="page-wrapper">
 
-			<!-- Header -->
-				<div id="header-wrapper">
-					<header id="header" class="container">
-
-						<!-- Logo -->
-							<div id="logo">
-								<h1><a href="main">추적자</a></h1>
-								<span>지역축제 술레잡기 게임</span>
-							</div>
-
-						<!-- Nav -->
-							<nav id="nav">
-								<ul>
-									<li class="current"><a href="main">Home</a></li>
-									<li>
-										<a href="/html5up-verti/1_Game.html">게임창</a>
-										<ul>
-											<li><a href="#">좀비게임</a></li>
-											<li><a href="#">윌리를 찾아라</a></li>
-											<li><a href="#">경찰과 도둑</a></li>
-											<li><a href="#">거점점령전</a></li>
-											<li>
-												<a href="/html5up-verti/1_1_5Rule.html">룰 북</a>
-												<ul>
-													<li><a href="/html5up-verti/1_1_1zombie.html">좀비게임</a></li>
-													<li><a href="/html5up-verti/1_1_2wily.html">윌리를 찾아라</a></li>
-													<li><a href="/html5up-verti/1_1_3police.html">경찰과 도둑</a></li>
-													<li><a href="/html5up-verti/1_1_4occupy.html">거점점령전</a></li>
-												</ul>
-											</li>
-										</ul>
-									</li>
-									<li><a href="#">스템프 투어창</a></li>
-									<li><a href="/html5up-verti/right-sidebar.html">축제 장</a></li>
-									<li><a href="/html5up-verti/no-sidebar.html">커뮤니티</a></li>
-									<li>
-									    <c:choose>
-									        <c:when test = "${!empty user}">
-									            <a href="update">개인정보수정</a>
-									        </c:when>
-                                            <c:otherwise>
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </li>
-									<li>
-                                        <c:choose>
-                                            <c:when test = "${!empty user}">
-                                                <a href="logout">로그아웃</a>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <a href="login">로그인/회원가입</a>
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </li>
-								</ul>
-							</nav>
-
-					</header>
-				</div>
+			<!-- 공통 헤더 include -->
+            <div id="site-header"></div>
+            <script src="/assets/js/header.js"></script>
 
 			<!-- Banner -->
 				<div id="banner-wrapper">

@@ -20,6 +20,10 @@ public class UserController {
     public String goMain() {
         return "index";
     }
+    @GetMapping("/header")
+    public String header() {
+        return "header";  // /WEB-INF/views/header.jsp 렌더링됨
+    }
     @GetMapping("/login")
     public String login() {
         return "login";

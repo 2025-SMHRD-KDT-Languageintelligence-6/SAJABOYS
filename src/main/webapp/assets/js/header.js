@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const headerTarget = document.getElementById("site-header");
 
   if (headerTarget) {
-    fetch("/partials/header.html")      // header.html 경로
+    fetch("/header")      // header.html 경로
       .then(response => response.text())
       .then(data => {
         headerTarget.innerHTML = data;
