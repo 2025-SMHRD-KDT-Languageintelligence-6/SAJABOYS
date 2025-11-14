@@ -95,4 +95,29 @@ public class UserController {
     public String update() {
         return "update";
     }
+
+    @PostMapping("/update")
+    public String updateUser(User user, HttpSession session) {
+        // 1. update.jsp에서 넘어오는 e, p, t, a 값을 Member객체로 받아옴
+        // 2. mapper에 추상메소드 작성 : updateMember
+        //      2-1. 결과 값
+        //      2-2. 매개변수
+        // 3. XML에서 SQL문 작성
+        int cnt = mapper.updateUser(user);
+
+        if (cnt > 0) {
+            System.out.println("update Succes!");
+            session.setAttribute("user", user);
+            // 변경 전 정보를 가지고 있는 세션에다가 같은 이름으로
+            // 다른 데이터를 저장해서 덮어쓰기
+        } else {
+            System.out.println("update Fail...");
+        }
+
+        // 4. 회원정보 수정이 잘 되었으면 -> session 변경된 정보를 다시 저장
+        //          실패가 되었으면 -> sysout으로 출력
+        // 회원정보 수정하고 main으로 이동
+        return "redirect:/main";
+    }
 }
+

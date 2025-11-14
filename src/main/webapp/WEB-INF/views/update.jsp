@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -66,6 +66,9 @@
             <form id="profileForm" action="update" method="post" novalidate>
                 <div class="grid-2">
 
+                    <!-- 아이디 (숨김) -->
+                    <input type="hidden" name = "UserId" value="${user.userId}"/>
+
 
                     <!-- 비밀번호 (선택: 변경 시에만 입력) -->
                     <label for="pw">새 비밀번호 (선택)</label>
@@ -87,22 +90,22 @@
 
                     <!-- 닉네임 -->
                     <label for="nickname">닉네임</label>
-                    <input type="text" id="nickname" name="Nickname" placeholder="예) 피카츄" value="피카츄" required />
+                    <input type="text" id="nickname" name="Nickname" placeholder="예) 피카츄" value="${user.nickname}" required />
 
 
                     <!-- 이메일 -->
                     <label for="email">이메일</label>
                     <input type="email" id="email" name="Email" placeholder="예) user@example.com"
-                           value="user@example.com" required />
+                           value="${user.email}" required />
 
                     <!-- 생년월일 (선택) -->
                     <label for="birth">생년월일</label>
-                    <input type="date" id="birth" name="BirthDate" />
+                    <input type="date" id="birth" name="BirthDate"  />
 
                     <!-- 휴대폰 (선택) -->
                     <label for="phone">핸드폰 번호</label>
                     <input type="tel" id="phone" name="Phone" placeholder="01011112222"
-                           inputmode="numeric" pattern="^01[016789]\d{7,8}$" />
+                           inputmode="numeric" value="${user.phone}" pattern="^01[016789]\d{7,8}$" />
 
                     <!-- 약관 안내 -->
                     <label>약관</label>
@@ -189,5 +192,6 @@
       window.location.href = "/7_MyPage.html";
     });
 </script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 </html>

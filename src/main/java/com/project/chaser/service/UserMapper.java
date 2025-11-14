@@ -11,4 +11,6 @@ public interface UserMapper {
     public int joinUser(User user);
 
     public int idCheck(@NonNull String UserId);
+
+    public int updateUser(User user);
 }

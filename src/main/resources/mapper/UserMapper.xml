@@ -22,4 +22,8 @@
         select count(UserId) from user where UserId = #{UserId}
     </select>
 
+    <update id="updateUser" parameterType="com.project.chaser.dto.User">
+        update user set PasswordHash = #{PasswordHash}, Nickname = #{Nickname}, Email = #{Email}, BirthDate = #{BirthDate}, Phone = #{Phone} where UserId = #{UserId}
+    </update>
+
 </mapper>
