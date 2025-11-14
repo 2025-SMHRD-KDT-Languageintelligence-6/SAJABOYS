@@ -100,7 +100,7 @@
 
                     <!-- 생년월일 (선택) -->
                     <label for="birth">생년월일</label>
-                    <input type="date" id="birth" name="BirthDate"  />
+                    <input type="date" id="birth" name="BirthDate" value="${user.birthDate != null ? user.birthDate : ''}" />
 
                     <!-- 휴대폰 (선택) -->
                     <label for="phone">핸드폰 번호</label>
