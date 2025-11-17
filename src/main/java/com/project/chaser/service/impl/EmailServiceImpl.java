@@ -19,6 +19,7 @@ public class EmailServiceImpl implements EmailService {
     public void sendResetPasswordEmail(String toEmail, String token) {
         try {
             String encodedToken = URLEncoder.encode(token, "UTF-8");
+            // 일반적으로는 localhost:8089/resetPw?token=
             String resetLink = "http://172.30.1.54:8089/resetPw?token=" + encodedToken;
 
             SimpleMailMessage message = new SimpleMailMessage();
