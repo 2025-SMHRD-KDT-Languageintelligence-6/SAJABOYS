@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- MyBatis 프레임 워크 방식에 따라서 SQL문 관리 -->
+<!-- namespace : 데이터베이스 관련 Mapper 인터페이스의 경로 설정
+                    BoardMapper, TestMapper 등에서 쿼리 태그들의 id 중복되어도
+                    namespace를 구분지어서 찾아감 -->
+<mapper namespace="com.project.chaser.service.SnsMapper">
+
+</mapper>
