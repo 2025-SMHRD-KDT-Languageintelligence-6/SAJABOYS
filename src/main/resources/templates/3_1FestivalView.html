@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>축제 상세보기 | 추적자</title>
+
+  <!-- Verti 기본 CSS -->
+  <link rel="stylesheet" href="assets/css/main.css" />
+
+  <style>
+    body{
+      background:#f5fafc;
+    }
+
+    .festival-wrap{
+      max-width:1100px;
+      margin:2.5rem auto 3rem;
+    }
+
+    .festival-header{
+      text-align:center;
+      margin-bottom:1.8rem;
+    }
+    .festival-header h2{
+      font-size:2rem;
+      font-weight:900;
+      margin-bottom:.5rem;
+    }
+    .festival-header p{
+      font-size:.95rem;
+      color:#666;
+    }
+
+    /* 메인 박스 */
+    .festival-box{
+      background:#fff;
+      border-radius:18px;
+      box-shadow:0 4px 12px rgba(0,0,0,.12);
+      padding:1.5rem 1.8rem 2rem;
+      display:grid;
+      grid-template-columns:380px minmax(0,1fr);
+      gap:1.6rem;
+    }
+
+    .festival-img{
+      width:100%;
+      border-radius:14px;
+      overflow:hidden;
+    }
+    .festival-img img{
+      width:100%;
+      height:auto;
+      display:block;
+      border-radius:14px;
+    }
+
+    .festival-info{
+      display:flex;
+      flex-direction:column;
+      gap:1rem;
+    }
+
+    .festival-info h3{
+      font-size:1.4rem;
+      font-weight:800;
+      margin:0;
+    }
+
+    .info-row{
+      font-size:.95rem;
+      padding-bottom:.5rem;
+      border-bottom:1px solid #eee;
+      line-height:1.6;
+    }
+
+    .info-row strong{
+      color:#0090c5;
+      margin-right:.3rem;
+    }
+
+    .favorite-btn{
+      padding:.55rem 1.1rem;
+      font-size:1rem;
+      background:#ffca2c;
+      border-radius:10px;
+      cursor:pointer;
+      width:170px;
+      text-align:center;
+      font-weight:700;
+    }
+
+    .favorite-btn.active{
+      background:#ff9800;
+      color:#fff;
+    }
+
+    /* 설명 */
+    .festival-desc{
+      margin-top:1.2rem;
+      background:#fff;
+      padding:1.3rem 1.5rem;
+      border-radius:16px;
+      box-shadow:0 2px 10px rgba(0,0,0,.08);
+      line-height:1.7;
+      font-size:.95rem;
+      color:#444;
+    }
+
+    /* 지도 */
+    .map-box{
+      margin-top:1.5rem;
+      background:#fff;
+      border-radius:16px;
+      padding:1rem;
+      box-shadow:0 2px 10px rgba(0,0,0,.08);
+    }
+    #map{
+      width:100%;
+      height:350px;
+      border-radius:10px;
+      background:#ddd;
+    }
+
+    /* 하단 버튼 */
+    .btn-row{
+      margin-top:2rem;
+      display:flex;
+      justify-content:flex-end;
+      gap:.5rem;
+    }
+
+    .btn-row .button{
+      padding:.55rem 1rem;
+      font-size:.95rem;
+      font-weight:700;
+    }
+
+    @media(max-width:900px){
+      .festival-box{
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div id="page-wrapper">
+
+  <!-- 공통 헤더 include -->
+  <div id="site-header"></div>
+  <script src="assets/js/header.js"></script>
+
+  <main class="festival-wrap">
+
+    <!-- 헤더 -->
+    <header class="festival-header">
+      <h2>순천만 국가정원 국제정원박람회</h2>
+      <p>축제 상세 정보를 확인하고, 관심 축제로 저장할 수 있습니다.</p>
+    </header>
+
+    <section class="festival-box">
+
+      <!-- 축제 포스터 -->
+      <div class="festival-img">
+        <img src="images/festival-sample.jpg" alt="축제 포스터" />
+      </div>
+
+      <!-- 축제 정보 -->
+      <div class="festival-info">
+
+        <div class="info-row">
+          <strong>📍 장소</strong> 순천만 국가정원 일대
+        </div>
+
+        <div class="info-row">
+          <strong>📅 기간</strong> 2025-03-20 ~ 2025-04-05
+        </div>
+
+        <div class="info-row">
+          <strong>⏰ 운영시간</strong> 10:00 ~ 21:00
+        </div>
+
+        <div class="info-row">
+          <strong>💵 입장료</strong> 성인 10,000원 / 청소년 7,000원
+        </div>
+
+        <div class="info-row">
+          <strong>⭐ 즐겨찾기</strong>
+          <div class="favorite-btn" id="favoriteBtn">☆ 관심 축제 추가</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 축제 상세 설명 -->
+    <section class="festival-desc">
+      순천만 국가정원 국제정원박람회는 국내 최대 규모의 자연 생태 축제로,
+      다양한 테마 정원과 문화 공연, 어린이 체험 프로그램 등이 운영됩니다.<br/><br/>
+      특히 야간 정원 조명 쇼와 포토존이 인기가 높으며, 축제 기간 동안 특별 이벤트와
+      지역 특산품 마켓이 함께 열려 많은 관광객들이 방문하고 있습니다.
+    </section>
+
+    <!-- 지도 -->
+    <section class="map-box">
+      <h3 style="margin-bottom:.6rem;">📌 축제 위치 지도</h3>
+      <div id="map">지도 로딩 영역</div>
+    </section>
+
+    <!-- 버튼 -->
+    <div class="btn-row">
+      <button type="button" class="button alt" onclick="location.href='3_Festival.html'">목록으로</button>
+      <button type="button" class="button" onclick="alert('축제 참가 페이지로 이동 예정')">참가하기</button>
+    </div>
+
+  </main>
+
+  <!-- 푸터 -->
+  <div id="footer-wrapper">
+    <div class="container" id="footer">
+      <div id="copyright">
+        <ul class="menu">
+          <li>&copy; 2025 RunBack</li>
+          <li>추적자 · 축제 상세보기</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // 즐겨찾기 버튼
+  const favBtn = document.getElementById("favoriteBtn");
+  favBtn.addEventListener("click", () => {
+    favBtn.classList.toggle("active");
+    if(favBtn.classList.contains("active")){
+      favBtn.textContent = "★ 관심 축제 저장됨";
+    } else {
+      favBtn.textContent = "☆ 관심 축제 추가";
+    }
+  });
+
+  // 지도 로딩 (예시, 실제 API 연동 X)
+  document.getElementById("map").innerHTML = 
+    "<div style='padding-top:140px;text-align:center;color:#666;'>지도 API 연동 예정</div>";
+</script>
+
+</body>
+</html>

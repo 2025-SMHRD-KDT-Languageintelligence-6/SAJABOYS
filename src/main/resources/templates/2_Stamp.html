@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>스탬프 투어 | 추적자</title>
+
+  <!-- Verti 기본 CSS -->
+  <link rel="stylesheet" href="assets/css/main.css" />
+
+  <style>
+    body{
+      background:#f5fafc;
+    }
+
+    .stamp-layout{
+      max-width:1100px;
+      margin:2.5rem auto 3rem;
+      display:grid;
+      grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);
+      gap:1.5rem;
+    }
+
+    .stamp-panel,
+    .qr-panel{
+      background:#fff;
+      border-radius:18px;
+      box-shadow:0 4px 14px rgba(0,0,0,.12);
+      padding:1.3rem 1.4rem 1.6rem;
+    }
+
+    .stamp-panel h2,
+    .qr-panel h2{
+      margin:0 0 .5rem;
+      font-size:1.5rem;
+      font-weight:800;
+    }
+
+    .panel-desc{
+      margin:0 0 1rem;
+      font-size:.9rem;
+      color:#666;
+    }
+
+    /* 스탬프 그리드 */
+    .stamp-grid{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:.8rem;
+      margin-top:.8rem;
+    }
+    .stamp-cell{
+      position:relative;
+      border-radius:14px;
+      border:2px dashed #cfd8e3;
+      padding-top:100%; /* 정사각형 만들기 */
+      background:#fafbff;
+      overflow:hidden;
+      text-align:center;
+      cursor:default;
+    }
+    .stamp-inner{
+      position:absolute;
+      inset:0;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      font-size:.85rem;
+      color:#777;
+      gap:.2rem;
+    }
+    .stamp-number{
+      font-weight:800;
+      font-size:1rem;
+    }
+    .stamp-label{
+      font-size:.78rem;
+    }
+
+    .stamp-cell.collected{
+      border-style:solid;
+      border-color:#2ecc71;
+      background:#e8fff1;
+      box-shadow:0 0 0 2px rgba(46,204,113,.3) inset;
+    }
+    .stamp-cell.collected .stamp-number{
+      color:#1f9d57;
+    }
+    .stamp-cell.collected .stamp-label::after{
+      content:"  ✔";
+      color:#1f9d57;
+      font-weight:800;
+    }
+
+    .stamp-progress{
+      margin-top:1rem;
+      font-size:.95rem;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:.3rem;
+    }
+    .stamp-bar-wrap{
+      width:100%;
+      margin-top:.4rem;
+      background:#e5edf7;
+      border-radius:999px;
+      overflow:hidden;
+      height:12px;
+    }
+    .stamp-bar{
+      height:100%;
+      width:0;
+      background:#0090c5;
+      transition:.3s width ease;
+    }
+
+    /* QR 영역 */
+    .qr-video-box{
+      border-radius:16px;
+      border:2px dashed #cfd8e3;
+      background:linear-gradient(135deg,#f7fbff,#e6f3ff);
+      padding:1rem;
+      margin:.7rem 0 1rem;
+      text-align:center;
+    }
+    .qr-video-placeholder{
+      height:220px;
+      border-radius:12px;
+      background:#111;
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:.95rem;
+      margin-bottom:.7rem;
+    }
+
+    .qr-buttons{
+      display:flex;
+      flex-wrap:wrap;
+      gap:.5rem;
+      justify-content:center;
+    }
+    .qr-buttons .button{
+      min-width:140px;
+      font-size:.9rem;
+      padding:.5rem 0;
+    }
+
+    .muted{
+      font-size:.85rem;
+      color:#777;
+      margin-top:.5rem;
+    }
+
+    /* 상품 링크 */
+    .reward-box{
+      max-width:1100px;
+      margin:0 auto 3rem;
+      margin-top:1rem;
+      background:#fff8e6;
+      border-radius:16px;
+      border:1px solid #ffd37a;
+      box-shadow:0 3px 10px rgba(0,0,0,.08);
+      padding:1rem 1.3rem;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:1rem;
+      flex-wrap:wrap;
+    }
+    .reward-text strong{
+      font-size:1.05rem;
+      color:#c27b00;
+    }
+    .reward-text p{
+      margin:.15rem 0 0;
+      font-size:.9rem;
+      color:#8a6520;
+    }
+    .reward-btn{
+      min-width:160px;
+      font-size:1rem;
+      padding:.55rem 0;
+      background:#ff9800;
+      color:#fff;
+    }
+
+    .hidden{ display:none; }
+
+    @media (max-width:900px){
+      .stamp-layout{
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
+</head>
+<body class="is-preload">
+
+<div id="page-wrapper">
+
+  <!-- 공통 헤더 include -->
+  <div id="site-header"></div>
+  <script src="assets/js/header.js"></script>
+
+  <!-- 메인 레이아웃 -->
+  <main class="stamp-layout">
+
+    <!-- 왼쪽 : 스탬프 모음 -->
+    <section class="stamp-panel">
+      <h2>스탬프 투어 진행 현황</h2>
+      <p class="panel-desc">
+        축제 장소 곳곳에 숨겨진 QR코드를 찍고, 총 10개의 스탬프를 모아보세요!
+      </p>
+
+      <!-- 진행 텍스트 -->
+      <div class="stamp-progress">
+        <span>현재 스탬프 : <strong id="stampCountText">0 / 10</strong></span>
+        <span style="font-size:.85rem;color:#999;">※ 각 장소당 1회만 적립됩니다.</span>
+        <div class="stamp-bar-wrap">
+          <div class="stamp-bar" id="stampBar"></div>
+        </div>
+      </div>
+
+      <!-- 스탬프 10개 그리드 -->
+      <div class="stamp-grid" id="stampGrid">
+        <!-- 1~10 스탬프 칸 -->
+        <!-- 숫자는 JS 없이도 보이도록 미리 작성 -->
+        <div class="stamp-cell">
+          <div class="stamp-inner">
+            <div class="stamp-number">1</div>
+            <div class="stamp-label">STAMP</div>
+          </div>
+        </div>
+        <div class="stamp-cell">
+          <div class="stamp-inner">
+            <div class="stamp-number">2</div>
+            <div class="stamp-label">STAMP</div>
+          </div>
+        </div>
+        <div class="stamp-cell">
+          <div class="stamp-inner">
+            <div class="stamp-number">3</div>
+            <div class="stamp-label">STAMP</div>
+          </div>
+        </div>
+        <div class="stamp-cell">
+          <div class="stamp-inner">
+            <div class="stamp-number">4</div>
+            <div class="stamp-label">STAMP</div>
+          </div>
+        </div>
+        <div class="stamp-cell">
+          <div class="stamp-inner">
+            <div class="stamp-number">5</div>
+            <div class="stamp-label">STAMP</div>
+          </div>
+        </div>
+        <div class="stamp-cell">
+          <div class="stamp-inner">
+            <div class="stamp-number">6</div>
+            <div class="stamp-label">STAMP</div>
+          </div>
+        </div>
+        <div class="stamp-cell">
+          <div class="stamp-inner">
+            <div class="stamp-number">7</div>
+            <div class="stamp-label">STAMP</div>
+          </div>
+        </div>
+        <div class="stamp-cell">
+          <div class="stamp-inner">
+            <div class="stamp-number">8</div>
+            <div class="stamp-label">STAMP</div>
+          </div>
+        </div>
+        <div class="stamp-cell">
+          <div class="stamp-inner">
+            <div class="stamp-number">9</div>
+            <div class="stamp-label">STAMP</div>
+          </div>
+        </div>
+        <div class="stamp-cell">
+          <div class="stamp-inner">
+            <div class="stamp-number">10</div>
+            <div class="stamp-label">STAMP</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 오른쪽 : QR 카메라 영역 -->
+    <section class="qr-panel">
+      <h2>QR 코드 스캔</h2>
+      <p class="panel-desc">
+        스탬프 포인트에서 제공되는 QR 코드를 카메라로 비추면 자동으로 스탬프가 적립됩니다.
+      </p>
+
+      <div class="qr-video-box">
+        <div class="qr-video-placeholder" id="qrPreview">
+          📷 카메라 미리보기 (데모용 화면)<br/>
+          실제 서비스에서는 QR 인식 라이브러리가 연동됩니다.
+        </div>
+
+        <div class="qr-buttons">
+          <button type="button" class="button alt" id="openCamBtn">카메라 열기</button>
+          <button type="button" class="button" id="mockScanBtn">QR 스캔 완료 (테스트)</button>
+        </div>
+
+        <p class="muted">
+          ※ 데모 버전에서는 <strong>“QR 스캔 완료 (테스트)”</strong> 버튼을 누르면 스탬프가 1개씩 채워집니다.
+        </p>
+      </div>
+
+      <p class="muted">
+        카메라 사용 권한을 허용하면, 브라우저 내에서 바로 QR 코드를 인식하고 스탬프에 반영됩니다.
+      </p>
+    </section>
+  </main>
+
+  <!-- 스탬프 10개 완료 시 나타나는 상품 링크 영역 -->
+  <section id="rewardSection" class="reward-box hidden">
+    <div class="reward-text">
+      <strong>축하합니다! 스탬프 10개를 모두 모으셨습니다 🎉</strong>
+      <p>
+        축제 운영 부스에서 상품을 교환하거나, 아래 버튼을 눌러 온라인 상품 교환 페이지로 이동하세요.
+      </p>
+    </div>
+    <button type="button" class="button reward-btn" onclick="location.href='rewardExchange.html'">
+      상품 교환 페이지로 이동
+    </button>
+  </section>
+
+  <!-- 푸터 -->
+  <div id="footer-wrapper">
+    <div class="container" id="footer">
+      <div id="copyright">
+        <ul class="menu">
+          <li>&copy; 2025 RunBack</li>
+          <li>추적자 · 스탬프 투어</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // 스탬프 관련
+  const totalStamps = 10;
+  let collected = 0;
+
+  const stampCells   = document.querySelectorAll('#stampGrid .stamp-cell');
+  const stampCountEl = document.getElementById('stampCountText');
+  const stampBar     = document.getElementById('stampBar');
+  const rewardBox    = document.getElementById('rewardSection');
+
+  function updateStampUI(){
+    // 칠해질 개수만 collected로
+    stampCells.forEach((cell, idx) => {
+      if(idx < collected) cell.classList.add('collected');
+      else cell.classList.remove('collected');
+    });
+
+    stampCountEl.textContent = collected + ' / ' + totalStamps;
+    const ratio = (collected / totalStamps) * 100;
+    stampBar.style.width = ratio + '%';
+
+    if(collected >= totalStamps){
+      rewardBox.classList.remove('hidden');
+    }
+  }
+
+  function addStamp(){
+    if(collected >= totalStamps){
+      alert('이미 스탬프를 모두 모았습니다!');
+      return;
+    }
+    collected++;
+    updateStampUI();
+
+    if(collected === totalStamps){
+      alert('축하합니다! 스탬프 10개를 모두 모았습니다.\n상품 교환 링크가 활성화됩니다.');
+    }
+  }
+
+  // 데모용 버튼: 실제로는 QR 인식 성공 콜백에서 addStamp() 호출
+  document.getElementById('mockScanBtn').addEventListener('click', addStamp);
+
+  // 카메라 열기 (간단 안내만; 실제 연동은 getUserMedia 사용)
+  document.getElementById('openCamBtn').addEventListener('click', () => {
+    alert('실제 서비스에서는 카메라 권한을 요청하고,\nQR 코드를 자동 인식하도록 구현합니다. (데모용 안내)');
+  });
+
+  // 초기 UI 반영
+  updateStampUI();
+</script>
+
+</body>
+</html>
