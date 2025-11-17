@@ -34,4 +34,9 @@
         select UserId from user where Name = #{Name} and Email = #{Email}
     </select>
 
+    <select id="findByUserIdAndEmail" resultType="com.project.chaser.dto.User">
+        SELECT * FROM user
+        WHERE UserId = #{UserId} AND Email = #{Email}
+    </select>
+
 </mapper>

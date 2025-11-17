@@ -1,6 +1,8 @@
 package com.project.chaser.controller;
 
 import com.project.chaser.dto.User;
+import com.project.chaser.service.EmailService;
+import com.project.chaser.service.JwtUtil;
 import com.project.chaser.service.UserMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -21,6 +23,12 @@ public class UserController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private JwtUtil jwtUtil;
+
+    @Autowired
+    private EmailService emailService;
 
     @GetMapping("/main")
     public String goMain() {
@@ -167,5 +175,50 @@ public class UserController {
             // 찾기 페이지 JSP 파일명 (예: findAccount.jsp)
             return "redirect:/findAccount";
     }
+    // 비밀번호 찾기 → 이메일 링크
+    @PostMapping("/findPw")
+    public String findPw(String UserId, String Email, RedirectAttributes redirect) {
+        User user = mapper.findByUserIdAndEmail(UserId, Email);
+        if(user != null) {
+            String token = jwtUtil.generateToken(user.getUserId(), 30);
+            emailService.sendResetPasswordEmail(user.getEmail(), token);
+            redirect.addFlashAttribute("msg", "비밀번호 재설정 링크를 이메일로 발송했습니다.");
+        } else {
+            redirect.addFlashAttribute("pwError", "일치하는 정보가 없습니다.");
+        }
+        return "redirect:/findAccount";
+    }
+
+    // 링크 클릭 → 비밀번호 재설정 폼
+    @GetMapping("/resetPw")
+    public String resetPwForm(String token, Model model) {
+        String userIdStr = jwtUtil.validateToken(token); // String으로 받음
+        if(userIdStr == null) {
+            model.addAttribute("tokenError", "유효하지 않은 링크입니다.");
+            return "resetPwError";
+        }
+
+        model.addAttribute("token", token);
+        return "resetPwForm";
+    }
+
+    // 새 비밀번호 저장
+    @PostMapping("/resetPw")
+    public String resetPwSubmit(String token, String password,
+                                RedirectAttributes redirect) {
+        String userIdStr = jwtUtil.validateToken(token); // String으로 받음
+        if(userIdStr == null) {
+            redirect.addFlashAttribute("pwError", "유효하지 않은 링크입니다.");
+            return "redirect:/findAccount";
+        }
+
+        Long userId = Long.valueOf(userIdStr); // 필요 시 Long 변환
+        String encodedPw = passwordEncoder.encode(password);
+        mapper.updatePassword(userId, encodedPw);
+
+        redirect.addFlashAttribute("msg", "비밀번호가 성공적으로 변경되었습니다.");
+        return "redirect:/login";
+    }
+
 }
 

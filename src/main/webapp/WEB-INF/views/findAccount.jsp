@@ -146,13 +146,13 @@
         <!-- 비밀번호 찾기 -->
         <section id="tab-pw" class="tab-panel" aria-label="비밀번호 찾기">
           <!-- 실제 서비스에서는 action을 비밀번호 찾기(임시 비밀번호 발급 등) URL로 변경 -->
-          <form action="/member/findPw" method="post" novalidate>
+          <form action="findPw" method="post" novalidate>
             <div class="grid-2">
               <label for="uid">아이디</label>
-              <input type="text" id="uid" name="username" placeholder="예) smart1234" required />
+              <input type="text" id="uid" name="UserId" placeholder="예) smart1234" required />
 
               <label for="emailPw">이메일</label>
-              <input type="email" id="emailPw" name="email" placeholder="회원가입 시 등록한 이메일" required />
+              <input type="email" id="emailPw" name="Email" placeholder="회원가입 시 등록한 이메일" required />
 
               <div class="full muted">
                 입력하신 정보로 임시 비밀번호를 발급하거나, 비밀번호 재설정 링크를 전송합니다.
