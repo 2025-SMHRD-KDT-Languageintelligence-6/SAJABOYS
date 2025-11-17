@@ -187,7 +187,7 @@ public class UserController {
         } else {
             redirect.addFlashAttribute("pwError", "일치하는 정보가 없습니다.");
         }
-        return "redirect:/findAccount";
+        return "redirect:/findAccount?tab=pw";
     }
 
     // 링크 클릭 → 비밀번호 재설정 폼

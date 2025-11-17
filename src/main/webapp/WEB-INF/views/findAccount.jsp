@@ -168,13 +168,19 @@
                 String pwError = (String)request.getAttribute("pwError");
               %>
               <div class="full">
-                <% if(pwMsg != null){ %>
-                  <div class="result-box">
-                    <%= pwMsg %>
-                  </div>
-                <% } else if(pwError != null){ %>
-                  <div class="error-msg"><%= pwError %></div>
-                <% } %>
+                  <!-- 성공 메시지 -->
+                  <c:if test="${not empty msg}">
+                      <div class="result-box">
+                          ${msg}
+                      </div>
+                  </c:if>
+
+                  <!-- 오류 메시지 -->
+                  <c:if test="${not empty pwError}">
+                      <div class="error-msg">
+                          ${pwError}
+                      </div>
+                  </c:if>
               </div>
             </div>
           </form>
@@ -217,6 +223,27 @@
           }
         });
       });
+    });
+    // 페이지 로드 시 쿼리 파라미터 기반으로 탭 활성화
+    window.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const tab = params.get('tab'); // ?tab=pw
+      if(tab){
+        tabButtons.forEach(b => {
+          if(b.getAttribute('data-target') === 'tab-' + tab){
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+        tabPanels.forEach(panel => {
+          if(panel.id === 'tab-' + tab){
+            panel.classList.add('active');
+          } else {
+            panel.classList.remove('active');
+          }
+        });
+      }
     });
   </script>
 </body>
