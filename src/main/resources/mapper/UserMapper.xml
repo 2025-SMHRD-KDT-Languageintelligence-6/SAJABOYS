@@ -39,4 +39,8 @@
         WHERE UserId = #{UserId} AND Email = #{Email}
     </select>
 
+    <update id="updatePassword" parameterType="com.project.chaser.dto.User">
+        UPDATE user SET PasswordHash = #{PasswordHash} WHERE UserId = #{UserId}
+    </update>
+
 </mapper>

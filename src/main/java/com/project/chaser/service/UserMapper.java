@@ -20,5 +20,5 @@ public interface UserMapper {
 
     public User findByUserIdAndEmail(String UserId, String Email);
 
-    public void updatePassword(Long id, String PasswordHash);
+    public void updatePassword(String UserId, String PasswordHash);
 }

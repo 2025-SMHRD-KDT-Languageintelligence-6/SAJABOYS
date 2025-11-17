@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import java.net.URLDecoder;
 
 @Controller
 public class UserController {
@@ -204,21 +205,31 @@ public class UserController {
 
     // 새 비밀번호 저장
     @PostMapping("/resetPw")
-    public String resetPwSubmit(String token, String password,
+    public String resetPwSubmit(String token, String PasswordHash,
                                 RedirectAttributes redirect) {
-        String userIdStr = jwtUtil.validateToken(token); // String으로 받음
-        if(userIdStr == null) {
+
+        try {
+            // URL 인코딩 되어 들어오는 token을 원래대로 복구
+            token = URLDecoder.decode(token, "UTF-8");
+        } catch (Exception ignored) {}
+
+        // JWT 토큰에서 userId 가져오기
+        String UserId = jwtUtil.validateToken(token);
+
+        if (UserId == null) {
             redirect.addFlashAttribute("pwError", "유효하지 않은 링크입니다.");
             return "redirect:/findAccount";
         }
 
-        Long userId = Long.valueOf(userIdStr); // 필요 시 Long 변환
-        String encodedPw = passwordEncoder.encode(password);
-        mapper.updatePassword(userId, encodedPw);
+        String encodedPw = passwordEncoder.encode(PasswordHash);
+
+        // 여기 mapper도 String 받아야 함!!
+        mapper.updatePassword(UserId, encodedPw);
 
         redirect.addFlashAttribute("msg", "비밀번호가 성공적으로 변경되었습니다.");
         return "redirect:/login";
     }
+
 
 }
 
