@@ -141,7 +141,17 @@
 
 </div>
 
-
-
+<script>
+const newPw = document.getElementById('newPw');
+document.getElementById('pwForm').addEventListener('submit', function(e){
+      // 비밀번호 입력이 일부만 되었을 때 처리
+      if(newPw.value.length < 8 || newPw.value.length > 20){
+        alert('비밀번호는 8~20자여야 합니다.');
+        newPw.focus();
+        e.preventDefault();
+        return;
+      }
+});
+</script>
 </body>
 </html>
