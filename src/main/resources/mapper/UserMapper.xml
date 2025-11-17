@@ -30,4 +30,8 @@
         update user set PasswordHash = #{PasswordHash}, Nickname = #{Nickname}, Email = #{Email}, BirthDate = #{BirthDate}, Phone = #{Phone} where UserId = #{UserId}
     </update>
 
+    <select id="findId" resultType="String">
+        select UserId from user where Name = #{Name} and Email = #{Email}
+    </select>
+
 </mapper>

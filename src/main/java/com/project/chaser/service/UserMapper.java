@@ -15,4 +15,6 @@ public interface UserMapper {
     public int nickCheck(@NonNull String Nickname);
 
     public int updateUser(User user);
+
+    public String findId(String Name, String Email);
 }

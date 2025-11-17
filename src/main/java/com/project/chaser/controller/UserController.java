@@ -2,6 +2,7 @@ package com.project.chaser.controller;
 
 import com.project.chaser.dto.User;
 import com.project.chaser.service.UserMapper;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -146,9 +147,25 @@ public class UserController {
         // 회원정보 수정하고 main으로 이동
         return "redirect:/main";
     }
-    @GetMapping("/findAcconunt")
-    public String findAcconunt() {
-        return "findAcconunt";
+    @GetMapping("/findAccount")
+    public String findAccount() {
+        return "findAccount";
+    }
+
+    @PostMapping("/findId")
+    public String findId(String Name, String Email, RedirectAttributes redirect){
+
+            // DB에서 아이디 조회
+            String foundId = mapper.findId(Name, Email);
+
+            if (foundId != null) {
+                redirect.addFlashAttribute("foundId", foundId);
+            } else {
+                redirect.addFlashAttribute("idError", "일치하는 정보가 없습니다.");
+            }
+
+            // 찾기 페이지 JSP 파일명 (예: findAccount.jsp)
+            return "redirect:/findAccount";
     }
 }
 

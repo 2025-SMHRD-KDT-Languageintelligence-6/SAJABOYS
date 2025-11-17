@@ -83,7 +83,7 @@
             </ul>
 
             <div class="helper">
-                <a href="findAcconunt">아이디/비밀번호를 잊으셨나요?</a>
+                <a href="findAccount">아이디/비밀번호를 잊으셨나요?</a>
             </div>
             <div class="helper">
                 아직 회원이 아니신가요?

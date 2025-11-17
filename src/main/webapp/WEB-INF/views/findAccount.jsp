@@ -1,5 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%-- JSTL : 자바코드를 활용할 수 있게끔 만들어진 '커스텀 태그 라이브러리' --%>
+<%-- JSTL사용법 1) dependency 추가 2)지시자를 이용해서 어떤 라이브러리 사용하는 것인지 명시 --%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -108,13 +111,13 @@
         <!-- 아이디 찾기 -->
         <section id="tab-id" class="tab-panel active" aria-label="아이디 찾기">
           <!-- 실제 서비스에서는 action을 아이디 찾기 처리 URL로 변경 -->
-          <form action="/member/findId" method="post" novalidate>
+          <form action="findId" method="post" novalidate>
             <div class="grid-2">
               <label for="name">이름</label>
-              <input type="text" id="name" name="name" placeholder="예) 홍길동" required />
+              <input type="text" id="name" name="Name" placeholder="예) 홍길동" required />
 
               <label for="email">이메일</label>
-              <input type="email" id="email" name="email" placeholder="예) user@example.com" required />
+              <input type="email" id="email" name="Email" placeholder="예) user@example.com" required />
 
               <!-- 또는 휴대폰으로 찾기 식으로 바꿔도 됨 -->
               <%--
@@ -126,19 +129,15 @@
                 <button type="submit" class="button full icon solid fa-search">아이디 찾기</button>
               </div>
 
-              <!-- 서버에서 찾은 아이디를 넘겨줄 경우 (예: request.setAttribute("foundId", "...")) -->
-              <%
-                String foundId = (String)request.getAttribute("foundId");
-                String idError = (String)request.getAttribute("idError");
-              %>
               <div class="full">
-                <% if(foundId != null){ %>
-                  <div class="result-box">
-                    찾으신 아이디는 <strong><%= foundId %></strong> 입니다.
-                  </div>
-                <% } else if(idError != null){ %>
-                  <div class="error-msg"><%= idError %></div>
-                <% } %>
+                  <c:if test="${not empty foundId}">
+                      <div class="result-box">
+                          찾으신 아이디는 <strong>${foundId}</strong> 입니다.
+                      </div>
+                  </c:if>
+                  <c:if test="${not empty idError}">
+                      <div class="error-msg">${idError}</div>
+                  </c:if>
               </div>
             </div>
           </form>
