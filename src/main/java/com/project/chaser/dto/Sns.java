@@ -13,10 +13,11 @@ public class Sns {
     private String snsTitle;
     @NonNull
     private String SnsContent;
-    private String SnsFile;
     private String CreatedAt;
     @NonNull
     private int UserIdx;
     private int SnsViews;
     private int SnsLikes;
+    @NonNull
+    private String Category;
 }
