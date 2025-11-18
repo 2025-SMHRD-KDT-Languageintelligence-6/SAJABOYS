@@ -10,28 +10,28 @@
     <!-- 게시글 등록 -->
     <insert id="insertPost" parameterType="com.project.chaser.dto.Sns" useGeneratedKeys="true" keyProperty="snsIdx">
         insert into sns (SnsTitle, SnsContent, Category, UserIdx)
-        values (#{snsTitle}, #{snsContent}, #{category}, #{userIdx})
+        values (#{SnsTitle}, #{SnsContent}, #{Category}, #{UserIdx})
     </insert>
 
     <!-- 파일 등록 -->
     <insert id="insertFile" parameterType="com.project.chaser.dto.Snsfile">
         insert into snsfile (SnsIdx, FileName, FilePath, FileSize, FileType)
-        values (#{snsIdx}, #{fileName}, #{filePath}, #{fileSize}, #{fileType})
+        values (#{SnsIdx}, #{FileName}, #{FilePath}, #{FileSize}, #{FileType})
     </insert>
 
     <!-- 게시글 상세 -->
     <select id="getPost" parameterType="int" resultType="com.project.chaser.dto.Sns">
-        select * from sns where SnsIdx = #{snsIdx}
+        select * from sns where SnsIdx = #{SnsIdx}
     </select>
 
     <!-- 파일 리스트 -->
     <select id="getFiles" parameterType="int" resultType="com.project.chaser.dto.Snsfile">
-        select * from snsfile where SnsIdx = #{snsIdx} order by FileIdx asc
+        select * from snsfile where SnsIdx = #{SnsIdx} order by FileIdx asc
     </select>
 
     <!-- 게시글 목록 -->
     <select id="getPostList" resultType="com.project.chaser.dto.Sns">
-        select * from sns where IsDeleted = 0 order by SnsIdx DESC
+        select * from sns order by SnsIdx DESC
     </select>
 
 </mapper>

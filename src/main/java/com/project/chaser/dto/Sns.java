@@ -12,7 +12,7 @@ import java.util.List;
 public class Sns {
     private int SnsIdx;
     @NonNull
-    private String snsTitle;
+    private String SnsTitle;
     @NonNull
     private String SnsContent;
     private String CreatedAt;

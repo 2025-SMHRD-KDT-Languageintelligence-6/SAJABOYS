@@ -1,6 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%-- JSTL : 자바코드를 활용할 수 있게끔 만들어진 '커스텀 태그 라이브러리' --%>
-<%-- JSTL사용법 1) dependency 추가 2)지시자를 이용해서 어떤 라이브러리 사용하는 것인지 명시 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
@@ -14,107 +12,138 @@
   <link rel="stylesheet" href="assets/css/main.css" />
 
   <style>
-    body{
-      background:#f5fafc;
+    body {
+      background: #f5fafc;
     }
 
-    .write-wrap{
-      max-width:900px;
-      margin:2.5rem auto 3rem;
+    .write-wrap {
+      max-width: 900px;
+      margin: 2.5rem auto 3rem;
     }
 
-    .write-header{
-      margin-bottom:1rem;
-    }
-    .write-header h2{
-      margin:0;
-      font-size:1.8rem;
-      font-weight:800;
-    }
-    .write-header p{
-      margin:.2rem 0 0;
-      font-size:.9rem;
-      color:#777;
+    .write-header {
+      margin-bottom: 1rem;
     }
 
-    .write-box{
-      background:#fff;
-      border-radius:16px;
-      box-shadow:0 4px 12px rgba(0,0,0,.15);
-      padding:1.3rem 1.4rem 1.5rem;
+    .write-header h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      font-weight: 800;
     }
 
-    .form-row{
-      display:flex;
-      gap:.75rem;
-      margin-bottom:.8rem;
-      align-items:center;
-      flex-wrap:wrap;
-      font-size:.95rem;
+    .write-header p {
+      margin: .2rem 0 0;
+      font-size: .9rem;
+      color: #777;
     }
-    .form-row label{
-      width:80px;
-      font-weight:700;
+
+    .write-box {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
+      padding: 1.3rem 1.4rem 1.5rem;
     }
+
+    .form-row {
+      display: flex;
+      gap: .75rem;
+      margin-bottom: .8rem;
+      align-items: center;
+      flex-wrap: wrap;
+      font-size: .95rem;
+    }
+
+    .form-row label {
+      width: 80px;
+      font-weight: 700;
+    }
+
     .form-row input[type="text"],
-    .form-row select{
-      flex:1;
-      min-width:0;
-      border-radius:6px;
-      border:1px solid #ccc;
-      padding:.4rem .55rem;
+    .form-row select {
+      flex: 1;
+      min-width: 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      padding: .4rem .55rem;
     }
 
-    .form-row textarea{
-      flex:1;
-      min-height:220px;
-      border-radius:8px;
-      border:1px solid #ccc;
-      padding:.6rem .7rem;
-      resize:vertical;
+    .form-row textarea {
+      flex: 1;
+      min-height: 220px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      padding: .6rem .7rem;
+      resize: vertical;
     }
 
-    .form-row-small{
-      display:flex;
-      gap:.4rem;
-      margin-bottom:.4rem;
-      font-size:.85rem;
-      color:#666;
-      align-items:center;
-      flex-wrap:wrap;
+    .form-row-small {
+      display: flex;
+      gap: .4rem;
+      margin-bottom: .4rem;
+      font-size: .85rem;
+      color: #666;
+      align-items: center;
+      flex-wrap: wrap;
     }
 
-    .attach-row{
-      display:flex;
-      gap:.6rem;
-      align-items:center;
-      flex-wrap:wrap;
-      margin-top:.3rem;
-    }
-    .attach-row input[type="file"]{
-      font-size:.85rem;
+    .attach-row {
+      display: flex;
+      gap: .6rem;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: .3rem;
     }
 
-    .btn-row{
-      margin-top:1.1rem;
-      display:flex;
-      justify-content:flex-end;
-      gap:.5rem;
-      flex-wrap:wrap;
-    }
-    .btn-row .button{
-      min-width:100px;
-      font-size:.95rem;
-      padding:.45rem 0;
+    .file-preview {
+      margin-top: 1rem;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
-    @media(max-width:736px){
-      .form-row{
-        flex-direction:column;
-        align-items:flex-start;
+    .file-preview img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .file-preview .remove-btn {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .btn-row {
+      margin-top: 1.1rem;
+      display: flex;
+      justify-content: flex-end;
+      gap: .5rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-row .button {
+      min-width: 100px;
+      font-size: .95rem;
+      padding: .45rem 0;
+    }
+
+    @media (max-width: 736px) {
+      .form-row {
+        flex-direction: column;
+        align-items: flex-start;
       }
-      .form-row label{
-        width:auto;
+
+      .form-row label {
+        width: auto;
       }
     }
   </style>
@@ -136,12 +165,15 @@
 
     <section class="write-box">
       <!-- 실제 서비스에서는 action / method 수정 -->
-      <form id="freeWriteForm" action="/board/free/write" method="post" enctype="multipart/form-data">
+      <form id="freeWriteForm" action="/sns/write" method="post" enctype="multipart/form-data">
+
+        <!-- hidden 필드로 UserIdx 전달 -->
+        <input type="hidden" name="UserIdx" value="${sessionScope.user.userIdx}" />
 
         <!-- 분류 -->
         <div class="form-row">
           <label for="category">분류</label>
-          <select id="category" name="category" required>
+          <select id="category" name="Category" required>
             <option value="">선택하세요</option>
             <option value="talk">잡담</option>
             <option value="review">축제후기</option>
@@ -153,14 +185,14 @@
         <!-- 제목 -->
         <div class="form-row">
           <label for="title">제목</label>
-          <input type="text" id="title" name="title"
+          <input type="text" id="title" name="SnsTitle"
                  placeholder="제목을 입력하세요" required />
         </div>
 
         <!-- 내용 -->
         <div class="form-row" style="align-items:flex-start;">
           <label for="content">내용</label>
-          <textarea id="content" name="content"
+          <textarea id="content" name="SnsContent"
                     placeholder="내용을 작성하세요. 축제 후기, 공략, 꿀팁, 질문 등 자유롭게 적어주세요."
                     required></textarea>
         </div>
@@ -174,21 +206,14 @@
         <!-- 첨부 영역 -->
         <div class="form-row">
           <label>첨부</label>
-          <div>
-            <div class="attach-row">
-              <button type="button" class="button alt">이미지 추가</button>
-              <input type="file" name="imageFile" accept="image/*" />
-            </div>
-            <div class="attach-row">
-              <button type="button" class="button alt">캘린더 추가</button>
-              <input type="date" name="eventDate" />
-            </div>
-            <div class="attach-row">
-              <button type="button" class="button alt">지도 위치 추가</button>
-              <input type="text" name="place"
-                     placeholder="예) 순천만국가정원, 중앙무대 앞" />
-            </div>
+          <div class="attach-row">
+            <button type="button" class="button alt" id="addImageButton">이미지 추가</button>
           </div>
+        </div>
+
+        <!-- 파일 미리보기 -->
+        <div class="file-preview" id="filePreview">
+          <!-- 선택된 파일들이 미리보기로 나타날 영역 -->
         </div>
 
         <!-- 버튼 영역 -->
@@ -219,28 +244,51 @@
 </div>
 
 <script>
-  // 아주 간단한 프론트 유효성 체크 (추가로 하고 싶을 때)
-  document.getElementById('freeWriteForm').addEventListener('submit', function(e){
-    const category = document.getElementById('category').value;
-    const title    = document.getElementById('title').value.trim();
-    const content  = document.getElementById('content').value.trim();
+  // 이미지 추가 버튼 클릭 시 새로운 파일 입력 요소 추가
+  document.getElementById('addImageButton').addEventListener('click', function() {
+    // 파일 입력 창을 동적으로 생성
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.name = 'files';
+    input.accept = 'image/*';
+    input.style.display = 'none';
 
-    if(!category){
-      alert('분류를 선택하세요.');
-      e.preventDefault();
-      return;
-    }
-    if(!title){
-      alert('제목을 입력하세요.');
-      e.preventDefault();
-      return;
-    }
-    if(!content){
-      alert('내용을 입력하세요.');
-      e.preventDefault();
-      return;
-    }
-    // 여기서부터는 서버로 전송
+    // 파일 선택 시 미리보기 추가
+    input.addEventListener('change', function(event) {
+      const files = event.target.files;
+      const previewContainer = document.getElementById('filePreview');
+
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+          const img = document.createElement('img');
+          img.src = e.target.result;
+          img.classList.add('preview-img');
+
+          // 미리보기 이미지에 삭제 버튼 추가
+          const removeButton = document.createElement('button');
+          removeButton.textContent = 'X';
+          removeButton.classList.add('remove-btn');
+          removeButton.onclick = function() {
+            previewContainer.removeChild(img);
+            previewContainer.removeChild(removeButton);
+          };
+
+          previewContainer.appendChild(img);
+          previewContainer.appendChild(removeButton);
+        };
+
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // 파일 입력 요소를 문서에 추가
+    document.querySelector('.attach-row').appendChild(input);
+
+    // 해당 파일 입력 요소 클릭
+    input.click();
   });
 </script>
 

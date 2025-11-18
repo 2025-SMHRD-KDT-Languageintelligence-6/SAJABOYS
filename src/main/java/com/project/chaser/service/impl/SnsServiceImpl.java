@@ -37,22 +37,32 @@ public class SnsServiceImpl implements SnsService {
 
             if (file.isEmpty()) continue;
 
-            String saveName = UUID.randomUUID() + "_" + file.getOriginalFilename();
-            File dest = new File(uploadPath, saveName);
-            file.transferTo(dest);
+            // uploadPath가 C:/upload로 설정되어 있으므로 해당 경로에 파일을 저장
+            File uploadDir = new File(uploadPath);  // C:/upload 디렉토리
+            if (!uploadDir.exists()) {
+                uploadDir.mkdirs();  // 디렉토리가 없으면 생성
+            }
 
+            // 파일 이름에 UUID를 추가하여 중복 방지
+            String saveName = UUID.randomUUID() + "_" + file.getOriginalFilename();
+            File dest = new File(uploadPath, saveName);  // C:/upload/파일이름
+            file.transferTo(dest);  // 파일 저장
+
+            // Snsfile 객체 생성 및 DB 저장
             Snsfile snsfile = new Snsfile();
             snsfile.setSnsIdx(snsIdx);
             snsfile.setFileName(file.getOriginalFilename());
-            snsfile.setFilePath(saveName);
+            snsfile.setFilePath(saveName);  // 저장된 파일 이름을 경로로 저장
             snsfile.setFileSize((int) file.getSize());
             snsfile.setFileType(file.getContentType());
 
+            // DB에 파일 정보 저장
             mapper.insertFile(snsfile);
         }
 
         return snsIdx;
     }
+
 
     @Override
     public Sns getPostDetail(int snsIdx) {
