@@ -69,4 +69,15 @@ public class SnsServiceImpl implements SnsService {
         return mapper.getPostListByPageWithSearch(start, pageSize, category, keyword);
     }
 
+    @Override
+    public int updatePost(Sns sns, List<MultipartFile> files) throws Exception {
+        // 글 내용만 수정
+        return mapper.updateSns(sns);
+    }
+
+    @Override
+    public int deletePost(int snsIdx) {
+        return mapper.deletePost(snsIdx);
+    }
+
 }

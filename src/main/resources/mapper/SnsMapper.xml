@@ -13,6 +13,16 @@
         values (#{SnsTitle}, #{SnsContent}, #{Category}, #{UserIdx})
     </insert>
 
+    <!-- 게시글 수정 -->
+    <update id="updateSns" parameterType="com.project.chaser.dto.Sns">
+        update sns set SnsTitle = #{SnsTitle}, SnsContent = #{SnsContent}, Category = #{Category} WHERE SnsIdx = #{SnsIdx}
+    </update>
+
+    <!-- 게시글 삭제 -->
+    <delete id="deletePost">
+        delete from sns where SnsIdx = #{SnsIdx}
+    </delete>
+
     <!-- 파일 등록 -->
     <insert id="insertFile" parameterType="com.project.chaser.dto.Snsfile">
         insert into snsfile (SnsIdx, FileName, FilePath, FileSize, FileType)

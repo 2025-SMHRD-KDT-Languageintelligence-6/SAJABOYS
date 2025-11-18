@@ -107,10 +107,21 @@
             <!-- 하단 버튼들 -->
             <div class="view-btn-row">
                 <button type="button" class="button alt" onclick="location.href='/sns'">목록</button>
-                <button type="button" class="button alt" onclick="alert('수정 페이지로 이동 (추후 구현)')">수정</button>
-                <button type="button" class="button alt" onclick="if(confirm('정말 삭제하시겠습니까?')) alert('삭제 요청 (추후 서버 연동)')">삭제</button>
+
+                <!-- 로그인한 사용자가 글 작성자인 경우에만 수정/삭제 버튼 표시 -->
+                <c:if test="${not empty sessionScope.user and sessionScope.user.userIdx == sns.userIdx}">
+                    <!-- 수정 버튼 -->
+                    <button type="button" class="button alt"
+                            onclick="location.href='/sns/write?snsIdx=${sns.snsIdx}'">수정</button>
+
+                    <!-- 삭제 버튼 -->
+                    <form action="/sns/delete/${sns.snsIdx}" method="post" style="display:inline;">
+                        <button type="submit" class="button alt"
+                                onclick="return confirm('정말 삭제하시겠습니까?');">삭제</button>
+                    </form>
+                </c:if>
             </div>
-        </section>
+
 
 
     </main>

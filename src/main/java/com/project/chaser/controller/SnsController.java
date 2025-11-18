@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 @RequiredArgsConstructor
@@ -49,19 +50,36 @@ public class SnsController {
     }
 
 
-    // 글 작성 화면
+    // 글쓰기 & 수정 화면
     @GetMapping("/write")
-    public String showWriteForm(HttpSession session) {
+    public String showWriteForm(@RequestParam(value = "snsIdx", required = false) Integer snsIdx,
+                                HttpSession session,
+                                Model model) {
+
         User loginUser = (User) session.getAttribute("user");
         if (loginUser == null) return "redirect:/login";
-        return "freeBoardWrite";
+
+        if (snsIdx != null) {
+            // 수정 모드: 기존 글 가져오기
+            Sns sns = service.getPostDetail(snsIdx);
+
+            // 본인 글인지 체크
+            if (sns == null || !Objects.equals(sns.getUserIdx(), loginUser.getUserIdx())) {
+                return "redirect:/sns";
+            }
+
+            model.addAttribute("sns", sns); // JSP에 기존 데이터 전달
+        }
+
+        return "freeBoardWrite"; // 글쓰기 JSP 재사용
     }
+
 
     // 글 작성 처리
     @PostMapping("/write")
-    public String write(Sns sns,
-                        @RequestParam(name = "files", required = false) List<MultipartFile> files,
-                        HttpSession session) throws Exception {
+    public String writeOrUpdate(Sns sns,
+                                @RequestParam(name = "files", required = false) List<MultipartFile> files,
+                                HttpSession session) throws Exception {
 
         User loginUser = (User) session.getAttribute("user");
         if (loginUser == null) return "redirect:/login";
@@ -69,9 +87,19 @@ public class SnsController {
         sns.setUserIdx(loginUser.getUserIdx());
         if (files == null) files = new ArrayList<>();
 
-        int snsIdx = service.insertPost(sns, files);
-        return "redirect:/sns/view/" + snsIdx;
+        if (sns.getSnsIdx() > 0) { // 0이면 새 글, 0보다 크면 수정 글
+            // 기존 글 수정
+            service.updatePost(sns, files);
+        } else {
+            // 새 글 작성
+            // 새 글 작성
+            int snsIdx = service.insertPost(sns, files);
+            return "redirect:/sns/view/" + snsIdx;
+        }
+
+        return "redirect:/sns/view/" + sns.getSnsIdx();
     }
+
 
     // 글 보기
     @GetMapping("/view/{snsIdx}")
@@ -80,4 +108,24 @@ public class SnsController {
         model.addAttribute("sns", sns);
         return "freeBoardView";
     }
+
+    // 글 삭제
+    @PostMapping("/delete/{snsIdx}")
+    public String deletePost(@PathVariable int snsIdx, HttpSession session) {
+        User loginUser = (User) session.getAttribute("user");
+        if (loginUser == null) return "redirect:/login";
+
+        // 삭제 요청이 본인 글인지 확인
+        Sns sns = service.getPostDetail(snsIdx);
+        if (sns == null || sns.getUserIdx() != loginUser.getUserIdx()) {
+            // 글이 없거나, 로그인 유저와 작성자가 다르면 목록으로
+            return "redirect:/sns";
+        }
+
+        service.deletePost(snsIdx); // Service 호출
+        return "redirect:/sns"; // 삭제 후 목록으로 이동
+    }
+
+
+
 }
