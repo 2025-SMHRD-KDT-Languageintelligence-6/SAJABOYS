@@ -1,12 +1,10 @@
 package com.project.chaser.controller;
 
 import com.project.chaser.dto.User;
-import com.project.chaser.service.SnsService;
 import com.project.chaser.dto.Sns;
-import com.project.chaser.dto.Snsfile;
+import com.project.chaser.service.SnsService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,85 +18,66 @@ import java.util.List;
 @RequestMapping("/sns")
 public class SnsController {
 
-    @Autowired
     private final SnsService service;
 
-    // 게시글 목록 (페이징 적용)
+    // 게시글 목록 (페이징 + 검색)
     @GetMapping
-    public String list(@RequestParam(defaultValue = "1") int page, Model model) {
+    public String list(@RequestParam(defaultValue = "1") int page,
+                       @RequestParam(defaultValue = "all") String category,
+                       @RequestParam(value = "q", defaultValue = "") String keyword, // q 파라미터로 받기
+                       Model model) {
 
-        int pageSize = 10;  // 한 페이지당 게시글 10개
+        int pageSize = 10;
 
-        // 전체 게시글 수
-        int totalCount = service.getTotalCount();
+        // 검색 조건 처리
+        String searchCategory = "all".equals(category) ? null : category;
+        String searchKeyword = keyword.isEmpty() ? null : keyword; // 빈 문자열이면 null 처리
 
-        // 총 페이지 수 계산
+        int totalCount = service.getTotalCount(searchCategory, searchKeyword);
         int totalPage = (int) Math.ceil((double) totalCount / pageSize);
-
-        // DB LIMIT 용 시작 index
         int start = (page - 1) * pageSize;
 
-        // 현재 페이지 게시글 목록 가져오기
-        List<Sns> postList = service.getPostListByPage(start, pageSize);
+        List<Sns> postList = service.getPostListByPage(start, pageSize, searchCategory, searchKeyword);
 
-        // JSP로 전달
         model.addAttribute("list", postList);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPage", totalPage);
+        model.addAttribute("category", category);
+        model.addAttribute("keyword", keyword);
 
-        return "freeBoard";  // /WEB-INF/views/freeBoard.jsp
+        return "freeBoard";
     }
 
+
+    // 글 작성 화면
+    @GetMapping("/write")
+    public String showWriteForm(HttpSession session) {
+        User loginUser = (User) session.getAttribute("user");
+        if (loginUser == null) return "redirect:/login";
+        return "freeBoardWrite";
+    }
+
+    // 글 작성 처리
     @PostMapping("/write")
     public String write(Sns sns,
                         @RequestParam(name = "files", required = false) List<MultipartFile> files,
                         HttpSession session) throws Exception {
 
-        // 세션에서 로그인된 사용자 정보 가져오기
         User loginUser = (User) session.getAttribute("user");
+        if (loginUser == null) return "redirect:/login";
 
-        if (loginUser == null) {
-            // 로그인되지 않은 경우 로그인 페이지로 리다이렉트
-            return "redirect:/login";
-        }
+        sns.setUserIdx(loginUser.getUserIdx());
+        if (files == null) files = new ArrayList<>();
 
-        // UserIdx 설정
-        sns.setUserIdx(loginUser.getUserIdx());  // 세션에서 가져온 UserIdx로 설정
-
-        // 파일이 없을 경우 빈 리스트로 처리
-        if (files == null) {
-            files = new ArrayList<>();
-        }
-
-        // 게시글 저장 후, 해당 게시글 상세 페이지로 리다이렉트
         int snsIdx = service.insertPost(sns, files);
         return "redirect:/sns/view/" + snsIdx;
     }
 
-
-
-
-    // 게시글 상세 보기
-    @GetMapping("/view/{SnsIdx}")
-    public String view(@PathVariable int SnsIdx, Model model) {
-        Sns sns = service.getPostDetail(SnsIdx);
+    // 글 보기
+    @GetMapping("/view/{snsIdx}")
+    public String view(@PathVariable int snsIdx, Model model) {
+        Sns sns = service.getPostDetail(snsIdx);
         model.addAttribute("sns", sns);
-        return "freeBoardView"; // /WEB-INF/views/sns/view.jsp
+        return "freeBoardView";
     }
-
-    // 글쓰기 페이지로 이동
-    @GetMapping("/write")
-    public String showWriteForm(HttpSession session) {
-        // 세션에서 로그인된 사용자 정보 가져오기
-        User loginUser = (User) session.getAttribute("user");
-
-        if (loginUser == null) {
-            // 로그인되지 않은 경우 로그인 페이지로 리다이렉트
-            return "redirect:/login";
-        }
-
-        return "freeBoardWrite"; // 로그인된 경우 글쓰기 페이지로 이동
-    }
-
-
 }

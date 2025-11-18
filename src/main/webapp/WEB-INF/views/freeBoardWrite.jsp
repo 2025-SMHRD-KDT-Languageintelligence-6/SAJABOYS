@@ -175,10 +175,10 @@
           <label for="category">분류</label>
           <select id="category" name="Category" required>
             <option value="">선택하세요</option>
-            <option value="talk">잡담</option>
-            <option value="review">축제후기</option>
-            <option value="tip">공략/팁</option>
-            <option value="qna">질문</option>
+            <option value="잡담">잡담</option>
+            <option value="축제후기">축제후기</option>
+            <option value="공략/팁">공략/팁</option>
+            <option value="질문">질문</option>
           </select>
         </div>
 

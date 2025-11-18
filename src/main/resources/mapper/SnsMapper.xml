@@ -21,7 +21,9 @@
 
     <!-- 게시글 상세 -->
     <select id="getPost" parameterType="int" resultType="com.project.chaser.dto.Sns">
-        select * from sns where SnsIdx = #{SnsIdx}
+        select s.*, u.Nickname as userNickname
+        from sns s left join user u on s.UserIdx = u.UserIdx
+        where s.SnsIdx = #{SnsIdx}
     </select>
 
     <update id="updateViews">
@@ -34,19 +36,51 @@
     </select>
 
     <!-- 게시글 목록 -->
-    <select id="getPostList" resultType="com.project.chaser.dto.Sns">
-        select s.SnsIdx, s.SnsTitle, s.Category, s.UserIdx, s.CreatedAt, s.SnsViews,
-        u.Nickname as userNickname
-        from sns s left join user u ON s.UserIdx = u.UserIdx
-        order by SnsIdx desc
-    </select>
 
     <select id="getTotalCount" resultType="int">
         select count(*) from sns
     </select>
 
     <select id="getPostListByPage" resultType="com.project.chaser.dto.Sns">
-        select * from sns order by SnsIdx desc LIMIT #{start}, #{pageSize}
+        select s.SnsIdx, s.SnsTitle, s.Category, s.UserIdx, s.CreatedAt, s.SnsViews, u.Nickname as UserNickname
+        from sns s left join user u on s.UserIdx = u.UserIdx order by SnsIdx desc LIMIT #{start}, #{pageSize}
     </select>
+
+    <!-- 게시글 검색 -->
+
+    <select id="getTotalCountBySearch" resultType="int" parameterType="map">
+        SELECT COUNT(*)
+        FROM sns s
+        JOIN user u ON s.UserIdx = u.UserIdx
+        WHERE 1=1
+        <if test="category != null and category != ''">
+            AND s.Category = #{category}
+        </if>
+        <if test="keyword != null and keyword != ''">
+            AND (s.SnsTitle LIKE CONCAT('%', #{keyword}, '%')
+            OR s.SnsContent LIKE CONCAT('%', #{keyword}, '%')
+            OR u.Nickname LIKE CONCAT('%', #{keyword}, '%'))
+        </if>
+    </select>
+
+    <select id="getPostListByPageWithSearch" resultType="com.project.chaser.dto.Sns" parameterType="map">
+        SELECT s.SnsIdx, s.SnsTitle, s.Category, s.UserIdx, s.CreatedAt, s.SnsViews, u.Nickname as UserNickname
+        FROM sns s
+        JOIN user u ON s.UserIdx = u.UserIdx
+        WHERE 1=1
+        <if test="category != null and category != ''">
+            AND s.Category = #{category}
+        </if>
+        <if test="keyword != null and keyword != ''">
+            AND (s.SnsTitle LIKE CONCAT('%', #{keyword}, '%')
+            OR s.SnsContent LIKE CONCAT('%', #{keyword}, '%')
+            OR u.Nickname LIKE CONCAT('%', #{keyword}, '%'))
+        </if>
+        ORDER BY s.CreatedAt DESC
+        LIMIT #{start}, #{pageSize}
+    </select>
+
+
+
 
 </mapper>

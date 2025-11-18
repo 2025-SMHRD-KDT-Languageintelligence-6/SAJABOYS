@@ -16,8 +16,12 @@ public interface SnsMapper {
     public List<Snsfile> getFiles(int SnsIdx);
     // 게시글 조회수 증가
     void updateViews(int snsIdx);
-    int getTotalCount();
+    // 검색 포함 페이징
+    int getTotalCountBySearch(@Param("category") String category,
+                              @Param("keyword") String keyword);
 
-    List<Sns> getPostListByPage(@Param("start") int start,
-                                @Param("pageSize") int pageSize);
+    List<Sns> getPostListByPageWithSearch(@Param("start") int start,
+                                          @Param("pageSize") int pageSize,
+                                          @Param("category") String category,
+                                          @Param("keyword") String keyword);
 }

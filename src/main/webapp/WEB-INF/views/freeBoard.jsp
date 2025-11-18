@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -9,7 +8,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>자유게시판 | 추적자</title>
 
-  <!-- Verti 기본 CSS -->
+  <!-- 기본 CSS -->
   <link rel="stylesheet" href="assets/css/main.css" />
 
   <style>
@@ -62,11 +61,11 @@
       </div>
       <div class="board-tools">
         <select id="categorySelect">
-          <option value="all">전체</option>
-          <option value="talk">잡담</option>
-          <option value="review">축제후기</option>
-          <option value="tip">공략/팁</option>
-          <option value="qna">질문</option>
+          <option value="전체">전체</option>
+          <option value="잡담">잡담</option>
+          <option value="축제후기">축제후기</option>
+          <option value="공략/팁">공략/팁</option>
+          <option value="질문">질문</option>
         </select>
         <input type="text" id="searchKeyword" placeholder="제목/내용/작성자 검색" />
         <button type="button" class="button alt" id="searchBtn">검색</button>
@@ -94,26 +93,21 @@
               <c:forEach var="row" items="${list}">
                 <tr>
                   <td data-label="번호">${row.snsIdx}</td>
-
                   <td data-label="분류">
                     <c:choose>
-                      <c:when test="${row.category == 'talk'}">잡담</c:when>
-                      <c:when test="${row.category == 'review'}">축제후기</c:when>
-                      <c:when test="${row.category == 'tip'}">공략/팁</c:when>
-                      <c:when test="${row.category == 'qna'}">질문</c:when>
+                      <c:when test="${row.category == '잡담'}">잡담</c:when>
+                      <c:when test="${row.category == '축제후기'}">축제후기</c:when>
+                      <c:when test="${row.category == '공략/팁'}">공략/팁</c:when>
+                      <c:when test="${row.category == '질문'}">질문</c:when>
                       <c:otherwise>기타</c:otherwise>
                     </c:choose>
                   </td>
-
                   <td class="title" data-label="제목">
                     <a href="/sns/view/${row.snsIdx}">
                       ${row.snsTitle}
                     </a>
                   </td>
-
                   <td data-label="작성자">${row.userNickname}</td>
-
-                  <!-- 날짜 포맷 -->
                   <td data-label="작성일">
                     <fmt:parseDate value="${row.createdAt}" pattern="yyyy-MM-dd HH:mm:ss" var="parsedDate" />
                     <fmt:formatDate value="${parsedDate}" pattern="yyyy-MM-dd" />
@@ -122,7 +116,6 @@
                 </tr>
               </c:forEach>
             </c:when>
-
             <c:otherwise>
               <tr>
                 <td colspan="6" class="board-empty">
@@ -135,69 +128,39 @@
         </tbody>
       </table>
 
-      <!-- 게시글 없을 때 표시 (초기엔 display:none) -->
-      <div id="emptyMsg" class="board-empty" style="display:none;">
-        등록된 게시글이 없습니다. 제일 첫 글의 주인공이 되어 보세요!
-      </div>
-
       <!-- 하단 영역 (페이징) -->
       <div class="board-bottom">
         <div class="pagination">
-
-          <!-- 첫 페이지 -->
-          <a href="?page=1">
-            <button type="button">&laquo;</button>
-          </a>
-
-          <!-- 이전 페이지 -->
+          <a href="?page=1"><button type="button">&laquo;</button></a>
           <c:choose>
             <c:when test="${currentPage > 1}">
-              <a href="?page=${currentPage - 1}">
-                <button type="button">&lsaquo;</button>
-              </a>
+              <a href="?page=${currentPage - 1}"><button type="button">&lsaquo;</button></a>
             </c:when>
             <c:otherwise>
               <button type="button" disabled>&lsaquo;</button>
             </c:otherwise>
           </c:choose>
-
-          <!-- 동적 페이지 버튼 생성 -->
           <c:forEach var="i" begin="1" end="${totalPage}">
             <c:choose>
               <c:when test="${currentPage == i}">
                 <span class="current">${i}</span>
               </c:when>
               <c:otherwise>
-                <a href="?page=${i}">
-                  <button type="button">${i}</button>
-                </a>
+                <a href="?page=${i}"><button type="button">${i}</button></a>
               </c:otherwise>
             </c:choose>
           </c:forEach>
-
-          <!-- 다음 페이지 -->
           <c:choose>
             <c:when test="${currentPage < totalPage}">
-              <a href="?page=${currentPage + 1}">
-                <button type="button">&rsaquo;</button>
-              </a>
+              <a href="?page=${currentPage + 1}"><button type="button">&rsaquo;</button></a>
             </c:when>
             <c:otherwise>
               <button type="button" disabled>&rsaquo;</button>
             </c:otherwise>
           </c:choose>
-
-          <!-- 마지막 페이지 -->
-          <a href="?page=${totalPage}">
-            <button type="button">&raquo;</button>
-          </a>
-
+          <a href="?page=${totalPage}"><button type="button">&raquo;</button></a>
         </div>
-
-        <button type="button" class="button write-btn"
-                onclick="location.href='/sns/write'">
-          글쓰기
-        </button>
+        <button type="button" class="button write-btn" onclick="location.href='/sns/write'">글쓰기</button>
       </div>
     </section>
   </main>
@@ -216,17 +179,25 @@
 </div>
 
 <script>
-  // 검색 버튼 (데모용)
-  document.getElementById('searchBtn').addEventListener('click', () => {
-    const cat = document.getElementById('categorySelect').value;
-    const q   = document.getElementById('searchKeyword').value.trim();
-    if(!q){
-      alert('검색어를 입력하세요.');
-      return;
-    }
-    alert('[' + cat + '] 범위에서 "' + q + '" 검색 기능은\n서버 연동 시 구현 예정입니다.');
-  });
-</script>
+document.getElementById('searchBtn').addEventListener('click', () => {
+  const category = document.getElementById('categorySelect').value;
+  const keyword = document.getElementById('searchKeyword').value.trim();
 
+  const params = new URLSearchParams();
+
+  // category가 전체가 아니면 URL에 추가
+  if(category && category !== '전체') {
+    params.append('category', category);
+  }
+
+  // keyword가 비어 있지 않으면 q 파라미터 추가
+  if(keyword) {
+    params.append('q', keyword);
+  }
+
+  // 페이지 1로 이동
+  window.location.href = '/sns?' + params.toString();
+});
+</script>
 </body>
 </html>
