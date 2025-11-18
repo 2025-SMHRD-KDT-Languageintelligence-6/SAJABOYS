@@ -197,38 +197,45 @@
           </tr>
         </thead>
         <tbody id="boardBody">
-          <!-- 예시 데이터 -->
-          <tr>
-            <td data-label="번호">3</td>
-            <td data-label="분류">축제후기</td>
-            <td class="title" data-label="제목">
-              <a href="4_1_FreeBoardView.html">[순천만가을꽃축제] 오늘 다녀온 후기 남겨요 🌸</a>
-            </td>
-            <td data-label="작성자">runback</td>
-            <td data-label="작성일">2025-11-14</td>
-            <td data-label="조회">123</td>
-          </tr>
-          <tr>
-            <td data-label="번호">2</td>
-            <td data-label="분류">공략/팁</td>
-            <td class="title" data-label="제목">
-              <a href="4_1_FreeBoardView.html">거점 탐험전 포인트 빨리 모으는 루트 공유</a>
-            </td>
-            <td data-label="작성자">tracker99</td>
-            <td data-label="작성일">2025-11-13</td>
-            <td data-label="조회">89</td>
-          </tr>
-          <tr>
-            <td data-label="번호">1</td>
-            <td data-label="분류">잡담</td>
-            <td class="title" data-label="제목">
-              <a href="4_1_FreeBoardView.html">내일 순천 가는 사람? 같이 게임 돌 사람 구해요</a>
-            </td>
-            <td data-label="작성자">현우</td>
-            <td data-label="작성일">2025-11-12</td>
-            <td data-label="조회">57</td>
-          </tr>
-          <!-- 실제 구현에서는 서버에서 게시글 목록을 불러와서 채움 -->
+          <c:choose>
+              <%-- 게시글이 있을 때 --%>
+              <c:when test="${not empty list}">
+                  <c:forEach var="row" items="${list}">
+                      <tr>
+                          <td data-label="번호">${row.snsIdx}</td>
+
+                          <td data-label="분류">
+                              <c:choose>
+                                  <c:when test="${row.category == 'talk'}">잡담</c:when>
+                                  <c:when test="${row.category == 'review'}">축제후기</c:when>
+                                  <c:when test="${row.category == 'tip'}">공략/팁</c:when>
+                                  <c:when test="${row.category == 'qna'}">질문</c:when>
+                                  <c:otherwise>기타</c:otherwise>
+                              </c:choose>
+                          </td>
+
+                          <td class="title" data-label="제목">
+                              <a href="/sns/view/${row.snsIdx}">
+                                  ${row.snsTitle}
+                              </a>
+                          </td>
+
+                          <td data-label="작성자">${row.userIdx}</td>
+                          <td data-label="작성일">${row.createdAt}</td>
+                          <td data-label="조회">${row.snsViews}</td>
+                      </tr>
+                  </c:forEach>
+              </c:when>
+
+              <%-- 게시글이 없을 때 --%>
+              <c:otherwise>
+                  <tr>
+                      <td colspan="6" class="board-empty">
+                          등록된 게시글이 없습니다. 제일 첫 글의 주인공이 되어 보세요!
+                      </td>
+                  </tr>
+              </c:otherwise>
+          </c:choose>
         </tbody>
       </table>
 
