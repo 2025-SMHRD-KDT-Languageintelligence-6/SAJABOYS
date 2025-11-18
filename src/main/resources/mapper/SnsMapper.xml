@@ -8,25 +8,30 @@
                     namespace를 구분지어서 찾아감 -->
 <mapper namespace="com.project.chaser.service.SnsMapper">
     <!-- 게시글 등록 -->
-    <insert id="insertPost" parameterType="SnsDTO" useGeneratedKeys="true" keyProperty="snsIdx">
+    <insert id="insertPost" parameterType="com.project.chaser.dto.Sns" useGeneratedKeys="true" keyProperty="snsIdx">
         insert into sns (SnsTitle, SnsContent, Category, UserIdx)
         values (#{snsTitle}, #{snsContent}, #{category}, #{userIdx})
     </insert>
 
     <!-- 파일 등록 -->
-    <insert id="insertFile" parameterType="SnsFileDTO">
-        insert into sns_file (SnsIdx, FileName, FilePath, FileSize, FileType)
+    <insert id="insertFile" parameterType="com.project.chaser.dto.Snsfile">
+        insert into snsfile (SnsIdx, FileName, FilePath, FileSize, FileType)
         values (#{snsIdx}, #{fileName}, #{filePath}, #{fileSize}, #{fileType})
     </insert>
 
     <!-- 게시글 상세 -->
-    <select id="getPost" parameterType="int" resultType="SnsDTO">
+    <select id="getPost" parameterType="int" resultType="com.project.chaser.dto.Sns">
         select * from sns where SnsIdx = #{snsIdx}
     </select>
 
     <!-- 파일 리스트 -->
-    <select id="getFiles" parameterType="int" resultType="SnsFileDTO">
-        select * from sns_file where SnsIdx = #{snsIdx} order by FileIdx asc
+    <select id="getFiles" parameterType="int" resultType="com.project.chaser.dto.Snsfile">
+        select * from snsfile where SnsIdx = #{snsIdx} order by FileIdx asc
+    </select>
+
+    <!-- 게시글 목록 -->
+    <select id="getPostList" resultType="com.project.chaser.dto.Sns">
+        select * from sns where IsDeleted = 0 order by SnsIdx DESC
     </select>
 
 </mapper>
