@@ -90,8 +90,6 @@
         <tbody id="boardBody">
 
           <c:choose>
-
-            <%-- 게시글이 있을 때 --%>
             <c:when test="${not empty list}">
               <c:forEach var="row" items="${list}">
                 <tr>
@@ -113,18 +111,18 @@
                     </a>
                   </td>
 
-                  <td data-label="작성자">${row.userIdx}</td>
-                  <%-- 날짜 포맷 처리 --%>
+                  <td data-label="작성자">${row.userNickname}</td>
+
+                  <!-- 날짜 포맷 -->
                   <td data-label="작성일">
-                      <fmt:parseDate value="${row.createdAt}" pattern="yyyy-MM-dd HH:mm:ss" var="parsedDate" />
-                      <fmt:formatDate value="${parsedDate}" pattern="yyyy-MM-dd" />
+                    <fmt:parseDate value="${row.createdAt}" pattern="yyyy-MM-dd HH:mm:ss" var="parsedDate" />
+                    <fmt:formatDate value="${parsedDate}" pattern="yyyy-MM-dd" />
                   </td>
                   <td data-label="조회">${row.snsViews}</td>
                 </tr>
               </c:forEach>
             </c:when>
 
-            <%-- 게시글이 없을 때 --%>
             <c:otherwise>
               <tr>
                 <td colspan="6" class="board-empty">
@@ -132,7 +130,6 @@
                 </td>
               </tr>
             </c:otherwise>
-
           </c:choose>
 
         </tbody>
@@ -143,16 +140,58 @@
         등록된 게시글이 없습니다. 제일 첫 글의 주인공이 되어 보세요!
       </div>
 
-      <!-- 하단 영역 -->
+      <!-- 하단 영역 (페이징) -->
       <div class="board-bottom">
         <div class="pagination">
-          <button type="button">&laquo;</button>
-          <button type="button">&lsaquo;</button>
-          <span class="current">1</span>
-          <button type="button">2</button>
-          <button type="button">3</button>
-          <button type="button">&rsaquo;</button>
-          <button type="button">&raquo;</button>
+
+          <!-- 첫 페이지 -->
+          <a href="?page=1">
+            <button type="button">&laquo;</button>
+          </a>
+
+          <!-- 이전 페이지 -->
+          <c:choose>
+            <c:when test="${currentPage > 1}">
+              <a href="?page=${currentPage - 1}">
+                <button type="button">&lsaquo;</button>
+              </a>
+            </c:when>
+            <c:otherwise>
+              <button type="button" disabled>&lsaquo;</button>
+            </c:otherwise>
+          </c:choose>
+
+          <!-- 동적 페이지 버튼 생성 -->
+          <c:forEach var="i" begin="1" end="${totalPage}">
+            <c:choose>
+              <c:when test="${currentPage == i}">
+                <span class="current">${i}</span>
+              </c:when>
+              <c:otherwise>
+                <a href="?page=${i}">
+                  <button type="button">${i}</button>
+                </a>
+              </c:otherwise>
+            </c:choose>
+          </c:forEach>
+
+          <!-- 다음 페이지 -->
+          <c:choose>
+            <c:when test="${currentPage < totalPage}">
+              <a href="?page=${currentPage + 1}">
+                <button type="button">&rsaquo;</button>
+              </a>
+            </c:when>
+            <c:otherwise>
+              <button type="button" disabled>&rsaquo;</button>
+            </c:otherwise>
+          </c:choose>
+
+          <!-- 마지막 페이지 -->
+          <a href="?page=${totalPage}">
+            <button type="button">&raquo;</button>
+          </a>
+
         </div>
 
         <button type="button" class="button write-btn"

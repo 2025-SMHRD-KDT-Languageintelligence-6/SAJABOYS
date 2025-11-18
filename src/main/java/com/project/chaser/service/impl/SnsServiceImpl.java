@@ -80,8 +80,13 @@ public class SnsServiceImpl implements SnsService {
 
 
     @Override
-    public List<Sns> getPostList() {
-        return mapper.getPostList();
+    public int getTotalCount() {
+        return mapper.getTotalCount();
+    }
+
+    @Override
+    public List<Sns> getPostListByPage(int start, int pageSize) {
+        return mapper.getPostListByPage(start, pageSize);
     }
 }
 

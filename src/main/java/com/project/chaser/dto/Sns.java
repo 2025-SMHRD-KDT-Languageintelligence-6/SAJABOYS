@@ -23,4 +23,7 @@ public class Sns {
     private String Category;
 
     private List<Snsfile> fileList;
+
+    // 새 필드 추가
+    private String userNickname;
 }

@@ -35,7 +35,18 @@
 
     <!-- 게시글 목록 -->
     <select id="getPostList" resultType="com.project.chaser.dto.Sns">
-        select * from sns order by SnsIdx DESC
+        select s.SnsIdx, s.SnsTitle, s.Category, s.UserIdx, s.CreatedAt, s.SnsViews,
+        u.Nickname as userNickname
+        from sns s left join user u ON s.UserIdx = u.UserIdx
+        order by SnsIdx desc
+    </select>
+
+    <select id="getTotalCount" resultType="int">
+        select count(*) from sns
+    </select>
+
+    <select id="getPostListByPage" resultType="com.project.chaser.dto.Sns">
+        select * from sns order by SnsIdx desc LIMIT #{start}, #{pageSize}
     </select>
 
 </mapper>

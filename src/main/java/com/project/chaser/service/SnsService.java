@@ -10,5 +10,6 @@ public interface SnsService {
 
     public Sns getPostDetail(int snsIdx);
 
-    public List<Sns> getPostList();
+    public int getTotalCount();                // 전체 게시글 수
+    public List<Sns> getPostListByPage(int start, int pageSize);  // 페이징 목록
 }

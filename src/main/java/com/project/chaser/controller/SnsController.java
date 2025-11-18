@@ -23,12 +23,30 @@ public class SnsController {
     @Autowired
     private final SnsService service;
 
-    // 게시글 목록 페이지
+    // 게시글 목록 (페이징 적용)
     @GetMapping
-    public String list(Model model) {
-        List<Sns> postList = service.getPostList();
-        model.addAttribute("list", postList);   // ★ JSP에서 ${list}로 사용하므로 key를 list로 변경
-        return "freeBoard"; // /WEB-INF/views/freeBoard.jsp
+    public String list(@RequestParam(defaultValue = "1") int page, Model model) {
+
+        int pageSize = 10;  // 한 페이지당 게시글 10개
+
+        // 전체 게시글 수
+        int totalCount = service.getTotalCount();
+
+        // 총 페이지 수 계산
+        int totalPage = (int) Math.ceil((double) totalCount / pageSize);
+
+        // DB LIMIT 용 시작 index
+        int start = (page - 1) * pageSize;
+
+        // 현재 페이지 게시글 목록 가져오기
+        List<Sns> postList = service.getPostListByPage(start, pageSize);
+
+        // JSP로 전달
+        model.addAttribute("list", postList);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPage", totalPage);
+
+        return "freeBoard";  // /WEB-INF/views/freeBoard.jsp
     }
 
     @PostMapping("/write")
