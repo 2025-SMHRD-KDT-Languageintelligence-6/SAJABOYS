@@ -65,7 +65,6 @@
                     <div class="post-meta-right">
                         <span>작성일 : ${sns.createdAt}</span>
                         <span>조회수 : ${sns.snsViews}</span>
-                        <span>좋아요 : ${sns.snsLikes}</span>
                     </div>
                 </div>
             </div>

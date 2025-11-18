@@ -24,6 +24,10 @@
         select * from sns where SnsIdx = #{SnsIdx}
     </select>
 
+    <update id="updateViews">
+        update sns set SnsViews = SnsViews + 1 where SnsIdx = #{SnsIdx} <!-- 조회수 증가 -->
+    </update>
+
     <!-- 파일 리스트 -->
     <select id="getFiles" parameterType="int" resultType="com.project.chaser.dto.Snsfile">
         select * from snsfile where SnsIdx = #{SnsIdx} order by FileIdx asc

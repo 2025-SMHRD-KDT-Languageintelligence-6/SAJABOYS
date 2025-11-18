@@ -19,7 +19,6 @@ public class Sns {
     @NonNull
     private int UserIdx;
     private int SnsViews;
-    private int SnsLikes;
     @NonNull
     private String Category;
 

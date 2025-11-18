@@ -66,10 +66,18 @@ public class SnsServiceImpl implements SnsService {
 
     @Override
     public Sns getPostDetail(int snsIdx) {
+        // 1. 조회수 증가
+        mapper.updateViews(snsIdx);  // 조회수를 증가시키는 쿼리 호출
+
+        // 2. 게시글 정보 조회
         Sns sns = mapper.getPost(snsIdx);
+
+        // 3. 파일 목록 가져오기
         sns.setFileList(mapper.getFiles(snsIdx));
+
         return sns;
     }
+
 
     @Override
     public List<Sns> getPostList() {

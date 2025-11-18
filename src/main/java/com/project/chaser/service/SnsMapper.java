@@ -14,4 +14,6 @@ public interface SnsMapper {
     public Sns getPost(int SnsIdx);
     public List<Snsfile> getFiles(int SnsIdx);
     public List<Sns> getPostList();
+    // 게시글 조회수 증가
+    void updateViews(int snsIdx);
 }

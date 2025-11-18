@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -30,9 +31,11 @@ public class SnsController {
         return "freeBoard"; // /WEB-INF/views/freeBoard.jsp
     }
 
-    // 게시글 등록 처리
     @PostMapping("/write")
-    public String write(Sns sns, @RequestParam("files") List<MultipartFile> files, HttpSession session) throws Exception {
+    public String write(Sns sns,
+                        @RequestParam(name = "files", required = false) List<MultipartFile> files,
+                        HttpSession session) throws Exception {
+
         // 세션에서 로그인된 사용자 정보 가져오기
         User loginUser = (User) session.getAttribute("user");
 
@@ -44,10 +47,16 @@ public class SnsController {
         // UserIdx 설정
         sns.setUserIdx(loginUser.getUserIdx());  // 세션에서 가져온 UserIdx로 설정
 
+        // 파일이 없을 경우 빈 리스트로 처리
+        if (files == null) {
+            files = new ArrayList<>();
+        }
+
         // 게시글 저장 후, 해당 게시글 상세 페이지로 리다이렉트
         int snsIdx = service.insertPost(sns, files);
         return "redirect:/sns/view/" + snsIdx;
     }
+
 
 
 
