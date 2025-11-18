@@ -2,6 +2,8 @@ package com.project.chaser.dto;
 
 import lombok.*;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor  // 기본 생성자
 @AllArgsConstructor // 모든 필드 변수를 담는 생성자(초기화를 한다)
@@ -20,4 +22,6 @@ public class Sns {
     private int SnsLikes;
     @NonNull
     private String Category;
+
+    private List<Snsfile> fileList;
 }
