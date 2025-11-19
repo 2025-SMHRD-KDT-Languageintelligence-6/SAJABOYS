@@ -214,62 +214,28 @@
             </div>
             </section>
             <!-- 댓글 영역 -->
-                <section class="comment-wrap">
-                    <div class="comment-header">
-                        <h3>댓글</h3>
-                        <span>총 <strong>3</strong>개</span>
-                    </div>
+                    <section class="comment-wrap">
+                        <div class="comment-header">
+                            <h3>댓글</h3>
+                            <span>총 <strong id="commentCount">0</strong>개</span>
+                        </div>
 
-                    <!-- 댓글 리스트 -->
-                    <div class="comment-list">
+                        <!-- 댓글 리스트 -->
+                        <div class="comment-list" id="commentList"></div>
 
-                        <div class="comment-item">
-                            <div class="comment-meta">
-                                <div>
-                                    <span class="comment-author">루피</span> · <span>2025-11-14 13:45</span>
+                        <!-- 댓글 작성 -->
+                        <c:if test="${not empty sessionScope.user}">
+                            <div class="comment-form">
+                                <div class="comment-form-row">
+                                    <textarea id="commentText" placeholder="댓글을 입력하세요. 예) 오늘 몇 시에 만날까요?"></textarea>
+                                    <button type="button" class="button" id="commentSubmit">등록</button>
                                 </div>
-                                <div>좋아요 2</div>
                             </div>
-                            <div class="comment-body">
-                                저도 오늘 축제 가요!
-                                3시 입구 쪽에서 만나면 될까요?
-                            </div>
-                        </div>
-
-                        <div class="comment-item">
-                            <div class="comment-meta">
-                                <div>
-                                    <span class="comment-author">조로</span> · <span>2025-11-14 14:02</span>
-                                </div>
-                                <div>좋아요 1</div>
-                            </div>
-                            <div class="comment-body">
-                                거점 탐험전은 처음인데 같이 해도 되나요? 😅
-                            </div>
-                        </div>
-
-                        <div class="comment-item">
-                            <div class="comment-meta">
-                                <div>
-                                    <span class="comment-author">나미</span> · <span>2025-11-14 14:10</span>
-                                </div>
-                                <div>좋아요 0</div>
-                            </div>
-                            <div class="comment-body">
-                                오늘 바람 좀 불어요. 따뜻하게 입고 오세요!
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <!-- 댓글 작성 -->
-                    <div class="comment-form">
-                        <div class="comment-form-row">
-                            <textarea id="commentText" placeholder="댓글을 입력하세요. 예) 오늘 몇 시에 만날까요?"></textarea>
-                            <button type="button" class="button" id="commentSubmit">등록</button>
-                        </div>
-                    </div>
-                </section>
+                        </c:if>
+                        <c:if test="${empty sessionScope.user}">
+                            <p style="margin-top:0.5rem; color:#666;">댓글 작성은 로그인 후 가능합니다.</p>
+                        </c:if>
+                    </section>
 
 
     </main>
@@ -288,16 +254,63 @@
 </div>
 
 <script>
-    // 댓글 등록 (데모용)
-    document.getElementById('commentSubmit').addEventListener('click', function(){
-        const text = document.getElementById('commentText').value.trim();
-        if(!text){
-            alert('댓글을 입력하세요.');
-            return;
+    const snsIdx = ${sns.snsIdx};
+
+        // 댓글 불러오기
+        function loadComments(){
+            fetch(`/comment/${snsIdx}`)
+            .then(res => res.json())
+            .then(list => {
+                const listBox = document.getElementById('commentList');
+                listBox.innerHTML = '';
+                list.forEach(c => {
+                    listBox.innerHTML += `
+                        <div class="comment-item">
+                            <div class="comment-meta">
+                                <div>
+                                    <span class="comment-author">${c.userNickname}</span> ·
+                                    <span>${c.createdAt}</span>
+                                </div>
+                            </div>
+                            <div class="comment-body">${c.commentContent}</div>
+                        </div>
+                    `;
+                });
+                document.getElementById('commentCount').innerText = list.length;
+            });
         }
-        alert('댓글이 등록되었습니다! (실제 저장은 서버 연동 후 구현)');
-        document.getElementById('commentText').value = '';
-    });
+
+        loadComments();
+
+        // 댓글 등록
+        const commentSubmit = document.getElementById('commentSubmit');
+        if(commentSubmit){
+            commentSubmit.addEventListener('click', function(){
+                const text = document.getElementById('commentText').value.trim();
+                if(!text){
+                    alert('댓글을 입력하세요.');
+                    return;
+                }
+
+                fetch('/comment/add', {
+                    method:'POST',
+                    headers:{'Content-Type':'application/json'},
+                    body: JSON.stringify({
+                        snsIdx: snsIdx,
+                        commentContent: text
+                    })
+                })
+                .then(res => res.text())
+                .then(result => {
+                    if(result === 'loginRequired'){
+                        alert('로그인이 필요합니다.');
+                        return;
+                    }
+                    document.getElementById('commentText').value = '';
+                    loadComments();
+                });
+            });
+        }
 </script>
 
 </body>
