@@ -256,62 +256,80 @@
 <script>
     const snsIdx = ${sns.snsIdx};
 
-        // 댓글 불러오기
-        function loadComments(){
-            fetch(`/comment/${snsIdx}`)
+    function loadComments() {
+        fetch(`/comment/${snsIdx}`)
             .then(res => res.json())
             .then(list => {
+                console.log('댓글 데이터:', list);
+
                 const listBox = document.getElementById('commentList');
                 listBox.innerHTML = '';
+
                 list.forEach(c => {
-                    listBox.innerHTML += `
-                        <div class="comment-item">
-                            <div class="comment-meta">
-                                <div>
-                                    <span class="comment-author">${c.userNickname}</span> ·
-                                    <span>${c.createdAt}</span>
-                                </div>
-                            </div>
-                            <div class="comment-body">${c.commentContent}</div>
+                    const commentItem = document.createElement('div');
+                    commentItem.className = 'comment-item';
+
+                    const commentMeta = document.createElement('div');
+                    commentMeta.className = 'comment-meta';
+                    commentMeta.innerHTML = `
+                        <div>
+                            <span class="comment-author">${c.userNickname || '익명'}</span> ·
+                            <span>${c.createdAt || '날짜 없음'}</span>
                         </div>
                     `;
+
+                    const commentBody = document.createElement('div');
+                    commentBody.className = 'comment-body';
+                    commentBody.textContent = c.commentContent;
+
+                    commentItem.appendChild(commentMeta);
+                    commentItem.appendChild(commentBody);
+                    listBox.appendChild(commentItem);
                 });
+
                 document.getElementById('commentCount').innerText = list.length;
+            })
+            .catch(err => {
+                console.error('댓글 불러오기 실패:', err);
             });
-        }
+    }
 
-        loadComments();
+    loadComments();
 
-        // 댓글 등록
-        const commentSubmit = document.getElementById('commentSubmit');
-        if(commentSubmit){
-            commentSubmit.addEventListener('click', function(){
-                const text = document.getElementById('commentText').value.trim();
-                if(!text){
-                    alert('댓글을 입력하세요.');
+    const commentSubmit = document.getElementById('commentSubmit');
+    if (commentSubmit) {
+        commentSubmit.addEventListener('click', function() {
+            const text = document.getElementById('commentText').value.trim();
+            if (!text) {
+                alert('댓글을 입력하세요.');
+                return;
+            }
+
+            fetch('/comment/add', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    snsIdx: snsIdx,
+                    commentContent: text
+                })
+            })
+            .then(res => res.text())
+            .then(result => {
+                if (result === 'loginRequired') {
+                    alert('로그인이 필요합니다.');
                     return;
                 }
-
-                fetch('/comment/add', {
-                    method:'POST',
-                    headers:{'Content-Type':'application/json'},
-                    body: JSON.stringify({
-                        snsIdx: snsIdx,
-                        commentContent: text
-                    })
-                })
-                .then(res => res.text())
-                .then(result => {
-                    if(result === 'loginRequired'){
-                        alert('로그인이 필요합니다.');
-                        return;
-                    }
-                    document.getElementById('commentText').value = '';
-                    loadComments();
-                });
+                document.getElementById('commentText').value = '';
+                loadComments();
+            })
+            .catch(err => {
+                console.error('댓글 등록 실패:', err);
             });
-        }
+        });
+    }
 </script>
+
+
 
 </body>
 </html>

@@ -2,22 +2,22 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.mapper.CommentMapper">
+<mapper namespace="com.project.chaser.service.CommentMapper">
 
     <!-- 댓글 목록 -->
-    <select id="getComments" resultType="Comment">
+    <select id="getComments" resultType="com.project.chaser.dto.Comment">
         SELECT c.CommentIdx, c.SnsIdx, c.UserIdx, c.CommentContent,
-        c.CreatedAt, u.UserNickname
+        c.CreatedAt, u.Nickname as UserNickname
         FROM comments c
         JOIN user u ON c.UserIdx = u.UserIdx
-        WHERE c.SnsIdx = #{snsIdx}
+        WHERE c.SnsIdx = #{SnsIdx}
         ORDER BY c.CommentIdx DESC
     </select>
 
     <!-- 댓글 등록 -->
     <insert id="insertComment">
         INSERT INTO comments (SnsIdx, UserIdx, CommentContent)
-        VALUES (#{snsIdx}, #{userIdx}, #{commentContent})
+        VALUES (#{SnsIdx}, #{UserIdx}, #{CommentContent})
     </insert>
 
 </mapper>
