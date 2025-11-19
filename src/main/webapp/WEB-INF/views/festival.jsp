@@ -79,76 +79,97 @@
         }
 
         /* 카드 공통 (포스터 그리드) */
-        .card-grid{
-          display:grid;
-          grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-          gap:1.2rem;
-        }
-        .festival-card{
-          border-radius:18px;
-          overflow:hidden;
-          background:#f8fbff;
-          border:1px solid #d8e6f5;
-          display:flex;
-          flex-direction:column;
-          cursor:pointer;
-          transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
-        }
-        .festival-card:hover{
-          transform:translateY(-4px);
-          box-shadow:0 10px 22px rgba(15,118,178,.25);
-          border-color:#60a5fa;
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 1.2rem; /* 카드 사이 간격 */
         }
 
-        .poster{
-          width:100%;
-          height:220px;
-          background:#eee;
-          display:flex;
-          align-items:center;
-          justify-content:center;
-          overflow:hidden;
+        /* 카드 기본 스타일 */
+        .festival-card {
+            max-width: 280px; /* 한 줄에 1개일 때 너무 커지지 않도록 최대 폭 제한 */
+            border-radius: 18px;
+            overflow: hidden;
+            background: #f8fbff;
+            border: 1px solid #d8e6f5;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
         }
 
-        .festival-body{
-          padding:.75rem .9rem 1rem;
-          display:flex;
-          flex-direction:column;
-          gap:.35rem;
-        }
-        .festival-name{
-          font-weight:800;
-          font-size:1rem;
-        }
-        .festival-meta{
-          font-size:.85rem;
-          color:#555;
-          line-height:1.6;
-        }
-        .tag-row{
-          display:flex;
-          flex-wrap:wrap;
-          gap:.3rem;
-          margin-top:.25rem;
-        }
-        .tag{
-          display:inline-block;
-          padding:.1rem .5rem;
-          border-radius:999px;
-          font-size:.75rem;
-          background:#0090c5;
-          color:#fff;
-        }
-        .tag.sub{
-          background:#e2e8f0;
-          color:#1f2933;
+        /* 호버 효과 */
+        .festival-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 22px rgba(15,118,178,.25);
+            border-color: #60a5fa;
         }
 
-        @media(max-width:980px){
-          .festival-layout{
-            padding:0 1rem 2rem;
-          }
+        /* 포스터 */
+        .poster {
+            width: 100%;
+            height: 220px;
+            background: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
         }
+
+        .poster img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 카드 내용 */
+        .festival-body {
+            padding: 0.75rem 0.9rem 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .festival-name {
+            font-weight: 800;
+            font-size: 1rem;
+        }
+
+        .festival-meta {
+            font-size: 0.85rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* 태그 */
+        .tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+            margin-top: 0.25rem;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.1rem 0.5rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            background: #0090c5;
+            color: #fff;
+        }
+
+        .tag.sub {
+            background: #e2e8f0;
+            color: #1f2933;
+        }
+
+        /* 반응형 */
+        @media (max-width: 980px) {
+            .festival-layout {
+                padding: 0 1rem 2rem;
+            }
+        }
+
     </style>
 </head>
 <body class="is-preload">
@@ -163,11 +184,11 @@
     <main class="festival-layout">
         <section class="festival-main">
 
-            <!-- 오늘 갈만한 축제 -->
+            <!-- 2025 전남 축제 -->
             <section class="section-box" id="todaySection">
                 <div class="section-header">
                     <div>
-                        <h2>오늘 갈만한 축제</h2>
+                        <h2>2025 전남 축제</h2>
                         <small id="todayLabel"></small>
                     </div>
 
@@ -254,8 +275,7 @@
                                 </div>
 
                                 <div class="tag-row">
-                                    <span class="tag">오늘 열리는 축제</span>
-                                    <span class="tag sub">테마: ${f.theme}</span>
+                                    <span class="tag">테마: ${f.theme}</span>
                                     <span class="tag sub">지역: ${f.region}</span>
                                     <span class="tag sub">기간: ${f.status}</span>
                                 </div>
@@ -328,4 +348,5 @@
 </script>
 
 </body>
+</html>
 </html>
