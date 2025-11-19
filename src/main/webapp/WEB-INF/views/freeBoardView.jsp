@@ -151,7 +151,6 @@
                 <div class="post-meta-row">
                     <div class="post-meta-left">
                         <span>작성자 : <strong>${sns.userNickname}</strong></span>
-                        <span>분류 : ${sns.category}</span>
                     </div>
                     <div class="post-meta-right">
                         <span>작성일 : ${sns.createdAt}</span>

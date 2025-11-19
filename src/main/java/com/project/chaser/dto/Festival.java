@@ -20,7 +20,7 @@ public class Festival {
     @NonNull
     private String EndDate;
     @NonNull
-    private int Fee;
+    private String Fee;
     @NonNull
     private String Theme;
     @NonNull
