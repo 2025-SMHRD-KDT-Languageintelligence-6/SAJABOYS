@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>🕵️‍♂️ 도둑과 경찰 · 추격형 전략 게임 룰북</title>
+  <meta name="description" content="도둑과 경찰: 팀 대결 추격 게임의 공식 룰북과 운영 가이드" />
+  <style>
+    :root{
+      --bg:#0d1117;--panel:#111827;--muted:#9aa4b2;--text:#e5e7eb;--accent:#60a5fa;--accent2:#a78bfa;--ok:#34d399;--warn:#f59e0b;--bad:#ef4444;
+      --b:1px solid rgba(255,255,255,.08);--r:16px;--r-sm:12px;--shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:linear-gradient(180deg,#0a0f15,#0d1117);color:var(--text);font-family:ui-sans-serif,system-ui,AppleSDGothicNeo,"Noto Sans KR",Segoe UI,Roboto,Helvetica,Arial}
+    a{color:var(--accent)}
+    .wrap{max-width:1100px;margin:0 auto;padding:28px}
+    header.hero{position:sticky;top:0;background:rgba(13,17,23,.85);backdrop-filter:saturate(140%) blur(10px);z-index:10;border-bottom:var(--b)}
+    .hero .inner{max-width:1100px;margin:0 auto;padding:12px 20px;display:flex;gap:16px;align-items:center;justify-content:space-between}
+    .brand{display:flex;gap:10px;align-items:center}
+    .brand h1{font-size:18px;margin:0}
+    .chips{display:flex;flex-wrap:wrap;gap:6px}
+    .chip{border:var(--b);border-radius:999px;padding:6px 10px;font-size:12px;color:var(--muted);background:rgba(255,255,255,.03)}
+    nav.toc{margin:18px 0;padding:14px;border:var(--b);border-radius:var(--r-sm);background:rgba(255,255,255,.02)}
+    nav.toc h2{font-size:15px;margin:0 0 8px 0;color:var(--muted)}
+    nav.toc ol{margin:0;padding-left:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:6px 16px}
+    .grid{display:grid;gap:18px}
+    @media(min-width:900px){.grid{grid-template-columns:2fr 1fr}}
+    section.card, aside .card{background:var(--panel);border:var(--b);border-radius:var(--r);padding:22px;box-shadow:var(--shadow)}
+    section.card h2{margin:0 0 10px 0;font-size:20px}
+    section.card h3{margin:16px 0 6px 0;font-size:16px;color:var(--accent)}
+    p,li{line-height:1.65}
+    .kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:12px 0}
+    .kv .cell{background:rgba(255,255,255,.03);border:var(--b);border-radius:12px;padding:12px}
+    .kv b{display:block;font-size:12px;color:var(--muted)}
+    .tag{display:inline-block;padding:3px 8px;border-radius:6px;background:rgba(255,255,255,.06);color:var(--muted);font-size:12px;margin-right:6px}
+    .callout{border-left:4px solid var(--accent2);background:rgba(167,139,250,.12);padding:10px 12px;border-radius:10px;margin:10px 0}
+    .hr{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.14),transparent);margin:14px 0}
+    table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;border-radius:12px;border:var(--b)}
+    th,td{padding:10px 12px;border-bottom:var(--b);vertical-align:top}
+    th{background:rgba(255,255,255,.04);text-align:left;font-weight:700}
+    tr:last-child td{border-bottom:none}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+    details{background:rgba(255,255,255,.03);border:var(--b);border-radius:12px;padding:10px;margin:10px 0}
+    details summary{cursor:pointer;outline:none}
+    footer{color:var(--muted);text-align:center;padding:30px 0}
+    .ok{color:var(--ok)} .warn{color:var(--warn)} .bad{color:var(--bad)}
+  </style>
+</head>
+<body>
+  <!-- 헤더 -->
+  <header class="hero">
+    <div class="inner">
+      <div class="brand">
+        <span aria-hidden="true">🚓</span>
+        <h1>도둑과 경찰 · 추격형 전략 게임 룰북</h1>
+      </div>
+      <div class="chips" aria-label="요약">
+        <span class="chip">인원 4명 이상</span>
+        <span class="chip">30분~1시간</span>
+        <span class="chip">실내·야외 모두 가능</span>
+        <span class="chip">장애물/숨을 공간 추천</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- 목차 -->
+    <nav class="toc" aria-label="목차">
+      <h2>목차</h2>
+      <ol>
+        <li><a href="#overview">1. 게임 개요</a></li>
+        <li><a href="#teams">2. 역할 및 팀 구성</a></li>
+        <li><a href="#setup">3. 게임 준비</a></li>
+        <li><a href="#rules">4. 기본 규칙</a></li>
+        <li><a href="#special">5. 특수 규칙(선택)</a></li>
+        <li><a href="#fair">6. 페널티 및 공정성</a></li>
+        <li><a href="#tips">7. 전략 팁</a></li>
+        <li><a href="#end">8. 게임 종료 및 평가</a></li>
+      </ol>
+    </nav>
+
+    <div class="grid">
+      <!-- 좌측 메인 -->
+      <div>
+        <!-- 1. 개요 -->
+        <section id="overview" class="card">
+          <h2>1. 🎯 게임 개요</h2>
+          <p><b>도둑과 경찰</b>은 <b>경찰팀</b>과 <b>도둑팀</b>으로 나뉘어 진행되는 추격형 전략 게임입니다. 도둑은 추적을 피해 <b>도착 지점</b>에 가거나 제한 시간 동안 <b>생존</b>하면 승리하고, 경찰은 도둑을 <b>체포</b>하여 승리합니다.</p>
+          <div class="kv">
+            <div class="cell"><b>인원</b> 4명 이상(짝수 추천)</div>
+            <div class="cell"><b>시간</b> 30분~1시간</div>
+            <div class="cell"><b>장소</b> 실내/야외(장애물·은신처 권장)</div>
+          </div>
+        </section>
+
+        <!-- 2. 팀 구성 -->
+        <section id="teams" class="card">
+          <h2>2. 🧑‍🤝‍🧑 역할 및 팀 구성</h2>
+          <table aria-label="팀 역할 표">
+            <thead><tr><th>팀</th><th>목표</th><th>핵심 능력</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>도둑팀</td>
+                <td>잡히지 않고 도착 지점 도달 또는 제한 시간 생존</td>
+                <td>은신, 빠른 이동, 위장</td>
+              </tr>
+              <tr>
+                <td>경찰팀</td>
+                <td>모든 도둑 체포 또는 제한 시간 내 목표 수 체포</td>
+                <td>수색, 추적, 협력</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- 3. 준비 -->
+        <section id="setup" class="card">
+          <h2>3. 🗺️ 게임 준비</h2>
+          <ul>
+            <li><b>구역 설정</b>: 시작 지점, 도착 지점, 체포 구역, 은신처를 지도에 표시</li>
+            <li><b>아이템 배치(선택)</b>: 위장 아이템(도둑), 수색 도구(경찰) 등</li>
+            <li><b>타이머</b>: 제한 시간 설정(예: 30분)</li>
+          </ul>
+        </section>
+
+        <!-- 4. 기본 규칙 -->
+        <section id="rules" class="card">
+          <h2>4. 📜 기본 규칙</h2>
+          <h3>4.1 시작</h3>
+          <ol>
+            <li>팀을 나눈 후 각 팀은 <b>전략</b>을 세우고 시작 지점에서 대기</li>
+            <li>도둑은 <b>선행 1~2분</b> 먼저 출발</li>
+          </ol>
+          <h3>4.2 이동</h3>
+          <ul>
+            <li>도둑은 자유 이동 가능하나 <b>금지 구역</b> 출입 불가</li>
+            <li>경찰은 도둑의 <b>동선·흔적</b>을 추적하며 이동</li>
+          </ul>
+          <h3>4.3 체포</h3>
+          <ul>
+            <li>경찰이 도둑에게 <b>손을 대거나</b> <b>1m 이내</b>에서 “<b>체포!</b>” 외치면 체포</li>
+            <li>체포된 도둑은 <b>경찰 기지</b>로 이동</li>
+          </ul>
+          <h3>4.4 승리 조건</h3>
+          <ul>
+            <li><b>도둑 승리</b>: 제한 시간 내 도착 지점 도달 또는 일정 수 이상 생존</li>
+            <li><b>경찰 승리</b>: 제한 시간 내 모든 도둑 체포 또는 목표 수 이상 체포</li>
+          </ul>
+        </section>
+
+        <!-- 5. 특수 규칙 -->
+        <section id="special" class="card">
+          <h2>5. 🎲 특수 규칙 (선택 사항)</h2>
+          <h3>5.1 아이템</h3>
+          <table aria-label="아이템 표">
+            <thead><tr><th>아이템</th><th>효과</th></tr></thead>
+            <tbody>
+              <tr><td>위장복</td><td>일정 시간 동안 경찰에게 식별되지 않음</td></tr>
+              <tr><td>연막탄</td><td>사용 시 <b>10초</b> 동안 경찰 추적 중단</td></tr>
+              <tr><td>무전기</td><td>경찰 간 위치 공유 가능</td></tr>
+            </tbody>
+          </table>
+          <h3>5.2 역할 추가</h3>
+          <table aria-label="추가 역할 표">
+            <thead><tr><th>역할</th><th>설명</th></tr></thead>
+            <tbody>
+              <tr><td>스파이 도둑</td><td>경찰팀에 위장한 도둑(메타 게임 요소)</td></tr>
+              <tr><td>탐지 경찰</td><td>도둑 위치를 <b>주기적</b>으로 감지 가능</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- 6. 페널티 -->
+        <section id="fair" class="card">
+          <h2>6. ⚖️ 페널티 및 공정성</h2>
+          <ul>
+            <li><b>금지 구역</b> 침범: <b>1분</b>간 이동 금지</li>
+            <li><b>거짓 체포 선언</b>: 경찰 <b>1분</b>간 정지</li>
+            <li>도둑이 <b>체포 후 도주</b> 시 즉시 실격</li>
+          </ul>
+          <div class="callout">안전 우선! 밀치기·거친 접촉 금지. 계단/차량 통행 구역은 속도 제한 또는 금지 구역 설정을 권장합니다.</div>
+        </section>
+
+        <!-- 7. 전략 팁 -->
+        <section id="tips" class="card">
+          <h2>7. 🧠 전략 팁</h2>
+          <ul>
+            <li><b>도둑</b>: 분산 이동 + 위장, 교란 동선 활용</li>
+            <li><b>경찰</b>: 협력·구역 분담으로 효율적 수색</li>
+            <li><b>아이템</b>: 사용 타이밍이 승부의 분기점</li>
+          </ul>
+        </section>
+
+        <!-- 8. 종료 -->
+        <section id="end" class="card">
+          <h2>8. 🏁 게임 종료 및 평가</h2>
+          <ul>
+            <li>게임 종료 후 팀별 전략 리뷰</li>
+            <li><b>MVP</b> 선정: 체포 수/생존 시간/기여도 등</li>
+          </ul>
+        </section>
+      </div>
+
+      <!-- 우측 보조: 운영 체크리스트 -->
+      <aside>
+        <section class="card">
+          <h2>🧰 운영 체크리스트</h2>
+          <ul>
+            <li>구역 지도(시작·도착·체포·은신처) 배포</li>
+            <li>선행 시간/제한 시간 타이머 세팅</li>
+            <li>아이템/추가 역할 사용 여부 사전 합의</li>
+            <li>안전 수칙 브리핑(접촉 규칙·금지 구역)</li>
+            <li>분쟁 처리 규정 공지(판정 우선권 등)</li>
+          </ul>
+        </section>
+        <section class="card">
+          <h2>📣 현장 운영 팁</h2>
+          <ul>
+            <li>진행 중 <b>알림 방송</b>: 남은 시간, 힌트, 경고</li>
+            <li>지도에 <b>체포 구역</b> 명확히 표기해 복귀 동선 단축</li>
+            <li>플레이 규모↑: 팀당 무전/메신저 채널 배정</li>
+          </ul>
+        </section>
+      </aside>
+    </div>
+
+    <footer>
+      <p>© 2025 도둑과 경찰 · 추격형 전략 게임</p>
+    </footer>
+  </main>
+</body>
+</html>

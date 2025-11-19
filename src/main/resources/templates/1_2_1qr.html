@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>퀴즈 미션 | 추적자</title>
+
+  <!-- Verti 기본 CSS -->
+  <link rel="stylesheet" href="assets/css/main.css" />
+
+  <style>
+    body{
+      background:#fdfdfd;
+    }
+    .mission-wrap{
+      min-height:100dvh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:2rem 1rem;
+    }
+    .mission-card{
+      width:100%;
+      max-width:900px;
+      background:#fff;
+      border-radius:20px;
+      box-shadow:0 6px 18px rgba(0,0,0,.12);
+      padding:2.5rem 2rem 2rem;
+      position:relative;
+    }
+    .mission-title{
+      font-size:2.4rem;
+      font-weight:800;
+      margin-bottom:1.5rem;
+    }
+    .mission-sub{
+      font-size:.95rem;
+      color:#777;
+      margin-bottom:.75rem;
+    }
+
+    /* 점수 획득 배지 */
+    .score-badge{
+      position:absolute;
+      top:1rem;
+      right:1rem;
+      background:#ffeb3b;
+      border-radius:999px;
+      padding:.4rem 1.1rem;
+      font-weight:800;
+      box-shadow:0 4px 10px rgba(0,0,0,.15);
+      font-size:.9rem;
+    }
+
+    /* 문제 영역 */
+    .question-box{
+      background:#e67923;
+      color:#fff;
+      border-radius:10px;
+      padding:1.4rem 1.6rem;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+      margin-bottom:1.5rem;
+      font-size:1.3rem;
+      font-weight:700;
+    }
+    .question-box strong{
+      text-decoration:underline;
+    }
+
+    .clue-btn{
+      background:#ffeb3b;
+      color:#000;
+      border-radius:6px;
+      padding:.4rem .7rem;
+      font-weight:800;
+      cursor:pointer;
+      border:2px solid #000;
+      display:inline-flex;
+      align-items:center;
+      gap:.4rem;
+      white-space:nowrap;
+    }
+
+    .clue-btn::before{
+      content:"✉";
+      font-size:1.2rem;
+    }
+
+    /* 말풍선 힌트 */
+    .hint-bubble{
+      position:absolute;
+      top:4.5rem;
+      right:3rem;
+      max-width:220px;
+      background:#00a6d6;
+      color:#fff;
+      padding:.8rem 1rem;
+      border-radius:20px;
+      font-size:.9rem;
+      display:none;
+    }
+    .hint-bubble::after{
+      content:"";
+      position:absolute;
+      bottom:-14px;
+      right:25px;
+      border-width:14px 10px 0 10px;
+      border-style:solid;
+      border-color:#00a6d6 transparent transparent transparent;
+    }
+
+    /* YES / NO 버튼 */
+    .btn-row{
+      display:flex;
+      gap:2rem;
+      justify-content:center;
+      margin-top:2.2rem;
+      margin-bottom:1.2rem;
+    }
+    .big-btn{
+      flex:1;
+      max-width:260px;
+      border-radius:30px;
+      font-size:2rem;
+      padding:1rem 0;
+      font-weight:700;
+      border:none;
+      cursor:pointer;
+      color:#fff;
+    }
+    .btn-yes{
+      background:#00a6ff;
+    }
+    .btn-no{
+      background:#e66427;
+    }
+    .big-btn:disabled{
+      opacity:.5;
+      cursor:default;
+    }
+
+    .result-text{
+      text-align:center;
+      font-weight:700;
+      font-size:1.1rem;
+      min-height:1.4rem;
+    }
+
+    .back-wrap{
+      text-align:center;
+      margin-top:1.5rem;
+    }
+    .back-btn{
+      font-size:.95rem;
+      padding:.5rem 1.3rem;
+    }
+
+    @media (max-width:736px){
+      .mission-card{
+        padding:1.8rem 1.3rem 1.5rem;
+      }
+      .mission-title{
+        font-size:1.8rem;
+      }
+      .btn-row{
+        flex-direction:column;
+        align-items:center;
+      }
+      .hint-bubble{
+        right:1.5rem;
+      }
+    }
+  </style>
+</head>
+<body class="is-preload">
+
+<div class="mission-wrap">
+  <section class="mission-card">
+
+    <!-- 현재 점수 / 새 점수 안내 -->
+    <div class="score-badge">
+      내 점수: <span id="currentScore">0</span>점
+    </div>
+
+    <!-- 말풍선 힌트 -->
+    <div id="hintBubble" class="hint-bubble">
+      순천의 인구수는 <strong>28만 명</strong>이다.
+    </div>
+
+    <header>
+      <p class="mission-sub">미션!!</p>
+      <h1 class="mission-title">퀴즈 미션</h1>
+    </header>
+
+    <!-- 문제 박스 -->
+    <div class="question-box">
+      <div>순천의 인구수는 <strong>20만명 이하이다.</strong></div>
+      <button type="button" class="clue-btn" id="clueBtn">단서 사용하기</button>
+    </div>
+
+    <!-- YES / NO 버튼 -->
+    <div class="btn-row">
+      <button type="button" class="big-btn btn-yes" id="yesBtn">YES</button>
+      <button type="button" class="big-btn btn-no" id="noBtn">NO</button>
+    </div>
+
+    <!-- 결과 텍스트 -->
+    <div id="resultText" class="result-text"></div>
+
+    <!-- 이전 화면으로 돌아가기 -->
+    <div class="back-wrap">
+      <button type="button" class="button alt back-btn" id="backBtn">
+        이전 화면으로 돌아가기
+      </button>
+    </div>
+  </section>
+</div>
+
+<script>
+  /*****************
+   * 0. 점수 불러오기
+   *   - 메인 게임 페이지에서
+   *     localStorage.setItem('gameScore', 값);
+   *     형태로 저장해뒀다고 가정
+   *****************/
+  const scoreKey = 'gameScore';
+  const scoreGain = 500; // 정답시 획득 점수
+  const scoreSpan = document.getElementById('currentScore');
+
+  function getScore(){
+    return parseInt(localStorage.getItem(scoreKey) || '0', 10);
+  }
+  function setScore(v){
+    localStorage.setItem(scoreKey, String(v));
+    scoreSpan.textContent = v;
+  }
+  setScore(getScore());
+
+  /*****************
+   * 1. 단서 말풍선
+   *****************/
+  const clueBtn   = document.getElementById('clueBtn');
+  const hintBubble = document.getElementById('hintBubble');
+  let hintShown = false;
+
+  clueBtn.addEventListener('click', () => {
+    hintShown = !hintShown;
+    hintBubble.style.display = hintShown ? 'block' : 'none';
+  });
+
+  /*****************
+   * 2. YES / NO 정답 체크
+   *    - 실제 사실: 인구수는 20만명 이하가 아님(예시: 28만명) → 정답은 NO
+   *****************/
+  const yesBtn = document.getElementById('yesBtn');
+  const noBtn  = document.getElementById('noBtn');
+  const resultText = document.getElementById('resultText');
+  let answered = false;
+
+  function handleAnswer(isYes){
+    if(answered) return;
+    answered = true;
+
+    yesBtn.disabled = true;
+    noBtn.disabled  = true;
+
+    const correctIsYes = false; // 이 문제의 정답은 NO
+    const isCorrect = (isYes === correctIsYes);
+
+    if(isCorrect){
+      const newScore = getScore() + scoreGain;
+      setScore(newScore);
+      resultText.style.color = '#0c8c3a';
+      resultText.textContent = `정답입니다! +${scoreGain}점 획득 🎉`;
+    }else{
+      resultText.style.color = '#e02626';
+      resultText.textContent = '아쉽지만 오답입니다. 다음 미션을 노려보세요!';
+    }
+  }
+
+  yesBtn.addEventListener('click', () => handleAnswer(true));
+  noBtn .addEventListener('click', () => handleAnswer(false));
+
+  /*****************
+   * 3. 이전 화면으로 돌아가기
+   *****************/
+  document.getElementById('backBtn').addEventListener('click', () => {
+    // history.back()이 없을 때를 대비해 fallback 경로도 줄 수 있음
+    if(document.referrer){
+      history.back();
+    }else{
+      // 예: 메인 게임 실행 페이지로
+      window.location.href = 'game-running.html'; // 파일 이름에 맞게 수정
+    }
+  });
+</script>
+
+</body>
+</html>

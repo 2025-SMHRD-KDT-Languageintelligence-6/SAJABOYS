@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>게임 실행 | 추적자</title>
+
+  <!-- Verti 공통 CSS -->
+  <link rel="stylesheet" href="assets/css/main.css" />
+
+  <!-- Leaflet 지도 라이브러리 (무료 / OpenStreetMap) -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+
+  <style>
+    body {
+      background:#e9f4ff;
+    }
+
+    #page-wrapper {
+      padding-top:0;
+    }
+
+    /* 상단 바 간단히 */
+    .game-header {
+      background:#0090c5;
+      color:#fff;
+      padding:.75rem 1.5rem;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .game-header h1 {
+      font-size:1.3rem;
+      margin:0;
+    }
+
+    /* 레이아웃: 왼쪽 정보패널 + 중앙 지도 + 오른쪽 랭킹/QR */
+    .game-layout {
+      display:grid;
+      grid-template-columns:260px minmax(0,1fr) 260px;
+      gap:1rem;
+      padding:1rem;
+      height:calc(100dvh - 70px);
+      box-sizing:border-box;
+    }
+
+    /* 공통 박스 스타일 */
+    .panel {
+      background:#fff;
+      border-radius:16px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.12);
+      padding:1rem 1.2rem;
+      display:flex;
+      flex-direction:column;
+      gap:.7rem;
+    }
+
+    /* 지도 영역 */
+    #map {
+      width:100%;
+      height:100%;
+      border-radius:16px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.12);
+      overflow:hidden;
+    }
+
+    /* 왼쪽 패널(제한시간, 점수) */
+    .time-badge {
+      background:#00a86b;
+      color:#fff;
+      border-radius:999px 0 999px 999px;
+      padding:.6rem 1rem;
+      font-weight:700;
+      text-align:center;
+      font-size:.95rem;
+    }
+    .time-badge span {
+      display:block;
+      font-size:1.3rem;
+      margin-top:.2rem;
+    }
+
+    .score-box {
+      background:#ffeb3b;
+      border-radius:12px;
+      padding:.6rem .9rem;
+      color:#000;
+      font-weight:700;
+      text-align:center;
+    }
+    .score-box .value {
+      display:block;
+      font-size:1.6rem;
+      margin-top:.2rem;
+    }
+
+    .info-small {
+      font-size:.85rem;
+      color:#555;
+    }
+
+    /* 오른쪽 패널(랭킹, QR) */
+    .ranking-table {
+      width:100%;
+      border-collapse:collapse;
+      font-size:.9rem;
+    }
+    .ranking-table th,
+    .ranking-table td {
+      padding:.25rem .4rem;
+    }
+    .ranking-table thead {
+      background:#0090c5;
+      color:#fff;
+    }
+    .ranking-table tbody tr:nth-child(odd){
+      background:#f5f5f5;
+    }
+
+    .qr-box {
+      margin-top:1rem;
+      background:#0090c5;
+      color:#fff;
+      border-radius:12px;
+      padding:.8rem;
+      text-align:center;
+    }
+    .qr-box button {
+      margin-top:.5rem;
+      width:100%;
+      font-size:1rem;
+    }
+    .camera-preview {
+      margin-top:.5rem;
+      max-height:160px;
+      border-radius:10px;
+      overflow:hidden;
+      background:#000;
+    }
+    .camera-preview video {
+      width:100%;
+      display:block;
+    }
+
+    /* 단서 배너 */
+    .clue-banner {
+      position:absolute;
+      top:10%;
+      left:50%;
+      transform:translateX(-50%);
+      z-index:500;
+      background:#000;
+      color:#fff;
+      padding:.8rem 1.5rem;
+      border-radius:12px;
+      box-shadow:0 6px 18px rgba(0,0,0,0.4);
+      display:flex;
+      align-items:center;
+      gap:.6rem;
+      cursor:pointer;
+      display:none;
+    }
+    .clue-banner span {
+      background:#ffeb3b;
+      color:#000;
+      font-weight:800;
+      padding:.2rem .5rem;
+      border-radius:6px;
+    }
+
+    /* 반응형 */
+    @media (max-width: 980px){
+      .game-layout{
+        grid-template-columns:1fr;
+        grid-template-rows:auto 300px auto;
+        height:auto;
+      }
+      #map{
+        height:300px;
+      }
+    }
+  </style>
+</head>
+<body class="is-preload">
+        <!-- Header -->
+				<div id="header-wrapper">
+					<header id="header" class="container">
+
+						<!-- Logo -->
+							<div id="logo">
+								<h1><a href="index.html">추적자</a></h1>
+								<span>지역축제 술레잡기 게임</span>
+							</div>
+
+						<!-- Nav -->
+							<nav id="nav">
+								<ul>
+									<li class="current"><a href="index.html">Home</a></li>
+									<li>
+										<a href="left-sidebar.html">게임창</a>
+										<ul>
+											<li><a href="#">술레잡기</a></li>
+											<li><a href="#">좀비게임</a></li>
+											<li><a href="#">거점점령전</a></li>
+											<li>
+												<a href="#">룰 북</a>
+												<ul>
+													<li><a href="#">술레잡기</a></li>
+													<li><a href="#">좀비게임</a></li>
+													<li><a href="#">거점점령전</a></li>
+													
+												</ul>
+											</li>
+										</ul>
+									</li>
+									<li><a href="#">스템프 투어창</a></li>
+									<li><a href="right-sidebar.html">축제 장</a></li>
+									<li><a href="no-sidebar.html">커뮤니티</a></li>
+									<li><a href="no-sidebar.html">로그인/회원가입</a></li>
+								</ul>
+							</nav>
+
+					</header>
+				</div>
+
+<div id="page-wrapper">
+
+  <!-- 상단 게임 타이틀 바 -->
+  <div class="game-header">
+    <h1>거점 탐험전 – 게임 실행</h1>
+    <div>현재 상태: <strong>진행 중</strong></div>
+  </div>
+
+  <!-- 단서 배너 -->
+  <div id="clueBanner" class="clue-banner">
+    <span>단서!!!</span> 클릭하세요
+  </div>
+
+  <!-- 메인 레이아웃 -->
+  <main class="game-layout">
+
+    <!-- 좌측: 시간 + 점수 -->
+    <section class="panel">
+      <div class="time-badge">
+        제한시간
+        <span id="timeDisplay">01:30:00</span>
+      </div>
+
+      <div class="score-box">
+        점수
+        <span id="scoreValue" class="value">1400</span>
+      </div>
+
+      <div class="info-small">
+        · 미션 성공 시 점수 증가<br>
+        · 제한시간이 끝나면 게임이 자동 종료됩니다.
+      </div>
+    </section>
+
+    <!-- 중앙: 지도 -->
+    <section style="position:relative;">
+      <div id="map"></div>
+    </section>
+
+    <!-- 우측: 랭킹 + QR -->
+    <section class="panel">
+      <h3 style="margin:0 0 .4rem 0;">랭킹</h3>
+      <table class="ranking-table">
+        <thead>
+          <tr>
+            <th>플레이어</th>
+            <th style="text-align:right;">점수</th>
+          </tr>
+        </thead>
+        <tbody id="rankingBody">
+          <tr><td>루피 👑</td><td style="text-align:right;">5000</td></tr>
+          <tr><td>나미</td><td style="text-align:right;">4000</td></tr>
+          <tr><td>조로</td><td style="text-align:right;">3000</td></tr>
+          <tr><td>나</td><td style="text-align:right;">1400</td></tr>
+          <tr><td>우솝</td><td style="text-align:right;">500</td></tr>
+        </tbody>
+      </table>
+
+      <div class="qr-box">
+        <div style="font-size:1.1rem;font-weight:700;">QR / 사진 찍기</div>
+        <small>미션 장소에서 QR을 스캔하거나 인증샷을 촬영하세요.</small>
+        <button type="button" class="button alt" id="cameraBtn">카메라 열기</button>
+        <div class="camera-preview" id="cameraBox" style="display:none;">
+          <video id="video" autoplay playsinline></video>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 푸터 (원하면 삭제 가능) -->
+  <div id="footer-wrapper">
+    <div class="container" id="footer">
+      <div id="copyright">
+        <ul class="menu">
+          <li>&copy; 2025 RunBack</li>
+          <li>추적자 · 게임 실행 화면</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  /**********************
+   * 1. 제한 시간 타이머 (1시간 30분)
+   **********************/
+  const timeDisplay = document.getElementById('timeDisplay');
+  let remaining = 90 * 60; // 90분 = 5400초
+
+  function formatTime(sec){
+    const h = String(Math.floor(sec / 3600)).padStart(2,'0');
+    const m = String(Math.floor((sec % 3600) / 60)).padStart(2,'0');
+    const s = String(sec % 60).padStart(2,'0');
+    return `${h}:${m}:${s}`;
+  }
+
+  function tickTimer(){
+    timeDisplay.textContent = formatTime(remaining);
+    if(remaining <= 0){
+      clearInterval(timerId);
+      alert('제한 시간이 종료되었습니다!');
+      return;
+    }
+    remaining--;
+  }
+
+  const timerId = setInterval(tickTimer, 1000);
+  tickTimer();
+
+  /**********************
+   * 2. Leaflet 지도 초기화
+   **********************/
+  // 순천만 국가정원 근처 대략 좌표 (원하면 수정)
+  const initialLat = 34.9245;
+  const initialLng = 127.5103;
+
+  const map = L.map('map').setView([initialLat, initialLng], 15);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
+
+  /**********************
+   * 3. 목적지(붉은 원) 표시
+   **********************/
+  const targets = [
+    { id:'A', lat:34.9248, lng:127.5088 },
+    { id:'B', lat:34.9238, lng:127.5120 }
+  ];
+  const targetLayers = [];
+
+  targets.forEach(t => {
+    const circle = L.circle([t.lat, t.lng], {
+      radius: 25,          // 실제 거리(미터)
+      color: 'red',
+      fillColor: '#ff0000',
+      fillOpacity: 0.15
+    }).addTo(map);
+    circle.targetId = t.id;
+    targetLayers.push(circle);
+  });
+
+  /**********************
+   * 4. 플레이어 & 참가자 위치(졸라맨)
+   **********************/
+  const stickIcon = L.divIcon({
+    className: '',   // 기본 클래스 제거
+    html: '🏃',      // 졸라맨 대신 달리기 이모지
+    iconSize: [24,24],
+    iconAnchor: [12,12]
+  });
+
+  // 내 위치 (플레이어)
+  const myMarker = L.marker([initialLat, initialLng], {icon: stickIcon}).addTo(map);
+
+  // 예시: 다른 참가자들 (임의 좌표)
+  const others = [
+    [34.9250, 127.5098],
+    [34.9242, 127.5110],
+    [34.9239, 127.5079],
+  ];
+  others.forEach(pos => L.marker(pos, {icon: stickIcon}).addTo(map));
+
+  // 실제 GPS 연동 (가능하면 사용)
+  if(navigator.geolocation){
+    navigator.geolocation.watchPosition(
+      pos => {
+        const {latitude, longitude} = pos.coords;
+        myMarker.setLatLng([latitude, longitude]);
+        checkNearTarget();
+      },
+      err => console.warn('GPS 오류:', err.message),
+      { enableHighAccuracy:true, maximumAge:10000, timeout:10000 }
+    );
+  }
+
+  /**********************
+   * 5. 목적지 도착 여부 체크
+   **********************/
+  const clueBanner = document.getElementById('clueBanner');
+  let clueShownFor = null;
+
+  function checkNearTarget(){
+    const myPos = myMarker.getLatLng();
+    targetLayers.forEach(circle => {
+      const center = circle.getLatLng();
+      const dist = map.distance(myPos, center); // meter
+      if(dist < circle.getRadius()){ // 원 안에 들어옴
+        if(clueShownFor !== circle.targetId){
+          clueShownFor = circle.targetId;
+          showClueBanner(circle.targetId);
+        }
+      }
+    });
+  }
+
+  function showClueBanner(targetId){
+    clueBanner.style.display = 'flex';
+    clueBanner.onclick = () => {
+      clueBanner.style.display = 'none';
+      alert('단서를 확인했습니다! (여기에 실제 단서/미션 팝업을 연결하세요)');
+      // 예: 점수 추가
+      addScore(100);
+    };
+  }
+
+  function addScore(delta){
+    const el = document.getElementById('scoreValue');
+    const current = parseInt(el.textContent, 10) || 0;
+    el.textContent = current + delta;
+  }
+
+  // GPS가 안될 경우를 위해 지도 클릭으로 테스트 가능
+  map.on('click', e => {
+    myMarker.setLatLng(e.latlng);
+    checkNearTarget();
+  });
+
+  /**********************
+   * 6. 카메라 열기 (QR/사진)
+   **********************/
+  const cameraBtn = document.getElementById('cameraBtn');
+  const cameraBox = document.getElementById('cameraBox');
+  const videoEl = document.getElementById('video');
+  let stream = null;
+
+  cameraBtn.addEventListener('click', async () => {
+    if(stream){
+      // 이미 켜져 있으면 끄기
+      stream.getTracks().forEach(t => t.stop());
+      stream = null;
+      cameraBox.style.display = 'none';
+      cameraBtn.textContent = '카메라 열기';
+      return;
+    }
+
+    try{
+      stream = await navigator.mediaDevices.getUserMedia({
+        video:{ facingMode:'environment' }
+      });
+      videoEl.srcObject = stream;
+      cameraBox.style.display = 'block';
+      cameraBtn.textContent = '카메라 끄기';
+      // 실제 QR 인식은 jsQR / html5-qrcode 같은 라이브러리를 추가해서 구현
+    }catch(err){
+      alert('카메라를 사용할 수 없습니다: ' + err.message);
+    }
+  });
+</script>
+
+</body>
+</html>

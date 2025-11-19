@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>축제 장 | 추적자</title>
+
+  <!-- Verti 기본 CSS -->
+  <link rel="stylesheet" href="assets/css/main.css" />
+
+  <style>
+    body{ background:#f5fafc; }
+
+    .festival-layout{
+      max-width:1200px;
+      margin:2rem auto;
+      display:grid;
+      grid-template-columns:260px minmax(0,1fr);
+      gap:1.5rem;
+    }
+
+    /* ===== 왼쪽 즐겨찾기 패널 ===== */
+    .fav-panel{
+      background:#fff;
+      border-radius:16px;
+      box-shadow:0 4px 12px rgba(0,0,0,.12);
+      padding:1rem 1.2rem;
+      font-size:.9rem;
+    }
+    .fav-title{
+      font-weight:800;
+      margin-bottom:.5rem;
+      border-bottom:2px solid #ddd;
+      padding-bottom:.3rem;
+    }
+    #favList{
+      list-style:none;
+      padding-left:0;
+      margin:0;
+    }
+    #favList li{
+      padding:.25rem 0;
+    }
+    #favList li span.name{
+      font-weight:600;
+    }
+    .fav-empty{
+      font-size:.85rem;
+      color:#777;
+      margin-top:.4rem;
+    }
+
+    /* ===== 오른쪽 메인 ===== */
+    .festival-main{
+      display:flex;
+      flex-direction:column;
+      gap:1.5rem;
+    }
+
+    .section-box{
+      background:#fff;
+      border-radius:18px;
+      box-shadow:0 4px 12px rgba(0,0,0,.12);
+      padding:1.2rem 1.5rem 1.4rem;
+    }
+    .section-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:1rem;
+      gap:.5rem;
+    }
+    .section-header h2{
+      margin:0;
+      font-size:1.4rem;
+      font-weight:800;
+    }
+    .section-header small{
+      font-size:.85rem;
+      color:#777;
+    }
+
+    /* 카드 공통 */
+    .card-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:1rem;
+    }
+    .festival-card{
+      background:#f8fbff;
+      border-radius:14px;
+      border:1px solid #d8e6f5;
+      padding:.8rem .9rem;
+      position:relative;
+      display:flex;
+      flex-direction:column;
+      gap:.4rem;
+    }
+    .poster{
+      background:#ccc;
+      border-radius:10px;
+      height:140px;
+      margin-bottom:.4rem;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:.9rem;
+      color:#333;
+      background-image:linear-gradient(135deg,#ffd54f,#ffb74d);
+    }
+    .festival-name{
+      font-weight:800;
+      font-size:1rem;
+    }
+    .festival-meta{
+      font-size:.85rem;
+      color:#555;
+      line-height:1.6;
+    }
+    .tag{
+      display:inline-block;
+      padding:.1rem .5rem;
+      border-radius:999px;
+      font-size:.75rem;
+      background:#0090c5;
+      color:#fff;
+      margin-top:.2rem;
+    }
+
+    /* 별 버튼 */
+    .star-btn{
+      position:absolute;
+      right:10px;
+      top:10px;
+      border:none;
+      background:transparent;
+      cursor:pointer;
+      font-size:1.4rem;
+      line-height:1;
+      color:#ccc;
+    }
+    .star-btn.active{
+      color:#ffb300;
+      text-shadow:0 0 4px rgba(0,0,0,.3);
+    }
+
+    /* 최근 다녀간 축제 스타일 */
+    .recent-list{
+      display:flex;
+      flex-direction:column;
+      gap:.8rem;
+    }
+    .recent-item{
+      display:flex;
+      gap:.7rem;
+      padding:.6rem .5rem;
+      border-radius:10px;
+      background:#fdf7ec;
+      border:1px solid #ffe0a3;
+      position:relative;
+    }
+    .recent-thumb{
+      width:90px;
+      height:70px;
+      border-radius:8px;
+      background:#ffcc80;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:.8rem;
+    }
+    .recent-body{
+      flex:1;
+      font-size:.9rem;
+    }
+    .recent-body .name{
+      font-weight:700;
+      margin-bottom:.1rem;
+    }
+    .recent-body .meta{
+      font-size:.8rem;
+      color:#555;
+    }
+
+    @media(max-width:980px){
+      .festival-layout{
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
+</head>
+<body class="is-preload">
+
+<div id="page-wrapper">
+
+  <!-- 상단 공통 헤더 -->
+  <div id="header-wrapper">
+    <header id="header" class="container">
+      <div id="logo">
+        <h1><a href="index.html">추적자</a></h1>
+        <span>지역축제 술레잡기 게임</span>
+      </div>
+      <nav id="nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="1_Game.html">게임창</a></li>
+          <li><a href="2_Stamp.html">스템프 투어창</a></li>
+          <li class="current"><a href="3_Festival.html">축제 장</a></li>
+          <li><a href="4_Community.html">커뮤니티</a></li>
+          <li><a href="5_Login.html">로그인/회원가입</a></li>
+        </ul>
+      </nav>
+    </header>
+  </div>
+
+  <!-- 메인 레이아웃 -->
+  <main class="festival-layout">
+
+    <!-- ===== 즐겨찾기 패널 ===== -->
+    <aside class="fav-panel">
+      <div class="fav-title">★ 즐겨찾기 축제</div>
+      <ul id="favList"></ul>
+      <p id="favEmpty" class="fav-empty">
+        마음에 드는 축제의 별표(<strong>★</strong>)를 클릭하면<br>
+        이곳에 저장됩니다.
+      </p>
+    </aside>
+
+    <!-- ===== 오른쪽 메인 ===== -->
+    <section class="festival-main">
+
+      <!-- 오늘 갈만한 축제 -->
+      <section class="section-box" id="todaySection">
+        <div class="section-header">
+          <h2>오늘 갈만한 축제</h2>
+          <small id="todayLabel"></small>
+        </div>
+
+        <div class="card-grid">
+          <!-- 예시 카드 1 -->
+          <article class="festival-card" data-id="f1" data-name="순천만 국가정원 별빛축제">
+            <button class="star-btn" type="button" aria-label="즐겨찾기">★</button>
+            <div class="poster">포스터 이미지</div>
+            <div class="festival-name">순천만 국가정원 별빛축제</div>
+            <div class="festival-meta">
+              날짜 : 오늘 ~ 24:00<br>
+              장소 : 순천만국가정원 메인무대<br>
+              분류 : 야간/불꽃/가족
+            </div>
+            <span class="tag">오늘 열리는 축제</span>
+          </article>
+
+          <!-- 예시 카드 2 -->
+          <article class="festival-card" data-id="f2" data-name="순천만 갈대축제">
+            <button class="star-btn" type="button" aria-label="즐겨찾기">★</button>
+            <div class="poster">포스터 이미지</div>
+            <div class="festival-name">순천만 갈대축제</div>
+            <div class="festival-meta">
+              날짜 : 오늘 하루<br>
+              장소 : 순천만습지 일원<br>
+              분류 : 자연/산책
+            </div>
+            <span class="tag">오늘 열리는 축제</span>
+          </article>
+
+          <!-- 예시 카드 3 -->
+          <article class="festival-card" data-id="f3" data-name="순천청년 푸드트럭 페스티벌">
+            <button class="star-btn" type="button" aria-label="즐겨찾기">★</button>
+            <div class="poster">포스터 이미지</div>
+            <div class="festival-name">순천청년 푸드트럭 페스티벌</div>
+            <div class="festival-meta">
+              날짜 : 오늘 12:00 ~ 22:00<br>
+              장소 : 조례호수공원<br>
+              분류 : 푸드/공연
+            </div>
+            <span class="tag">오늘 열리는 축제</span>
+          </article>
+        </div>
+      </section>
+
+      <!-- 최근 다녀간 축제 -->
+      <section class="section-box">
+        <div class="section-header">
+          <h2>최근 다녀간 축제</h2>
+          <small>사이트를 통해 참가한 기록입니다.</small>
+        </div>
+
+        <div class="recent-list">
+          <div class="recent-item">
+            <div class="recent-thumb">포스터</div>
+            <div class="recent-body">
+              <div class="name">전남 청년 음악 페스티벌</div>
+              <div class="meta">
+                방문일 : 2025-10-05<br>
+                위치 : 순천만 국가정원 야외무대<br>
+                한 줄 후기 : 라이브 밴드랑 불꽃쇼가 최고였어요!
+              </div>
+            </div>
+          </div>
+
+          <div class="recent-item">
+            <div class="recent-thumb">포스터</div>
+            <div class="recent-body">
+              <div class="name">순천만 동물 친구들 축제</div>
+              <div class="meta">
+                방문일 : 2025-09-20<br>
+                위치 : 순천만생태문화교육원<br>
+                한 줄 후기 : 아이들과 체험 부스 돌기 좋았던 축제.
+              </div>
+            </div>
+          </div>
+
+          <div class="recent-item">
+            <div class="recent-thumb">포스터</div>
+            <div class="recent-body">
+              <div class="name">순천만 플리마켓 & 캠핑축제</div>
+              <div class="meta">
+                방문일 : 2025-08-30<br>
+                위치 : 순천만 캠핑존<br>
+                한 줄 후기 : 밤에 조용히 캠핑하며 게임하기 딱 좋아요.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </section>
+  </main>
+
+  <!-- 푸터 -->
+  <div id="footer-wrapper">
+    <div class="container" id="footer">
+      <div id="copyright">
+        <ul class="menu">
+          <li>&copy; 2025 RunBack</li>
+          <li>추적자 · 축제 장</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // 오늘 날짜 표시
+  (function(){
+    const label = document.getElementById('todayLabel');
+    const today = new Date();
+    const y = today.getFullYear();
+    const m = ('0' + (today.getMonth()+1)).slice(-2);
+    const d = ('0' + today.getDate()).slice(-2);
+    label.textContent = `오늘 날짜 : ${y}-${m}-${d}`;
+  })();
+
+  const STORAGE_KEY = 'festival_favorites';
+
+  // 즐겨찾기 로드
+  function loadFavs(){
+    try{
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : [];
+    }catch(e){
+      return [];
+    }
+  }
+
+  function saveFavs(list){
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+  }
+
+  // 즐겨찾기 UI 업데이트
+  function renderFavList(){
+    const favListEl = document.getElementById('favList');
+    const emptyEl   = document.getElementById('favEmpty');
+    const cards = document.querySelectorAll('.festival-card');
+    const favs = loadFavs();
+
+    favListEl.innerHTML = '';
+    let count = 0;
+    cards.forEach(card => {
+      const id = card.dataset.id;
+      const isFav = favs.includes(id);
+      const btn = card.querySelector('.star-btn');
+      btn.classList.toggle('active', isFav);
+      if(isFav){
+        count++;
+        const li = document.createElement('li');
+        li.innerHTML = `<span class="name">${card.dataset.name}</span>`;
+        favListEl.appendChild(li);
+      }
+    });
+
+    emptyEl.style.display = count === 0 ? 'block' : 'none';
+  }
+
+  // 별 클릭 이벤트
+  document.querySelectorAll('.festival-card .star-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.festival-card');
+      const id = card.dataset.id;
+      let favs = loadFavs();
+      if(favs.includes(id)){
+        favs = favs.filter(x => x !== id);
+      }else{
+        favs.push(id);
+      }
+      saveFavs(favs);
+      renderFavList();
+    });
+  });
+
+  // 초기 렌더링
+  renderFavList();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>축제 게임 룰북 허브 · 4종 소개</title>
+  <meta name="description" content="좀비 아포칼립스 / 월리를 찾아라 / 도둑과 경찰 / 거점 탐험전 — 4가지 축제형 게임 룰북을 한눈에!" />
+  <style>
+    :root{
+      --bg:#0d1117;--panel:#111827;--muted:#9aa4b2;--text:#e5e7eb;--accent:#60a5fa;--accent2:#a78bfa;--ok:#34d399;--warn:#f59e0b;--bad:#ef4444;
+      --b:1px solid rgba(255,255,255,.08);--r:16px;--shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:linear-gradient(180deg,#0a0f15,#0d1117);color:var(--text);font-family:ui-sans-serif,system-ui,AppleSDGothicNeo,"Noto Sans KR",Segoe UI,Roboto,Helvetica,Arial}
+    a{color:var(--accent);text-decoration:none}
+    .wrap{max-width:1200px;margin:0 auto;padding:28px}
+    header.hero{position:sticky;top:0;background:rgba(13,17,23,.85);backdrop-filter:saturate(140%) blur(10px);z-index:10;border-bottom:var(--b)}
+    .hero .inner{max-width:1200px;margin:0 auto;padding:14px 20px;display:flex;gap:18px;align-items:center;justify-content:space-between}
+    .brand{display:flex;gap:12px;align-items:center}
+    .brand h1{font-size:18px;margin:0}
+    .chips{display:flex;flex-wrap:wrap;gap:6px}
+    .chip{border:var(--b);border-radius:999px;padding:6px 10px;font-size:12px;color:var(--muted);background:rgba(255,255,255,.03)}
+    .grid{display:grid;gap:18px;margin-top:18px}
+    @media(min-width:900px){.grid{grid-template-columns:repeat(4,1fr)}}
+    .card{background:var(--panel);border:var(--b);border-radius:var(--r);box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden}
+    .cover{aspect-ratio:16/9;background:linear-gradient(135deg,rgba(96,165,250,.16),rgba(167,139,250,.10));display:flex;align-items:center;justify-content:center;font-size:42px}
+    .body{padding:18px}
+    h2{margin:0 0 6px 0;font-size:18px}
+    .meta{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px 0}
+    .tag{display:inline-block;padding:3px 8px;border-radius:6px;background:rgba(255,255,255,.06);color:var(--muted);font-size:12px}
+    ul{padding-left:18px;margin:10px 0}
+    li{line-height:1.6}
+    .actions{margin-top:auto;padding:14px 18px;display:flex;gap:10px;align-items:center;border-top:var(--b)}
+    .btn{display:inline-block;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.06);color:var(--text);font-size:14px;text-align:center}
+    .btn.primary{background:linear-gradient(90deg,rgba(96,165,250,.25),rgba(167,139,250,.25));border-color:rgba(255,255,255,.22)}
+    .section{background:var(--panel);border:var(--b);border-radius:var(--r);box-shadow:var(--shadow);padding:20px;margin-top:22px}
+    table{width:100%;border-collapse:separate;border-spacing:0;border:var(--b);border-radius:12px;overflow:hidden}
+    th,td{padding:10px 12px;border-bottom:var(--b);vertical-align:top}
+    th{background:rgba(255,255,255,.04);text-align:left;font-weight:700}
+    tr:last-child td{border-bottom:none}
+    footer{color:var(--muted);text-align:center;padding:30px 0}
+    .sr{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+  </style>
+</head>
+<body>
+  <!-- 헤더 -->
+  <header class="hero">
+    <div class="inner">
+      <div class="brand">
+        <span aria-hidden="true">🎮</span>
+        <h1>축제 게임 룰북 허브</h1>
+      </div>
+      <div class="chips" aria-label="요약">
+        <span class="chip">모바일·QR·GPS 연동</span>
+        <span class="chip">실내/야외 운영 가능</span>
+        <span class="chip">운영 가이드 포함</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- 카드 그리드 -->
+    <section aria-label="룰북 목록" class="grid">
+      <!-- 1. 좀비 아포칼립스 -->
+      <article class="card">
+        <div class="cover" aria-hidden="true">🧟‍♀️</div>
+        <div class="body">
+          <h2>좀비 아포칼립스</h2>
+          <div class="meta">
+            <span class="tag">20~100명</span>
+            <span class="tag">30~60분</span>
+            <span class="tag">야외 추격</span>
+          </div>
+          <ul>
+            <li>역할: 생존자 vs 좀비</li>
+            <li>핵심: 감염 등록, 해독제, 실시간 방송</li>
+            <li>모바일: 지도·QR·AR·랭킹</li>
+          </ul>
+        </div>
+        <div class="actions">
+          <a class="btn primary" href="zombie-apocalypse-rulebook.html">룰북 열기</a>
+          <a class="btn" href="#compare">빠른 비교</a>
+        </div>
+      </article>
+
+      <!-- 2. 월리를 찾아라 -->
+      <article class="card">
+        <div class="cover" aria-hidden="true">🧭</div>
+        <div class="body">
+          <h2>월리를 찾아라!</h2>
+          <div class="meta">
+            <span class="tag">인원 무제한</span>
+            <span class="tag">30분~2시간</span>
+            <span class="tag">탐색/인증</span>
+          </div>
+          <ul>
+            <li>유형: 사람/인형/패널/디지털 월리</li>
+            <li>핵심: 힌트 지도, 포토 인증, 투표</li>
+            <li>모바일: QR·GPS·랭킹·방송</li>
+          </ul>
+        </div>
+        <div class="actions">
+          <a class="btn primary" href="wally-festival-rulebook.html">룰북 열기</a>
+          <a class="btn" href="#compare">빠른 비교</a>
+        </div>
+      </article>
+
+      <!-- 3. 도둑과 경찰 -->
+      <article class="card">
+        <div class="cover" aria-hidden="true">🚓</div>
+        <div class="body">
+          <h2>도둑과 경찰</h2>
+          <div class="meta">
+            <span class="tag">4명 이상</span>
+            <span class="tag">30~60분</span>
+            <span class="tag">추격/체포</span>
+          </div>
+          <ul>
+            <li>역할: 경찰 vs 도둑</li>
+            <li>핵심: 선행 출발, 체포 규칙(1m/콜)</li>
+            <li>선택 규칙: 연막탄·위장복·탐지</li>
+          </ul>
+        </div>
+        <div class="actions">
+          <!-- 파일명을 다르게 저장했다면 href를 해당 파일명으로 바꿔주세요 -->
+          <a class="btn primary" href="cops-and-robbers-rulebook.html">룰북 열기</a>
+          <a class="btn" href="#compare">빠른 비교</a>
+        </div>
+      </article>
+
+      <!-- 4. 거점 탐험전 -->
+      <article class="card">
+        <div class="cover" aria-hidden="true">📍</div>
+        <div class="body">
+          <h2>거점 탐험전</h2>
+          <div class="meta">
+            <span class="tag">30명+</span>
+            <span class="tag">60~120분</span>
+            <span class="tag">개인 경쟁</span>
+          </div>
+          <ul>
+            <li>핵심: 거점 미션·점령 포인트</li>
+            <li>모바일: QR/GPS 인증, 자동 배정</li>
+            <li>랭킹·쿨타임·난이도 점수</li>
+          </ul>
+        </div>
+        <div class="actions">
+          <a class="btn primary" href="geojum-explore-rulebook.html">룰북 열기</a>
+          <a class="btn" href="#compare">빠른 비교</a>
+        </div>
+      </article>
+    </section>
+
+    <!-- 빠른 비교 표 -->
+    <section id="compare" class="section" aria-label="빠른 비교">
+      <h2>⚖️ 빠른 비교</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>구분</th>
+            <th>좀비 아포칼립스</th>
+            <th>월리를 찾아라</th>
+            <th>도둑과 경찰</th>
+            <th>거점 탐험전</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>권장 인원</td>
+            <td>20~100명</td>
+            <td>무제한</td>
+            <td>4명 이상</td>
+            <td>30명+</td>
+          </tr>
+          <tr>
+            <td>진행 시간</td>
+            <td>30~60분</td>
+            <td>30분~2시간</td>
+            <td>30~60분</td>
+            <td>60~120분</td>
+          </tr>
+          <tr>
+            <td>핵심 메커닉</td>
+            <td>감염/해독, 추격</td>
+            <td>탐색/인증, 힌트</td>
+            <td>추격/체포, 선행</td>
+            <td>거점 점령, 미션</td>
+          </tr>
+          <tr>
+            <td>모바일 기능</td>
+            <td>지도·QR·AR·랭킹·방송</td>
+            <td>QR·GPS·사진·랭킹·방송</

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>거점 탐험전 · 개인 미션 기반 점령 게임 룰북</title>
+  <meta name="description" content="QR/GPS/사진 인증을 활용한 개인 경쟁형 점령 게임 &quot;거점 탐험전&quot; 룰북" />
+  <style>
+    :root{
+      --bg:#0d1117;--panel:#111827;--muted:#9aa4b2;--text:#e5e7eb;--accent:#60a5fa;--accent2:#a78bfa;--ok:#34d399;--warn:#f59e0b;--bad:#ef4444;
+      --b:1px solid rgba(255,255,255,.08);--r:16px;--r-sm:12px;--shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:linear-gradient(180deg,#0a0f15,#0d1117);color:var(--text);font-family:ui-sans-serif,system-ui,AppleSDGothicNeo,"Noto Sans KR",Segoe UI,Roboto,Helvetica,Arial}
+    a{color:var(--accent)}
+    .wrap{max-width:1100px;margin:0 auto;padding:28px}
+    header.hero{position:sticky;top:0;background:rgba(13,17,23,.85);backdrop-filter:saturate(140%) blur(10px);z-index:10;border-bottom:var(--b)}
+    .hero .inner{max-width:1100px;margin:0 auto;padding:12px 20px;display:flex;gap:16px;align-items:center;justify-content:space-between}
+    .brand{display:flex;gap:10px;align-items:center}
+    .brand h1{font-size:18px;margin:0}
+    .chips{display:flex;flex-wrap:wrap;gap:6px}
+    .chip{border:var(--b);border-radius:999px;padding:6px 10px;font-size:12px;color:var(--muted);background:rgba(255,255,255,.03)}
+    nav.toc{margin:18px 0;padding:14px;border:var(--b);border-radius:var(--r-sm);background:rgba(255,255,255,.02)}
+    nav.toc h2{font-size:15px;margin:0 0 8px 0;color:var(--muted)}
+    nav.toc ol{margin:0;padding-left:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:6px 16px}
+    .grid{display:grid;gap:18px}
+    @media(min-width:900px){.grid{grid-template-columns:2fr 1fr}}
+    section.card, aside .card{background:var(--panel);border:var(--b);border-radius:var(--r);padding:22px;box-shadow:var(--shadow)}
+    section.card h2{margin:0 0 10px 0;font-size:20px}
+    section.card h3{margin:16px 0 6px 0;font-size:16px;color:var(--accent)}
+    p,li{line-height:1.65}
+    .kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:12px 0}
+    .kv .cell{background:rgba(255,255,255,.03);border:var(--b);border-radius:12px;padding:12px}
+    .kv b{display:block;font-size:12px;color:var(--muted)}
+    .hr{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.14),transparent);margin:14px 0}
+    .callout{border-left:4px solid var(--accent2);background:rgba(167,139,250,.12);padding:10px 12px;border-radius:10px;margin:10px 0}
+    table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;border-radius:12px;border:var(--b)}
+    th,td{padding:10px 12px;border-bottom:var(--b);vertical-align:top}
+    th{background:rgba(255,255,255,.04);text-align:left;font-weight:700}
+    tr:last-child td{border-bottom:none}
+    details{background:rgba(255,255,255,.03);border:var(--b);border-radius:12px;padding:10px;margin:10px 0}
+    details summary{cursor:pointer;outline:none}
+    footer{color:var(--muted);text-align:center;padding:30px 0}
+    .ok{color:var(--ok)} .warn{color:var(--warn)} .bad{color:var(--bad)}
+  </style>
+</head>
+<body>
+  <!-- 헤더 -->
+  <header class="hero">
+    <div class="inner">
+      <div class="brand">
+        <span aria-hidden="true">📍</span>
+        <h1>거점 탐험전 · 개인 미션 기반 점령 게임 룰북</h1>
+      </div>
+      <div class="chips" aria-label="요약">
+        <span class="chip">인원 30명+</span>
+        <span class="chip">60~120분</span>
+        <span class="chip">거점 6~12곳</span>
+        <span class="chip">개인/2~3인 팀</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- 목차 -->
+    <nav class="toc" aria-label="목차">
+      <h2>목차</h2>
+      <ol>
+        <li><a href="#overview">1. 게임 개요</a></li>
+        <li><a href="#nodes">2. 거점 구성 및 모바일 기능</a></li>
+        <li><a href="#rules">3. 게임 규칙</a></li>
+        <li><a href="#missions">4. 미션 예시</a></li>
+        <li><a href="#rewards">5. 보상 및 이벤트</a></li>
+        <li><a href="#fair">6. 공정성 및 페널티</a></li>
+        <li><a href="#ops">7. 운영자 시스템 제안</a></li>
+      </ol>
+    </nav>
+
+    <div class="grid">
+      <!-- 좌측 메인 -->
+      <div>
+        <!-- 1. 개요 -->
+        <section id="overview" class="card">
+          <h2>1. 🎯 게임 개요</h2>
+          <p><b>“거점 탐험전”</b>은 축제 공간 내 여러 거점을 돌아다니며 미션을 수행하고 <b>점령 포인트</b>를 획득하는 <b>개인 경쟁형</b> 게임입니다. <b>QR</b>, <b>GPS</b>, <b>모바일 인증</b>을 활용하여 공정하고 몰입감 있는 플레이를 제공합니다. 참가자 개개인의 탐험·도전 욕구를 자극하며 축제 전체를 <b>거대한 게임판</b>으로 만듭니다.</p>
+          <div class="kv">
+            <div class="cell"><b>인원</b> 30명 이상(개인 또는 2~3인 팀)</div>
+            <div class="cell"><b>시간</b> 60~120분</div>
+            <div class="cell"><b>장소</b> 축제 전역(거점 6~12곳)</div>
+            <div class="cell"><b>목표</b> 가장 많은 점령 포인트를 획득</div>
+          </div>
+        </section>
+
+        <!-- 2. 거점/모바일 -->
+        <section id="nodes" class="card">
+          <h2>2. 🗺️ 거점 구성 및 모바일 기능</h2>
+          <h3>A. 거점 설정</h3>
+          <ul>
+            <li>주요 장소(예: <b>무대·푸드존·체험부스·포토존</b>)에 거점 배치</li>
+            <li>거점마다 <b>QR</b> 또는 <b>GPS 기반 인증</b> 설치</li>
+            <li>거점별 <b>고유 미션</b>과 <b>난이도별 점수</b> 설정</li>
+          </ul>
+          <h3>B. 모바일 기능 활용</h3>
+          <table aria-label="모바일 기능">
+            <thead><tr><th>기능</th><th>설명</th></tr></thead>
+            <tbody>
+              <tr><td>QR코드 인증</td><td>거점 도착 후 스캔 → 미션 시작 및 점령 인증</td></tr>
+              <tr><td>GPS 위치 확인</td><td>실제 거점 도달 자동 확인(스푸핑 방지 규칙 병행)</td></tr>
+              <tr><td>실시간 점수 집계</td><td>참가자별 점령 현황/누적 점수 실시간 표시</td></tr>
+              <tr><td>미션 자동 배정</td><td>QR 스캔 시 개인화 랜덤 미션 제공</td></tr>
+              <tr><td>사진 인증</td><td>특정 미션은 사진 업로드로 인증</td></tr>
+              <tr><td>힌트 시스템</td><td>일정 시간마다 거점 힌트 자동 제공</td></tr>
+              <tr><td>랭킹 보드</td><td>상위 참가자 랭킹 공개</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- 3. 규칙 -->
+        <section id="rules" class="card">
+          <h2>3. 📜 게임 규칙</h2>
+          <h3>A. 참가 방법</h3>
+          <ol>
+            <li>모바일 앱/웹에서 <b>참가 등록</b></li>
+            <li>시작 지점 QR 스캔 → <b>게임 시작</b></li>
+            <li>지도/힌트를 따라 거점 탐색</li>
+            <li>거점 도착 → <b>QR/GPS 인증</b> → <b>미션 수행</b></li>
+            <li>미션 성공 시 <b>점령 포인트</b> 획득</li>
+          </ol>
+          <h3>B. 점령 방식</h3>
+          <ul>
+            <li>각 거점은 <b>1인당 1회</b> 점령 가능</li>
+            <li>점령 후 해당 거점은 <b>재도전 쿨타임</b> (예: 10분)</li>
+            <li>난이도별 점수: 예) 쉬움 <b>10점</b>, 보통 <b>20점</b>, 어려움 <b>30점</b></li>
+          </ul>
+          <h3>C. 승리 조건</h3>
+          <ul>
+            <li>제한 시간 종료 시 <b>최다 점수</b> 참가자(또는 팀) 승리</li>
+            <li><b>동점</b> 시 미션 성공률 → 총 소요 시간 순으로 결정</li>
+          </ul>
+        </section>
+
+        <!-- 4. 미션 예시 -->
+        <section id="missions" class="card">
+          <h2>4. 🎲 미션 예시</h2>
+          <table aria-label="미션 유형">
+            <thead><tr><th>미션 유형</th><th>설명</th></tr></thead>
+            <tbody>
+              <tr><td>퀴즈 미션</td><td>지역 역사/축제 정보/월리 찾기 등 지식형 퀴즈</td></tr>
+              <tr><td>퍼즐 미션</td><td>QR 스캔 후 퍼즐 조각 수집 → 조합 정답 입력</td></tr>
+              <tr><td>사진 인증</td><td>거점 앞 특정 포즈 촬영·업로드</td></tr>
+              <tr><td>NPC 상호작용</td><td>운영자에게 암호 전달 또는 질문에 답변</td></tr>
+              <tr><td>AR 콘텐츠</td><td>증강현실로 숨겨진 아이템 찾기(앱 연동)</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- 5. 보상 -->
+        <section id="rewards" class="card">
+          <h2>5. 🏆 보상 및 이벤트</h2>
+          <ul>
+            <li><b>상위 랭커 시상</b>: 1~3위 상품 지급</li>
+            <li><b>미션 완수자 추첨</b>: 모든 거점 점령자 대상</li>
+            <li><b>포토 콘테스트</b>: 인증샷 베스트 선정</li>
+            <li><b>팀 플레이 보너스</b>: 팀 총점 별도 시상</li>
+          </ul>
+        </section>
+
+        <!-- 6. 공정성 -->
+        <section id="fair" class="card">
+          <h2>6. ⚖️ 공정성 및 페널티</h2>
+          <ul>
+            <li><b>QR 중복 스캔</b> 방지: 1인 1회만 점령 인정</li>
+            <li><b>GPS 조작</b> 적발 시 점령 <b>무효</b></li>
+            <li><b>사진 조작</b> 시 경고 또는 <b>실격</b></li>
+            <li><b>과격 행동·거점 훼손</b> 시 즉시 퇴장</li>
+          </ul>
+          <div class="callout">안전 우선! 차량 통행·계단·수변 등 위험 구역은 <span class="warn">금지 구역</span> 혹은 속도 제한을 권장합니다.</div>
+        </section>
+      </div>
+
+      <!-- 우측 사이드: 운영 -->
+      <aside>
+        <!-- 7. 운영자 시스템 -->
+        <section id="ops" class="card">
+          <h2>7. 🛠️ 운영자 시스템 제안</h2>
+          <table aria-label="운영 기능">
+            <thead><tr><th>기능</th><th>설명</th></tr></thead>
+            <tbody>
+              <tr><td>거점 관리</td><td>점령 상태·미션 배정·위치 설정 등 실시간 조정</td></tr>
+              <tr><td>참가자 모니터링</td><td>개인 이동 경로·점수·성공률 확인</td></tr>
+              <tr><td>실시간 방송</td><td>“거점 B 점령!” 등 알림 메시지 전송</td></tr>
+              <tr><td>보상 관리</td><td>MVP 선정·상품 지급·포인트 교환</td></tr>
+            </tbody>
+          </table>
+          <div class="hr"></div>
+          <details>
+            <summary>모바일 기능 요약(중복 항목 포함 정리)</summary>
+            <table aria-label="모바일 기능 요약">
+              <thead><tr><th>기능</th><th>설명</th></tr></thead>
+              <tbody>
+                <tr><td>QR코드 인증</td><td>거점 도착 후 스캔 → 미션 시작/점령 인증</td></tr>
+                <tr><td>GPS 위치 확인</td><td>거점 도달 자동 확인</td></tr>
+                <tr><td>실시간 점수 집계</td><td>점령 현황/누적 점수 표시</td></tr>
+                <tr><td>미션 자동 배정</td><td>개인화 랜덤 미션</td></tr>
+                <tr><td>사진 인증</td><td>사진 업로드로 인증</td></tr>
+                <tr><td>힌트 시스템</td><td>주기적 위치 힌트 제공</td></tr>
+                <tr><td>랭킹 보드</td><td>상위권 실시간 공개</td></tr>
+              </tbody>
+            </table>
+          </details>
+          <details>
+            <summary>미션 유형 재정리</summary>
+            <table aria-label="미션 유형 요약">
+              <thead><tr><th>미션 유형</th><th>설명</th></tr></thead>
+              <tbody>
+                <tr><td>퀴즈 미션</td><td>지역/축제 정보 등</td></tr>
+                <tr><td>퍼즐 미션</td><td>조각 수집 후 정답 입력</td></tr>
+                <tr><td>사진 인증</td><td>포즈·장소 인증샷</td></tr>
+                <tr><td>NPC 상호작용</td><td>암호 전달/질문 답변</td></tr>
+                <tr><td>AR 콘텐츠</td><td>증강현실 아이템 찾기</td></tr>
+              </tbody>
+            </table>
+          </details>
+        </section>
+
+        <!-- 개발 힌트 -->
+        <section class="card" aria-label="개발 힌트">
+          <h2>🔧 개발 힌트(엔드포인트 스케치)</h2>
+<pre style="white-space:pre-wrap; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;">
+POST /api/register                 # 참가 등록
+GET  /api/map/nodes                # 거점 목록/좌표/난이도
+POST /api/scan/qr
