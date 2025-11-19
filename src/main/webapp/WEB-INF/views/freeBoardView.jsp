@@ -29,6 +29,97 @@
         .attach-area a { text-decoration:underline; }
         .view-btn-row { margin-top:1.2rem; display:flex; justify-content:flex-end; gap:.4rem; flex-wrap:wrap; }
         .view-btn-row .button { min-width:90px; font-size:.9rem; padding:.45rem 0; }
+        /* 댓글 영역 */
+                .comment-wrap{
+                  margin-top:2rem;
+                  background:#fff;
+                  border-radius:16px;
+                  box-shadow:0 4px 14px rgba(0,0,0,.08);
+                  padding:1.2rem 1.4rem 1.4rem;
+                }
+                .comment-header{
+                  display:flex;
+                  justify-content:space-between;
+                  align-items:center;
+                  margin-bottom:.8rem;
+                  font-size:.95rem;
+                }
+                .comment-header h3{
+                  margin:0;
+                  font-size:1.1rem;
+                  font-weight:800;
+                }
+                .comment-header span{
+                  font-size:.85rem;
+                  color:#666;
+                }
+
+                .comment-list{
+                  margin-bottom:1rem;
+                  max-height:260px;
+                  overflow-y:auto;
+                }
+
+                .comment-item{
+                  border-bottom:1px solid #e9edf3;
+                  padding:.55rem 0;
+                  font-size:.9rem;
+                }
+                .comment-meta{
+                  display:flex;
+                  justify-content:space-between;
+                  margin-bottom:.15rem;
+                  color:#666;
+                  font-size:.8rem;
+                }
+                .comment-author{
+                  font-weight:700;
+                }
+                .comment-body{
+                  color:#333;
+                  white-space:pre-line;
+                }
+
+                .comment-form{
+                  border-top:1px solid #dde3ec;
+                  padding-top:.7rem;
+                }
+
+                .comment-form-row{
+                  display:flex;
+                  gap:.5rem;
+                  flex-wrap:wrap;
+                }
+                .comment-form-row textarea{
+                  flex:1;
+                  min-height:70px;
+                  border-radius:8px;
+                  border:1px solid #ccc;
+                  padding:.5rem .6rem;
+                  resize:vertical;
+                  font-size:.9rem;
+                }
+                .comment-form-row .button{
+                  min-width:90px;
+                  height:40px;
+                  align-self:flex-end;
+                  font-size:.9rem;
+                  padding:0;
+                }
+
+                @media (max-width:736px){
+                  .post-meta-row{
+                    flex-direction:column;
+                    align-items:flex-start;
+                  }
+                  .comment-form-row{
+                    flex-direction:column;
+                  }
+                  .comment-form-row .button{
+                    width:100%;
+                    height:42px;
+                  }
+                }
     </style>
 </head>
 <body class="is-preload">
@@ -121,7 +212,64 @@
                     </form>
                 </c:if>
             </div>
+            </section>
+            <!-- 댓글 영역 -->
+                <section class="comment-wrap">
+                    <div class="comment-header">
+                        <h3>댓글</h3>
+                        <span>총 <strong>3</strong>개</span>
+                    </div>
 
+                    <!-- 댓글 리스트 -->
+                    <div class="comment-list">
+
+                        <div class="comment-item">
+                            <div class="comment-meta">
+                                <div>
+                                    <span class="comment-author">루피</span> · <span>2025-11-14 13:45</span>
+                                </div>
+                                <div>좋아요 2</div>
+                            </div>
+                            <div class="comment-body">
+                                저도 오늘 축제 가요!
+                                3시 입구 쪽에서 만나면 될까요?
+                            </div>
+                        </div>
+
+                        <div class="comment-item">
+                            <div class="comment-meta">
+                                <div>
+                                    <span class="comment-author">조로</span> · <span>2025-11-14 14:02</span>
+                                </div>
+                                <div>좋아요 1</div>
+                            </div>
+                            <div class="comment-body">
+                                거점 탐험전은 처음인데 같이 해도 되나요? 😅
+                            </div>
+                        </div>
+
+                        <div class="comment-item">
+                            <div class="comment-meta">
+                                <div>
+                                    <span class="comment-author">나미</span> · <span>2025-11-14 14:10</span>
+                                </div>
+                                <div>좋아요 0</div>
+                            </div>
+                            <div class="comment-body">
+                                오늘 바람 좀 불어요. 따뜻하게 입고 오세요!
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- 댓글 작성 -->
+                    <div class="comment-form">
+                        <div class="comment-form-row">
+                            <textarea id="commentText" placeholder="댓글을 입력하세요. 예) 오늘 몇 시에 만날까요?"></textarea>
+                            <button type="button" class="button" id="commentSubmit">등록</button>
+                        </div>
+                    </div>
+                </section>
 
 
     </main>
