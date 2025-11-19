@@ -14,7 +14,7 @@
 
         <!-- Logo -->
             <div id="logo">
-                <a href="index.html">
+                <a href="main">
                     <img src="/images/bg.png" style="width: 300px;">
                 </a>
             </div>
