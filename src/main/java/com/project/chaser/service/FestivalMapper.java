@@ -7,6 +7,5 @@ import java.util.List;
 
 @Mapper
 public interface FestivalMapper {
-    List<Festival> getTodayFestivals();   // 오늘 기준 일정 포함된 축제 목록
-
+    List<Festival> getTodayFestivals();
 }

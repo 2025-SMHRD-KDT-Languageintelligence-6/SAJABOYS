@@ -28,4 +28,5 @@ public class Festival {
     @NonNull
     private double Lon;
     private String CreatedAt;
+    private String status; // XML에서 계산된 상태를 담기 위해 추가
 }
