@@ -22,7 +22,7 @@
         <!-- Nav -->
             <nav id="nav">
                 <ul>
-                    <li class="current"><a href="main">Home</a></li>
+                    <li><a href="main">Home</a></li>
                     <li>
                         <a href="/html5up-verti/1_Game.html">게임창</a>
                         <ul>
