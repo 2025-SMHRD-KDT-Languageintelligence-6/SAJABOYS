@@ -2754,3 +2754,54 @@ input, select, textarea {
       }
 
 	} */
+
+	.head {
+      max-width: 600px;
+      margin: 0 auto;      /* 가운데 정렬 */
+    }
+
+    /* 위 큰 슬라이드 */
+    .gallery-top {
+      width: 300px;
+      height: 100%;
+      margin-bottom: 10px;
+    }
+
+    /* 아래 작은 썸네일 슬라이드 */
+    .gallery-thumbs {
+      width: 100%;
+      height: 80px;
+      box-sizing: border-box;
+      padding: 5px 0;
+    }
+
+    .gallery-thumbs .swiper-slide {
+      width: 20%;
+      height: 100%;
+      opacity: 0.4;
+      cursor: pointer;
+    }
+
+    .gallery-thumbs .swiper-slide-thumb-active {
+      opacity: 1;
+    }
+
+    /* 슬라이드 안 내용 박스 스타일 (지금은 텍스트라서 박스처럼 보이게) */
+    .swiper-slide-container {
+      background: #008937;
+
+      border-radius: 10px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .festival-img {
+    	width: 300px;
+    	height: 100%;
+    	box-sizing: border-box;
+    	padding: 5px 0;
+    }
+
+
