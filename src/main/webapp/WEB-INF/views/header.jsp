@@ -14,8 +14,9 @@
 
         <!-- Logo -->
             <div id="logo">
-                <h1><a href="main">추적자</a></h1>
-                <span>지역축제 술레잡기 게임</span>
+                <a href="index.html">
+                    <img src="/images/bg.png" style="width: 300px;">
+                </a>
             </div>
 
         <!-- Nav -->
