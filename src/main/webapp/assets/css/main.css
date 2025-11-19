@@ -1,6 +1,20 @@
 @import url("fontawesome-all.min.css");
 @import url("https://fonts.googleapis.com/css?family=Oleo+Script:400|Open+Sans:300,300italic,600,600italic,800");
 
+@font-face {
+    font-family: 'StrongArmy';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2104@1.1/ROKAMedium.woff') format('woff');
+    font-weight: 500;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'StrongArmy';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2104@1.1/ROKABold.woff') format('woff');
+    font-weight: 700;
+    font-display: swap;
+}
+
 /*
 	Verti by HTML5 UP
 	html5up.net | @ajlkn
@@ -87,11 +101,12 @@ input, select, textarea {
 	}
 
 	body {
-		background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0)), url("images/bg01.png");
+		background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0)), url("images/pic01.jpg");
 		background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0)), url("images/bg01.png");
 		background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0)), url("images/bg01.png");
 		background-image: linear-gradient(top, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0)), url("images/bg01.png");
-		background-color: #f7f7f7;
+		background-color: rgb(100, 177, 114);
+		background-image:  url("/images/bgimg3.png");
 		background-position: top left, top left;
 		background-repeat: repeat-x, repeat;
 		background-size: 100% 30em, auto;
@@ -129,6 +144,7 @@ input, select, textarea {
 		a:hover {
 			text-decoration: none;
 		}
+
 
 	h1, h2, h3, h4, h5, h6 {
 		color: #444;
@@ -199,7 +215,7 @@ input, select, textarea {
 		max-width: 100%;
 		width: 1400px;
 	}
-
+/*
 		@media screen and (max-width: 1680px) {
 
 			.container {
@@ -230,7 +246,7 @@ input, select, textarea {
 				width: 100%;
 			}
 
-		}
+		} */
 
 /* Row */
 
@@ -474,7 +490,7 @@ input, select, textarea {
 				.row.gtr-200.gtr-uniform > * {
 					padding-top: 80px;
 				}
-
+/*
 		@media screen and (max-width: 1680px) {
 
 			.row {
@@ -718,8 +734,8 @@ input, select, textarea {
 							padding-top: 80px;
 						}
 
-		}
-
+		} */
+/*
 		@media screen and (max-width: 1280px) {
 
 			.row {
@@ -963,9 +979,9 @@ input, select, textarea {
 							padding-top: 50px;
 						}
 
-		}
+		} */
 
-		@media screen and (max-width: 980px) {
+		/* @media screen and (max-width: 980px) {
 
 			.row {
 				display: flex;
@@ -1208,8 +1224,8 @@ input, select, textarea {
 							padding-top: 50px;
 						}
 
-		}
-
+		} */
+/*
 		@media screen and (max-width: 736px) {
 
 			.row {
@@ -1453,7 +1469,7 @@ input, select, textarea {
 							padding-top: 40px;
 						}
 
-		}
+		} */
 
 /* Section/Article */
 
@@ -1634,7 +1650,7 @@ input, select, textarea {
 		-webkit-appearance: none;
 		position: relative;
 		display: inline-block;
-		background: #0090c5;
+		background: lightgray;
 		color: #fff;
 		text-decoration: none;
 		border-radius: 6px;
@@ -1661,7 +1677,7 @@ input, select, textarea {
 		input[type="reset"]:hover,
 		button:hover,
 		.button:hover {
-			background: #10a0d5;
+			background:  #20b0e5;
 		}
 
 		input[type="button"]:active,
@@ -1783,10 +1799,18 @@ input, select, textarea {
 		border-radius: 6px;
 		box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.05);
 		padding: 2em;
+
 	}
 
 		.box.feature {
+
 			padding: 0;
+
+				/* 기존 템플릿 유지 */
+				margin: 0 auto;
+				/* 가로 중앙 배치 */
+				max-width: 500px;      /* 박스 폭 제한 (필수 아님) */
+
 		}
 
 			.box.feature .inner {
@@ -1858,6 +1882,24 @@ input, select, textarea {
 		margin: 0;
 	}
 
+
+
+		#fastival.col-6:before {
+			color: #f3f3f3;
+			font-size: 1.5em;
+			line-height: inherit;
+		}
+
+		#fastival.col-6:hover {
+			background: #444444;
+		}
+
+		#fastival.col-6:active {
+			background: #666666;
+		}
+
+
+
 	.widget.contact ul {
 		list-style: none;
 		padding-left: 0;
@@ -1866,6 +1908,7 @@ input, select, textarea {
 		left: -4px;
 		top: 4px;
 		margin-bottom: 1.5em;
+		text-align: center;
 	}
 
 		.widget.contact ul li {
@@ -1873,6 +1916,7 @@ input, select, textarea {
 			margin-right: 0.25em;
 			padding-left: 0;
 		}
+
 
 			.widget.contact ul li a {
 				-moz-transition: background-color .25s ease-in-out;
@@ -1962,10 +2006,14 @@ input, select, textarea {
 /* Nav */
 
 	#nav {
+
+		font-family: 'StrongArmy', sans-serif;
+		font-style: italic;   /* ← 기울이기 추가 */
+
 		position: absolute;
 		right: 0;
 		top: 0;
-		font-size: 0.9em;
+		font-size: 1.5em;
 	}
 
 		#nav ul {
@@ -1975,8 +2023,8 @@ input, select, textarea {
 
 			#nav ul li {
 				float: left;
-				line-height: 4.5em;
-				padding-left: 1.5em;
+				line-height: 2em;
+				padding-left: 0.3em;
 			}
 
 				#nav ul li a, #nav ul li span {
@@ -1986,7 +2034,7 @@ input, select, textarea {
 					transition: background-color .25s ease-in-out;
 					font-weight: 800;
 					letter-spacing: 0.025em;
-					color: #696969;
+					color: #000000;
 					text-decoration: none;
 					border-radius: 6px;
 					padding: 0.5em 1em 0.5em 1em;
@@ -2136,27 +2184,27 @@ input, select, textarea {
 
 /* XLarge */
 
-	@media screen and (max-width: 1680px) {
+	/* @media screen and (max-width: 1680px) { */
 
 		/* Basic */
 
-			body, input, select, textarea {
+			/* body, input, select, textarea {
 				font-size: 12pt;
-			}
+			} */
 
-	}
+	/* } */
 
 /* Large */
 
-	@media screen and (max-width: 1280px) {
+	/* @media screen and (max-width: 1280px) {
 
 		/* Basic */
 
-			body, input, select, textarea {
+			/* body, input, select, textarea {
 				font-size: 11pt;
-			}
+			} */
 
-	}
+	/* }  */
 
 /* Medium */
 
@@ -2164,9 +2212,15 @@ input, select, textarea {
 		display: none;
 	}
 
-	@media screen and (max-width: 980px) {
+	#banner-wrapper {
+		padding: 0 15px 0 15px;
+		font-family: 'StrongArmy', sans-serif;
+		font-style: italic;   /* ← 기울이기 추가 */
+	}
 
-		/* Basic */
+	 /* @media screen and (max-width: 980px) {
+
+		Basic
 
 			html, body {
 				overflow-x: hidden;
@@ -2176,7 +2230,7 @@ input, select, textarea {
 				font-size: 11pt;
 			}
 
-		/* Section/Article */
+		Section/Article
 
 			section, article {
 				clear: both;
@@ -2187,14 +2241,14 @@ input, select, textarea {
 				margin-bottom: 0 !important;
 			}
 
-		/* Image */
+		Image
 
 			.image.left {
 				width: 25%;
 				margin-bottom: 2em !important;
 			}
 
-		/* Menu */
+		Menu
 
 			ul.menu li {
 				display: block;
@@ -2203,7 +2257,7 @@ input, select, textarea {
 				margin: 0 !important;
 			}
 
-		/* Actions */
+		Actions
 
 			ul.actions li {
 				display: block;
@@ -2215,7 +2269,7 @@ input, select, textarea {
 					margin-top: 0;
 				}
 
-		/* Button */
+		Button
 
 			input[type="button"],
 			input[type="submit"],
@@ -2245,7 +2299,7 @@ input, select, textarea {
 						top: 0.05em;
 					}
 
-		/* Wrappers */
+		Wrappers
 
 			#header-wrapper {
 				padding: 3em 0 1em 0;
@@ -2256,26 +2310,26 @@ input, select, textarea {
 				padding: 6em 0 4em 0;
 			}
 
-		/* Header */
+		Header
 
 			#header {
 				margin: 0 auto;
 			}
 
-		/* Logo */
+		Logo
 
 			#logo span {
 				display: block;
 				margin: 0;
 			}
 
-		/* Nav */
+		Nav
 
 			#nav {
 				display: none;
 			}
 
-		/* Banner */
+		Banner
 
 			#banner {
 				padding: 4.5em 3em;
@@ -2292,7 +2346,7 @@ input, select, textarea {
 					top: auto;
 				}
 
-		/* Content */
+		Content
 
 			#content {
 				border-bottom: solid 1px #e8e8e8;
@@ -2308,13 +2362,13 @@ input, select, textarea {
 				margin-bottom: 0 !important;
 			}
 
-		/* Footer */
+		Footer
 
 			#copyright {
 				padding: 0;
 			}
 
-		/* Nav */
+		Nav
 
 			#page-wrapper {
 				-moz-backface-visibility: hidden;
@@ -2480,10 +2534,10 @@ input, select, textarea {
 	}
 
 /* Small */
-
+/*
 	@media screen and (max-width: 736px) {
 
-		/* Basic */
+		Basic
 
 			body, input, select, textarea {
 				line-height: 2em;
@@ -2494,7 +2548,7 @@ input, select, textarea {
 				margin: 0 0 1em 0;
 			}
 
-		/* Section/Article */
+		Section/Article
 
 			section, article {
 				clear: both;
@@ -2505,14 +2559,14 @@ input, select, textarea {
 					margin-bottom: 0 !important;
 				}
 
-		/* Image */
+		Image
 
 			.image.left {
 				width: 25%;
 				margin-bottom: 2em !important;
 			}
 
-		/* Menu */
+		Menu
 
 			ul.menu li {
 				display: block;
@@ -2521,7 +2575,7 @@ input, select, textarea {
 				margin: 0 !important;
 			}
 
-		/* Actions */
+		Actions
 
 			ul.actions li {
 				display: block;
@@ -2533,7 +2587,7 @@ input, select, textarea {
 					margin-top: 0;
 				}
 
-		/* Button */
+		Button
 
 			input[type="button"],
 			input[type="submit"],
@@ -2563,7 +2617,7 @@ input, select, textarea {
 						top: 0.05em;
 					}
 
-		/* Box */
+		Box
 
 			.box {
 				padding: 15px 15px 15px 15px;
@@ -2593,7 +2647,7 @@ input, select, textarea {
 							border-bottom-right-radius: 0;
 						}
 
-		/* Widgets */
+		Widgets
 
 			.widget.thumbnails .image {
 				margin: 0;
@@ -2611,7 +2665,7 @@ input, select, textarea {
 				padding-top: 0;
 			}
 
-		/* Wrappers */
+		Wrappers
 
 			#header-wrapper {
 				padding: 3em 0 1.5em 0;
@@ -2629,7 +2683,7 @@ input, select, textarea {
 				padding: 40px 30px 40px 30px;
 			}
 
-		/* Logo */
+		Logo
 
 			#logo h1 {
 				font-size: 2.75em;
@@ -2640,7 +2694,7 @@ input, select, textarea {
 				line-height: 3em;
 			}
 
-		/* Banner */
+		Banner
 
 			#banner {
 				text-align: center;
@@ -2667,13 +2721,13 @@ input, select, textarea {
 					margin: 0 0 1em 0;
 				}
 
-		/* Content */
+		Content
 
 			#content {
 				padding-bottom: 3em;
 			}
 
-		/* Footer */
+		Footer
 
 			#footer section {
 				border-bottom: solid 1px #ccc;
@@ -2684,7 +2738,7 @@ input, select, textarea {
 			#copyright {
 				text-align: left;
 			}
-		/* gpt */
+		gpt
 
 			.chat {
 				background: #fff !important;
@@ -2699,7 +2753,4 @@ input, select, textarea {
 				font-family:inherit;
       }
 
-
-
-
-	}
+	} */
