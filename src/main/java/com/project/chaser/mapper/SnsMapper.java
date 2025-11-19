@@ -1,4 +1,4 @@
-package com.project.chaser.service;
+package com.project.chaser.mapper;
 
 import com.project.chaser.dto.Sns;
 import com.project.chaser.dto.Snsfile;

@@ -1,4 +1,4 @@
-package com.project.chaser.service;
+package com.project.chaser.mapper;
 
 import com.project.chaser.dto.Festival;
 import org.apache.ibatis.annotations.Mapper;

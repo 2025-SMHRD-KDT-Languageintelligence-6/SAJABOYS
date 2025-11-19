@@ -29,4 +29,10 @@ public class Festival {
     private double Lon;
     private String CreatedAt;
     private String status; // XML에서 계산된 상태를 담기 위해 추가
+
+    // 이미지 경로 동적 생성
+    public String getImagePath() {
+        // FesIdx가 1이면 001, 10이면 010 등 3자리 형식
+        return String.format("/img/festival/%03d.png", FesIdx);
+    }
 }

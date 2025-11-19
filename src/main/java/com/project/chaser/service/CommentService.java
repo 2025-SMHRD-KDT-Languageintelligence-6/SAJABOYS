@@ -1,6 +1,7 @@
 package com.project.chaser.service;
 
 import com.project.chaser.dto.Comment;
+import com.project.chaser.mapper.CommentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

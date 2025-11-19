@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -178,10 +179,10 @@
                                 <option value="">전체</option>
                                 <option value="먹거리">먹거리</option>
                                 <option value="문화유산">문화유산</option>
-                                <option value="음악">음악</option>
-                                <option value="자연">자연</option>
-                                <option value="전통">전통</option>
-                                <option value="해양">해양</option>
+                                <option value="음악/공연">음악/공연</option>
+                                <option value="자연/꽃">자연/꽃</option>
+                                <option value="전통/문화유산">전통/문화유산</option>
+                                <option value="해양/수산">해양/수산</option>
                             </select>
                         </div>
 
@@ -189,9 +190,28 @@
                             <label for="filterRegion">지역</label>
                             <select id="filterRegion">
                                 <option value="">전체</option>
-                                <option value="순천">순천</option>
+                                <option value="강진">강진</option>
+                                <option value="고흥">고흥</option>
+                                <option value="곡성">곡성</option>
                                 <option value="광양">광양</option>
+                                <option value="구례">구례</option>
+                                <option value="나주">나주</option>
+                                <option value="담양">담양</option>
+                                <option value="목포">목포</option>
+                                <option value="무안">무안</option>
+                                <option value="보성">보성</option>
+                                <option value="순천">순천</option>
+                                <option value="신안">신안</option>
                                 <option value="여수">여수</option>
+                                <option value="영광">영광</option>
+                                <option value="영암">영암</option>
+                                <option value="완도">완도</option>
+                                <option value="장성">장성</option>
+                                <option value="장흥">장흥</option>
+                                <option value="진도">진도</option>
+                                <option value="함평">함평</option>
+                                <option value="해남">해남</option>
+                                <option value="화순">화순</option>
                             </select>
                         </div>
 
@@ -218,8 +238,8 @@
 
                             <!-- 포스터 -->
                             <div class="poster">
-                                <img src="/img/festival/${f.fesIdx}.jpg"
-                                     onerror="this.src='/img/festival/default.jpg'"
+                                <img src="/img/festival/<fmt:formatNumber value='${f.fesIdx}' pattern='000'/>.png"
+                                     onerror="this.src='/img/festival/default.png'"
                                      style="width:100%; height:100%; object-fit:cover;">
                             </div>
 
