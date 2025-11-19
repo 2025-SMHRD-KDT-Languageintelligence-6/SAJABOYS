@@ -266,27 +266,42 @@
                 listBox.innerHTML = '';
 
                 list.forEach(c => {
+                    // 댓글 아이템
                     const commentItem = document.createElement('div');
                     commentItem.className = 'comment-item';
 
+                    // 댓글 메타
                     const commentMeta = document.createElement('div');
                     commentMeta.className = 'comment-meta';
-                    commentMeta.innerHTML = `
-                        <div>
-                            <span class="comment-author">${c.userNickname || '익명'}</span> ·
-                            <span>${c.createdAt || '날짜 없음'}</span>
-                        </div>
-                    `;
 
+                    const authorSpan = document.createElement('span');
+                    authorSpan.className = 'comment-author';
+                    authorSpan.textContent = c.userNickname || '익명';
+
+                    const dateSpan = document.createElement('span');
+                    dateSpan.textContent = c.createdAt || '날짜 없음';
+
+                    const metaInner = document.createElement('div');
+                    metaInner.appendChild(authorSpan);
+                    metaInner.appendChild(document.createTextNode(' · '));
+                    metaInner.appendChild(dateSpan);
+
+                    commentMeta.appendChild(metaInner);
+
+                    // 댓글 내용
                     const commentBody = document.createElement('div');
                     commentBody.className = 'comment-body';
-                    commentBody.textContent = c.commentContent;
+                    commentBody.textContent = c.commentContent || '';
 
+                    // 댓글 아이템에 추가
                     commentItem.appendChild(commentMeta);
                     commentItem.appendChild(commentBody);
+
+                    // 리스트에 추가
                     listBox.appendChild(commentItem);
                 });
 
+                // 댓글 개수 표시
                 document.getElementById('commentCount').innerText = list.length;
             })
             .catch(err => {
@@ -294,8 +309,10 @@
             });
     }
 
+    // 초기 댓글 로드
     loadComments();
 
+    // 댓글 등록
     const commentSubmit = document.getElementById('commentSubmit');
     if (commentSubmit) {
         commentSubmit.addEventListener('click', function() {
