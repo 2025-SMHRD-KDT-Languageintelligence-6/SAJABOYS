@@ -97,7 +97,7 @@ input, select, textarea {
 		background-size: 100% 30em, auto;
 		font-family: 'Open Sans', sans-serif;
 		font-size: 13pt;
-		color: #696969;
+		color: #000000;
 		font-weight: 300;
 		line-height: 2.25em;
 	}
@@ -116,13 +116,13 @@ input, select, textarea {
 	input, select, textarea {
 		font-family: 'Open Sans', sans-serif;
 		font-size: 13pt;
-		color: #696969;
+		color: #000000;
 		font-weight: 300;
 		line-height: 2.25em;
 	}
 
 	a {
-		color: #0090c5;
+		color: #000000;
 		text-decoration: underline;
 	}
 
@@ -131,7 +131,7 @@ input, select, textarea {
 		}
 
 	h1, h2, h3, h4, h5, h6 {
-		color: #444;
+		color: #000000;
 		font-weight: 800;
 	}
 

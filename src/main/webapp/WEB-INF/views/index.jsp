@@ -131,7 +131,7 @@
         							<div class="swiper-container gallery-top">
         								<div class="swiper-wrapper">
         									<div class="swiper-slide">
-        										<div class="swiper-slide-container"><img class="festival-img" src="/images/pic01.jpg" alt="전남 축제 포스터"></div>
+        										<div class="swiper-slide-container"><img class="festival-img" src="static/image/2._설맞이_달집태우기.png" alt="설맞이"></div>
         									</div>
         									<div class="swiper-slide">
         										<div class="swiper-slide-container"><img class="festival-img" src="/images/pic02.jpg" alt="전남 축제 포스터"></div>
