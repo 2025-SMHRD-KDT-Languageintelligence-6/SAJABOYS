@@ -131,13 +131,16 @@
         							<div class="swiper-container gallery-top">
         								<div class="swiper-wrapper">
         									<div class="swiper-slide">
-        										<div class="swiper-slide-container"><img class="festival-img" src="static/image/2._설맞이_달집태우기.png" alt="설맞이"></div>
+        										<div class="swiper-slide-container">
+        										    <img class="festival-img" id="rec-img-1" src="static/image/2._설맞이_달집태우기.png" alt="축제 1 포스터"></div>
         									</div>
         									<div class="swiper-slide">
-        										<div class="swiper-slide-container"><img class="festival-img" src="/images/pic02.jpg" alt="전남 축제 포스터"></div>
+        										<div class="swiper-slide-container">
+        										    <img class="festival-img" id="rec-img-2"  src="/images/pic02.jpg" alt="축제 2 포스터"></div>
         									</div>
         									<div class="swiper-slide">
-        										<div class="swiper-slide-container"><img class="festival-img" src="/images/pic03.jpg" alt="전남 축제 포스터"></div>
+        										<div class="swiper-slide-container">
+        										    <img class="festival-img" id="rec-img-3"src="/images/pic03.jpg" alt="전남 축제 포스터"></div>
         									</div>
         									<div class="swiper-slide">
         										<div class="swiper-slide-container"><img class="festival-img" src="/images/pic101.jpg" alt="전남 축제 포스터"></div>
