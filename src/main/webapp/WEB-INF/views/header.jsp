@@ -42,7 +42,7 @@
                         </ul>
                     </li>
                     <li><a href="#">스템프 투어창</a></li>
-                    <li><a href="/html5up-verti/right-sidebar.html">축제 장</a></li>
+                    <li><a href="/html5up-verti/right-sidebar.html">축제창</a></li>
                     <li><a href="sns">커뮤니티</a></li>
                     <li>
                         <c:choose>
