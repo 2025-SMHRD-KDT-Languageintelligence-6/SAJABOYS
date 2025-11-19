@@ -201,25 +201,9 @@
 
 <div id="page-wrapper">
 
-    <!-- 상단 공통 헤더 -->
-    <div id="header-wrapper">
-        <header id="header" class="container">
-            <div id="logo">
-                <h1><a href="index.html">추적자</a></h1>
-                <span>지역축제 술레잡기 게임</span>
-            </div>
-            <nav id="nav">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="1_Game.html">게임창</a></li>
-                    <li><a href="2_Stamp.html">스템프 투어창</a></li>
-                    <li class="current"><a href="3_Festival.html">축제 장</a></li>
-                    <li><a href="4_Community.html">커뮤니티</a></li>
-                    <li><a href="5_Login.html">로그인/회원가입</a></li>
-                </ul>
-            </nav>
-        </header>
-    </div>
+    <!-- 공통 헤더 include -->
+      <div id="site-header"></div>
+      <script src="/assets/js/header.js"></script>
 
     <!-- 메인 레이아웃 -->
     <main class="festival-layout">
