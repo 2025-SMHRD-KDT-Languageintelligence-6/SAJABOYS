@@ -1,6 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%-- JSTL : 자바코드를 활용할 수 있게끔 만들어진 '커스텀 태그 라이브러리' --%>
-<%-- JSTL사용법 1) dependency 추가 2)지시자를 이용해서 어떤 라이브러리 사용하는 것인지 명시 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
@@ -104,18 +102,11 @@
         .poster{
           width:100%;
           height:220px;
-          background-image:linear-gradient(135deg,#ffd54f,#ffb74d);
+          background:#eee;
           display:flex;
           align-items:center;
           justify-content:center;
-          font-size:.9rem;
-          color:#333;
-          transition:transform .25s ease, box-shadow .25s ease, filter .25s ease;
-        }
-        .festival-card:hover .poster{
-          transform:scale(1.04);
-          filter:brightness(1.03);
-          box-shadow:0 8px 18px rgba(0,0,0,.25);
+          overflow:hidden;
         }
 
         .festival-body{
@@ -152,44 +143,6 @@
           color:#1f2933;
         }
 
-        /* 최근 다녀간 축제 스타일 */
-        .recent-list{
-          display:flex;
-          flex-direction:column;
-          gap:.8rem;
-        }
-        .recent-item{
-          display:flex;
-          gap:.7rem;
-          padding:.6rem .5rem;
-          border-radius:10px;
-          background:#fdf7ec;
-          border:1px solid #ffe0a3;
-          position:relative;
-        }
-        .recent-thumb{
-          width:90px;
-          height:70px;
-          border-radius:8px;
-          background:#ffcc80;
-          display:flex;
-          align-items:center;
-          justify-content:center;
-          font-size:.8rem;
-        }
-        .recent-body{
-          flex:1;
-          font-size:.9rem;
-        }
-        .recent-body .name{
-          font-weight:700;
-          margin-bottom:.1rem;
-        }
-        .recent-body .meta{
-          font-size:.8rem;
-          color:#555;
-        }
-
         @media(max-width:980px){
           .festival-layout{
             padding:0 1rem 2rem;
@@ -202,8 +155,8 @@
 <div id="page-wrapper">
 
     <!-- 공통 헤더 include -->
-      <div id="site-header"></div>
-      <script src="/assets/js/header.js"></script>
+    <div id="site-header"></div>
+    <script src="/assets/js/header.js"></script>
 
     <!-- 메인 레이아웃 -->
     <main class="festival-layout">
@@ -254,78 +207,46 @@
                     </div>
                 </div>
 
+                <!-- ===== 축제 카드 리스트 (DB 기반) ===== -->
                 <div class="card-grid">
-                    <!-- 카드 1 -->
-                    <article class="festival-card"
-                             data-theme="음악,자연"
-                             data-region="순천"
-                             data-status="진행중">
-                        <div class="poster">포스터 이미지</div>
-                        <div class="festival-body">
-                            <div class="festival-name">순천만 국가정원 별빛축제</div>
-                            <div class="festival-meta">
-                                날짜 : 오늘 ~ 24:00<br>
-                                장소 : 순천만국가정원 메인무대<br>
-                                분류 : 야간/불꽃/가족
-                            </div>
-                            <div class="tag-row">
-                                <span class="tag">오늘 열리는 축제</span>
-                                <span class="tag sub">테마: 음악·자연</span>
-                                <span class="tag sub">지역: 순천</span>
-                                <span class="tag sub">기간: 진행중</span>
-                            </div>
-                        </div>
-                    </article>
 
-                    <!-- 카드 2 -->
-                    <article class="festival-card"
-                             data-theme="자연,전통"
-                             data-region="순천"
-                             data-status="진행중">
-                        <div class="poster">포스터 이미지</div>
-                        <div class="festival-body">
-                            <div class="festival-name">순천만 갈대축제</div>
-                            <div class="festival-meta">
-                                날짜 : 오늘 하루<br>
-                                장소 : 순천만습지 일원<br>
-                                분류 : 자연/산책
-                            </div>
-                            <div class="tag-row">
-                                <span class="tag">오늘 열리는 축제</span>
-                                <span class="tag sub">테마: 자연·전통</span>
-                                <span class="tag sub">지역: 순천</span>
-                                <span class="tag sub">기간: 진행중</span>
-                            </div>
-                        </div>
-                    </article>
+                    <c:forEach var="f" items="${festivalList}">
+                        <article class="festival-card"
+                                 data-theme="${f.theme}"
+                                 data-region="${f.region}"
+                                 data-status="${f.status}">
 
-                    <!-- 카드 3 -->
-                    <article class="festival-card"
-                             data-theme="먹거리,음악"
-                             data-region="순천"
-                             data-status="예정">
-                        <div class="poster">포스터 이미지</div>
-                        <div class="festival-body">
-                            <div class="festival-name">순천청년 푸드트럭 페스티벌</div>
-                            <div class="festival-meta">
-                                날짜 : 오늘 12:00 ~ 22:00<br>
-                                장소 : 조례호수공원<br>
-                                분류 : 푸드/공연
+                            <!-- 포스터 -->
+                            <div class="poster">
+                                <img src="/img/festival/${f.fesIdx}.jpg"
+                                     onerror="this.src='/img/festival/default.jpg'"
+                                     style="width:100%; height:100%; object-fit:cover;">
                             </div>
-                            <div class="tag-row">
-                                <span class="tag">오늘 열리는 축제</span>
-                                <span class="tag sub">테마: 먹거리·음악</span>
-                                <span class="tag sub">지역: 순천</span>
-                                <span class="tag sub">기간: 예정</span>
-                            </div>
-                        </div>
-                    </article>
 
-                    <!-- 필요하면 여기부터 추천 결과 카드 추가하면 됨 -->
+                            <!-- 본문 -->
+                            <div class="festival-body">
+                                <div class="festival-name">${f.fesName}</div>
+
+                                <div class="festival-meta">
+                                    날짜 : ${f.startDate} ~ ${f.endDate}<br>
+                                    장소 : ${f.addr}<br>
+                                    입장료 : ${f.fee}
+                                </div>
+
+                                <div class="tag-row">
+                                    <span class="tag">오늘 열리는 축제</span>
+                                    <span class="tag sub">테마: ${f.theme}</span>
+                                    <span class="tag sub">지역: ${f.region}</span>
+                                    <span class="tag sub">기간: ${f.status}</span>
+                                </div>
+                            </div>
+
+                        </article>
+                    </c:forEach>
+
                 </div>
             </section>
         </section>
-
 
     </main>
 
