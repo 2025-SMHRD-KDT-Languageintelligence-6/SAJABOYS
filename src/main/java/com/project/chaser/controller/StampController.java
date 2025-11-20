@@ -94,4 +94,15 @@ public class StampController {
 
         return "stampDetail";
     }
+
+    @GetMapping("/qr")
+    public String qrPage(HttpSession session, Model model) {
+        User loginUser = (User) session.getAttribute("user");
+        if (loginUser == null) return "redirect:/login";
+
+        // 현재 보고 있는 축제 ID (옵션)
+        // model.addAttribute("fesIdx", fesIdx);
+
+        return "qr";  // qr.jsp
+    }
 }
