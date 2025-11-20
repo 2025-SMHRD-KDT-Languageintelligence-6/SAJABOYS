@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>축제 장 | 추적자</title>
+    <title>축제 창 | 추적자</title>
 
     <!-- Verti 기본 CSS -->
     <link rel="stylesheet" href="assets/css/main.css" />
