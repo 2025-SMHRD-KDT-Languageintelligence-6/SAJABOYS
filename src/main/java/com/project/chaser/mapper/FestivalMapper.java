@@ -15,4 +15,5 @@ public interface FestivalMapper {
 
     @Select("SELECT StampCount FROM festival WHERE FesIdx = #{fesIdx}")
     int getStampCount(@Param("fesIdx") int fesIdx);
+
 }

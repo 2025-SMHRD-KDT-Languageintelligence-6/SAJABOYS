@@ -4,24 +4,85 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.chaser.mapper.StampMapper">
 
-    <select id="countTotalFestivals" resultType="int">
+    <select id="getTotalFestivalCount" resultType="int">
         SELECT COUNT(FesIdx)
         FROM festival
     </select>
 
-    <select id="countDistinctFestivalsByUser" resultType="int">
-        SELECT COUNT(DISTINCT FesIdx)
-        FROM stamp         WHERE UserIdx = #{userIdx}
+    <select id="countCompletedFestivals" resultType="int">
+        SELECT COUNT(T1.FesIdx)
+        FROM (
+        SELECT FesIdx, COUNT(StampIdx) AS Collected
+        FROM stamp
+        WHERE UserIdx = #{userIdx}
+        GROUP BY FesIdx
+        ) AS T1
+        JOIN festival AS T2 ON T1.FesIdx = T2.FesIdx
+        WHERE T1.Collected = T2.StampCount
+    </select>
+
+    <select id="getFestivalCompletionStatus"
+            resultType="hashmap">
+        SELECT
+        f.FesIdx AS fesIdx,
+        CASE
+        WHEN (
+        SELECT COUNT(s.StampIdx) FROM stamp s
+        WHERE s.UserIdx = #{userIdx} AND s.FesIdx = f.FesIdx
+        ) = f.StampCount
+        THEN TRUE
+        ELSE FALSE
+        END AS completed
+        FROM festival f
+        ORDER BY f.FesIdx
     </select>
 
     <select id="findByUserIdx" resultType="com.project.chaser.dto.Stamp">
         SELECT StampIdx, UserIdx, StampNumber, FesIdx, CreatedAt
-        FROM stamp         WHERE UserIdx = #{userIdx}
+        FROM stamp WHERE UserIdx = #{userIdx}
     </select>
 
     <insert id="insertStamp" parameterType="com.project.chaser.dto.Stamp">
-        INSERT INTO stamp (UserIdx, StampNumber, FesIdx)  VALUES (#{UserIdx}, #{StampNumber}, #{FesIdx})
+        INSERT INTO stamp (UserIdx, StampNumber, FesIdx) VALUES (#{UserIdx}, #{StampNumber}, #{FesIdx})
     </insert>
 
-</mapper>
+    <select id="findStampsByUserAndFestival" resultType="com.project.chaser.dto.Stamp">
+        SELECT StampIdx, UserIdx, StampNumber, FesIdx, CreatedAt
+        FROM stamp
+        WHERE UserIdx = #{param1} AND FesIdx = #{param2}
+        ORDER BY StampNumber ASC
+    </select>
 
+    <select id="getFestivalDetails" resultType="com.project.chaser.dto.Festival">
+        SELECT
+        FesIdx, FesName, Region,
+        Addr, StartDate, EndDate,
+        Theme, Tel, StampCount   FROM festival
+        WHERE FesIdx = #{FesIdx}
+    </select>
+
+    <!-- MyBatis 매퍼 XML -->
+    <select id="findFestivalById" parameterType="int" resultType="com.project.chaser.dto.Festival">
+        SELECT * FROM festival
+        WHERE fes_idx = #{fesIdx}
+    </select>
+
+    <!-- findByFesIdx 쿼리 정의 -->
+    <select id="findByFesIdx" parameterType="int" resultType="com.project.chaser.dto.Festival">
+        SELECT *
+        FROM festival
+        WHERE FesIdx = #{fesIdx}
+    </select>
+
+    <!-- StampMapper.xml -->
+    <!-- countStampsByFestival 쿼리 추가 -->
+    <select id="countStampsByFestival" resultType="int">
+        SELECT COUNT(*)
+        FROM stamp
+        WHERE FesIdx = #{FesIdx}
+    </select>
+
+
+
+
+</mapper>
