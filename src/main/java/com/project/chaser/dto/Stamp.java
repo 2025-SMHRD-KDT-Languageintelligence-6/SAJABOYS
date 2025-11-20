@@ -18,7 +18,4 @@ public class Stamp {
     @NonNull
     private int StampNumber;
 
-    // 추가할 필드
-    private int StampCount;  // 각 축제에서 필요한 스탬프 수
-
 }

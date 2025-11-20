@@ -1,6 +1,9 @@
 package com.project.chaser.dto;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 
 @Data
 @NoArgsConstructor  // 기본 생성자
@@ -16,25 +19,28 @@ public class Festival {
     @NonNull
     private String Addr;
     @NonNull
-    private String StartDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date StartDate;
     @NonNull
-    private String EndDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date EndDate;
     @NonNull
     private String Fee;
     @NonNull
     private String Theme;
+    @NonNull
+    private String Tel;
     @NonNull
     private double Lat;
     @NonNull
     private double Lon;
     private String CreatedAt;
     private String status; // XML에서 계산된 상태를 담기 위해 추가
+    private int StampCount; // 스탬프 총 개수
 
     // 이미지 경로 동적 생성
     public String getImagePath() {
         // FesIdx가 1이면 001, 10이면 010 등 3자리 형식
         return String.format("/img/festival/%03d.png", FesIdx);
     }
-
-    private int StampCount; // 스탬프 총 개수
 }

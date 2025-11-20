@@ -65,13 +65,6 @@ public class StampService {
     public Festival getFestivalDetails(int fesIdx) {
         // 축제 정보를 DB에서 가져옵니다.
         Festival festival = stampMapper.findByFesIdx(fesIdx);
-
-        if (festival != null) {
-            // 해당 축제에서 수집해야 하는 스탬프 수 계산
-            int stampCount = stampMapper.countStampsByFestival(fesIdx);  // countStampsByFestival 메서드를 호출하여 스탬프 개수 계산
-            festival.setStampCount(stampCount);  // festival 객체에 stampCount를 설정
-        }
-
         return festival;
     }
 
