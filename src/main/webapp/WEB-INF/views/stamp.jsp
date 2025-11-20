@@ -153,7 +153,7 @@
         </div>
 
         <div class="go-scan">
-            <button class="button alt" onclick="location.href='qr.html'">QR 코드 스캔하기 →</button>
+            <button class="button alt" onclick="location.href='/stamp/qr'">QR 코드 스캔하기 →</button>
         </div>
 
         <c:if test="${collectedCount == totalCount && totalCount > 0}">

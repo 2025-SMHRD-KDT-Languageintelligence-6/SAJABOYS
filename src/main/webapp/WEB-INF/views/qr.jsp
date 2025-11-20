@@ -14,9 +14,15 @@
             padding:1.5rem;
         }
         .qr-video {
-            width:100%; height:300px; background:#000;
-            display:flex; align-items:center; justify-content:center;
-            color:#fff; border-radius:12px; margin-bottom:1rem;
+            width: 100%;
+            height: 420px;   /* 기존 300px → 420px 로 확대 */
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            border-radius: 12px;
+            margin-bottom: 1.2rem; /* 버튼과의 간격도 조금 증가 */
         }
         .qr-buttons { display:flex; justify-content:center; gap:.6rem; margin-bottom:1rem; }
         .back-btn { text-align:center; margin-top:1rem; }
