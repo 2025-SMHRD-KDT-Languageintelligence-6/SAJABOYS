@@ -9,7 +9,7 @@
   <title>자유게시판 | 추적자</title>
 
   <!-- 기본 CSS -->
-  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="/assets/css/main.css" />
 
   <style>
     body { background:#f5fafc; }
@@ -50,7 +50,7 @@
 
   <!-- 공통 헤더 include -->
   <div id="site-header"></div>
-  <script src="assets/js/header.js"></script>
+  <script src="/assets/js/header.js"></script>
 
   <!-- 자유게시판 영역 -->
   <main class="board-wrap">

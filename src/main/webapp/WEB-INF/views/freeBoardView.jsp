@@ -9,7 +9,7 @@
     <title>자유게시판 글보기 | 추적자</title>
 
     <!-- Verti 기본 CSS -->
-    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="/assets/css/main.css" />
 
     <style>
         body { background:#f5fafc; }
@@ -136,7 +136,7 @@
 
     <!-- 공통 헤더 include -->
     <div id="site-header"></div>
-    <script src="assets/js/header.js"></script>
+    <script src="/assets/js/header.js"></script>
 
     <main class="view-wrap">
 
