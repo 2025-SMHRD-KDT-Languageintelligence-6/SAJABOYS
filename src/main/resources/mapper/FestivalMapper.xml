@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.chaser.mapper.FestivalMapper">
+
+    <select id="getTodayFestivals" resultType="com.project.chaser.dto.Festival">
+        <![CDATA[
+        SELECT
+            FesIdx, FesName, Region, Addr, StartDate, EndDate, Fee, Theme, Tel, Lat, Lon,
+            CASE
+                WHEN StartDate > CURDATE() THEN '예정'
+                WHEN StartDate <= CURDATE() AND EndDate >= CURDATE() THEN '진행중'
+                ELSE '마감'
+            END AS status
+        FROM festival
+        ORDER BY StartDate ASC
+        ]]>
+    </select>
+
+</mapper>

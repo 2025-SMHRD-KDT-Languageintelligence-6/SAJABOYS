@@ -2,7 +2,7 @@ package com.project.chaser.service.impl;
 
 import com.project.chaser.dto.Sns;
 import com.project.chaser.dto.Snsfile;
-import com.project.chaser.service.SnsMapper;
+import com.project.chaser.mapper.SnsMapper;
 import com.project.chaser.service.SnsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;

@@ -39,9 +39,8 @@
         				</div>
         				<div class="col-5 col-12-medium">
         					<ul>
-        						<li><a href="/1_Game.html" class="button large icon solid fa-arrow-circle-right">Ok let's
-        								go!</a></li>
-        						<li><a href="/1_1Rule.html" class="button alt large icon solid fa-question-circle">룰 북</a></li>
+        						<li><a href="/1_Game.html" class="button large icon solid fa-arrow-circle-right">Game Start!</a></li>
+        						<li><a href="/1_1Rule.html" class="button alt large icon solid fa-question-circle">Game Rule</a></li>
         					</ul>
         				</div>
         			</div>

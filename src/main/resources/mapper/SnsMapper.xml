@@ -6,7 +6,7 @@
 <!-- namespace : 데이터베이스 관련 Mapper 인터페이스의 경로 설정
                     BoardMapper, TestMapper 등에서 쿼리 태그들의 id 중복되어도
                     namespace를 구분지어서 찾아감 -->
-<mapper namespace="com.project.chaser.service.SnsMapper">
+<mapper namespace="com.project.chaser.mapper.SnsMapper">
     <!-- 게시글 등록 -->
     <insert id="insertPost" parameterType="com.project.chaser.dto.Sns" useGeneratedKeys="true" keyProperty="snsIdx">
         insert into sns (SnsTitle, SnsContent, Category, UserIdx)

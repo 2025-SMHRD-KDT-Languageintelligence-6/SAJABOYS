@@ -3,8 +3,7 @@ package com.project.chaser.controller;
 import com.project.chaser.dto.User;
 import com.project.chaser.service.EmailService;
 import com.project.chaser.service.JwtUtil;
-import com.project.chaser.service.UserMapper;
-import jakarta.servlet.http.HttpServletRequest;
+import com.project.chaser.mapper.UserMapper;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -229,7 +228,4 @@ public class UserController {
         redirect.addFlashAttribute("msg", "비밀번호가 성공적으로 변경되었습니다.");
         return "redirect:/login";
     }
-
-
 }
-

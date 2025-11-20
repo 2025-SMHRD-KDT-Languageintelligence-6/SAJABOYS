@@ -6,7 +6,7 @@
 <!-- namespace : 데이터베이스 관련 Mapper 인터페이스의 경로 설정
                     BoardMapper, TestMapper 등에서 쿼리 태그들의 id 중복되어도
                     namespace를 구분지어서 찾아감 -->
-<mapper namespace="com.project.chaser.service.UserMapper">
+<mapper namespace="com.project.chaser.mapper.UserMapper">
 
     <select id="loginUser" parameterType="com.project.chaser.dto.User"
             resultType="com.project.chaser.dto.User">
