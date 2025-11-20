@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>QR 코드 스캔</title>
+
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <style>
+    body{ background:#f5fafc; }
+    .qr-panel{
+      max-width:600px;margin:2.5rem auto;background:#fff;
+      border-radius:18px;box-shadow:0 4px 14px rgba(0,0,0,.12);
+      padding:1.4rem 1.4rem 2rem;
+    }
+    .qr-panel h2{ font-size:1.5rem;font-weight:800;margin-bottom:.5rem; }
+    .panel-desc{ margin-bottom:1rem;color:#666;font-size:.9rem; }
+
+    .qr-video-box{
+      border-radius:16px;border:2px dashed #cfd8e3;
+      background:#eaf4ff;padding:1rem;margin-bottom:1rem;text-align:center;
+    }
+    .qr-video-placeholder{
+      height:220px;background:#000;color:#fff;
+      display:flex;align-items:center;justify-content:center;
+      border-radius:12px;margin-bottom:.8rem;
+    }
+    .qr-buttons{ display:flex;justify-content:center;gap:.6rem;flex-wrap:wrap; }
+    .muted{ margin-top:.5rem;font-size:.85rem;color:#777; }
+
+    .back-btn{
+      text-align:center;margin-top:1.2rem;
+    }
+  </style>
+</head>
+<body>
+
+<div class="qr-panel">
+  <h2>QR 코드 스캔</h2>
+  <p class="panel-desc">스탬프 포인트의 QR 코드를 카메라로 인식하세요.</p>
+
+  <div class="qr-video-box">
+    <div class="qr-video-placeholder" id="qrPreview">
+      📷 카메라 미리보기(데모)
+    </div>
+
+    <div class="qr-buttons">
+      <button class="button alt" id="openCamBtn">카메라 열기</button>
+      <button class="button" id="mockScanBtn">QR 스캔 완료 (테스트)</button>
+    </div>
+    <p class="muted">※ 실제 서비스에서는 QR 인식 라이브러리로 대체됩니다.</p>
+  </div>
+
+  <div class="back-btn">
+    <button class="button" onclick="location.href='stamp.html'">← 스탬프 현황으로 돌아가기</button>
+  </div>
+</div>
+
+<script>
+  document.getElementById('openCamBtn').onclick = () => {
+    alert("실제 서비스에서는 카메라 권한을 요청하고 QR을 인식합니다.");
+  };
+
+  // DEMO: 스캔 시 localStorage에 +1
+  document.getElementById('mockScanBtn').onclick = () => {
+    let count = Number(localStorage.getItem("stampCount") || "0");
+    if(count >= 10){ alert("이미 10개 완료!"); return; }
+
+    count++;
+    localStorage.setItem("stampCount", count);
+
+    alert("스캔 완료! 현재 스탬프: " + count + "개\n→ 스탬프 현황 페이지로 이동합니다.");
+    location.href = "stamp.html";
+  };
+</script>
+
+</body>
+</html>
