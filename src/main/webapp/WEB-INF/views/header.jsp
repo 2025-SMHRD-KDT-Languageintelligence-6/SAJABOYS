@@ -41,7 +41,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li><a href="#">스탬프 투어</a></li>
+                    <li><a href="stamp">스탬프 투어</a></li>
                     <li><a href="festival">축제</a></li>
                     <li><a href="sns">커뮤니티</a></li>
                     <li>

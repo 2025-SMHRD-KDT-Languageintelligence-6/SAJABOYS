@@ -8,4 +8,6 @@ import java.util.List;
 @Mapper
 public interface FestivalMapper {
     List<Festival> getTodayFestivals();
+
+    Festival getFestival(int fesIdx);
 }

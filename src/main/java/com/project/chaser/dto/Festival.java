@@ -35,4 +35,6 @@ public class Festival {
         // FesIdx가 1이면 001, 10이면 010 등 3자리 형식
         return String.format("/img/festival/%03d.png", FesIdx);
     }
+
+    private int StampCount; // 스탬프 총 개수
 }

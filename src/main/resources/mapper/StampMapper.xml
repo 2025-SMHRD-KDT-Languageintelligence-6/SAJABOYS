@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.chaser.mapper.StampMapper">
+
+        <!-- 유저가 획득한 스탬프 번호 조회 -->
+        <select id="getUserStamps" resultType="int">
+            SELECT StampNumber
+            FROM stamp
+            WHERE FesIdx = #{fesIdx} AND UserIdx = #{userIdx}
+            ORDER BY StampNumber
+        </select>
+
+        <!-- 스탬프 추가 -->
+        <insert id="insertStamp">
+            INSERT INTO stamp (FesIdx, UserIdx, StampNumber)
+            VALUES (#{fesIdx}, #{userIdx}, #{stampNumber})
+        </insert>
+
+</mapper>

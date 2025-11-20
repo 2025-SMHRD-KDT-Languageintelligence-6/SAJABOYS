@@ -19,4 +19,13 @@
         ]]>
     </select>
 
+    <select id="getFestival" resultType="com.project.chaser.dto.Festival">
+        SELECT
+        FesIdx, FesName, Region, Addr, StartDate, EndDate, Fee, Theme,
+        Lat, Lon, StampCount
+        FROM festival
+        WHERE FesIdx = #{fesIdx}
+    </select>
+
+
 </mapper>

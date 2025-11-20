@@ -15,4 +15,6 @@ public class Stamp {
     private String CreatedAt;
     @NonNull
     private int UserIdx;
+    @NonNull
+    private int StampNumber;
 }
