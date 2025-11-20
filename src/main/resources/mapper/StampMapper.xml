@@ -1,22 +1,27 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="com.project.chaser.mapper.StampMapper">
 
-        <!-- 유저가 획득한 스탬프 번호 조회 -->
-        <select id="getUserStamps" resultType="int">
-            SELECT StampNumber
-            FROM stamp
-            WHERE FesIdx = #{fesIdx} AND UserIdx = #{userIdx}
-            ORDER BY StampNumber
-        </select>
+    <select id="countTotalFestivals" resultType="int">
+        SELECT COUNT(FesIdx)
+        FROM festival
+    </select>
 
-        <!-- 스탬프 추가 -->
-        <insert id="insertStamp">
-            INSERT INTO stamp (FesIdx, UserIdx, StampNumber)
-            VALUES (#{fesIdx}, #{userIdx}, #{stampNumber})
-        </insert>
+    <select id="countDistinctFestivalsByUser" resultType="int">
+        SELECT COUNT(DISTINCT FesIdx)
+        FROM stamp         WHERE UserIdx = #{userIdx}
+    </select>
+
+    <select id="findByUserIdx" resultType="com.project.chaser.dto.Stamp">
+        SELECT StampIdx, UserIdx, StampNumber, FesIdx, CreatedAt
+        FROM stamp         WHERE UserIdx = #{userIdx}
+    </select>
+
+    <insert id="insertStamp" parameterType="com.project.chaser.dto.Stamp">
+        INSERT INTO stamp (UserIdx, StampNumber, FesIdx)  VALUES (#{UserIdx}, #{StampNumber}, #{FesIdx})
+    </insert>
 
 </mapper>
+
