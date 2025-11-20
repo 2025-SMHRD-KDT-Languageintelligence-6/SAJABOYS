@@ -53,7 +53,7 @@
 
 <main class="auth-wrap">
     <section class="box auth-card" aria-labelledby="loginTitle">
-        <div class="brand">추적자들</div>
+        <div class="brand"></div>
         <h2 id="loginTitle" class="title">로그인</h2>
         <p class="subtitle" aria-hidden="true">아이디와 비밀번호를 입력해 주세요</p>
 
