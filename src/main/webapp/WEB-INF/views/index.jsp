@@ -1,373 +1,296 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%-- JSTL : 자바코드를 활용할 수 있게끔 만들어진 '커스텀 태그 라이브러리' --%>
-<%-- JSTL사용법 1) dependency 추가 2)지시자를 이용해서 어떤 라이브러리 사용하는 것인지 명시 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE HTML>
 <!--
-	Verti by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+  Verti by HTML5 UP
+  커스텀: 추적자들(축제 술레잡기 사이트) 메인 페이지
 -->
-<html>
-	<head>
-		<title>추적자들(축제 술레잡기 사이트)</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="/assets/css/main.css" />
-        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-	</head>
-	<body class="is-preload homepage">
-		<body class="is-preload homepage">
+<html lang="ko">
+<head>
+    <title>추적자들(축제 술레잡기 사이트)</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 
-        	<!-- header include -->
-        	<div id="site-header"></div>
-        	<script src="/assets/js/header.js"></script>
+    <!-- Verti 기본 CSS -->
+    <link rel="stylesheet" href="/assets/css/main.css" />
 
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+</head>
 
+<body class="is-preload homepage">
 
-        	<!-- Banner -->
-        	<div id="banner-wrapper">
-        		<div id="banner" class="box container">
-        			<div class="row">
-        				<div class="col-7 col-12-medium">
-        					<h2>바로 게임하러가자~</h2>
-        					<!-- (스크립트 왔다갔다 부분.) -->
+    <!-- =================== HEADER =================== -->
+    <!-- header.js 가 /partials/header.html 을 로드한다고 가정 -->
+    <div id="site-header"></div>
+    <script src="/assets/js/header.js"></script>
 
+    <!-- =================== BANNER : 메인 액션 =================== -->
+    <div id="banner-wrapper">
+        <div id="banner" class="box container">
+            <div class="row">
+                <div class="col-7 col-12-medium">
+                    <h2>바로 게임하러가자~</h2>
+                    <p>전남 곳곳에서 열리는 축제를 배경으로 실시간 술래잡기 게임을 즐겨보세요.</p>
+                </div>
+                <div class="col-5 col-12-medium">
+                    <ul>
+                        <li>
+                            <a href="/1_Game.html"
+                               class="button large icon solid fa-arrow-circle-right">
+                                Game Start!
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/1_1Rule.html"
+                               class="button alt large icon solid fa-question-circle">
+                                Game Rule
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <!-- =================== 자유 채팅 영역 =================== -->
+    <div id="features-wrapper">
+        <div class="container">
+            <!-- 가운데 정렬 -->
+            <div class="row aln-center">
+                <div class="col-4 col-12-medium">
+                    <section class="box feature">
+                        <div class="inner">
+                            <header>
+                                <h2>자유채팅</h2>
+                                <p>[88명 참여중]</p>
+                            </header>
+                            <p>
+                                축제 현장 후기, 게임 공략, 팀원 모집 등 자유롭게 이야기를 나눠보세요.
+                                (실제 채팅 기능은 추후 연동 예정)
+                            </p>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        				</div>
-        				<div class="col-5 col-12-medium">
-        					<ul>
-        						<li><a href="/1_Game.html" class="button large icon solid fa-arrow-circle-right">Game Start!</a></li>
-        						<li><a href="/1_1Rule.html" class="button alt large icon solid fa-question-circle">Game Rule</a></li>
-        					</ul>
-        				</div>
-        			</div>
-        		</div>
-        	</div>
+    <!-- =================== 축제 추천 영역 (포스터 + 이름) =================== -->
+    <div id="main-wrapper">
+        <div class="container">
+            <div class="row gtr-200">
+                <!-- 우측/좌측 배치가 필요하면 col-* 로 감싸도 됨 -->
+                <div id="sidebar">
+                    <section class="widget thumbnails">
+                        <h3>이런 축제 어때요?</h3>
 
-        	<!-- 채팅창 -->
-        	<div id="features-wrapper">
-        		<div class="container">
-        			<div class="row">
-        				<div class="col-4 col-12-medium">
+                        <!--
+                            recoList : List<FestivalReco>
+                            FestivalReco {
+                                Long id;
+                                String name;       // 축제명
+                                String posterUrl;  // 포스터 이미지 경로
+                            }
+                            컨트롤러에서 model.addAttribute("recoList", list);
+                        -->
+                        <div class="head">
 
+                            <!-- ===== 위 : 포스터 카드 슬라이더 ===== -->
+                            <div class="swiper-container gallery-top">
+                                <div class="swiper-wrapper">
 
+                                    <!-- 추천 데이터가 있을 때 -->
+                                    <c:forEach var="fest" items="${recoList}">
+                                        <div class="swiper-slide">
+                                            <div class="swiper-slide-container">
+                                                <img class="festival-img"
+                                                     src="${fest.posterUrl}"
+                                                     alt="${fest.name} 포스터" />
+                                            </div>
+                                        </div>
+                                    </c:forEach>
 
+                                    <!-- 추천 데이터가 없을 때 기본 예시 3개 -->
+                                    <c:if test="${empty recoList}">
+                                        <div class="swiper-slide">
+                                            <div class="swiper-slide-container">
+                                                <img class="festival-img"
+                                                     src="/images/pic01.jpg"
+                                                     alt="기본 축제 1 포스터" />
+                                            </div>
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <div class="swiper-slide-container">
+                                                <img class="festival-img"
+                                                     src="/images/pic02.jpg"
+                                                     alt="기본 축제 2 포스터" />
+                                            </div>
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <div class="swiper-slide-container">
+                                                <img class="festival-img"
+                                                     src="/images/pic03.jpg"
+                                                     alt="기본 축제 3 포스터" />
+                                            </div>
+                                        </div>
+                                    </c:if>
 
-        					<!-- 채팅 박스 -->
+                                </div>
 
-        					<div section class="box feature">
+                                <!-- 좌우 화살표 -->
+                                <div class="swiper-button-next"></div>
+                                <div class="swiper-button-prev"></div>
+                            </div>
 
+                            <!-- ===== 아래 : 축제명 네모 박스 슬라이더 ===== -->
+                            <div class="swiper-container gallery-thumbs">
+                                <div class="swiper-wrapper">
 
-        						<div class="inner">
-        							<header>
-        								<h2>자유채팅</h2>
-        								<p>[88명 참여중]</p>
-        							</header>
-        							<p>채팅채팅채팅채팅채팅채팅채팅채팅채팅채팅채팅채팅채팅채팅채팅채팅채팅채팅</p>
-        						</div>
-        					</div>
+                                    <!-- 추천 축제명 -->
+                                    <c:forEach var="fest" items="${recoList}">
+                                        <div class="swiper-slide">
+                                            <div class="swiper-slide-container">
+                                                ${fest.name}
+                                            </div>
+                                        </div>
+                                    </c:forEach>
 
-        				</div>
+                                    <!-- 데이터 없을 때 기본 텍스트 -->
+                                    <c:if test="${empty recoList}">
+                                        <div class="swiper-slide">
+                                            <div class="swiper-slide-container">기본 축제 1</div>
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <div class="swiper-slide-container">기본 축제 2</div>
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <div class="swiper-slide-container">기본 축제 3</div>
+                                        </div>
+                                    </c:if>
 
+                                </div>
+                            </div>
 
-        				<!-- <div class="col-4 col-12-medium"> -->
+                        </div>
 
-        				<!-- 일단 주석처리함 -->
+                        <a href="/festival" class="button icon fa-file-alt">More</a>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        				<!-- Box -->
-        				<!-- <section class="box feature">
-        										<a href="#" class="image featured"><img src="images/pic02.jpg" alt="" /></a>
-        										<div class="inner">
-        											<header>
-        												<h2>An interesting title</h2>
-        												<p>This is also an interesting subtitle</p>
-        											</header>
-        											<p>Phasellus quam turpis, feugiat sit amet in, hendrerit in lectus. Praesent sed semper amet bibendum tristique fringilla.</p>
-        										</div>
-        									</section>
+    <!-- =================== FOOTER =================== -->
+    <div id="footer-wrapper">
+        <footer id="footer" class="container">
+            <div class="row">
+                <div class="col-3 col-6-medium col-12-small">
+                    <section class="widget links">
+                        <h3>About 추적자들</h3>
+                        <ul class="style2">
+                            <li><a href="#">서비스 소개</a></li>
+                            <li><a href="#">팀 소개</a></li>
+                            <li><a href="#">전남 축제 데이터 출처</a></li>
+                            <li><a href="#">이용 가이드</a></li>
+                        </ul>
+                    </section>
+                </div>
 
-        							</div>
-        							<div class="col-4 col-12-medium"> -->
+                <div class="col-3 col-6-medium col-12-small">
+                    <section class="widget links">
+                        <h3>축제/게임</h3>
+                        <ul class="style2">
+                            <li><a href="#">진행 중인 게임</a></li>
+                            <li><a href="#">지난 축제 기록</a></li>
+                            <li><a href="#">랭킹 보드</a></li>
+                            <li><a href="#">자주 묻는 질문</a></li>
+                        </ul>
+                    </section>
+                </div>
 
-        				<!-- Box -->
-        				<!-- <section class="box feature">
-        										<a href="#" class="image featured"><img src="images/pic03.jpg" alt="" /></a>
-        										<div class="inner">
-        											<header>
-        												<h2>Oh, and finally ...</h2>
-        												<p>Here's another intriguing subtitle</p>
-        											</header>
-        											<p>Phasellus quam turpis, feugiat sit amet in, hendrerit in lectus. Praesent sed semper amet bibendum tristique fringilla.</p>
-        										</div>
-        									</section> -->
+                <div class="col-3 col-6-medium col-12-small">
+                    <section class="widget links">
+                        <h3>정책</h3>
+                        <ul class="style2">
+                            <li><a href="#">이용약관</a></li>
+                            <li><a href="#">개인정보 처리방침</a></li>
+                            <li><a href="#">위치기반 서비스 약관</a></li>
+                        </ul>
+                    </section>
+                </div>
 
-        				<!-- 일단 주석처리함 -->
+                <div class="col-3 col-6-medium col-12-small">
+                    <section class="widget contact last">
+                        <h3>Contact Us</h3>
+                        <ul>
+                            <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+                            <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+                            <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+                        </ul>
+                        <p>
+                            전남 어딘가의 축제 현장<br />
+                            (예시 주소) 1234 Festival Road<br />
+                            010-0000-0000
+                        </p>
+                    </section>
+                </div>
+            </div>
 
-        				<!-- </div> -->
-        			</div>
-        		</div>
-        	</div>
+            <div class="row">
+                <div class="col-12">
+                    <div id="copyright">
+                        <ul class="menu">
+                            <li>&copy; 추적자들. All rights reserved.</li>
+                            <li>Design base: <a href="http://html5up.net">HTML5 UP Verti</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
 
-        	<!-- 축제 -->
-        	<div id="main-wrapper">
-        		<div class="container">
-        			<div class="row gtr-200">
+    <!-- =================== SCRIPTS =================== -->
 
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
-        				<!-- Sidebar -->
-        				<div id="sidebar">
-        					<section class="widget thumbnails">
-        						<h3>이런 축제 어때요?</h3>
+    <!-- Verti 기본 JS -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/jquery.dropotron.min.js"></script>
+    <script src="/assets/js/browser.min.js"></script>
+    <script src="/assets/js/breakpoints.min.js"></script>
+    <script src="/assets/js/util.js"></script>
+    <script src="/assets/js/main.js"></script>
 
-        						<!-- Swiper -->
-
-
-        						<div class="head">
-
-        							<div class="swiper-container gallery-top">
-        								<div class="swiper-wrapper">
-        									<div class="swiper-slide">
-        										<div class="swiper-slide-container">
-        										    <img class="festival-img" id="rec-img-1" src="static/image/2._설맞이_달집태우기.png" alt="축제 1 포스터"></div>
-        									</div>
-        									<div class="swiper-slide">
-        										<div class="swiper-slide-container">
-        										    <img class="festival-img" id="rec-img-2"  src="/images/pic02.jpg" alt="축제 2 포스터"></div>
-        									</div>
-        									<div class="swiper-slide">
-        										<div class="swiper-slide-container">
-        										    <img class="festival-img" id="rec-img-3"src="/images/pic03.jpg" alt="전남 축제 포스터"></div>
-        									</div>
-        									<div class="swiper-slide">
-        										<div class="swiper-slide-container"><img class="festival-img" src="/images/pic101.jpg" alt="전남 축제 포스터"></div>
-        									</div>
-        									<div class="swiper-slide">
-        										<div class="swiper-slide-container"><img class="festival-img" src="/images/pic01.jpg" alt="전남 축제 포스터"></div>
-        									</div>
-        								</div>
-        								<!-- Add Arrows -->
-        								<div class="swiper-button-next"></div>
-        								<div class="swiper-button-prev"></div>
-        							</div>
-        							<div class="swiper-container gallery-thumbs">
-        								<div class="swiper-wrapper">
-        									<div class="swiper-slide">
-        										<div class="swiper-slide-container">축제 1</div>
-        									</div>
-        									<div class="swiper-slide">
-        										<div class="swiper-slide-container">축제 2</div>
-        									</div>
-        									<div class="swiper-slide">
-        										<div class="swiper-slide-container">축제 3</div>
-        									</div>
-        									<div class="swiper-slide">
-        										<div class="swiper-slide-container">축제 4</div>
-        									</div>
-        									<div class="swiper-slide">
-        										<div class="swiper-slide-container">축제 5</div>
-        									</div>
-        								</div>
-        							</div>
-        						</div>
-        						<!-- <script>
-        										var galleryThumbs = new Swiper('.gallery-thumbs', {
-        											spaceBetween: 10,
-        											slidesPerView: 5,
-        											freeMode: true,
-        											watchSlidesVisibility: true,
-        											watchSlidesProgress: true,
-        										});
-
-        										var galleryTop = new Swiper('.gallery-top', {
-        											spaceBetween: 10,
-        											navigation: {
-        												nextEl: '.swiper-button-next',
-        												prevEl: '.swiper-button-prev',
-        											},
-        											thumbs: {
-        												swiper: galleryThumbs,
-        											},
-        										});
-        									</script> -->
-
-
-        						<!-- <div class="grid">
-        							<div class="row gtr-50" id="fastival">
-
-        								<div><a href="#" class="image fit"><img src="static/image/2. 설맞이 달집태우기.png" alt="" /></a></div>
-        								<div><a href="#" class="image fit"><img src="/images/pic05.jpg" alt="" /></a></div>
-        								<div><a href="#" class="image fit"><img src="/images/pic06.jpg" alt="" /></a></div>
-        								<div><a href="#" class="image fit"><img src="/images/pic07.jpg" alt="" /></a></div>
-        								<div><a href="#" class="image fit"><img src="/images/pic07.jpg" alt="" /></a></div>
-        								<div><a href="#" class="image fit"><img src="/images/pic07.jpg" alt="" /></a></div>
-        								<div><a href="#" class="image fit"><img src="/images/pic07.jpg" alt="" /></a></div>
-
-
-        								<div><a href="#" class="image fit"><img src="/images/pic07.jpg" alt="" /></a></div>
-        								<div><a href="#" class="image fit"><img src="/images/pic07.jpg" alt="" /></a></div>
-        								<div><a href="#" class="image fit"><img src="/images/pic07.jpg" alt="" /></a></div>
-        								<div><a href="#" class="image fit"><img src="/images/pic07.jpg" alt="" /></a></div>
-        								<div><a href="#" class="image fit"><img src="/images/pic07.jpg" alt="" /></a></div>
-        								<div><a href="#" class="image fit"><img src="/images/pic07.jpg" alt="" /></a></div>
-        								<div><a href="#" class="image fit"><img src="/images/pic07.jpg" alt="" /></a></div>
-
-        							</div>
-        						</div> -->
-        						<a href="#" class="button icon fa-file-alt">More</a>
-        					</section>
-        				</div>
-
-
-
-        			</div>
-        		</div>
-        	</div>
-
-
-        	<!-- 축제 추천 포스터 영역 (이미지 경로만 교체해서 사용) -->
-
-
-        		<!-- <div class="festival-reco-header">
-        			<div class="festival-reco-title">
-        				나에게 맞춘 순 | 축제일순 | 거리순
-        			</div>
-        			<nav class="festival-reco-tabs">
-        				<a href="#" class="active">나에게 맞춘 순</a>
-        				<a href="#">축제일순</a>
-        				<a href="#">거리순</a>
-        			</nav>
-        		</div> -->
-
-
-
-        		<!-- Footer -->
-        		<div id="footer-wrapper">
-        			<footer id="footer" class="container">
-        				<div class="row">
-        					<div class="col-3 col-6-medium col-12-small">
-
-        						<!-- Links -->
-        						<section class="widget links">
-        							<h3>Random Stuff</h3>
-        							<ul class="style2">
-        								<li><a href="#">Etiam feugiat condimentum</a></li>
-        								<li><a href="#">Aliquam imperdiet suscipit odio</a></li>
-        								<li><a href="#">Sed porttitor cras in erat nec</a></li>
-        								<li><a href="#">Felis varius pellentesque potenti</a></li>
-        								<li><a href="#">Nullam scelerisque blandit leo</a></li>
-        							</ul>
-        						</section>
-
-        					</div>
-        					<div class="col-3 col-6-medium col-12-small">
-
-        						<!-- Links -->
-        						<section class="widget links">
-        							<h3>Random Stuff</h3>
-        							<ul class="style2">
-        								<li><a href="#">Etiam feugiat condimentum</a></li>
-        								<li><a href="#">Aliquam imperdiet suscipit odio</a></li>
-        								<li><a href="#">Sed porttitor cras in erat nec</a></li>
-        								<li><a href="#">Felis varius pellentesque potenti</a></li>
-        								<li><a href="#">Nullam scelerisque blandit leo</a></li>
-        							</ul>
-        						</section>
-
-        					</div>
-        					<div class="col-3 col-6-medium col-12-small">
-
-        						<!-- Links -->
-        						<section class="widget links">
-        							<h3>Random Stuff</h3>
-        							<ul class="style2">
-        								<li><a href="#">Etiam feugiat condimentum</a></li>
-        								<li><a href="#">Aliquam imperdiet suscipit odio</a></li>
-        								<li><a href="#">Sed porttitor cras in erat nec</a></li>
-        								<li><a href="#">Felis varius pellentesque potenti</a></li>
-        								<li><a href="#">Nullam scelerisque blandit leo</a></li>
-        							</ul>
-        						</section>
-
-        					</div>
-        					<div class="col-3 col-6-medium col-12-small">
-
-        						<!-- Contact -->
-        						<section class="widget contact last">
-        							<h3>Contact Us</h3>
-        							<ul>
-        								<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a>
-        								</li>
-        								<li><a href="#" class="icon brands fa-facebook-f"><span
-        											class="label">Facebook</span></a></li>
-        								<li><a href="#" class="icon brands fa-instagram"><span
-        											class="label">Instagram</span></a></li>
-        								<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a>
-        								</li>
-        								<li><a href="#" class="icon brands fa-pinterest"><span
-        											class="label">Pinterest</span></a></li>
-        							</ul>
-        							<p>1234 Fictional Road<br />
-        								Nashville, TN 00000<br />
-        								(800) 555-0000</p>
-        						</section>
-
-        					</div>
-        				</div>
-        				<div class="row">
-        					<div class="col-12">
-        						<div id="copyright">
-        							<ul class="menu">
-        								<li>&copy; Untitled. All rights reserved</li>
-        								<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-        							</ul>
-        						</div>
-        					</div>
-        				</div>
-        			</footer>
-        		</div>
-
-        	</div>
-
-        	<!-- Swiper JS (CDN) -->
-        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-
-        <!-- Verti 기본 JS (경로 수정) -->
-        <script src="assets/js/jquery.min.js"></script>
-        <script src="assets/js/jquery.dropotron.min.js"></script>
-        <script src="assets/js/browser.min.js"></script>
-        <script src="assets/js/breakpoints.min.js"></script>
-        <script src="assets/js/util.js"></script>
-        <script src="assets/js/main.js"></script>
-
-        <script>
-          document.addEventListener('DOMContentLoaded', function () {
+    <!-- Swiper 초기화 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
             var galleryTop = new Swiper('.gallery-top', {
-              spaceBetween: 10,
-              navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-              },
-              loop: true,
-              loopedSlides: 5
+                spaceBetween: 10,
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev'
+                },
+                loop: true,
+                loopedSlides: 5
             });
 
             var galleryThumbs = new Swiper('.gallery-thumbs', {
-              spaceBetween: 10,
-              centeredSlides: true,
-              slidesPerView: 3,
-              touchRatio: 0.2,
-              slideToClickedSlide: true,
-              loop: true,
-              loopedSlides: 5
+                spaceBetween: 10,
+                centeredSlides: true,
+                slidesPerView: 3,
+                touchRatio: 0.2,
+                slideToClickedSlide: true,
+                loop: true,
+                loopedSlides: 5
             });
 
             galleryTop.controller.control = galleryThumbs;
             galleryThumbs.controller.control = galleryTop;
-          });
-        </script>
+        });
+    </script>
 
-	</body>
+</body>
 </html>
