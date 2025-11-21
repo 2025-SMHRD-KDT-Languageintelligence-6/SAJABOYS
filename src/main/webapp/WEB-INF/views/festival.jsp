@@ -27,79 +27,79 @@
         }
 
         .section-box {
-            background: #fff;
-            border-radius: 18px;
-            box-shadow: 0 4px 12px rgba(0,0,0,.12);
-            padding: 1.2rem 1.5rem 1.6rem;
+            background:#fff;
+            border-radius:18px;
+            box-shadow:0 4px 12px rgba(0,0,0,.12);
+            padding:1.2rem 1.5rem 1.6rem;
         }
 
         .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: 1rem;
-            gap: .5rem;
-            flex-wrap: wrap;
+            display:flex;
+            justify-content:space-between;
+            align-items:flex-end;
+            margin-bottom:1rem;
+            gap:.5rem;
+            flex-wrap:wrap;
         }
 
         .section-header h2 {
-            margin: 0;
-            font-size: 1.4rem;
-            font-weight: 800;
+            margin:0;
+            font-size:1.4rem;
+            font-weight:800;
         }
 
         .section-header small {
-            font-size: .85rem;
-            color: #777;
+            font-size:.85rem;
+            color:#777;
         }
 
         /* ===== 필터 ===== */
         .filter-bar {
-            display: flex;
-            flex-wrap: wrap;
-            gap: .75rem 1.5rem;
-            margin-bottom: 1rem;
-            font-size: .9rem;
-            align-items: center;
+            display:flex;
+            flex-wrap:wrap;
+            gap:.75rem 1.5rem;
+            margin-bottom:1rem;
+            font-size:.9rem;
+            align-items:center;
         }
 
         .filter-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: .4rem;
-            align-items: center;
+            display:flex;
+            flex-wrap:wrap;
+            gap:.4rem;
+            align-items:center;
         }
 
         .filter-group label {
-            font-weight: 600;
+            font-weight:600;
         }
 
         .filter-group select {
-            min-width: 120px;
-            padding: .25rem .5rem;
-            border-radius: 999px;
-            border: 1px solid #cbd5e1;
-            font-size: .9rem;
-            background: #f8fafc;
+            min-width:120px;
+            padding:.25rem .5rem;
+            border-radius:999px;
+            border:1px solid #cbd5e1;
+            font-size:.9rem;
+            background:#f8fafc;
         }
 
         /* 카드 공통 (포스터 그리드) */
         .card-grid {
-            display: grid;
+            display:grid;
             grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-            gap: 1.2rem; /* 카드 사이 간격 */
+            gap:1.2rem;
         }
 
         /* 카드 기본 스타일 */
         .festival-card {
-            max-width: 280px;
-            border-radius: 18px;
-            overflow: hidden;
-            background: #f8fbff;
-            border: 1px solid #d8e6f5;
-            display: flex;
-            flex-direction: column;
-            cursor: pointer;
+            max-width:280px;
+            border-radius:18px;
+            overflow:hidden;
+            background:#f8fbff;
+            border:1px solid #d8e6f5;
+            display:flex;
+            flex-direction:column;
+            cursor:pointer;
             transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
         }
 
@@ -107,238 +107,259 @@
         .festival-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 10px 22px rgba(15,118,178,.25);
-            border-color: #60a5fa;
+            border-color:#60a5fa;
         }
 
         /* 포스터 */
         .poster {
-            width: 100%;
-            height: 220px;
-            background: #eee;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            width:100%;
+            height:220px;
+            background:#eee;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            overflow:hidden;
         }
 
         .poster img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            width:100%;
+            height:100%;
+            object-fit:cover;
         }
 
         /* 카드 내용 */
         .festival-body {
-            padding: 0.75rem 0.9rem 1rem;
-            display: flex;
-            flex-direction: column;
-            gap: .35rem;
+            padding:0.75rem 0.9rem 1rem;
+            display:flex;
+            flex-direction:column;
+            gap:.35rem;
         }
 
         .festival-name {
-            font-weight: 800;
-            font-size: 1rem;
+            font-weight:800;
+            font-size:1rem;
         }
 
         .festival-meta {
-            font-size: .85rem;
-            color: #555;
-            line-height: 1.6;
+            font-size:.85rem;
+            color:#555;
+            line-height:1.6;
         }
 
         /* 태그 */
         .tag-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: .3rem;
-            margin-top: .25rem;
+            display:flex;
+            flex-wrap:wrap;
+            gap:.3rem;
+            margin-top:.25rem;
         }
 
         .tag {
-            display: inline-block;
-            padding: .1rem .5rem;
-            border-radius: 999px;
-            font-size: .75rem;
-            background: #0090c5;
-            color: #fff;
+            display:inline-block;
+            padding:.1rem .5rem;
+            border-radius:999px;
+            font-size:.75rem;
+            background:#0090c5;
+            color:#fff;
         }
 
         .tag.sub {
-            background: #e2e8f0;
-            color: #1f2933;
+            background:#e2e8f0;
+            color:#1f2933;
+        }
+
+        /* 상태별 태그 색상 */
+        .tag-예정 {
+            background: #fff4d1;
+            color: #b66d00;
+        }
+        .tag-진행중 {
+            background: #d4f7d4;
+            color: #2d7a2d;
+        }
+        .tag-마감 {
+            background: #ffe0e0;
+            color: #b60000;
         }
 
         /* 반응형 */
-        @media (max-width: 980px) {
+        @media (max-width:980px) {
             .festival-layout {
-                padding: 0 1rem 2rem;
+                padding:0 1rem 2rem;
             }
         }
     </style>
 </head>
 
 <body class="is-preload">
-    <div id="page-wrapper">
+<div id="page-wrapper">
 
-        <!-- 공통 헤더 include -->
-        <div id="site-header"></div>
-        <script src="/assets/js/header.js"></script>
+    <!-- 공통 헤더 include -->
+    <div id="site-header"></div>
+    <script src="/assets/js/header.js"></script>
 
-        <!-- 메인 레이아웃 -->
-        <main class="festival-layout">
-            <section class="festival-main">
+    <!-- 메인 레이아웃 -->
+    <main class="festival-layout">
+        <section class="festival-main">
 
-                <!-- 2025 전남 축제 -->
-                <section class="section-box" id="todaySection">
-                    <div class="section-header">
-                        <div>
-                            <h2>2025 전남 축제</h2>
-                            <small id="todayLabel"></small>
-                        </div>
-
-                        <!-- 카테고리 필터 -->
-                        <div class="filter-bar">
-                            <div class="filter-group">
-                                <label for="filterStatus">기간</label>
-                                <select id="filterStatus">
-                                    <option value="">전체</option>
-                                    <option value="예정">예정</option>
-                                    <option value="진행중">진행중</option>
-                                    <option value="마감">마감</option>
-                                </select>
-                            </div>
-
-                            <div class="filter-group">
-                                <label for="filterRegion">지역</label>
-                                <select id="filterRegion">
-                                    <option value="">전체</option>
-                                    <option value="강진">강진</option>
-                                    <option value="고흥">고흥</option>
-                                    <option value="곡성">곡성</option>
-                                    <option value="광양">광양</option>
-                                    <option value="구례">구례</option>
-                                    <option value="나주">나주</option>
-                                    <option value="담양">담양</option>
-                                    <option value="목포">목포</option>
-                                    <option value="무안">무안</option>
-                                    <option value="보성">보성</option>
-                                    <option value="순천">순천</option>
-                                    <option value="신안">신안</option>
-                                    <option value="여수">여수</option>
-                                    <option value="영광">영광</option>
-                                    <option value="영암">영암</option>
-                                    <option value="완도">완도</option>
-                                    <option value="장성">장성</option>
-                                    <option value="장흥">장흥</option>
-                                    <option value="진도">진도</option>
-                                    <option value="함평">함평</option>
-                                    <option value="해남">해남</option>
-                                    <option value="화순">화순</option>
-                                </select>
-                            </div>
-
-                            <div class="filter-group">
-                                <label for="filterTheme">테마</label>
-                                <select id="filterTheme">
-                                    <option value="">전체</option>
-                                    <option value="먹거리">먹거리</option>
-                                    <option value="문화유산">문화유산</option>
-                                    <option value="음악/공연">음악/공연</option>
-                                    <option value="자연/꽃">자연/꽃</option>
-                                    <option value="전통/문화유산">전통/문화유산</option>
-                                    <option value="해양/수산">해양/수산</option>
-                                </select>
-                            </div>
-                        </div>
+            <!-- 2025 전남 축제 -->
+            <section class="section-box" id="todaySection">
+                <div class="section-header">
+                    <div>
+                        <h2>2025 전남 축제</h2>
+                        <small id="todayLabel"></small>
                     </div>
 
-                    <!-- ===== 축제 카드 리스트 (DB 기반) ===== -->
-                    <div class="card-grid">
-                        <c:forEach var="f" items="${festivalList}">
-                            <article class="festival-card" data-theme="${f.theme}" data-region="${f.region}" data-status="${f.status}">
-                                <!-- 포스터 -->
-                                <div class="poster">
-                                    <img src="/img/festival/<fmt:formatNumber value='${f.fesIdx}' pattern='000'/>.png"
-                                         onerror="this.src='/img/festival/default.png'"
-                                         style="width:100%; height:100%; object-fit:cover;">
-                                </div>
+                    <!-- 카테고리 필터 -->
+                    <div class="filter-bar">
+                        <div class="filter-group">
+                            <label for="filterStatus">기간</label>
+                            <select id="filterStatus">
+                                <option value="">전체</option>
+                                <option value="예정">예정</option>
+                                <option value="진행중">진행중</option>
+                                <option value="마감">마감</option>
+                            </select>
+                        </div>
 
-                                <!-- 본문 -->
-                                <div class="festival-body">
-                                    <div class="festival-name">${f.fesName}</div>
-                                    <div class="festival-meta">
-                                        날짜 : <fmt:formatDate value="${f.startDate}" pattern="yyyy-MM-dd" /> ~
-                                        <fmt:formatDate value="${f.endDate}" pattern="yyyy-MM-dd" /><br>
-                                        장소 : ${f.addr}<br>
-                                        입장료 : ${f.fee}
-                                    </div>
-                                    <div class="tag-row">
-                                        <span class="tag">기간: ${f.status}</span>
-                                        <span class="tag sub">지역: ${f.region}</span>
-                                        <span class="tag sub">테마: ${f.theme}</span>
-                                    </div>
-                                </div>
-                            </article>
-                        </c:forEach>
+                        <div class="filter-group">
+                            <label for="filterRegion">지역</label>
+                            <select id="filterRegion">
+                                <option value="">전체</option>
+                                <option value="강진">강진</option>
+                                <option value="고흥">고흥</option>
+                                <option value="곡성">곡성</option>
+                                <option value="광양">광양</option>
+                                <option value="구례">구례</option>
+                                <option value="나주">나주</option>
+                                <option value="담양">담양</option>
+                                <option value="목포">목포</option>
+                                <option value="무안">무안</option>
+                                <option value="보성">보성</option>
+                                <option value="순천">순천</option>
+                                <option value="신안">신안</option>
+                                <option value="여수">여수</option>
+                                <option value="영광">영광</option>
+                                <option value="영암">영암</option>
+                                <option value="완도">완도</option>
+                                <option value="장성">장성</option>
+                                <option value="장흥">장흥</option>
+                                <option value="진도">진도</option>
+                                <option value="함평">함평</option>
+                                <option value="해남">해남</option>
+                                <option value="화순">화순</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label for="filterTheme">테마</label>
+                            <select id="filterTheme">
+                                <option value="">전체</option>
+                                <option value="먹거리">먹거리</option>
+                                <option value="문화유산">문화유산</option>
+                                <option value="음악/공연">음악/공연</option>
+                                <option value="자연/꽃">자연/꽃</option>
+                                <option value="전통/문화유산">전통/문화유산</option>
+                                <option value="해양/수산">해양/수산</option>
+                            </select>
+                        </div>
                     </div>
-                </section>
-            </section>
-        </main>
-
-        <!-- 푸터 -->
-        <div id="footer-wrapper">
-            <div class="container" id="footer">
-                <div id="copyright">
-                    <ul class="menu">
-                        <li>&copy; 2025 RunBack</li>
-                        <li>추적자 · 축제 장</li>
-                    </ul>
                 </div>
+
+                <!-- ===== 축제 카드 리스트 (DB 기반) ===== -->
+                <div class="card-grid">
+                    <c:forEach var="f" items="${festivalList}">
+                        <article class="festival-card" data-theme="${f.theme}" data-region="${f.region}" data-status="${f.status}">
+                            <!-- 포스터 -->
+                            <div class="poster">
+                                <img src="/img/festival/<fmt:formatNumber value='${f.fesIdx}' pattern='000'/>.png"
+                                     onerror="this.src='/img/festival/default.png'"
+                                     style="width:100%; height:100%; object-fit:cover;">
+                            </div>
+
+                            <!-- 본문 -->
+                            <div class="festival-body">
+                                <div class="festival-name">${f.fesName}</div>
+                                <div class="festival-meta">
+                                    날짜 : <fmt:formatDate value="${f.startDate}" pattern="yyyy-MM-dd" /> ~
+                                    <fmt:formatDate value="${f.endDate}" pattern="yyyy-MM-dd" /><br>
+                                    장소 : ${f.addr}<br>
+                                    입장료 : ${f.fee}
+                                </div>
+                                <div class="tag-row">
+                                    <span class="tag
+                                        <c:choose>
+                                            <c:when test="${f.status == '예정'}"> tag-예정</c:when>
+                                            <c:when test="${f.status == '진행중'}"> tag-진행중</c:when>
+                                            <c:when test="${f.status == '마감'}"> tag-마감</c:when>
+                                        </c:choose>">
+                                        기간: ${f.status}
+                                    </span>
+                                    <span class="tag sub">지역: ${f.region}</span>
+                                    <span class="tag sub">테마: ${f.theme}</span>
+                                </div>
+                            </div>
+                        </article>
+                    </c:forEach>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <!-- 푸터 -->
+    <div id="footer-wrapper">
+        <div class="container" id="footer">
+            <div id="copyright">
+                <ul class="menu">
+                    <li>&copy; 2025 RunBack</li>
+                    <li>추적자 · 축제 장</li>
+                </ul>
             </div>
         </div>
     </div>
+</div>
 
-    <script>
-        // 오늘 날짜 표시
-        (function(){
-            const label = document.getElementById('todayLabel');
-            const today = new Date();
-            const y = today.getFullYear();
-            const m = ('0' + (today.getMonth()+1)).slice(-2);
-            const d = ('0' + today.getDate()).slice(-2);
-            label.textContent = `오늘 날짜 : ${y}-${m}-${d}`;
-        })();
+<script>
+    // 오늘 날짜 표시
+    (function(){
+        const label = document.getElementById('todayLabel');
+        const today = new Date();
+        const y = today.getFullYear();
+        const m = ('0' + (today.getMonth()+1)).slice(-2);
+        const d = ('0' + today.getDate()).slice(-2);
+        label.textContent = `오늘 날짜 : ${y}-${m}-${d}`;
+    })();
 
-        // ===== 카테고리 필터 =====
-        const themeSel = document.getElementById('filterTheme');
-        const regionSel = document.getElementById('filterRegion');
-        const statusSel = document.getElementById('filterStatus');
+    // ===== 카테고리 필터 =====
+    const themeSel = document.getElementById('filterTheme');
+    const regionSel = document.getElementById('filterRegion');
+    const statusSel = document.getElementById('filterStatus');
 
-        function filterFestivals() {
-            const t = themeSel.value;
-            const r = regionSel.value;
-            const s = statusSel.value;
+    function filterFestivals() {
+        const t = themeSel.value;
+        const r = regionSel.value;
+        const s = statusSel.value;
 
-            document.querySelectorAll('.festival-card').forEach(card => {
-                const cardThemes = (card.dataset.theme || '').split(',').map(v => v.trim());
-                const cardRegion = (card.dataset.region || '').trim();
-                const cardStatus = (card.dataset.status || '').trim();
+        document.querySelectorAll('.festival-card').forEach(card => {
+            const cardThemes = (card.dataset.theme || '').split(',').map(v => v.trim());
+            const cardRegion = (card.dataset.region || '').trim();
+            const cardStatus = (card.dataset.status || '').trim();
 
-                let visible = true;
-                if(t && !cardThemes.includes(t)) visible = false;
-                if(r && cardRegion !== r) visible = false;
-                if(s && cardStatus !== s) visible = false;
+            let visible = true;
+            if(t && !cardThemes.includes(t)) visible = false;
+            if(r && cardRegion !== r) visible = false;
+            if(s && cardStatus !== s) visible = false;
 
-                card.style.display = visible ? '' : 'none';
-            });
-        }
-
-        [themeSel, regionSel, statusSel].forEach(sel => {
-            sel.addEventListener('change', filterFestivals);
+            card.style.display = visible ? '' : 'none';
         });
+    }
 
-        // 초기 필터 적용
-        filterFestivals();
-    </script>
+    [themeSel, regionSel, statusSel].forEach(sel => {
+        sel.addEventListener('change', filterFestivals);
+    });
+
+    // 초기 필터 적용
+    filterFestivals();
+</script>
 </body>
 </html>
