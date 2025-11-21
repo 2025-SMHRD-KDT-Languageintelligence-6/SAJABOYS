@@ -14,6 +14,7 @@
 
     <!-- Verti 기본 CSS -->
     <link rel="stylesheet" href="/assets/css/main.css" />
+    <link rel="stylesheet" href="/assets/css/main-festival3.css" />
 
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
@@ -77,110 +78,35 @@
         </div>
     </div>
 
-    <!-- =================== 축제 추천 영역 (포스터 + 이름) =================== -->
-    <div id="main-wrapper">
-        <div class="container">
-            <div class="row gtr-200">
-                <!-- 우측/좌측 배치가 필요하면 col-* 로 감싸도 됨 -->
-                <div id="sidebar">
-                    <section class="widget thumbnails">
-                        <h3>이런 축제 어때요?</h3>
+    	<!-- 축제 -->
 
-                        <!--
-                            recoList : List<FestivalReco>
-                            FestivalReco {
-                                Long id;
-                                String name;       // 축제명
-                                String posterUrl;  // 포스터 이미지 경로
-                            }
-                            컨트롤러에서 model.addAttribute("recoList", list);
-                        -->
-                        <div class="head">
+    	<div id="main-wrapper">
+    	<h3>이런 축제 어떠세요?</h3>
+    		<section class="festival-section">
 
-                            <!-- ===== 위 : 포스터 카드 슬라이더 ===== -->
-                            <div class="swiper-container gallery-top">
-                                <div class="swiper-wrapper">
+    			<div class="festival-grid">
+    				<div class="festival-card">
+    					<img class="festival-img" src="/images/pic01.jpg" alt="전남 축제 포스터 1"
+    						onerror="this.src='/images/no-image.png';">
+    				</div>
 
-                                    <!-- 추천 데이터가 있을 때 -->
-                                    <c:forEach var="fest" items="${recoList}">
-                                        <div class="swiper-slide">
-                                            <div class="swiper-slide-container">
-                                                <img class="festival-img"
-                                                     src="${fest.posterUrl}"
-                                                     alt="${fest.name} 포스터" />
-                                            </div>
-                                        </div>
-                                    </c:forEach>
+    				<div class="festival-card">
+    					<img class="festival-img" src="/images/pic01.jpg" alt="전남 축제 포스터 2"
+    						onerror="this.src='/images/no-image.png';">
+    				</div>
 
-                                    <!-- 추천 데이터가 없을 때 기본 예시 3개 -->
-                                    <c:if test="${empty recoList}">
-                                        <div class="swiper-slide">
-                                            <div class="swiper-slide-container">
-                                                <img class="festival-img"
-                                                     src="/images/pic01.jpg"
-                                                     alt="기본 축제 1 포스터" />
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="swiper-slide-container">
-                                                <img class="festival-img"
-                                                     src="/images/pic02.jpg"
-                                                     alt="기본 축제 2 포스터" />
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="swiper-slide-container">
-                                                <img class="festival-img"
-                                                     src="/images/pic03.jpg"
-                                                     alt="기본 축제 3 포스터" />
-                                            </div>
-                                        </div>
-                                    </c:if>
+    				<div class="festival-card">
+    					<img class="festival-img" src="/images/pic01.jpg" alt="전남 축제 포스터 3"
+    						onerror="this.src='/images/no-image.png';">
+    				</div>
+    			</div>
 
-                                </div>
+    			<a href="#" class="button icon fa-file-alt">더 많은 축제 보러가기</a>
+    		</section>
+    	</div>
 
-                                <!-- 좌우 화살표 -->
-                                <div class="swiper-button-next"></div>
-                                <div class="swiper-button-prev"></div>
-                            </div>
 
-                            <!-- ===== 아래 : 축제명 네모 박스 슬라이더 ===== -->
-                            <div class="swiper-container gallery-thumbs">
-                                <div class="swiper-wrapper">
 
-                                    <!-- 추천 축제명 -->
-                                    <c:forEach var="fest" items="${recoList}">
-                                        <div class="swiper-slide">
-                                            <div class="swiper-slide-container">
-                                                ${fest.name}
-                                            </div>
-                                        </div>
-                                    </c:forEach>
-
-                                    <!-- 데이터 없을 때 기본 텍스트 -->
-                                    <c:if test="${empty recoList}">
-                                        <div class="swiper-slide">
-                                            <div class="swiper-slide-container">기본 축제 1</div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="swiper-slide-container">기본 축제 2</div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="swiper-slide-container">기본 축제 3</div>
-                                        </div>
-                                    </c:if>
-
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <a href="/festival" class="button icon fa-file-alt">More</a>
-                    </section>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- =================== FOOTER =================== -->
     <div id="footer-wrapper">

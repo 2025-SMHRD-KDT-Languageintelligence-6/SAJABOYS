@@ -154,7 +154,7 @@ input, select, textarea {
 
 	b, strong {
 		font-weight: 600;
-		color: #444;
+		color: #000000;
 	}
 
 	i, em {
@@ -1491,7 +1491,7 @@ input, select, textarea {
 		font-weight: 800;
 		margin: 0 0 1em 0;
 		font-size: 0.8em;
-		color: #444;
+		color: #000000;
 	}
 
 	form input[type="text"],
@@ -1679,7 +1679,7 @@ input, select, textarea {
 		.button.alt {
 			background: #f1f1f1;
 			background: rgba(0, 0, 0, 0.05);
-			color: #444;
+			color: #000000;
 		}
 
 			input[type="button"].alt:hover,
@@ -1898,11 +1898,11 @@ input, select, textarea {
 				}
 
 				.widget.contact ul li a:hover {
-					background: #444444;
+					background: #000000;
 				}
 
 				.widget.contact ul li a:active {
-					background: #666666;
+					background: #000000;
 				}
 
 /* Wrappers */
@@ -1986,7 +1986,7 @@ input, select, textarea {
 					transition: background-color .25s ease-in-out;
 					font-weight: 800;
 					letter-spacing: 0.025em;
-					color: #696969;
+					color: #000000;
 					text-decoration: none;
 					border-radius: 6px;
 					padding: 0.5em 1em 0.5em 1em;
@@ -2005,14 +2005,14 @@ input, select, textarea {
 				}
 
 				#nav ul li.current a {
-					background: #444;
+					background: #000000;
 					color: #fff;
 				}
 
 	.dropotron {
 		background: #fff;
 		letter-spacing: 0.025em;
-		color: #696969;
+		color: #000000;
 		text-decoration: none;
 		border-radius: 6px;
 		padding: 0.75em 0;
@@ -2121,7 +2121,7 @@ input, select, textarea {
 	}
 
 		#footer a {
-			color: inherit;
+			color: #000000;
 		}
 
 	#copyright {
@@ -2419,7 +2419,7 @@ input, select, textarea {
 					height: 54px;
 					line-height: 54px;
 					border-top: solid 1px #e8e8e8;
-					color: #696969;
+					color: #000000;
 				}
 
 					#navPanel .link:first-child {
@@ -2452,7 +2452,7 @@ input, select, textarea {
 				}
 
 				#navPanel .depth-0 {
-					color: #444;
+					color: #000000;
 					font-weight: 800;
 				}
 
