@@ -105,4 +105,9 @@ public class StampController {
 
         return "qr";  // qr.jsp
     }
+
+    @GetMapping("/createQr")
+    public String createQr() {
+        return "createQr";  // createQr.jsp
+    }
 }
