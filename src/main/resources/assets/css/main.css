@@ -2699,6 +2699,69 @@ input, select, textarea {
 				font-family:inherit;
       }
 
+/* ===== 섹션 전체 ===== */
+#main-wrapper {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 0 1.5rem;
+}
+
+/* 제목 */
+#main-wrapper h3 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin-bottom: 2rem;
+}
+
+/* ===== 그리드 (반응형 핵심) ===== */
+.festival-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    justify-items: center;   /* 카드 가운데 정렬 */
+}
+
+/* ===== 카드 공통 ===== */
+.festival-card {
+    width: 100%;
+    max-width: 360px;          /* 카드가 너무 커지지 않도록 제한 */
+    aspect-ratio: 4 / 3;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.festival-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.18);
+}
+
+/* 이미지 */
+.festival-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ===== 아래 버튼 (가운데 정렬) ===== */
+.festival-section .button {
+    margin-top: 2.5rem;
+    display: inline-block;
+    text-align: center;
+}
+
+/* ===== 모바일 반응형 ===== */
+@media (max-width: 480px) {
+    #main-wrapper h3 {
+        text-align: center;
+        font-size: 1.4rem;
+    }
+    .festival-grid {
+        gap: 1.5rem;
+    }
+}
 
 
 

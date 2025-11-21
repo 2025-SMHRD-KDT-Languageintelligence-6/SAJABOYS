@@ -15,56 +15,57 @@
         <!-- Logo -->
             <div id="logo">
                 <a href="/main">
-                    <img src="/images/bg.png" style="width: 300px;">
+                    <img src="/images/bg.png" style="width: 600px ;">
                 </a>
+                <nav id="nav">
+                                <ul>
+                                    <li><a href="/main">Home</a></li>
+                                    <li>
+                                        <a href="/html5up-verti/1_Game.html">게임</a>
+                                        <ul>
+                                            <li><a href="#">거점 점령전</a></li>
+                                            <li><a href="#">경찰과 도둑</a></li>
+                                            <li><a href="#">월리를 찾아라</a></li>
+                                            <li><a href="#">좀비게임</a></li>
+                                            <li>
+                                                <a href="/html5up-verti/1_1_5Rule.html">게임 룰</a>
+                                                <ul>
+                                                    <li><a href="/html5up-verti/1_1_1zombie.html">거점 점령전</a></li>
+                                                    <li><a href="/html5up-verti/1_1_2wily.html">경찰과 도둑</a></li>
+                                                    <li><a href="/html5up-verti/1_1_3police.html">월리를 찾아라</a></li>
+                                                    <li><a href="/html5up-verti/1_1_4occupy.html">좀비게임</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="/stamp">스탬프 투어</a></li>
+                                    <li><a href="/festival">축제</a></li>
+                                    <li><a href="/sns">커뮤니티</a></li>
+                                    <li>
+                                        <c:choose>
+                                            <c:when test = "${!empty user}">
+                                                <a href="/update">개인정보수정</a>
+                                            </c:when>
+                                            <c:otherwise>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </li>
+                                    <li>
+                                        <c:choose>
+                                            <c:when test = "${!empty user}">
+                                                <a href="/logout">로그아웃</a>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <a href="/login">로그인/회원가입</a>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </li>
+                                </ul>
+                            </nav>
             </div>
 
         <!-- Nav -->
-            <nav id="nav">
-                <ul>
-                    <li><a href="/main">Home</a></li>
-                    <li>
-                        <a href="/html5up-verti/1_Game.html">게임</a>
-                        <ul>
-                            <li><a href="#">거점 점령전</a></li>
-                            <li><a href="#">경찰과 도둑</a></li>
-                            <li><a href="#">월리를 찾아라</a></li>
-                            <li><a href="#">좀비게임</a></li>
-                            <li>
-                                <a href="/html5up-verti/1_1_5Rule.html">게임 룰</a>
-                                <ul>
-                                    <li><a href="/html5up-verti/1_1_1zombie.html">거점 점령전</a></li>
-                                    <li><a href="/html5up-verti/1_1_2wily.html">경찰과 도둑</a></li>
-                                    <li><a href="/html5up-verti/1_1_3police.html">월리를 찾아라</a></li>
-                                    <li><a href="/html5up-verti/1_1_4occupy.html">좀비게임</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a href="/stamp">스탬프 투어</a></li>
-                    <li><a href="/festival">축제</a></li>
-                    <li><a href="/sns">커뮤니티</a></li>
-                    <li>
-                        <c:choose>
-                            <c:when test = "${!empty user}">
-                                <a href="/update">개인정보수정</a>
-                            </c:when>
-                            <c:otherwise>
-                            </c:otherwise>
-                        </c:choose>
-                    </li>
-                    <li>
-                        <c:choose>
-                            <c:when test = "${!empty user}">
-                                <a href="/logout">로그아웃</a>
-                            </c:when>
-                            <c:otherwise>
-                                <a href="/login">로그인/회원가입</a>
-                            </c:otherwise>
-                        </c:choose>
-                    </li>
-                </ul>
-            </nav>
+
 
     </header>
 </div>

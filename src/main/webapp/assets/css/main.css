@@ -2010,7 +2010,7 @@ input, select, textarea {
 		font-family: 'StrongArmy', sans-serif;
 		font-style: italic;   /* ← 기울이기 추가 */
 
-		position: absolute;
+		/*position: absolute;*/
 		right: 0;
 		top: 0;
 		font-size: 1.5em;
