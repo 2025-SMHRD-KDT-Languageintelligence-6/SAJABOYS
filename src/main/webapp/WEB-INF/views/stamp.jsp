@@ -11,7 +11,6 @@
 
     <link rel="stylesheet" href="/assets/css/main.css" />
     <style>
-
         .stamp-panel{
           max-width:1100px;
           margin:2.5rem auto 3rem;
@@ -74,7 +73,14 @@
           font-weight:800;
         }
 
-        .stamp-progress{ margin-top:1rem;font-size:.95rem; }
+        .stamp-progress-wrapper {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-top: 1rem;
+        }
+
+        .stamp-progress{ font-size:.95rem; }
         .stamp-bar-wrap{
           width:100%; background:#e5edf7;
           border-radius:999px; overflow:hidden;
@@ -108,13 +114,13 @@
           padding:.6rem 0;
         }
 
-        .hidden{ display:none; }
-
         .go-scan{
-          text-align:right;
-          margin-top:1.3rem;
+          margin: 0;
         }
 
+        .go-scan button {
+            margin-left: 0.5rem; /* 버튼 사이 간격 */
+        }
     </style>
 </head>
 <body>
@@ -129,17 +135,27 @@
 
         <c:set var="percent" value="${totalCount > 0 ? collectedCount / totalCount * 100 : 0}" />
 
-        <div class="stamp-progress">
-            <span>완료한 축제 : <strong id="stampCountText">${collectedCount} / ${totalCount}</strong></span>
-            <div class="stamp-bar-wrap">
-                <div class="stamp-bar" id="stampBar" style="width:${percent}%"></div>
+        <!-- 진행 현황과 버튼을 같은 줄에 배치 -->
+        <div class="stamp-progress-wrapper">
+            <div class="stamp-progress">
+                <span>완료한 축제 : <strong id="stampCountText">${collectedCount} / ${totalCount}</strong></span>
+                <div class="stamp-bar-wrap">
+                    <div class="stamp-bar" id="stampBar" style="width:${percent}%"></div>
+                </div>
+            </div>
+            <div class="go-scan">
+                <!-- 관리자 전용 버튼 -->
+                <c:if test="${user.admin}">
+                    <button class="button alt" onclick="location.href='/stamp/createQr'">QR 코드 생성하기</button>
+                </c:if>
+                <!-- 모든 사용자 버튼 -->
+                <button class="button alt" onclick="location.href='/stamp/qr'">QR 코드 스캔하기 →</button>
             </div>
         </div>
 
         <div class="stamp-grid" id="stampGrid">
             <c:forEach var="status" items="${festivalStatuses}">
                 <c:set var="isCompleted" value="${status.completed != 0}" />
-                <!-- 축제 클릭 시 해당 축제의 fesIdx 값을 detail로 넘김 -->
                 <a href="/stamp/detail?fesIdx=${status.fesIdx}" class="stamp-cell-link">
                     <div class="stamp-cell <c:if test='${isCompleted}'>collected</c:if>">
                         <div class="stamp-inner">
@@ -149,10 +165,6 @@
                     </div>
                 </a>
             </c:forEach>
-        </div>
-
-        <div class="go-scan">
-            <button class="button alt" onclick="location.href='/stamp/qr'">QR 코드 스캔하기 →</button>
         </div>
 
         <c:if test="${collectedCount == totalCount && totalCount > 0}">

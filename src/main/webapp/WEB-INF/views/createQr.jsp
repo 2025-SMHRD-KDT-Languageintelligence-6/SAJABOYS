@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>QR 코드 생성 | 추적자</title>
+
+    <!-- Verti 기본 CSS -->
+    <link rel="stylesheet" href="assets/css/main.css" />
+
+    <style>
+        body{ background:#f5fafc; }
+
+        .qrgen-wrap{
+          min-height:100dvh;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          padding:3rem 1rem;
+        }
+        .qrgen-card{
+          width:100%;
+          max-width:900px;
+          border-radius:12px;
+          display:grid;
+          grid-template-columns: minmax(0,1.4fr) minmax(260px,1fr);
+          gap:1.5rem;
+        }
+        .qrgen-card h2{
+          margin-top:0;
+          margin-bottom:.5rem;
+          font-weight:800;
+        }
+        .qrgen-card p.muted{
+          margin-top:0;
+          font-size:.9rem;
+          color:#666;
+        }
+        .qr-form-group{
+          margin-bottom:.9rem;
+        }
+        .qr-form-group label{
+          display:block;
+          font-size:.9rem;
+          font-weight:600;
+          margin-bottom:.25rem;
+        }
+        .qr-form-group small{
+          display:block;
+          font-size:.8rem;
+          color:#777;
+          margin-top:.2rem;
+        }
+        .qr-row-inline{
+          display:flex;
+          gap:.5rem;
+          align-items:center;
+          flex-wrap:wrap;
+        }
+        .qr-row-inline input[type="number"]{
+          max-width:120px;
+        }
+        .qr-actions{
+          margin-top:1.1rem;
+          display:flex;
+          flex-wrap:wrap;
+          gap:.5rem;
+        }
+        .qr-actions .button{
+          min-width:140px;
+        }
+        .qr-preview-wrap{
+          border-radius:12px;
+          border:2px dashed #cfd8e3;
+          background:#f7fbff;
+          padding:1.2rem;
+          text-align:center;
+          display:flex;
+          flex-direction:column;
+          justify-content:space-between;
+          gap:1rem;
+        }
+        .qr-preview-box{
+          min-height:220px;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+        }
+        #qrcode{
+          display:inline-block;
+        }
+        .qr-preview-empty{
+          font-size:.9rem;
+          color:#777;
+        }
+        .qr-info{
+          font-size:.8rem;
+          color:#777;
+          line-height:1.5;
+        }
+        .qr-download-btn{
+          margin-top:.3rem;
+        }
+
+        @media (max-width:860px){
+          .qrgen-card{
+            grid-template-columns:1fr;
+          }
+        }
+    </style>
+
+    <!-- QR 코드 생성 라이브러리 (필요시 로컬로 내려받아서 사용해도 됩니다) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body class="is-preload">
+
+<!-- header include -->
+<div id="site-header"></div>
+<script src="/webapp/assets/js/header.js"></script>
+
+<div id="page-wrapper">
+    <main class="qrgen-wrap">
+        <section class="box qrgen-card">
+            <!-- 왼쪽: 폼 -->
+            <div>
+                <h2>QR 코드 생성기</h2>
+                <p class="muted">
+                    스탬프 포인트, 미션 페이지, 룰북 링크 등을 입력하면 바로 출력용 QR 이미지를 만들 수 있습니다.
+                </p>
+
+                <!-- QR 내용 -->
+                <div class="qr-form-group">
+                    <label for="qrText">QR 내용 (URL 또는 텍스트)</label>
+                    <textarea id="qrText" rows="3" placeholder="예) https://example.com/2_Stamp.html?spot=1" style="width:100%;"></textarea>
+                    <small>스탬프 페이지, 게임 설명, 미션 API 엔드포인트 등 어떤 텍스트든 QR로 변환 가능합니다.</small>
+                </div>
+
+                <!-- 스탬프용 샘플 링크 만들기 -->
+                <div class="qr-form-group">
+                    <label>스탬프 페이지용 링크 도우미 (선택)</label>
+                    <!-- 기본 경로 -->
+                    <div class="qr-row-inline">
+                        <span style="font-size:.85rem;">기본 경로</span>
+                        <!-- 쿼리스트링 없이 페이지 경로만 -->
+                        <input type="text" id="basePath" value="2_Stamp.html?spot=" style="flex:1;min-width:150px;">
+                    </div>
+
+                    <!-- 축제 번호 + 스탬프 번호 -->
+                    <div class="qr-row-inline" style="margin-top:.35rem;">
+                        <span style="font-size:.85rem;">축제 번호</span>
+                        <input type="number" id="fesNo" min="1" max="9999" value="1" style="max-width:100px;">
+
+                        <span style="font-size:.85rem;">스탬프 번호</span>
+                        <input type="number" id="stampNo" min="1" max="99" value="1">
+
+                        <button type="button" class="button alt" id="makeStampUrlBtn">링크 자동입력</button>
+                    </div>
+                    <small>
+                        예) <code>2_Stamp.html?fes=12&spot=3</code><br>
+                        축제 번호와 스탬프 번호를 입력하고 [링크 자동입력]을 누르면 위 형식으로 QR 내용이 자동으로 채워집니다.
+                    </small>
+                </div>
+
+
+                <!-- 옵션 -->
+                <div class="qr-form-group">
+                    <label for="qrLabel">QR 라벨 (파일명/출력 메모)</label>
+                    <input type="text" id="qrLabel" placeholder="예) 스탬프1_입구" style="width:100%;">
+                    <small>다운로드 파일 이름 및 출력물 메모 용도로 사용됩니다.</small>
+                </div>
+
+                <div class="qr-form-group">
+                    <label>QR 크기 설정</label>
+                    <div class="qr-row-inline">
+                        <input type="number" id="qrSize" value="240" min="120" max="600" step="20">
+                        <span style="font-size:.85rem;">px</span>
+                    </div>
+                    <small>축제 현장에서 인쇄할 QR 크기에 맞게 설정하세요. (기본 240px)</small>
+                </div>
+
+                <div class="qr-actions">
+                    <button type="button" class="button" id="generateBtn">QR 생성</button>
+                    <button type="button" class="button alt" id="clearBtn">초기화</button>
+                </div>
+            </div>
+
+            <!-- 오른쪽: 미리보기 -->
+            <div class="qr-preview-wrap">
+                <div class="qr-preview-box">
+                    <div id="qrcode">
+                        <div class="qr-preview-empty">
+                            아직 생성된 QR이 없습니다.<br>
+                            왼쪽에 내용을 입력하고 <strong>“QR 생성”</strong> 버튼을 눌러 주세요.
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="qr-info" id="qrInfo">
+                        · 생성된 QR 이미지는 바로 인쇄하거나,<br>
+                        · “PNG로 다운로드” 버튼을 눌러 파일로 저장할 수 있습니다.
+                    </div>
+                    <div class="qr-download-btn">
+                        <a id="downloadLink" href="#" download="qrcode.png" class="button small" style="display:none;">
+                            PNG로 다운로드
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-wrapper">
+        <div class="container" id="footer">
+            <div id="copyright">
+                <ul class="menu">
+                    <li>&copy; 2025 RunBack</li>
+                    <li>추적자 · QR 코드 관리</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.dropotron.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
+
+<script>
+    let qr; // QRCode 인스턴스
+
+    const qrTextEl   = document.getElementById('qrText');
+    const qrSizeEl   = document.getElementById('qrSize');
+    const qrLabelEl  = document.getElementById('qrLabel');
+    const qrDiv      = document.getElementById('qrcode');
+    const downloadEl = document.getElementById('downloadLink');
+    const infoEl     = document.getElementById('qrInfo');
+
+    // 스탬프용 링크 자동 생성
+    document.getElementById('makeStampUrlBtn').addEventListener('click', () => {
+      const base  = document.getElementById('basePath').value.trim();
+      const no    = document.getElementById('stampNo').value || '1';
+      if(!base){
+        alert('기본 경로를 먼저 입력해 주세요.');
+        return;
+      }
+      const url = base + no;
+      qrTextEl.value = url;
+    });
+
+    // QR 생성
+    document.getElementById('generateBtn').addEventListener('click', () => {
+      const text = qrTextEl.value.trim();
+      let size   = parseInt(qrSizeEl.value, 10);
+
+      if(!text){
+        alert('QR로 변환할 내용을 입력해 주세요.');
+        qrTextEl.focus();
+        return;
+      }
+      if(isNaN(size) || size < 120 || size > 600){
+        alert('QR 크기는 120 ~ 600px 사이로 입력해 주세요.');
+        qrSizeEl.focus();
+        return;
+      }
+
+      // 기존 QR 제거
+      qrDiv.innerHTML = '';
+
+      // 새 QR 생성
+      qr = new QRCode(qrDiv, {
+        text: text,
+        width: size,
+        height: size,
+        correctLevel: QRCode.CorrectLevel.H
+      });
+
+      infoEl.textContent = 'QR 코드가 생성되었습니다. 아래 버튼을 눌러 PNG 파일로 저장하거나 인쇄해 주세요.';
+      // 이미지 로딩 후 다운로드 링크 세팅
+      setTimeout(() => {
+        const img = qrDiv.querySelector('img') || qrDiv.querySelector('canvas');
+        if(!img) return;
+
+        let dataUrl;
+        if(img.tagName.toLowerCase() === 'img'){
+          dataUrl = img.src;
+        }else{
+          dataUrl = img.toDataURL('image/png');
+        }
+
+        const label = qrLabelEl.value.trim() || 'qrcode';
+        downloadEl.href = dataUrl;
+        downloadEl.download = label + '.png';
+        downloadEl.style.display = 'inline-block';
+      }, 200);
+    });
+
+    // 초기화
+    document.getElementById('clearBtn').addEventListener('click', () => {
+      qrTextEl.value = '';
+      qrLabelEl.value = '';
+      qrSizeEl.value = 240;
+      qrDiv.innerHTML = '<div class="qr-preview-empty">아직 생성된 QR이 없습니다.<br>왼쪽에 내용을 입력하고 <strong>“QR 생성”</strong> 버튼을 눌러 주세요.</div>';
+      downloadEl.style.display = 'none';
+      infoEl.textContent = '· 생성된 QR 이미지는 바로 인쇄하거나,\n· “PNG로 다운로드” 버튼을 눌러 파일로 저장할 수 있습니다.';
+    });
+</script>
+</body>
+</html>
