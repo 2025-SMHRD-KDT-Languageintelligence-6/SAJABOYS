@@ -25,6 +25,7 @@
             resultType="hashmap">
         SELECT
         f.FesIdx AS fesIdx,
+        f.FesName AS fesName,
         CASE
         WHEN (
         SELECT COUNT(s.StampIdx) FROM stamp s

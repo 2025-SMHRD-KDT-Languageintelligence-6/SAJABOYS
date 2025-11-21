@@ -12,7 +12,6 @@
   <link rel="stylesheet" href="/assets/css/main.css" />
 
   <style>
-    body { background:#f5fafc; }
     .board-wrap{ max-width:1100px; margin:2.5rem auto 3rem; }
     .board-header{ display:flex; justify-content:space-between; align-items:flex-end; gap:1rem; margin-bottom:1rem; flex-wrap:wrap; }
     .board-title h2{ margin:0; font-size:1.8rem; font-weight:800; }

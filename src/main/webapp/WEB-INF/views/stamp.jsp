@@ -11,7 +11,6 @@
 
     <link rel="stylesheet" href="/assets/css/main.css" />
     <style>
-        body{ background:#f5fafc; }
 
         .stamp-panel{
           max-width:1100px;
@@ -145,7 +144,7 @@
                     <div class="stamp-cell <c:if test='${isCompleted}'>collected</c:if>">
                         <div class="stamp-inner">
                             <div class="stamp-number">${status.fesIdx}</div>
-                            <div class="stamp-label">축제 ${status.fesIdx}</div>
+                            <div class="stamp-label">${status.fesName}</div>
                         </div>
                     </div>
                 </a>

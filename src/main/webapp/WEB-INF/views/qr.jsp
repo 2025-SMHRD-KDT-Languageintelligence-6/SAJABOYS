@@ -6,7 +6,6 @@
     <title>QR 코드 스캔</title>
     <link rel="stylesheet" href="/assets/css/main.css">
     <style>
-        body { background:#f5fafc; }
         .qr-panel {
             max-width:600px; margin:2.5rem auto;
             background:#fff; border-radius:18px;

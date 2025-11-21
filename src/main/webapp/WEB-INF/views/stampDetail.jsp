@@ -9,7 +9,6 @@
     <title>스탬프 투어 | ${festival.fesName}</title>
     <link rel="stylesheet" href="/assets/css/main.css">
     <style>
-        body { background:#f5fafc; }
         .stamp-panel{
             max-width:1100px;
             margin:2.5rem auto 3rem;
