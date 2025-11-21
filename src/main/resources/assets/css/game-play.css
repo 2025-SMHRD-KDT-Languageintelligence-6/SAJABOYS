@@ -250,3 +250,12 @@ section[style*="position:relative"] {
     font-size: 1.1rem;
   }
 }
+/* 게임 메인 3칸(좌/중/우) 높이 통일 */
+.game-layout > section {
+  height: 700px;   /* 필요하면 550~650 사이로 조절해서 맞추시면 됩니다 */
+}
+
+/* 지도는 가운데 섹션 높이에 꽉 차게 */
+#map {
+  height: 100%;
+}
