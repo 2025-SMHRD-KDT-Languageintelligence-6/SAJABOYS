@@ -43,24 +43,34 @@
 
 <script src="https://unpkg.com/html5-qrcode"></script>
 <script>
-    // QR 코드가 URL 전체를 반환하므로, 현재 페이지의 fesIdx는 사용하지 않도록 수정합니다.
-    // const fesIdx = new URLSearchParams(window.location.search).get('fesIdx') || 1;
     let qrScanner;
 
-    // URL 문자열에서 특정 쿼리 파라미터의 값을 추출하는 함수
-    function getQueryParamFromUrl(url, param) {
+    // 🚨 수정된 함수: URL을 절대 경로로 변환 후 파싱하는 로직 추가
+    function getQueryParamFromUrl(scannedUrl, param) {
+        if (!scannedUrl) return null;
+
+        let absoluteUrl;
+
+        // 스캔된 URL이 상대 경로로 시작하면, 현재 페이지의 origin을 붙여 절대 경로로 만듭니다.
+        if (scannedUrl.startsWith('/')) {
+            absoluteUrl = window.location.origin + scannedUrl;
+        } else {
+            absoluteUrl = scannedUrl;
+        }
+
         try {
-            const urlObj = new URL(url);
+            // 절대 경로로 파싱을 시도합니다.
+            const urlObj = new URL(absoluteUrl);
             return urlObj.searchParams.get(param);
         } catch (e) {
-            console.error("URL 파싱 오류:", e);
+            console.error("URL 파싱 오류:", e, "원본 URL:", scannedUrl);
             return null;
         }
     }
 
     // 스캔 로직 실행 함수
     function executeScan(scannedUrl, isMock = false) {
-        // 🚨 1단계: 스캔된 URL에서 fesIdx와 stampNumber를 추출
+        // 🚨 1단계: 스캔된 URL에서 fesIdx와 stampNumber를 추출 (절대 경로 처리 로직 포함)
         const scannedFesIdx = getQueryParamFromUrl(scannedUrl, 'fesIdx');
         const scannedStampNumber = getQueryParamFromUrl(scannedUrl, 'stampNumber');
 
@@ -74,31 +84,31 @@
         fetch('/stamp/add', {
             method:'POST',
             headers: {'Content-Type':'application/x-www-form-urlencoded'},
-            // 🚨 추출된 숫자 값만 전달
             body: new URLSearchParams({ stampNumber: scannedStampNumber, fesIdx: scannedFesIdx })
         })
         .then(res => res.json())
         .then(data => {
-            if (data) {
+            // 서버의 /stamp/add가 true/false를 반환하므로 data === true로 체크
+            if (data === true) {
                 alert((isMock ? "테스트 " : "") + "스탬프 적립 완료!");
                 // 3단계: 적립 후 해당 축제의 상세 페이지로 이동
                 location.href = `/stamp/detail?fesIdx=${scannedFesIdx}`;
             } else {
-                alert((isMock ? "테스트 " : "") + "적립 실패. 이미 적립했거나 유효하지 않은 스탬프입니다.");
+                alert((isMock ? "테스트 " : "") + "적립 실패: 이미 적립했거나 유효하지 않은 스탬프입니다.");
             }
         })
         .catch(error => {
             console.error('Fetch Error:', error);
-            alert("서버 통신 오류가 발생했습니다.");
+            alert("서버 통신 오류가 발생했습니다. (자세한 내용은 콘솔 확인)");
         });
 
         if (qrScanner) {
+            // 스캐너가 실행 중인 경우에만 멈춤
             qrScanner.stop().catch(err => console.error("스캐너 중지 오류:", err));
         }
     }
 
     document.getElementById('startScanBtn').onclick = () => {
-        // ... (카메라 시작 로직은 그대로 유지) ...
         const qrPreview = document.getElementById('qrPreview');
         qrPreview.innerHTML = '';
         qrScanner = new Html5Qrcode("qrPreview");
@@ -108,7 +118,7 @@
                 qrScanner.start(
                     { facingMode: "environment" },
                     { fps:10, qrbox:250 },
-                    // 🚨 스캔 성공 시, 추출 로직을 담은 executeScan 함수 호출
+                    // 스캔 성공 시, 추출 로직을 담은 executeScan 함수 호출
                     scannedUrl => executeScan(scannedUrl, false),
                     errorMessage => { /* 스캔 실패 무시 */ }
                 );
