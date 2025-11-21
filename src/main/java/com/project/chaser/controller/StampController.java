@@ -111,15 +111,25 @@ public class StampController {
         return "createQr";  // createQr.jsp
     }
 
+    /**
+     * QR 스캔 후 스탬프 적립
+     */
     @GetMapping("/scan")
     public String scanStamp(
-            @RequestParam int fesIdx,
-            @RequestParam int stampNumber,
+            // 🚨 수정된 부분: required=false와 defaultValue="0" 설정
+            @RequestParam(value = "fesIdx", required = false, defaultValue = "0") int fesIdx,
+            @RequestParam(value = "stampNumber", required = false, defaultValue = "0") int stampNumber,
             HttpSession session,
             Model model
     ) {
         User loginUser = (User) session.getAttribute("user");
         if (loginUser == null) return "redirect:/login";
+
+        // 🚨 값이 0(기본값)이라면 유효하지 않은 요청으로 처리하거나 에러 페이지로 리턴
+        if (fesIdx == 0 || stampNumber == 0) {
+            model.addAttribute("error", "잘못된 스캔 링크입니다. 축제 번호나 스탬프 번호가 누락되었습니다.");
+            return "error"; // 혹은 다른 에러 페이지
+        }
 
         boolean success = stampService.addStamp(loginUser.getUserIdx(), stampNumber, fesIdx);
 
