@@ -17,4 +17,5 @@ public class Stamp {
     private int UserIdx;
     @NonNull
     private int StampNumber;
+
 }

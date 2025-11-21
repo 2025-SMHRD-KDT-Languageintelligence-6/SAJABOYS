@@ -7,24 +7,47 @@
 
     <select id="getTodayFestivals" resultType="com.project.chaser.dto.Festival">
         <![CDATA[
-        SELECT
-            FesIdx, FesName, Region, Addr, StartDate, EndDate, Fee, Theme, Tel, Lat, Lon,
-            CASE
-                WHEN StartDate > CURDATE() THEN '예정'
-                WHEN StartDate <= CURDATE() AND EndDate >= CURDATE() THEN '진행중'
-                ELSE '마감'
-            END AS status
-        FROM festival
-        ORDER BY StartDate ASC
-        ]]>
+    SELECT
+        FesIdx, FesName, Region, Addr, StartDate, EndDate, Fee, Theme, Tel, Lat, Lon, StampCount,
+        CASE
+            WHEN StartDate > CURDATE() THEN '예정'
+            WHEN StartDate <= CURDATE() AND EndDate >= CURDATE() THEN '진행중'
+            ELSE '마감'
+        END AS status
+    FROM festival
+    ORDER BY StartDate ASC
+    ]]>
     </select>
 
+    <!-- 축제 상세 정보 -->
     <select id="getFestival" resultType="com.project.chaser.dto.Festival">
         SELECT
-        FesIdx, FesName, Region, Addr, StartDate, EndDate, Fee, Theme,
-        Lat, Lon, StampCount
+        FesIdx,
+        FesName,
+        Region,
+        Addr,
+        StartDate,
+        EndDate,
+        Fee,
+        Theme,
+        Tel,
+        Lat,
+        Lon,
+        StampCount AS stampCount
         FROM festival
         WHERE FesIdx = #{fesIdx}
+    </select>
+
+    <!-- 사용자가 수집한 스탬프 조회 -->
+    <select id="getCollectedStampsByFestival" resultType="com.project.chaser.dto.Stamp">
+        SELECT
+        StampIdx,
+        FesIdx,
+        UserIdx,
+        StampNumber,
+        CreatedAt
+        FROM stamp
+        WHERE FesIdx = #{fesIdx} AND UserIdx = #{userIdx}
     </select>
 
 
