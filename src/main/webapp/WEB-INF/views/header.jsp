@@ -24,7 +24,7 @@
                 <ul>
                     <li><a href="/main">Home</a></li>
                     <li>
-                        <a href="/html5up-verti/1_Game.html">게임</a>
+                        <a href="templates/1_Game.html">게임</a>
                         <ul>
                             <li><a href="#">거점 점령전</a></li>
                             <li><a href="#">경찰과 도둑</a></li>
