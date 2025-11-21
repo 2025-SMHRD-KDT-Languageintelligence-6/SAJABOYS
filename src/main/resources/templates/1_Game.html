@@ -1,121 +1,118 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  
+  <title>게임 선택 | 거점 탐험전</title>
 
-    <title>게임 선택 | 거점 탐험전</title>
+  <!-- 기본 테마 CSS -->
+  <link rel="stylesheet" href="assets/css/main.css" />
 
-    <!-- 기본 테마 CSS -->
-    <link rel="stylesheet" href="assets/css/main.css" />
-
-    <!-- 게임 선택 전용 CSS -->
-    <link rel="stylesheet" href="assets/css/game-select.css" />
+  <!-- 게임 선택 전용 CSS -->
+  <link rel="stylesheet" href="assets/css/game-select.css" />
 </head>
 
 <body class="is-preload">
 
-<!-- header include -->
-<div id="site-header"></div>
-<script src="/assets/js/header.js"></script>
+  <!-- header include -->
+  <div id="site-header"></div>
+  <script src="/assets/js/header.js"></script>
 
 <div id="page-wrapper">
 
+  
 
+  <!-- 내용 -->
+  <main class="select-layout">
+    <div class="select-grid">
 
-    <!-- 내용 -->
-    <main class="select-layout">
-        <div class="select-grid">
+      <!-- 왼쪽: 대기창 -->
+      <section class="wait-box">
+        <h3>대기 중</h3>
+        <p>현재 참가 인원</p>
+        <div class="wait-num" id="waitCount">28 / 30</div>
+      </section>
 
-            <!-- 왼쪽: 대기창 -->
-            <section class="wait-box">
-                <h3>대기 중</h3>
-                <p>현재 참가 인원</p>
-                <div class="wait-num" id="waitCount">28 / 30</div>
-            </section>
+      <!-- 가운데: 게임 선택 -->
+      <section class="game-select-box">
+        <h2>게임 모드 선택</h2>
 
-            <!-- 가운데: 게임 선택 -->
-            <section class="game-select-box">
-                <h2>게임 모드 선택</h2>
+        <form id="gameSelectForm">
+          <div class="mode-wrap">
 
-                <form id="gameSelectForm">
-                    <div class="mode-wrap">
+            <label class="mode-option">
+              <input type="radio" name="mode" value="police" required>
+              <strong>🥷 술래잡기 (도둑과 경찰)</strong>
+            </label>
 
-                        <label class="mode-option">
-                            <input type="radio" name="mode" value="police" required>
-                            <strong>🥷 술래잡기 (도둑과 경찰)</strong>
-                        </label>
+          
 
-                        <label class="mode-option">
-                            <input type="radio" name="mode" value="occupy">
-                            <strong>🗺️ 거점 점령전</strong>
-                        </label>
+            <label class="mode-option">
+              <input type="radio" name="mode" value="zombie">
+              <strong>🧟 좀비 아포칼립스</strong>
+            </label>
 
-                        <label class="mode-option">
-                            <input type="radio" name="mode" value="zombie">
-                            <strong>🧟 좀비 아포칼립스</strong>
-                        </label>
+            <label class="mode-option">
+              <input type="radio" name="mode" value="wally">
+              <strong>🕵️ 월리를 찾아라</strong>
+            </label>
 
-                        <label class="mode-option">
-                            <input type="radio" name="mode" value="wally">
-                            <strong>🕵️ 월리를 찾아라</strong>
-                        </label>
+          </div>
 
-                    </div>
+          <button type="submit" class="start-btn">
+            <a href="/1_2_gamestart.html">게임시작하기</a>
+          </button>
+        </form>
+      </section>
 
-                    <button type="submit" class="start-btn">
-                        <a href="/1_2_gamestart.html">게임시작하기</a>
-                    </button>
-                </form>
-            </section>
+      <!-- 오른쪽: 채팅 -->
+      <section class="chat-box">
+        <h3>자유 채팅</h3>
+        <p>자유 채팅자유 채팅자유 채팅자유 채팅자유 채팅자유 채팅자유 채팅자유 채팅자유 채팅자유 채팅자유 채팅자유 채팅자유 채팅자유 채팅</p>
+        <div class="chat-num">_______________:입력</div>
+      </section>
 
-            <!-- 오른쪽: 채팅 -->
-            <section class="chat-box">
-                <h3>자유 채팅</h3>
-                <p>자유 채팅자유 채팅자유 채팅자유 채팅자유 채팅자유 채팅자유 채팅자유 채팅자유 채팅자유 채팅자유 채팅자유 채팅자유 채팅자유 채팅</p>
-                <div class="chat-num">_______________:입력</div>
-            </section>
-
-        </div>
-    </main>
-
-    <!-- 푸터 -->
-    <div id="footer-wrapper">
-        <div class="container" id="footer">
-            <div id="copyright">
-                <ul class="menu">
-                    <li>&copy; 2025 RunBack</li>
-                    <li>게임 선택 페이지</li>
-                </ul>
-            </div>
-        </div>
     </div>
+  </main>
+
+  <!-- 푸터 -->
+  <div id="footer-wrapper">
+    <div class="container" id="footer">
+      <div id="copyright">
+        <ul class="menu">
+          <li>&copy; 2025 RunBack</li>
+          <li>게임 선택 페이지</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
 </div>
 
 <!-- 스크립트: 게임 모드별 페이지 이동 -->
 <script>
-    const gamePages = {
-      police: "1_1_3police.html",
-      occupy: "1_1_4occupy.html",
-      zombie: "1_1_1zombie.html",
-      wally: "1_1_2wily.html"
-    };
+  const gamePages = {
+    police: "1_1_3police.html",
+    occupy: "1_1_4occupy.html",
+    zombie: "1_1_1zombie.html",
+    wally: "1_1_2wily.html"
+  };
 
-    document.getElementById("gameSelectForm").addEventListener("submit", function(e){
-      e.preventDefault();
+  document.getElementById("gameSelectForm").addEventListener("submit", function(e){
+    e.preventDefault();
 
-      const selected = document.querySelector("input[name='mode']:checked");
-      if(!selected){
-        alert("게임 모드를 선택하세요!");
-        return;
-      }
+    const selected = document.querySelector("input[name='mode']:checked");
+    if(!selected){
+      alert("게임 모드를 선택하세요!");
+      return;
+    }
 
-      const target = gamePages[selected.value];
-      if(target){
-        window.location.href = target;
-      }
-    });
+    const target = gamePages[selected.value];
+    if(target){
+      window.location.href = target;
+    }
+  });
 </script>
 
 </body>
