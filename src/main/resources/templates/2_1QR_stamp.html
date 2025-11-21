@@ -176,16 +176,27 @@
                 <!-- 스탬프용 샘플 링크 만들기 -->
                 <div class="qr-form-group">
                     <label>스탬프 페이지용 링크 도우미 (선택)</label>
+                    <!-- 기본 경로 -->
                     <div class="qr-row-inline">
                         <span style="font-size:.85rem;">기본 경로</span>
+                        <!-- 쿼리스트링 없이 페이지 경로만 -->
                         <input type="text" id="basePath" value="2_Stamp.html?spot=" style="flex:1;min-width:150px;">
                     </div>
+
+                    <!-- 축제 번호 + 스탬프 번호 -->
                     <div class="qr-row-inline" style="margin-top:.35rem;">
+                        <span style="font-size:.85rem;">축제 번호</span>
+                        <input type="number" id="fesNo" min="1" max="9999" value="1" style="max-width:100px;">
+
                         <span style="font-size:.85rem;">스탬프 번호</span>
                         <input type="number" id="stampNo" min="1" max="99" value="1">
+
                         <button type="button" class="button alt" id="makeStampUrlBtn">링크 자동입력</button>
                     </div>
-                    <small>예) <code>2_Stamp.html?spot=3</code> 처럼 번호별 QR을 빠르게 만들 때 사용합니다.</small>
+                    <small>
+                        예) <code>2_Stamp.html?fes=12&spot=3</code><br>
+                        축제 번호와 스탬프 번호를 입력하고 [링크 자동입력]을 누르면 위 형식으로 QR 내용이 자동으로 채워집니다.
+                    </small>
                 </div>
 
                 <!-- 옵션 -->
