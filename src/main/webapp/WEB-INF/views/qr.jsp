@@ -45,7 +45,7 @@
 <script>
     let qrScanner;
 
-    // 🚨 수정된 함수: URL을 절대 경로로 변환 후 파싱하는 로직 추가
+    // URL 문자열에서 특정 쿼리 파라미터의 값을 추출하는 함수
     function getQueryParamFromUrl(scannedUrl, param) {
         if (!scannedUrl) return null;
 
@@ -68,44 +68,27 @@
         }
     }
 
-    // 스캔 로직 실행 함수
-    function executeScan(scannedUrl, isMock = false) {
-        // 🚨 1단계: 스캔된 URL에서 fesIdx와 stampNumber를 추출 (절대 경로 처리 로직 포함)
+    // 스캔 로직 실행 함수 (POST 요청 로직 제거)
+    function executeScan(scannedUrl) {
+
+        // 1단계: 유효성 검사 (QR이 올바른 형식인지 확인)
+        // 이 검사를 통과하지 못하면 /scan으로 이동하지 않습니다.
         const scannedFesIdx = getQueryParamFromUrl(scannedUrl, 'fesIdx');
         const scannedStampNumber = getQueryParamFromUrl(scannedUrl, 'stampNumber');
 
-        // 추출된 값이 유효한지 확인
         if (!scannedFesIdx || !scannedStampNumber) {
             alert("QR 코드가 유효하지 않습니다. [fesIdx] 또는 [stampNumber]가 누락되었습니다.");
             return;
         }
 
-        // 2단계: 서버의 /stamp/add (POST)로 추출된 값만 전송
-        fetch('/stamp/add', {
-            method:'POST',
-            headers: {'Content-Type':'application/x-www-form-urlencoded'},
-            body: new URLSearchParams({ stampNumber: scannedStampNumber, fesIdx: scannedFesIdx })
-        })
-        .then(res => res.json())
-        .then(data => {
-            // 서버의 /stamp/add가 true/false를 반환하므로 data === true로 체크
-            if (data === true) {
-                alert((isMock ? "테스트 " : "") + "스탬프 적립 완료!");
-                // 3단계: 적립 후 해당 축제의 상세 페이지로 이동
-                location.href = `/stamp/detail?fesIdx=${scannedFesIdx}`;
-            } else {
-                alert((isMock ? "테스트 " : "") + "적립 실패: 이미 적립했거나 유효하지 않은 스탬프입니다.");
-            }
-        })
-        .catch(error => {
-            console.error('Fetch Error:', error);
-            alert("서버 통신 오류가 발생했습니다. (자세한 내용은 콘솔 확인)");
-        });
-
+        // 스캐너 중지
         if (qrScanner) {
-            // 스캐너가 실행 중인 경우에만 멈춤
             qrScanner.stop().catch(err => console.error("스캐너 중지 오류:", err));
         }
+
+        // 🚨 2단계: 핵심 수정! POST 대신 GET 요청으로 페이지를 이동시킵니다.
+        // 이 요청이 @GetMapping("/scan") 컨트롤러를 호출하여 적립 및 결과 페이지 표시를 완료합니다.
+        location.href = scannedUrl;
     }
 
     document.getElementById('startScanBtn').onclick = () => {
@@ -118,19 +101,19 @@
                 qrScanner.start(
                     { facingMode: "environment" },
                     { fps:10, qrbox:250 },
-                    // 스캔 성공 시, 추출 로직을 담은 executeScan 함수 호출
-                    scannedUrl => executeScan(scannedUrl, false),
+                    // 스캔 성공 시, 해당 URL로 즉시 이동
+                    scannedUrl => executeScan(scannedUrl),
                     errorMessage => { /* 스캔 실패 무시 */ }
                 );
             } else alert("카메라를 찾을 수 없습니다.");
         }).catch(err => alert(err));
     };
 
-    // 테스트 버튼 (모바일 카메라에서 얻은 실제 URL 값 사용)
+    // 테스트 버튼 (GET 요청으로 처리)
     document.getElementById('mockScanBtn').onclick = () => {
-        // 모바일에서 스캔했을 때 얻은 텍스트를 그대로 사용합니다.
-        const mockUrl = "/stamp/scan?fesIdx=1&stampNumber=4";
-        executeScan(mockUrl, true);
+        // 현재 수동으로 성공한 조합과 다른 새로운 번호로 테스트해보세요.
+        const mockUrl = "/stamp/scan?fesIdx=6&stampNumber=99";
+        executeScan(mockUrl);
     };
 </script>
 
