@@ -253,12 +253,7 @@
   color: rgba(255, 255, 255, 0.9);
 }
 
-/* 좌우 카드 hover 시 살짝 떠오르기 */
-.wait-box:hover,
-.chat-box:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.36);
-}
+
 
 /* ===== 애니메이션 정의 ===== */
 @keyframes card-pop {
