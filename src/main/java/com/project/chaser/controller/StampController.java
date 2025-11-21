@@ -125,18 +125,20 @@ public class StampController {
         User loginUser = (User) session.getAttribute("user");
         if (loginUser == null) return "redirect:/login";
 
-        // 🚨 값이 0(기본값)이라면 유효하지 않은 요청으로 처리하거나 에러 페이지로 리턴
+        // 🚨 유효성 검사: 기본값(0)이 들어왔다면 잘못된 요청으로 간주하고 처리
         if (fesIdx == 0 || stampNumber == 0) {
             model.addAttribute("error", "잘못된 스캔 링크입니다. 축제 번호나 스탬프 번호가 누락되었습니다.");
-            return "error"; // 혹은 다른 에러 페이지
+            // 오류를 명확히 보여주는 페이지로 리턴하거나, 다른 처리 로직을 넣으세요.
+            return "error";
         }
 
+        // 유효한 값이므로 정상 로직 실행
         boolean success = stampService.addStamp(loginUser.getUserIdx(), stampNumber, fesIdx);
 
         model.addAttribute("success", success);
         model.addAttribute("fesIdx", fesIdx);
         model.addAttribute("stampNumber", stampNumber);
 
-        return "scanResult";  // JSP 만들면 됨
+        return "scanResult";
     }
 }
