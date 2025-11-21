@@ -269,7 +269,10 @@
                                 <div class="festival-name">${f.fesName}</div>
 
                                 <div class="festival-meta">
-                                    날짜 : ${f.startDate} ~ ${f.endDate}<br>
+                                    날짜 :
+                                    <fmt:formatDate value="${f.startDate}" pattern="yyyy-MM-dd" />
+                                    ~
+                                    <fmt:formatDate value="${f.endDate}" pattern="yyyy-MM-dd" /><br>
                                     장소 : ${f.addr}<br>
                                     입장료 : ${f.fee}
                                 </div>
@@ -348,5 +351,4 @@
 </script>
 
 </body>
-</html>
 </html>
