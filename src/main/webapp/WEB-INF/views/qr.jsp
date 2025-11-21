@@ -43,10 +43,62 @@
 
 <script src="https://unpkg.com/html5-qrcode"></script>
 <script>
-    const fesIdx = new URLSearchParams(window.location.search).get('fesIdx') || 1; // 축제 번호, 테스트 기본값 1
+    // QR 코드가 URL 전체를 반환하므로, 현재 페이지의 fesIdx는 사용하지 않도록 수정합니다.
+    // const fesIdx = new URLSearchParams(window.location.search).get('fesIdx') || 1;
     let qrScanner;
 
+    // URL 문자열에서 특정 쿼리 파라미터의 값을 추출하는 함수
+    function getQueryParamFromUrl(url, param) {
+        try {
+            const urlObj = new URL(url);
+            return urlObj.searchParams.get(param);
+        } catch (e) {
+            console.error("URL 파싱 오류:", e);
+            return null;
+        }
+    }
+
+    // 스캔 로직 실행 함수
+    function executeScan(scannedUrl, isMock = false) {
+        // 🚨 1단계: 스캔된 URL에서 fesIdx와 stampNumber를 추출
+        const scannedFesIdx = getQueryParamFromUrl(scannedUrl, 'fesIdx');
+        const scannedStampNumber = getQueryParamFromUrl(scannedUrl, 'stampNumber');
+
+        // 추출된 값이 유효한지 확인
+        if (!scannedFesIdx || !scannedStampNumber) {
+            alert("QR 코드가 유효하지 않습니다. [fesIdx] 또는 [stampNumber]가 누락되었습니다.");
+            return;
+        }
+
+        // 2단계: 서버의 /stamp/add (POST)로 추출된 값만 전송
+        fetch('/stamp/add', {
+            method:'POST',
+            headers: {'Content-Type':'application/x-www-form-urlencoded'},
+            // 🚨 추출된 숫자 값만 전달
+            body: new URLSearchParams({ stampNumber: scannedStampNumber, fesIdx: scannedFesIdx })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data) {
+                alert((isMock ? "테스트 " : "") + "스탬프 적립 완료!");
+                // 3단계: 적립 후 해당 축제의 상세 페이지로 이동
+                location.href = `/stamp/detail?fesIdx=${scannedFesIdx}`;
+            } else {
+                alert((isMock ? "테스트 " : "") + "적립 실패. 이미 적립했거나 유효하지 않은 스탬프입니다.");
+            }
+        })
+        .catch(error => {
+            console.error('Fetch Error:', error);
+            alert("서버 통신 오류가 발생했습니다.");
+        });
+
+        if (qrScanner) {
+            qrScanner.stop().catch(err => console.error("스캐너 중지 오류:", err));
+        }
+    }
+
     document.getElementById('startScanBtn').onclick = () => {
+        // ... (카메라 시작 로직은 그대로 유지) ...
         const qrPreview = document.getElementById('qrPreview');
         qrPreview.innerHTML = '';
         qrScanner = new Html5Qrcode("qrPreview");
@@ -56,44 +108,19 @@
                 qrScanner.start(
                     { facingMode: "environment" },
                     { fps:10, qrbox:250 },
-                    qrMessage => {
-                        // QR 스캔 성공 시 서버 전송
-                        fetch('/stamp/add', {
-                            method:'POST',
-                            headers: {'Content-Type':'application/x-www-form-urlencoded'},
-                            body: new URLSearchParams({ stampNumber: qrMessage, fesIdx: fesIdx })
-                        })
-                        .then(res=>res.json())
-                        .then(data=>{
-                            if(data){
-                                alert("스탬프 적립 완료!");
-                                location.href = `/stamp/detail?fesIdx=${fesIdx}`;
-                            } else {
-                                alert("적립 실패, 다시 시도하세요.");
-                            }
-                        });
-                        qrScanner.stop();
-                    },
+                    // 🚨 스캔 성공 시, 추출 로직을 담은 executeScan 함수 호출
+                    scannedUrl => executeScan(scannedUrl, false),
                     errorMessage => { /* 스캔 실패 무시 */ }
                 );
             } else alert("카메라를 찾을 수 없습니다.");
         }).catch(err => alert(err));
     };
 
-    // 테스트 버튼
+    // 테스트 버튼 (모바일 카메라에서 얻은 실제 URL 값 사용)
     document.getElementById('mockScanBtn').onclick = () => {
-        fetch('/stamp/add', {
-            method:'POST',
-            headers:{'Content-Type':'application/x-www-form-urlencoded'},
-            body: new URLSearchParams({ stampNumber: 1, fesIdx: fesIdx })
-        })
-        .then(res=>res.json())
-        .then(data=>{
-            if(data){
-                alert("테스트 스탬프 적립 완료!");
-                location.href = `/stamp/detail?fesIdx=${fesIdx}`;
-            } else alert("적립 실패");
-        });
+        // 모바일에서 스캔했을 때 얻은 텍스트를 그대로 사용합니다.
+        const mockUrl = "/stamp/scan?fesIdx=1&stampNumber=4";
+        executeScan(mockUrl, true);
     };
 </script>
 

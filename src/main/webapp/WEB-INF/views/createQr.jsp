@@ -209,7 +209,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (size > 600) size = 600;
 
         // 4. URL 생성: 🚨 템플릿 리터럴 대신 문자열 연결(+) 사용
-        const baseUrl = "http://localhost:8089/stamp/scan?fesIdx=";
+        const baseUrl = "/stamp/scan?fesIdx=";
         const url = baseUrl + fes + "&stampNumber=" + spot;
         console.log("생성할 URL:", url);
 
