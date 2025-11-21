@@ -42,7 +42,7 @@
 
 <div id="page-wrapper">
   <div id="site-header"></div>
-  <script src="assets/js/header.js"></script>
+  <script src="/assets/js/header.js"></script>
 
   <main class="write-wrap">
     <header class="write-header">
