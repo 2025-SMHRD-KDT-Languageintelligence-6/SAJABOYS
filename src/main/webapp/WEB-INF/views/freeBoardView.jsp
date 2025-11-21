@@ -8,10 +8,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>자유게시판 글보기 | 추적자</title>
 
-    <!-- Verti 기본 CSS -->
     <link rel="stylesheet" href="/assets/css/main.css" />
 
     <style>
+        /* 기존 스타일 그대로 유지 */
         .view-wrap { max-width:900px; margin:2.5rem auto 3rem; }
         .view-header { margin-bottom:1rem; }
         .view-header h2 { margin:0; font-size:1.8rem; font-weight:800; }
@@ -22,11 +22,10 @@
         .post-meta-row { display:flex; justify-content:space-between; flex-wrap:wrap; font-size:.85rem; color:#666; gap:.4rem; }
         .post-meta-left span, .post-meta-right span { margin-right:.6rem; }
 
-        /* 태그 배지 스타일 */
-        .tag-badge.chat { background: #d4f7d4; color: #2d7a2d; }       /* 잡담 - 연초록 */
-        .tag-badge.festival { background: #ffe0e0; color: #b60000; }   /* 축제후기 - 연핑크 */
-        .tag-badge.tips { background: #e0f7ff; color: #0076b6; }       /* 공략/팁 - 하늘색 */
-        .tag-badge.question { background: #fff4d1; color: #b66d00; }   /* 질문 - 연노랑 */
+        .tag-badge.chat { background: #d4f7d4; color: #2d7a2d; }
+        .tag-badge.festival { background: #ffe0e0; color: #b60000; }
+        .tag-badge.tips { background: #e0f7ff; color: #0076b6; }
+        .tag-badge.question { background: #fff4d1; color: #b66d00; }
         .tag-badge { display:inline-block; padding:.15rem .5rem; border-radius:999px; font-size:.8rem; margin-right:.4rem; }
 
         .post-content { min-height:160px; line-height:1.7; font-size:.95rem; color:#333; white-space:pre-line; margin-bottom:1rem; }
@@ -36,96 +35,27 @@
         .view-btn-row { margin-top:1.2rem; display:flex; justify-content:flex-end; gap:.4rem; flex-wrap:wrap; }
         .view-btn-row .button { min-width:90px; font-size:.9rem; padding:.45rem 0; }
 
-        /* 댓글 영역 */
-        .comment-wrap{
-            margin-top:2rem;
-            background:#fff;
-            border-radius:16px;
-            box-shadow:0 4px 14px rgba(0,0,0,.08);
-            padding:1.2rem 1.4rem 1.4rem;
-        }
-        .comment-header{
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            margin-bottom:.8rem;
-            font-size:.95rem;
-        }
-        .comment-header h3{
-            margin:0;
-            font-size:1.1rem;
-            font-weight:800;
-        }
-        .comment-header span{
-            font-size:.85rem;
-            color:#666;
-        }
+        .comment-wrap { margin-top:2rem; background:#fff; border-radius:16px; box-shadow:0 4px 14px rgba(0,0,0,.08); padding:1.2rem 1.4rem 1.4rem; }
+        .comment-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:.8rem; font-size:.95rem; }
+        .comment-header h3 { margin:0; font-size:1.1rem; font-weight:800; }
+        .comment-header span { font-size:.85rem; color:#666; }
 
-        .comment-list{
-            margin-bottom:1rem;
-            max-height:260px;
-            overflow-y:auto;
-        }
+        .comment-list { margin-bottom:1rem; max-height:260px; overflow-y:auto; }
+        .comment-item { border-bottom:1px solid #e9edf3; padding:.55rem 0; font-size:.9rem; }
+        .comment-meta { display:flex; justify-content:space-between; margin-bottom:.15rem; color:#666; font-size:.8rem; }
+        .comment-author { font-weight:700; }
+        .comment-body { color:#333; white-space:pre-line; }
+        .reply-btn { cursor:pointer; color:#0076b6; font-size:0.85rem; margin-left:5px; }
 
-        .comment-item{
-            border-bottom:1px solid #e9edf3;
-            padding:.55rem 0;
-            font-size:.9rem;
-        }
-        .comment-meta{
-            display:flex;
-            justify-content:space-between;
-            margin-bottom:.15rem;
-            color:#666;
-            font-size:.8rem;
-        }
-        .comment-author{
-            font-weight:700;
-        }
-        .comment-body{
-            color:#333;
-            white-space:pre-line;
-        }
-
-        .comment-form{
-            border-top:1px solid #dde3ec;
-            padding-top:.7rem;
-        }
-
-        .comment-form-row{
-            display:flex;
-            gap:.5rem;
-            flex-wrap:wrap;
-        }
-        .comment-form-row textarea{
-            flex:1;
-            min-height:70px;
-            border-radius:8px;
-            border:1px solid #ccc;
-            padding:.5rem .6rem;
-            resize:vertical;
-            font-size:.9rem;
-        }
-        .comment-form-row .button{
-            min-width:90px;
-            height:40px;
-            align-self:flex-end;
-            font-size:.9rem;
-            padding:0;
-        }
+        .comment-form { border-top:1px solid #dde3ec; padding-top:.7rem; }
+        .comment-form-row { display:flex; gap:.5rem; flex-wrap:wrap; }
+        .comment-form-row textarea { flex:1; min-height:70px; border-radius:8px; border:1px solid #ccc; padding:.5rem .6rem; resize:vertical; font-size:.9rem; }
+        .comment-form-row .button { min-width:90px; height:40px; align-self:flex-end; font-size:.9rem; padding:0; }
 
         @media (max-width:736px){
-            .post-meta-row{
-                flex-direction:column;
-                align-items:flex-start;
-            }
-            .comment-form-row{
-                flex-direction:column;
-            }
-            .comment-form-row .button{
-                width:100%;
-                height:42px;
-            }
+            .post-meta-row{ flex-direction:column; align-items:flex-start; }
+            .comment-form-row{ flex-direction:column; }
+            .comment-form-row .button{ width:100%; height:42px; }
         }
     </style>
 </head>
@@ -133,22 +63,16 @@
 
 <div id="page-wrapper">
 
-    <!-- 공통 헤더 include -->
     <div id="site-header"></div>
     <script src="/assets/js/header.js"></script>
 
     <main class="view-wrap">
-
-        <!-- 상단 설명 -->
         <header class="view-header">
             <h2>자유게시판</h2>
             <p>축제, 게임, 일상 등 어떤 이야기든 자유롭게 나눠보세요.</p>
         </header>
 
-        <!-- 글 상세 박스 -->
         <section class="view-box">
-
-            <!-- 제목 + 메타 정보 -->
             <div class="post-top">
                 <div class="post-title">${sns.snsTitle}</div>
                 <div style="margin-bottom:.3rem;">
@@ -161,7 +85,6 @@
                             <c:otherwise>chat</c:otherwise>
                         </c:choose>
                     </c:set>
-
                     <span class="tag-badge ${categoryClass}">${sns.category}</span>
                 </div>
 
@@ -176,11 +99,8 @@
                 </div>
             </div>
 
-            <!-- 본문 내용 -->
             <div class="post-content">
                 ${sns.snsContent}
-
-                <!-- 첨부 파일 이미지 삽입 -->
                 <c:if test="${not empty sns.fileList}">
                     <p><strong>첨부 이미지:</strong></p>
                     <c:forEach var="file" items="${sns.fileList}">
@@ -191,17 +111,12 @@
                 </c:if>
             </div>
 
-            <!-- 첨부 파일 영역 -->
             <div class="attach-area">
                 <c:if test="${not empty sns.fileList}">
                     <p><strong>첨부 파일 :</strong></p>
                     <ul>
                         <c:forEach var="file" items="${sns.fileList}">
-                            <li>
-                                <a href="/upload/${file.filePath}" target="_blank">
-                                    ${file.fileName}
-                                </a>
-                            </li>
+                            <li><a href="/upload/${file.filePath}" target="_blank">${file.fileName}</a></li>
                         </c:forEach>
                     </ul>
                 </c:if>
@@ -210,11 +125,8 @@
                 </c:if>
             </div>
 
-            <!-- 하단 버튼들 -->
             <div class="view-btn-row">
                 <button type="button" class="button alt" onclick="location.href='/sns'">목록</button>
-
-                <!-- 로그인한 작성자만 수정/삭제 가능 -->
                 <c:if test="${not empty sessionScope.user and sessionScope.user.userIdx == sns.userIdx}">
                     <button type="button" class="button alt" onclick="location.href='/sns/write?snsIdx=${sns.snsIdx}'">수정</button>
                     <form action="/sns/delete/${sns.snsIdx}" method="post" style="display:inline;">
@@ -224,7 +136,6 @@
             </div>
         </section>
 
-        <!-- 댓글 영역 -->
         <section class="comment-wrap">
             <div class="comment-header">
                 <h3>댓글</h3>
@@ -245,10 +156,8 @@
                 <p style="margin-top:0.5rem; color:#666;">댓글 작성은 로그인 후 가능합니다.</p>
             </c:if>
         </section>
-
     </main>
 
-    <!-- 푸터 -->
     <div id="footer-wrapper">
         <div class="container" id="footer">
             <div id="copyright">
@@ -263,6 +172,7 @@
 
 <script>
     const snsIdx = ${sns.snsIdx};
+    const sessionUser = ${not empty sessionScope.user ? sessionScope.user.userIdx : 'null'};
 
     function loadComments() {
         fetch(`/comment/${snsIdx}`)
@@ -290,6 +200,21 @@
                     metaInner.appendChild(document.createTextNode(' · '));
                     metaInner.appendChild(dateSpan);
 
+                    // 답글 버튼 (로그인한 사용자만)
+                    if(sessionUser) {
+                        const replyBtn = document.createElement('span');
+                        replyBtn.className = 'reply-btn';
+                        replyBtn.dataset.idx = c.commentIdx;
+                        replyBtn.textContent = '답글';
+                        replyBtn.addEventListener('click', () => {
+                            const parentInput = document.getElementById('commentText');
+                            parentInput.value = `@${c.userNickname} `; // 간단 멘션
+                            parentInput.dataset.parent = c.commentIdx; // parentIdx 저장
+                            parentInput.focus();
+                        });
+                        metaInner.appendChild(replyBtn);
+                    }
+
                     commentMeta.appendChild(metaInner);
 
                     const commentBody = document.createElement('div');
@@ -310,20 +235,24 @@
     loadComments();
 
     const commentSubmit = document.getElementById('commentSubmit');
-    if (commentSubmit) {
-        commentSubmit.addEventListener('click', function() {
-            const text = document.getElementById('commentText').value.trim();
-            if (!text) { alert('댓글을 입력하세요.'); return; }
+    if(commentSubmit){
+        commentSubmit.addEventListener('click', function(){
+            const textArea = document.getElementById('commentText');
+            const text = textArea.value.trim();
+            if(!text){ alert('댓글을 입력하세요.'); return; }
+
+            const parentIdx = textArea.dataset.parent || null;
 
             fetch('/comment/add', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ snsIdx: snsIdx, commentContent: text })
+                body: JSON.stringify({ snsIdx: snsIdx, commentContent: text, parentIdx: parentIdx })
             })
             .then(res => res.text())
             .then(result => {
-                if (result === 'loginRequired') { alert('로그인이 필요합니다.'); return; }
-                document.getElementById('commentText').value = '';
+                if(result === 'loginRequired'){ alert('로그인이 필요합니다.'); return; }
+                textArea.value = '';
+                textArea.removeAttribute('data-parent'); // 초기화
                 loadComments();
             })
             .catch(err => console.error('댓글 등록 실패:', err));

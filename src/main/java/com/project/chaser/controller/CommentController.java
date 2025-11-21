@@ -22,6 +22,7 @@ public class CommentController {
     }
 
     @PostMapping("/add")
+    @ResponseBody
     public String addComment(@RequestBody Comment comment,
                              HttpSession session) {
 
@@ -31,7 +32,9 @@ public class CommentController {
         comment.setUserIdx(user.getUserIdx());
         comment.setUserNickname(user.getNickname());
 
+        // parentIdx는 프론트에서 넘어오면 그대로, 안 넘어오면 null
         commentService.addComment(comment);
+
         return "success";
     }
 }
