@@ -17,7 +17,7 @@
                 <a href="/main">
                     <img src="/images/bg.png" style="width: 600px ;">
                 </a>
-                <nav id="nav1">
+                <nav id="nav">
                                 <ul>
                                     <li><a href="/main">Home</a></li>
                                     <li>
