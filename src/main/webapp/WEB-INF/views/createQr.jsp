@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/assets/css/main.css" />
 
     <style>
+        /* ... (CSS 코드는 이전과 동일) ... */
         body{ background:#f5fafc; }
 
         .qrgen-wrap{
@@ -102,7 +103,6 @@
         }
     </style>
 
-    <!-- QR코드 생성 라이브러리 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body class="is-preload">
@@ -114,29 +114,24 @@
     <main class="qrgen-wrap">
         <section class="box qrgen-card">
 
-            <!-- 왼쪽 입력폼 -->
             <div>
                 <h2>QR 코드 생성기</h2>
 
-                <!-- 축제번호 -->
                 <div class="qr-form-group">
                     <label for="fesNo">축제 번호</label>
-                    <input type="number" id="fesNo" min="1" max="9999" value="1" style="width:100%;">
+                    <input type="text" id="fesNo" style="width:100%;" placeholder="축제 번호를 입력하세요" autocomplete="off">
                 </div>
 
-                <!-- 스탬프 번호 -->
                 <div class="qr-form-group">
                     <label for="stampNo">스탬프 번호</label>
-                    <input type="number" id="stampNo" min="1" max="99" value="1" style="width:100%;">
+                    <input type="text" id="stampNo" style="width:100%;" placeholder="스탬프 번호를 입력하세요" autocomplete="off">
                 </div>
 
-                <!-- QR 라벨 -->
                 <div class="qr-form-group">
                     <label for="qrLabel">QR 라벨 (파일명/출력 메모)</label>
                     <input type="text" id="qrLabel" placeholder="예) 축제1_스탬프3" style="width:100%;">
                 </div>
 
-                <!-- QR 크기 -->
                 <div class="qr-form-group">
                     <label for="qrSize">QR 크기 (px)</label>
                     <input type="number" id="qrSize" value="240" min="120" max="600" step="20" style="width:100%;">
@@ -148,7 +143,6 @@
                 </div>
             </div>
 
-            <!-- 오른쪽 QR 미리보기 -->
             <div class="qr-preview-wrap">
                 <div class="qr-preview-box">
                     <div id="qrcode">
@@ -177,6 +171,7 @@
 </div>
 
 <script>
+document.addEventListener("DOMContentLoaded", () => {
     let qr;
 
     const qrDiv      = document.getElementById("qrcode");
@@ -185,22 +180,38 @@
 
     // QR 생성 버튼
     document.getElementById("generateBtn").addEventListener("click", () => {
-        const fes   = document.getElementById("fesNo").value.trim();
-        const spot  = document.getElementById("stampNo").value.trim();
-        const label = document.getElementById("qrLabel").value.trim() || "qrcode";
-        let size    = parseInt(document.getElementById("qrSize").value, 10);
+        // 1. 입력 필드 요소 자체를 가져오기
+        const fesEl = document.getElementById("fesNo");
+        const spotEl = document.getElementById("stampNo");
 
+        // 2. 값 가져오기: type="text"이므로 .value를 그대로 사용
+        const fes = fesEl.value.trim();
+        const spot = spotEl.value.trim();
+
+        // 3. 필수 입력값 체크 및 사용자 경고
         if (!fes || !spot) {
-            alert("축제 번호와 스탬프 번호를 입력하세요.");
-            return;
-        }
-        if (isNaN(size) || size < 120 || size > 600) {
-            alert("QR 크기는 120~600px 입니다.");
-            return;
+            let msg = "다음 항목은 필수 입력입니다. 확인해 주세요:\n";
+            if (!fes) msg += " - 축제 번호\n";
+            if (!spot) msg += " - 스탬프 번호\n";
+            alert(msg);
+
+            if (!fes) fesEl.focus();
+            else if (!spot) spotEl.focus();
+
+            return; // QR 생성 중단
         }
 
-        // 자동 생성 URL
-        const url = `/stamp/qr?fes=${fes}&spot=${spot}`;
+        const label = document.getElementById("qrLabel").value.trim() || "qrcode";
+        let size = parseInt(document.getElementById("qrSize").value, 10) || 240;
+
+        // 최소/최대 체크
+        if (size < 120) size = 120;
+        if (size > 600) size = 600;
+
+        // 4. URL 생성: 🚨 템플릿 리터럴 대신 문자열 연결(+) 사용
+        const baseUrl = "/stamp/scan?fesIdx=";
+        const url = baseUrl + fes + "&stampNumber=" + spot;
+        console.log("생성할 URL:", url);
 
         // QR 초기화
         qrDiv.innerHTML = "";
@@ -213,6 +224,7 @@
             correctLevel: QRCode.CorrectLevel.H
         });
 
+        // 다운로드 링크 설정
         setTimeout(() => {
             const img = qrDiv.querySelector("img") || qrDiv.querySelector("canvas");
             if (!img) return;
@@ -220,7 +232,7 @@
             let dataUrl = img.tagName === "IMG" ? img.src : img.toDataURL("image/png");
 
             downloadEl.href = dataUrl;
-            downloadEl.download = label + ".png";
+            downloadEl.download = (label || "qrcode") + ".png";
             downloadEl.style.display = "inline-block";
 
             infoEl.textContent = `QR이 생성되었습니다. URL: ${url}`;
@@ -229,16 +241,23 @@
 
     // 초기화 버튼
     document.getElementById("clearBtn").addEventListener("click", () => {
-        document.getElementById("fesNo").value = 1;
-        document.getElementById("stampNo").value = 1;
+        document.getElementById("fesNo").value = "";
+        document.getElementById("stampNo").value = "";
         document.getElementById("qrLabel").value = "";
         document.getElementById("qrSize").value = 240;
 
-        qrDiv.innerHTML = `<div class="qr-preview-empty">생성된 QR이 없습니다.<br>“QR 생성”을 누르세요.</div>`;
+        qrDiv.innerHTML = `<div class="qr-preview-empty">생성된 QR이 없습니다.<br>항목 입력 후 <strong>“QR 생성”</strong>을 누르세요.</div>`;
         downloadEl.style.display = "none";
         infoEl.textContent = "· 생성 후 PNG 저장 가능";
     });
+});
 </script>
 
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/jquery.dropotron.min.js"></script>
+<script src="/assets/js/browser.min.js"></script>
+<script src="/assets/js/breakpoints.min.js"></script>
+<script src="/assets/js/util.js"></script>
+<script src="/assets/js/main.js"></script>
 </body>
 </html>

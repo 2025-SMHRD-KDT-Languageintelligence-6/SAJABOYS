@@ -110,4 +110,23 @@ public class StampController {
     public String createQr() {
         return "createQr";  // createQr.jsp
     }
+
+    @GetMapping("/scan")
+    public String scanStamp(
+            @RequestParam int fesIdx,
+            @RequestParam int stampNumber,
+            HttpSession session,
+            Model model
+    ) {
+        User loginUser = (User) session.getAttribute("user");
+        if (loginUser == null) return "redirect:/login";
+
+        boolean success = stampService.addStamp(loginUser.getUserIdx(), stampNumber, fesIdx);
+
+        model.addAttribute("success", success);
+        model.addAttribute("fesIdx", fesIdx);
+        model.addAttribute("stampNumber", stampNumber);
+
+        return "scanResult";  // JSP 만들면 됨
+    }
 }
