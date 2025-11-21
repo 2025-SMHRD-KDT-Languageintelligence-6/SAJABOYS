@@ -13,36 +13,10 @@
 
     <!-- Verti 스타일 사용 (당신이 준 CSS 경로로 맞춰주세요) -->
     <link rel="stylesheet" href="${ctx}/assets/css/main.css" />
+    <link rel="stylesheet" href="${ctx}/assets/css/login.css" />
     <link rel="stylesheet" href="${ctx}/assets/css/fontawesome-all.min.css" />
 
-    <style>
-        /* 페이지 전용 보강 스타일 */
-        .auth-wrap{
-          min-height: 100dvh;
-          display:flex; align-items:center; justify-content:center;
-          padding: 3rem 1rem;
-        }
-        .auth-card{
-          width:100%; max-width:420px;
-          border-radius:10px;
-        }
-        .title{
-          text-align:center; margin-bottom:1.2rem; font-weight:800;
-        }
-        .subtitle{
-          text-align:center; color:#777; margin:-0.8rem 0 1.8rem 0;
-        }
-        .field + .field{ margin-top:0.75rem; }
-        .helper{
-          text-align:center; margin-top:1rem; font-size:.95em;
-        }
-        .helper a{ text-decoration:underline; }
-        .brand{
-          text-align:center; margin-bottom:.5rem; font-family:'Oleo Script', cursive;
-          font-size:1.6rem; color:#ff4486;
-        }
-        .button.full{ width:100%; }
-    </style>
+
 </head>
 <body class="is-preload">
 
@@ -83,22 +57,19 @@
             </div>
             <div class="helper">
                 아직 회원이 아니신가요?
+                <br>
                 <a href="signup">회원가입 하러가기 &raquo;</a>
             </div>
         </form>
     </section>
 </main>
 
-<div id="footer-wrapper">
-    <div class="container" id="footer">
-        <div id="copyright">
-            <ul class="menu">
-                <li>&copy; 2025 RunBack</li>
-                <li>Verti 테마 기반 커스텀</li>
-            </ul>
-        </div>
+<footer id="auth-footer">
+    <div class="auth-footer-inner">
+        <p class="auth-footer-brand">© chaser</p>
+        <p class="auth-footer-desc">Festival Game Platform · Powered by Verti Theme</p>
     </div>
-</div>
+</footer>
 
 
 <!-- 간단한 클라이언트 검증 -->

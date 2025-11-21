@@ -1,0 +1,57 @@
+
+
+/* 페이지 전용 보강 스타일 */
+
+
+.auth-wrap{
+  min-height: 100dvh;
+  display:flex; align-items:center; justify-content:center;
+  padding: 3rem 1rem;
+
+}
+.auth-card{
+  width:100%; max-width:620px;
+  border-radius:10px;
+}
+.title{
+  text-align:center; margin-bottom:1.2rem; font-weight:800;
+}
+.subtitle{
+  text-align:center; color:#777; margin:-0.8rem 0 1.8rem 0; font-size:1.5em;
+}
+.field + .field{ margin-top:0.75rem; }
+.helper{
+  text-align:center; margin-top:1rem; font-size:1.5em;
+}
+.helper a{ text-decoration:underline; }
+.brand{
+  text-align:center; margin-bottom:.5rem; font-family:'Oleo Script', cursive;
+  font-size:1.6rem; color:#ff4486;
+}
+.button.full{ width:100%; }
+
+/* ===== 푸터 ===== */
+#auth-footer {
+    background: #0f172a; /* 차분한 남색 */
+    padding: 1.5rem 1rem;
+    margin-top: 2rem;
+}
+
+.auth-footer-inner {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+    color: #e5e7eb; /* 밝은 회색 */
+}
+
+.auth-footer-brand {
+    font-weight: 700;
+    font-size: 1rem;
+    margin: 0 0 .25rem 0;
+}
+
+.auth-footer-desc {
+    font-size: .85rem;
+    color: #cbd5f5;
+    margin: 0;
+}
