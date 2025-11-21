@@ -1,0 +1,62 @@
+/* ===== 축제 포스터 3장 그리드 ===== */
+.festival-preview {
+  margin-top: 2rem;
+}
+
+.festival-section {
+  text-align: center;
+}
+
+/* 3장 가로 배치 */
+.festival-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+  justify-items: center;
+  margin-bottom: 1.5rem;
+}
+
+/* 포스터 카드 */
+.festival-card {
+  width: 100%;
+  max-width: 320px;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+  transition: transform .25s ease, box-shadow .25s ease;
+  cursor: pointer;
+}
+
+/* 호버 효과 */
+.festival-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.20);
+}
+
+/* 포스터 이미지 */
+.festival-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .3s ease;
+}
+
+/* 이미지 확대 효과 */
+.festival-card:hover .festival-img {
+  transform: scale(1.08);
+}
+
+/* 반응형 */
+@media(max-width: 960px) {
+  .festival-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media(max-width: 640px) {
+  .festival-grid {
+    grid-template-columns: 1fr;
+  }
+}
