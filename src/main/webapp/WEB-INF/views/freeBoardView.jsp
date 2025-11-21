@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="/assets/css/main.css" />
 
     <style>
-        body { background:#f5fafc; }
         .view-wrap { max-width:900px; margin:2.5rem auto 3rem; }
         .view-header { margin-bottom:1rem; }
         .view-header h2 { margin:0; font-size:1.8rem; font-weight:800; }
