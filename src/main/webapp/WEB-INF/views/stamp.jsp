@@ -20,7 +20,7 @@
           padding:1.3rem 1.4rem 1.6rem;
         }
 
-        h2{ font-size:1.5rem;font-weight:800;margin:0 0 .5rem; }
+        h2{ font-size:3rem;font-weight:800;margin:0 0 .5rem; }
         .panel-desc{ color:#666;margin-bottom:1rem;font-size:.9rem; }
 
         .stamp-grid{

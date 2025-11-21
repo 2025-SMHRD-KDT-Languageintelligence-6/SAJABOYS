@@ -1,0 +1,166 @@
+/* ===== 스탬프 투어 페이지 전용 CSS ===== */
+
+.stamp-panel{
+    max-width:1100px;
+    margin:2.5rem auto 3rem;
+    background:#fff;
+    border-radius:18px;
+    box-shadow:0 4px 14px rgba(0,0,0,.12);
+    padding:1.3rem 1.4rem 1.6rem;
+}
+
+h2{
+    font-family: 'SchoolSafetyAquariumDecor', sans-serif;
+    font-size:1.5rem;
+    font-weight:800;
+    margin:0 0 .5rem;
+}
+
+.panel-desc{
+    color:#666;
+    margin-bottom:1rem;
+    font-size:.9rem;
+}
+
+.stamp-info p{
+    margin: .2rem 0;
+}
+
+/* 스탬프 그리드 */
+.stamp-grid{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:.8rem;
+    margin-top:.8rem;
+}
+
+/* 스탬프 기본 박스 */
+.stamp-cell{
+    position:relative;
+    border-radius:14px;
+    border:2px dashed #cfd8e3;
+    padding-top:100%;
+    background:#fafbff;
+    overflow:hidden;
+}
+
+/* 스탬프 내부 */
+.stamp-inner{
+    position:absolute;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    color:#777;
+    font-size:.85rem;
+}
+
+.stamp-number{
+    font-weight:800;
+    font-size:1rem;
+}
+
+.stamp-label{
+    font-size:.78rem;
+}
+
+/* 스탬프 찍혔을 때 */
+.stamp-cell.collected{
+    border-color:#2ecc71;
+    background:#e8fff1;
+    border-style:solid;
+    box-shadow:0 0 0 2px rgba(46,204,113,.3) inset;
+}
+
+.stamp-cell.collected .stamp-number{
+    color:#1f9d57;
+}
+
+.stamp-cell.collected .stamp-label::after{
+    content:" ✔";
+    color:#1f9d57;
+    font-weight:800;
+}
+
+/* 버튼 영역 */
+.go-scan{
+    text-align:right;
+    margin-top:1.3rem;
+}
+
+/* =======================
+   스탬프 요약
+======================= */
+.stamp-summary{
+    background:#f8faff;
+    padding:0.7rem 1rem;
+    border-radius:12px;
+    font-size:1rem;
+    display:flex;
+    gap:1.5rem;
+    align-items:center;
+    color:#555;
+    border:1px solid #e5ecf9;
+}
+
+.stamp-summary i{
+    color:#4a72ff;
+    margin-right:4px;
+}
+
+.stamp-summary .stamp-collected{
+    font-weight:600;
+}
+
+.stamp-summary .stamp-total{
+    color:#666;
+}
+
+/* =======================
+   축제 상세 정보 카드
+======================= */
+.stamp-detail-card{
+    font-family: 'SchoolSafetyAquariumDecor', sans-serif;
+    margin-top:1rem;
+    background:#ffffff;
+    border:1px solid #e7e9ee;
+    border-radius:14px;
+    padding:1.2rem 1rem;
+    box-shadow:0 4px 12px rgba(0,0,0,0.05);
+    display:flex;
+    flex-direction:column;
+    gap:0.6rem;
+}
+
+.detail-row{
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0.55rem 0.2rem;
+    border-bottom:1px dashed #eee;
+}
+
+.detail-row:last-child{
+    border-bottom:none;
+}
+
+.detail-row .label{
+    color:#445;
+    font-weight:700;
+    font-size:1rem;
+}
+
+.detail-row .label i{
+    margin-right:6px;
+    color:#4a72ff;
+}
+
+.detail-row .value{
+    color:#333;
+    font-size:1rem;
+    text-align:right;
+    max-width:65%;
+    line-height:1.45;
+}

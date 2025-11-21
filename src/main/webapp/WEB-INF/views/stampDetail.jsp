@@ -7,58 +7,10 @@
 <head>
     <meta charset="UTF-8">
     <title>스탬프 투어 | ${festival.fesName}</title>
+
     <link rel="stylesheet" href="/assets/css/main.css">
-    <style>
-        .stamp-panel{
-            max-width:1100px;
-            margin:2.5rem auto 3rem;
-            background:#fff;
-            border-radius:18px;
-            box-shadow:0 4px 14px rgba(0,0,0,.12);
-            padding:1.3rem 1.4rem 1.6rem;
-        }
-        h2{ font-size:1.5rem;font-weight:800;margin:0 0 .5rem; }
-        .panel-desc{ color:#666;margin-bottom:1rem;font-size:.9rem; }
-        .stamp-grid{
-            display:grid;
-            grid-template-columns:repeat(5,1fr);
-            gap:.8rem;
-            margin-top:.8rem;
-        }
-        .stamp-cell{
-            position:relative;
-            border-radius:14px;
-            border:2px dashed #cfd8e3;
-            padding-top:100%;
-            background:#fafbff;
-            overflow:hidden;
-        }
-        .stamp-inner{
-            position:absolute;
-            inset:0;
-            display:flex;
-            flex-direction:column;
-            align-items:center;
-            justify-content:center;
-            color:#777;
-            font-size:.85rem;
-        }
-        .stamp-number{ font-weight:800;font-size:1rem; }
-        .stamp-label{ font-size:.78rem; }
-        .stamp-cell.collected{
-            border-color:#2ecc71;
-            background:#e8fff1;
-            border-style:solid;
-            box-shadow:0 0 0 2px rgba(46,204,113,.3) inset;
-        }
-        .stamp-cell.collected .stamp-number{ color:#1f9d57; }
-        .stamp-cell.collected .stamp-label::after{
-            content:" ✔";
-            color:#1f9d57;
-            font-weight:800;
-        }
-        .go-scan{ text-align:right; margin-top:1.3rem; }
-    </style>
+    <link rel="stylesheet" href="/assets/css/stamp.css">
+
 </head>
 <body>
 
@@ -70,22 +22,48 @@
         <h2>${festival.fesName}</h2>
 
         <!-- 필요 스탬프 / 수집 스탬프 -->
-        <p class="panel-desc">
+        <p class="panel-desc stamp-summary">
+            <span class="stamp-collected">
+                    <i class="fas fa-check-circle"></i>
             수집 스탬프: <strong>${fn:length(collectedStamps)}</strong>개 /
+
+            </span>
+            <span class="stamp-total">
+                    <i class="fas fa-star"></i>
             총 스탬프: <strong>${festival.stampCount}</strong>개
+            </span>
         </p>
 
         <!-- 축제 상세 정보 -->
-        <div class="stamp-info">
-            <p><strong>지역:</strong> ${festival.region}</p>
-            <p><strong>주소:</strong> ${festival.addr}</p>
-            <p><strong>기간:</strong>
-                <fmt:formatDate value="${festival.startDate}" pattern="yyyy.MM.dd"/>
-                ~
-                <fmt:formatDate value="${festival.endDate}" pattern="yyyy.MM.dd"/>
-            </p>
-            <p><strong>테마:</strong> ${festival.theme}</p>
-            <p><strong>전화:</strong> ${festival.tel}</p>
+        <div class="stamp-detail-card">
+            <div class="detail-row">
+                <span class="label"><i class="fas fa-map-marker-alt"></i> 지역</span>
+                <span class="value">${festival.region}</span>
+            </div>
+
+            <div class="detail-row">
+                <span class="label"><i class="fas fa-location-dot"></i> 주소</span>
+                <span class="value">${festival.addr}</span>
+            </div>
+
+            <div class="detail-row">
+                <span class="label"><i class="fas fa-calendar"></i> 기간</span>
+                <span class="value">
+                    <fmt:formatDate value="${festival.startDate}" pattern="yyyy.MM.dd"/>
+                    ~
+                    <fmt:formatDate value="${festival.endDate}" pattern="yyyy.MM.dd"/>
+                </span>
+            </div>
+
+            <div class="detail-row">
+                <span class="label"><i class="fas fa-tags"></i> 테마</span>
+                <span class="value">${festival.theme}</span>
+            </div>
+
+            <div class="detail-row">
+                <span class="label"><i class="fas fa-phone"></i> 전화</span>
+                <span class="value">${festival.tel}</span>
+            </div>
         </div>
 
         <!-- 스탬프 그리드 -->
