@@ -49,22 +49,8 @@ public class StampController {
         return "stamp";
     }
 
-    /**
-     * QR 스캔 후 스탬프 적립
-     */
-    @PostMapping("/add")
-    @ResponseBody
-    public boolean addStamp(HttpSession session,
-                            @RequestParam int stampNumber,
-                            @RequestParam int fesIdx) {
-
-        User loginUser = (User) session.getAttribute("user");
-        if (loginUser == null) {
-            return false;
-        }
-        int userIdx = loginUser.getUserIdx();
-        return stampService.addStamp(userIdx, stampNumber, fesIdx);
-    }
+    // 🚨 @PostMapping("/add") 메서드는 사용하지 않는 것으로 판단하여 제거했습니다.
+    // 만약 필요하다면 다시 추가해 주십시오.
 
     /**
      * 스탬프 상세 페이지
@@ -100,9 +86,6 @@ public class StampController {
         User loginUser = (User) session.getAttribute("user");
         if (loginUser == null) return "redirect:/login";
 
-        // 현재 보고 있는 축제 ID (옵션)
-        // model.addAttribute("fesIdx", fesIdx);
-
         return "qr";  // qr.jsp
     }
 
@@ -112,11 +95,11 @@ public class StampController {
     }
 
     /**
-     * QR 스캔 후 스탬프 적립
+     * QR 스캔 후 스탬프 적립 및 결과 페이지 표시
      */
     @GetMapping("/scan")
     public String scanStamp(
-            // 🚨 수정된 부분: required=false와 defaultValue="0" 설정
+            // 🚨 400 Bad Request 오류 방지를 위해 required=false와 defaultValue="0" 설정 추가
             @RequestParam(value = "fesIdx", required = false, defaultValue = "0") int fesIdx,
             @RequestParam(value = "stampNumber", required = false, defaultValue = "0") int stampNumber,
             HttpSession session,
@@ -125,20 +108,19 @@ public class StampController {
         User loginUser = (User) session.getAttribute("user");
         if (loginUser == null) return "redirect:/login";
 
-        // 🚨 유효성 검사: 기본값(0)이 들어왔다면 잘못된 요청으로 간주하고 처리
+        // 유효성 검사: 값이 누락되거나 빈 문자열일 경우 defaultValue="0"이 할당됨
         if (fesIdx == 0 || stampNumber == 0) {
             model.addAttribute("error", "잘못된 스캔 링크입니다. 축제 번호나 스탬프 번호가 누락되었습니다.");
-            // 오류를 명확히 보여주는 페이지로 리턴하거나, 다른 처리 로직을 넣으세요.
             return "error";
         }
 
-        // 유효한 값이므로 정상 로직 실행
+        // 유효한 값이므로 정상 로직 실행 (스탬프 적립)
         boolean success = stampService.addStamp(loginUser.getUserIdx(), stampNumber, fesIdx);
 
         model.addAttribute("success", success);
         model.addAttribute("fesIdx", fesIdx);
         model.addAttribute("stampNumber", stampNumber);
 
-        return "scanResult";
+        return "scanResult";  // 스탬프 적립 결과 페이지
     }
 }
