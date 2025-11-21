@@ -125,6 +125,14 @@
                     <input type="tel" id="phone" name="Phone" placeholder="01011112222"
                            inputmode="numeric" pattern="^01[016789]\d{7,8}$"  />
 
+                    <!-- 약관 안내 -->
+                    <label>약관</label>
+                    <div class="muted">
+                        회원 가입을 위해서는 <a href="/terms.html" target="_blank">이용약관</a>과
+                        <a href="/privacy.html" target="_blank">개인정보 처리방침</a>에 대한 확인과 동의가 필요합니다.
+                    </div>
+
+
                     <!-- 제출 -->
                     <div class="full">
                         <button type="submit" class="button full icon solid fa-user-plus">회원가입</button>
