@@ -11,7 +11,6 @@
 
     <link rel="stylesheet" href="/assets/css/main.css" />
     <style>
-        body{ background:#f5fafc; }
 
         .stamp-panel{
           max-width:1100px;

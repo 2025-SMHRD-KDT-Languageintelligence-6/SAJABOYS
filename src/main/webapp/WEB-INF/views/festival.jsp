@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="assets/css/main.css" />
 
     <style>
-        body{ background:#f5fafc; }
 
         .festival-layout{
           max-width:1200px;
