@@ -18,13 +18,12 @@ public class CommentService {
 
     // DB에서 댓글 가져와서 트리 구조로 변환 및 Level 계산
     public List<Comment> getComments(int snsIdx) {
-        // 1. 모든 댓글을 플랫 리스트로 가져옴 (이때 정렬된 상태를 유지해야 함)
+        // ... (기존 getComments 메서드 내용은 동일)
         List<Comment> allComments = mapper.getComments(snsIdx);
         if (allComments.isEmpty()) {
             return new ArrayList<>();
         }
 
-        // 2. Map을 사용하여 CommentIdx(ID)를 키로 저장, O(1) 탐색 가능하게 함
         Map<Integer, Comment> commentMap = allComments.stream()
                 .collect(Collectors.toMap(Comment::getCommentIdx, dto -> dto));
 
@@ -33,33 +32,50 @@ public class CommentService {
         for (Comment comment : allComments) {
             Integer parentId = comment.getParentIdx();
 
-            // 3. 부모 ID가 없거나 0이면 Level 0, 최상위 리스트에 추가
             if (parentId == null || parentId.equals(0)) {
-                comment.setLevel(0); // ⭐ Level 0 설정
+                comment.setLevel(0);
                 rootComments.add(comment);
             } else {
-                // 4. 부모 Map에서 O(1)로 부모 댓글을 찾음
                 Comment parent = commentMap.get(parentId);
 
                 if (parent != null) {
-                    // 부모 Level + 1로 자신의 Level 설정
-                    comment.setLevel(parent.getLevel() + 1); // ⭐ Level 설정
-
-                    // 부모의 children 목록에 자신을 추가
+                    comment.setLevel(parent.getLevel() + 1);
                     parent.getChildren().add(comment);
                 } else {
-                    // 부모가 없으면 최상위 댓글로 처리 (데이터베이스 오류 등)
                     comment.setLevel(0);
                     rootComments.add(comment);
                 }
             }
         }
-
-        // 5. 계층적으로 구성된 최상위 목록만 반환
         return rootComments;
     }
 
     public void addComment(Comment comment) {
         mapper.insertComment(comment);
+    }
+
+    /**
+     * 댓글 삭제 로직 (대댓글 유무에 따른 조건부 삭제)
+     */
+    public boolean deleteComment(int commentIdx, int userIdx) {
+
+        // 1. 해당 댓글에 대댓글이 있는지 확인
+        // mapper.countReplies(commentIdx)가 XML의 SELECT 쿼리를 실행합니다.
+        int replyCount = mapper.countReplies(commentIdx);
+        int deletedRows = 0;
+
+        if (replyCount > 0) {
+            // 2-A. 대댓글이 있는 경우: 소프트 삭제 (메시지 남기기)
+            // UPDATE: CommentContent = '삭제된 댓글입니다.', IsDeleted = TRUE
+            deletedRows = mapper.deleteComment(commentIdx, userIdx); // 소프트 삭제 쿼리 호출
+
+        } else {
+            // 2-B. 대댓글이 없는 경우: DB에서 완전히 삭제 (Hard Delete)
+            // DELETE FROM comments...
+            deletedRows = mapper.hardDeleteComment(commentIdx, userIdx); // 하드 삭제 쿼리 호출
+        }
+
+        // 3. 업데이트/삭제된 행이 1개 이상이면 성공
+        return deletedRows > 0;
     }
 }

@@ -12,6 +12,7 @@ public class Comment {
     private int UserIdx;
     private String CommentContent;
     private String CreatedAt;
+    private boolean IsDeleted;
 
     // 조인해서 닉네임 표시용
     private String UserNickname;

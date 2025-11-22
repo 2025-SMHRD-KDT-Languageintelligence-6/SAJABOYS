@@ -10,14 +10,13 @@
     <link rel="stylesheet" href="/assets/css/main.css" />
 
     <style>
-        /* CSS 변수: 들여쓰기 기본 단위를 정의합니다. (수정 가능) */
+        /* (생략: CSS 스타일은 유지) */
         :root {
-            --indent-unit-pc: 40px; /* PC 환경의 들여쓰기 단위 */
-            --indent-unit-mobile: 20px; /* 모바일 환경의 들여쓰기 단위 */
-            --base-padding: 10px; /* Level 0 댓글의 기본 좌측 패딩 */
+            --indent-unit-pc: 40px;
+            --indent-unit-mobile: 20px;
+            --base-padding: 10px;
         }
 
-        /* (생략: 게시글 레이아웃 - 변경 없음) */
         .view-wrap { max-width:900px; margin:2.5rem auto 3rem; }
         .view-header { margin-bottom:1rem; }
         .view-header h2 { margin:0; font-size:1.8rem; font-weight:800; }
@@ -54,9 +53,9 @@
             padding: .55rem 0;
             border-bottom:1px solid #e9edf3;
             font-size:.9rem;
-            position: relative; /* 답글 버튼 위치 조정을 위한 기준점 */
+            position: relative;
             transition: all 0.3s ease;
-            padding-left: var(--base-padding); /* Level 0의 기본 패딩 */
+            padding-left: var(--base-padding);
         }
 
         /* 대댓글 시각적 구분 - 배경색만 남김 */
@@ -70,12 +69,11 @@
             padding-left: calc(var(--base-padding) + (var(--indent-unit-pc) * var(--data-level, 0)));
         }
 
-        /* ---------------------------------------------------- */
         /* 댓글 메타 및 작성일/답글 버튼 위치 수정 */
         .comment-meta {
             display:flex;
-            justify-content:space-between; /* 작성자와 메타 정보를 양 끝으로 */
-            align-items: flex-start; /* 세로 정렬 상단 정렬 */
+            justify-content:space-between;
+            align-items: flex-start;
             margin-bottom:.15rem;
             color:#666;
             font-size:.8rem;
@@ -116,8 +114,20 @@
         .reply-btn:hover {
             text-decoration: underline;
         }
-        /* ---------------------------------------------------- */
 
+        /* 삭제 버튼 스타일 */
+        .delete-btn {
+            cursor: pointer;
+            color: #b60000;
+            font-size: 0.85rem;
+            margin-top: 5px;
+            margin-right: 10px;
+            margin-left: 10px;
+            user-select: none;
+        }
+        .delete-btn:hover {
+            text-decoration: underline;
+        }
 
         .comment-body {
             color:#333;
@@ -282,9 +292,44 @@
 
 <script>
 const snsIdx = ${sns.snsIdx};
-const sessionUser = ${not empty sessionScope.user ? sessionScope.user.userIdx : 'null'};
+// 🚨🚨🚨 EL 안정성 확보를 위해 String으로 받은 후 JavaScript에서 Number로 변환합니다.
+// 세션이 없으면 '0'을 출력합니다.
+const sessionUserIdx = '${not empty sessionScope.user ? sessionScope.user.userIdx : 0}';
+const sessionUser = Number(sessionUserIdx); // 숫자로 변환하여 비교에 사용
 
-// 댓글 렌더링 함수, 재귀적 호출로 대댓글까지 표시
+// 댓글 삭제 함수
+function deleteComment(commentIdx) {
+
+    var deleteUrl = "/comment/delete/" + commentIdx;
+
+    if (!confirm('정말 이 댓글을 삭제하시겠습니까?')) {
+        return;
+    }
+
+    fetch(deleteUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+    .then(res => res.text())
+    .then(result => {
+        if (result === 'success') {
+            alert('댓글이 삭제되었습니다.');
+            loadComments(); // 댓글 목록 새로고침
+        } else {
+            alert('댓글 삭제에 실패했습니다. 서버 응답을 확인하세요.');
+            console.error('댓글 삭제 실패 응답:', result);
+        }
+    })
+    .catch(error => {
+        console.error('댓글 삭제 요청 중 오류 발생:', error);
+        alert('댓글 삭제 중 통신 오류가 발생했습니다.');
+    });
+}
+
+
+// 댓글 렌더링 함수 (수정됨: 삭제 댓글 처리 로직 추가)
 function renderComment(c, parentElement, level = 0) {
     const div = document.createElement('div');
     div.className = 'comment-item';
@@ -304,6 +349,48 @@ function renderComment(c, parentElement, level = 0) {
     const metaDiv = document.createElement('div');
     metaDiv.className = 'comment-meta';
 
+    // ------------------------------------------------------------------
+    // 🚨🚨🚨 삭제된 댓글 처리 로직 시작
+    // c.isDeleted 필드나 commentContent가 비어있으면 삭제된 것으로 간주합니다.
+    const isCommentDeleted = c.isDeleted === true || !c.commentContent;
+
+    if (isCommentDeleted) {
+        // 1. 작성자 및 메타 정보
+        const authorWrapper = document.createElement('span');
+        authorWrapper.className = 'comment-author-wrapper';
+        const authorSpan = document.createElement('span');
+        authorSpan.className = 'comment-author';
+        authorSpan.textContent = (currentLevel > 0 ? '↳ ' : '') + '삭제됨';
+        authorWrapper.appendChild(authorSpan);
+
+        const rightMetaDiv = document.createElement('div');
+        rightMetaDiv.className = 'comment-meta-right';
+
+        metaDiv.appendChild(authorWrapper);
+        metaDiv.appendChild(rightMetaDiv);
+        div.appendChild(metaDiv);
+
+
+        // 2. 본문 내용 대신 '삭제된 댓글입니다.' 표시
+        const bodyDiv = document.createElement('div');
+        bodyDiv.className = 'comment-body';
+        bodyDiv.style.color = '#777';
+        bodyDiv.style.fontStyle = 'italic';
+        bodyDiv.textContent = '삭제된 댓글입니다.';
+        div.appendChild(bodyDiv);
+
+        parentElement.appendChild(div);
+
+        // 자식 댓글만 재귀 호출하여 구조를 유지합니다.
+        if(c.children && c.children.length > 0) {
+            c.children.forEach(child => renderComment(child, parentElement, currentLevel + 1));
+        }
+        return; // 현재 댓글 처리를 여기서 종료 (답글/삭제 버튼 생성 방지)
+    }
+    // 🚨🚨🚨 삭제된 댓글 처리 로직 끝
+    // ------------------------------------------------------------------
+
+    // 1. 삭제되지 않은 댓글의 메타 정보
     const authorWrapper = document.createElement('span');
     authorWrapper.className = 'comment-author-wrapper';
 
@@ -326,15 +413,14 @@ function renderComment(c, parentElement, level = 0) {
     rightMetaDiv.appendChild(dateSpan);
 
 
-    // 3. 답글 버튼
-    if(sessionUser && sessionUser !== 'null') {
+    // 2. 답글 버튼 & 삭제 버튼
+    if(sessionUser > 0) { // sessionUser가 0보다 클 때만 (로그인 상태)
+        // 답글 버튼
         const replyBtn = document.createElement('span');
         replyBtn.className = 'reply-btn';
         replyBtn.dataset.idx = c.commentIdx;
-
         const replyTargetNickname = c.userNickname;
 
-        // 닉네임이 유효할 때만 dataset에 저장
         if (replyTargetNickname) {
             replyBtn.dataset.nickname = replyTargetNickname;
         }
@@ -342,39 +428,42 @@ function renderComment(c, parentElement, level = 0) {
         replyBtn.textContent = '답글';
         replyBtn.addEventListener('click', () => {
             const parentInput = document.getElementById('commentText');
-            // 저장된 닉네임을 가져오기
             let targetNickname = replyBtn.dataset.nickname;
 
-            // 닉네임이 있을 경우에만 @닉네임 포맷을 사용합니다.
             if (targetNickname) {
-                // 초강력 안정화 조치: 모든 공백을 제거하여 순수한 닉네임 문자열 생성
                 const cleanNickname = String(targetNickname).replace(/\s/g, '').trim();
-
-                // 💡 디버깅 로그: 닉네임이 정확히 무엇인지 콘솔에 출력 (문제 해결의 핵심 단서)
-                console.log('클릭된 닉네임 데이터 (Clean):', cleanNickname, '| 길이:', cleanNickname.length);
-
                 if (cleanNickname) {
-                    // 🚨 문자열 결합(`+`) 방식으로 대체 (템플릿 리터럴 회피)
                     parentInput.value = '@' + cleanNickname + ' ';
                     parentInput.dataset.parent = c.commentIdx;
                 } else {
-                    // 닉네임이 공백만 있었을 경우 처리
                     parentInput.value = '';
                     alert("답글 대상 닉네임이 유효하지 않아 맨션 기능을 사용할 수 없습니다. 답글 내용은 직접 입력해주세요.");
                     parentInput.dataset.parent = c.commentIdx;
                 }
             } else {
-                // 닉네임이 없는 댓글에 답글 버튼을 누른 경우:
                 parentInput.value = '';
                 alert("해당 댓글은 '익명'으로 작성되어 맨션 기능을 사용할 수 없습니다. 답글 내용은 직접 입력해주세요.");
-                parentInput.dataset.parent = c.commentIdx; // 부모 idx는 유지하여 대댓글로 등록되게 함
+                parentInput.dataset.parent = c.commentIdx;
             }
             parentInput.focus();
         });
         rightMetaDiv.appendChild(replyBtn);
+
+        // 삭제 버튼 로직 추가 (본인이 작성한 댓글일 경우만 표시)
+        if (sessionUser === c.userIdx) {
+            const deleteBtn = document.createElement('span');
+            deleteBtn.className = 'delete-btn';
+            deleteBtn.dataset.idx = c.commentIdx;
+            deleteBtn.textContent = '삭제';
+            deleteBtn.addEventListener('click', () => {
+                 deleteComment(c.commentIdx);
+            });
+            rightMetaDiv.appendChild(deleteBtn);
+        }
     }
 
-    // 🚨🚨🚨 복구된 핵심 로직: metaDiv에 자식 요소를 추가합니다.
+
+    // 3. 메타 정보와 본문 결합
     metaDiv.appendChild(authorWrapper);
     metaDiv.appendChild(rightMetaDiv);
 
@@ -388,6 +477,7 @@ function renderComment(c, parentElement, level = 0) {
 
     parentElement.appendChild(div);
 
+    // 자식 댓글 재귀 호출
     if(c.children && c.children.length > 0) {
         c.children.forEach(child => renderComment(child, parentElement, currentLevel + 1));
     }
@@ -435,22 +525,19 @@ if(commentSubmit) {
         }
 
         let parentIdx = textArea.dataset.parent || null;
-        let contentToSend = text; // 기본값은 전체 텍스트
+        let contentToSend = text;
 
-        // 맨션 처리 로직
+        // 멘션 제거 로직
         if (parentIdx) {
-            // 정규식으로 맨션(@닉네임 ) 제거
             const mentionRegex = /^@\w+\s/;
             contentToSend = text.replace(mentionRegex, '').trim();
         }
 
-        // 멘션을 제거한 후 내용이 비어있다면 오류 방지
         if(parentIdx && contentToSend.length === 0) {
             alert('댓글 내용을 입력하세요.');
             return;
         }
 
-        // 멘션(@닉네임)만 입력하고 내용이 없는 경우를 막음
         if(contentToSend.length === 0 && text.startsWith('@')) {
              alert('댓글 내용을 입력하세요.');
              return;
@@ -461,7 +548,7 @@ if(commentSubmit) {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
                 snsIdx: snsIdx,
-                commentContent: contentToSend, // 멘션이 제거된 내용 전송
+                commentContent: contentToSend,
                 parentIdx: parentIdx
             })
         })
