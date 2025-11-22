@@ -4,7 +4,7 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.chaser.mapper.CommentMapper">
 
-    <!-- 댓글 목록 (대댓글 포함) -->
+    <!-- 댓글 + 대댓글 목록 -->
     <select id="getComments" resultType="com.project.chaser.dto.Comment">
         SELECT
         c.CommentIdx,
@@ -12,18 +12,16 @@
         c.UserIdx,
         c.CommentContent,
         c.CreatedAt,
-        u.Nickname as UserNickname,
+        u.Nickname AS userNickname,
         c.ParentIdx
         FROM comments c
         JOIN user u ON c.UserIdx = u.UserIdx
-        WHERE c.SnsIdx = #{SnsIdx}
-        ORDER BY
-        COALESCE(c.ParentIdx, c.CommentIdx) ASC,  -- 부모 댓글 기준으로 정렬
-        c.CreatedAt ASC                          -- 댓글 순서
+        WHERE c.SnsIdx = #{snsIdx}
+        ORDER BY COALESCE(c.ParentIdx, c.CommentIdx) ASC, c.CreatedAt ASC
     </select>
 
-    <!-- 댓글 등록 -->
-    <insert id="insertComment" parameterType="com.project.chaser.dto.Comment">
+    <!-- 댓글/대댓글 등록 -->
+    <insert id="insertComment" parameterType="com.project.chaser.dto.Comment" useGeneratedKeys="true" keyProperty="CommentIdx">
         INSERT INTO comments (SnsIdx, UserIdx, CommentContent, ParentIdx)
         VALUES (#{SnsIdx}, #{UserIdx}, #{CommentContent}, #{ParentIdx})
     </insert>

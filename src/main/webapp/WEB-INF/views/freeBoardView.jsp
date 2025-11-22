@@ -7,11 +7,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>자유게시판 글보기 | 추적자</title>
-
     <link rel="stylesheet" href="/assets/css/main.css" />
 
     <style>
-        /* 기존 스타일 그대로 유지 */
+        /* CSS 변수: 들여쓰기 기본 단위를 정의합니다. (수정 가능) */
+        :root {
+            --indent-unit-pc: 40px; /* PC 환경의 들여쓰기 단위 */
+            --indent-unit-mobile: 20px; /* 모바일 환경의 들여쓰기 단위 */
+            --base-padding: 10px; /* Level 0 댓글의 기본 좌측 패딩 */
+        }
+
+        /* (생략: 게시글 레이아웃 - 변경 없음) */
         .view-wrap { max-width:900px; margin:2.5rem auto 3rem; }
         .view-header { margin-bottom:1rem; }
         .view-header h2 { margin:0; font-size:1.8rem; font-weight:800; }
@@ -35,27 +41,136 @@
         .view-btn-row { margin-top:1.2rem; display:flex; justify-content:flex-end; gap:.4rem; flex-wrap:wrap; }
         .view-btn-row .button { min-width:90px; font-size:.9rem; padding:.45rem 0; }
 
+        /* 댓글 & 대댓글 */
         .comment-wrap { margin-top:2rem; background:#fff; border-radius:16px; box-shadow:0 4px 14px rgba(0,0,0,.08); padding:1.2rem 1.4rem 1.4rem; }
         .comment-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:.8rem; font-size:.95rem; }
         .comment-header h3 { margin:0; font-size:1.1rem; font-weight:800; }
         .comment-header span { font-size:.85rem; color:#666; }
 
-        .comment-list { margin-bottom:1rem; max-height:260px; overflow-y:auto; }
-        .comment-item { border-bottom:1px solid #e9edf3; padding:.55rem 0; font-size:.9rem; }
-        .comment-meta { display:flex; justify-content:space-between; margin-bottom:.15rem; color:#666; font-size:.8rem; }
-        .comment-author { font-weight:700; }
-        .comment-body { color:#333; white-space:pre-line; }
-        .reply-btn { cursor:pointer; color:#0076b6; font-size:0.85rem; margin-left:5px; }
+        .comment-list { margin-bottom:1rem; max-height:400px; overflow-y:auto; }
 
-        .comment-form { border-top:1px solid #dde3ec; padding-top:.7rem; }
-        .comment-form-row { display:flex; gap:.5rem; flex-wrap:wrap; }
-        .comment-form-row textarea { flex:1; min-height:70px; border-radius:8px; border:1px solid #ccc; padding:.5rem .6rem; resize:vertical; font-size:.9rem; }
-        .comment-form-row .button { min-width:90px; height:40px; align-self:flex-end; font-size:.9rem; padding:0; }
+        /* 댓글 기본 스타일 */
+        .comment-item {
+            padding: .55rem 0;
+            border-bottom:1px solid #e9edf3;
+            font-size:.9rem;
+            position: relative; /* 답글 버튼 위치 조정을 위한 기준점 */
+            transition: all 0.3s ease;
+            padding-left: var(--base-padding); /* Level 0의 기본 패딩 */
+        }
 
+        /* 대댓글 시각적 구분 - 배경색만 남김 */
+        .comment-item.reply-item {
+            background-color: #f8fafd;
+            border-radius: 6px;
+        }
+
+        /* 무제한 레벨 들여쓰기 */
+        .comment-item[data-level] {
+            padding-left: calc(var(--base-padding) + (var(--indent-unit-pc) * var(--data-level, 0)));
+        }
+
+        /* ---------------------------------------------------- */
+        /* 댓글 메타 및 작성일/답글 버튼 위치 수정 */
+        .comment-meta {
+            display:flex;
+            justify-content:space-between; /* 작성자와 메타 정보를 양 끝으로 */
+            align-items: flex-start; /* 세로 정렬 상단 정렬 */
+            margin-bottom:.15rem;
+            color:#666;
+            font-size:.8rem;
+        }
+
+        .comment-meta-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            position: absolute;
+            right: 0;
+            top: 0.55rem;
+            font-size: 0.8rem;
+            line-height: 1.2;
+        }
+
+        /* 작성자 스타일 */
+        .comment-author {
+            font-weight:700;
+            color:#0076b6;
+        }
+
+        /* 작성일 (dateSpan) 스타일 */
+        .comment-date {
+            color:#666;
+            margin-right: 10px;
+        }
+
+        /* 답글 버튼 (replyBtn) 스타일 */
+        .reply-btn {
+            cursor:pointer;
+            color:#0076b6;
+            font-size:0.85rem;
+            margin-top: 5px;
+            margin-right: 10px;
+            user-select:none;
+        }
+        .reply-btn:hover {
+            text-decoration: underline;
+        }
+        /* ---------------------------------------------------- */
+
+
+        .comment-body {
+            color:#333;
+            white-space:pre-line;
+            word-break: break-word;
+        }
+
+        /* 댓글 작성 폼 (생략: 변경 없음) */
+        .comment-form {
+            border-top:1px solid #dde3ec;
+            padding-top:.7rem;
+        }
+        .comment-form-row {
+            display:flex;
+            gap:.5rem;
+            flex-wrap:wrap;
+        }
+        .comment-form-row textarea {
+            flex:1;
+            min-height:70px;
+            border-radius:8px;
+            border:1px solid #ccc;
+            padding:.5rem .6rem;
+            resize:vertical;
+            font-size:.9rem;
+            font-family: inherit;
+        }
+        .comment-form-row .button {
+            min-width:90px;
+            height:40px;
+            align-self:flex-end;
+            font-size:.9rem;
+            padding:0;
+            background:#0076b6;
+            color:#fff;
+            border:none;
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+        }
+        .comment-form-row .button:hover {
+            background:#005a91;
+        }
+
+        /* 반응형 */
         @media (max-width:736px){
             .post-meta-row{ flex-direction:column; align-items:flex-start; }
             .comment-form-row{ flex-direction:column; }
             .comment-form-row .button{ width:100%; height:42px; }
+
+            /* 모바일 환경에서 들여쓰기 조정 */
+            .comment-item[data-level] {
+                padding-left: calc(var(--base-padding) + (var(--indent-unit-mobile) * var(--data-level, 0)));
+            }
         }
     </style>
 </head>
@@ -99,31 +214,27 @@
                 </div>
             </div>
 
-            <div class="post-content">
-                ${sns.snsContent}
-                <c:if test="${not empty sns.fileList}">
+            <div class="post-content">${sns.snsContent}</div>
+
+            <c:if test="${not empty sns.fileList}">
+                <div class="attach-area">
                     <p><strong>첨부 이미지:</strong></p>
                     <c:forEach var="file" items="${sns.fileList}">
-                        <c:if test="${fn:contains(file.fileName, '.jpg') || fn:contains(file.fileName, '.jpeg') || fn:contains(file.fileName, '.png') || fn:contains(file.fileName, '.gif')}">
+                        <c:if test="${fn:contains(file.fileName, '.jpg') or fn:contains(file.fileName, '.jpeg') or fn:contains(file.fileName, '.png') or fn:contains(file.fileName, '.gif')}">
                             <img src="/upload/${file.filePath}" alt="${file.fileName}" style="max-width:100%; height:auto; margin-top:10px;">
                         </c:if>
                     </c:forEach>
-                </c:if>
-            </div>
+                </div>
 
-            <div class="attach-area">
-                <c:if test="${not empty sns.fileList}">
+                <div class="attach-area">
                     <p><strong>첨부 파일 :</strong></p>
                     <ul>
                         <c:forEach var="file" items="${sns.fileList}">
                             <li><a href="/upload/${file.filePath}" target="_blank">${file.fileName}</a></li>
                         </c:forEach>
                     </ul>
-                </c:if>
-                <c:if test="${empty sns.fileList}">
-                    <p>첨부 파일이 없습니다.</p>
-                </c:if>
-            </div>
+                </div>
+            </c:if>
 
             <div class="view-btn-row">
                 <button type="button" class="button alt" onclick="location.href='/sns'">목록</button>
@@ -135,7 +246,6 @@
                 </c:if>
             </div>
         </section>
-
         <section class="comment-wrap">
             <div class="comment-header">
                 <h3>댓글</h3>
@@ -147,7 +257,7 @@
             <c:if test="${not empty sessionScope.user}">
                 <div class="comment-form">
                     <div class="comment-form-row">
-                        <textarea id="commentText" placeholder="댓글을 입력하세요. 예) 오늘 몇 시에 만날까요?"></textarea>
+                        <textarea id="commentText" placeholder="댓글을 입력하세요. (답글을 달 때는 맨션 @작성자 를 포함해주세요)"></textarea>
                         <button type="button" class="button" id="commentSubmit">등록</button>
                     </div>
                 </div>
@@ -171,93 +281,210 @@
 </div>
 
 <script>
-    const snsIdx = ${sns.snsIdx};
-    const sessionUser = ${not empty sessionScope.user ? sessionScope.user.userIdx : 'null'};
+const snsIdx = ${sns.snsIdx};
+const sessionUser = ${not empty sessionScope.user ? sessionScope.user.userIdx : 'null'};
 
-    function loadComments() {
-        fetch(`/comment/${snsIdx}`)
-            .then(res => res.json())
-            .then(list => {
-                const listBox = document.getElementById('commentList');
-                listBox.innerHTML = '';
+// 댓글 렌더링 함수, 재귀적 호출로 대댓글까지 표시
+function renderComment(c, parentElement, level = 0) {
+    const div = document.createElement('div');
+    div.className = 'comment-item';
 
-                list.forEach(c => {
-                    const commentItem = document.createElement('div');
-                    commentItem.className = 'comment-item';
+    const currentLevel = parseInt(level) || 0;
+    div.dataset.level = currentLevel;
+    div.style.setProperty('--data-level', currentLevel);
 
-                    const commentMeta = document.createElement('div');
-                    commentMeta.className = 'comment-meta';
-
-                    const authorSpan = document.createElement('span');
-                    authorSpan.className = 'comment-author';
-                    authorSpan.textContent = c.userNickname || '익명';
-
-                    const dateSpan = document.createElement('span');
-                    dateSpan.textContent = c.createdAt || '날짜 없음';
-
-                    const metaInner = document.createElement('div');
-                    metaInner.appendChild(authorSpan);
-                    metaInner.appendChild(document.createTextNode(' · '));
-                    metaInner.appendChild(dateSpan);
-
-                    // 답글 버튼 (로그인한 사용자만)
-                    if(sessionUser) {
-                        const replyBtn = document.createElement('span');
-                        replyBtn.className = 'reply-btn';
-                        replyBtn.dataset.idx = c.commentIdx;
-                        replyBtn.textContent = '답글';
-                        replyBtn.addEventListener('click', () => {
-                            const parentInput = document.getElementById('commentText');
-                            parentInput.value = `@${c.userNickname} `; // 간단 멘션
-                            parentInput.dataset.parent = c.commentIdx; // parentIdx 저장
-                            parentInput.focus();
-                        });
-                        metaInner.appendChild(replyBtn);
-                    }
-
-                    commentMeta.appendChild(metaInner);
-
-                    const commentBody = document.createElement('div');
-                    commentBody.className = 'comment-body';
-                    commentBody.textContent = c.commentContent || '';
-
-                    commentItem.appendChild(commentMeta);
-                    commentItem.appendChild(commentBody);
-
-                    listBox.appendChild(commentItem);
-                });
-
-                document.getElementById('commentCount').innerText = list.length;
-            })
-            .catch(err => console.error('댓글 불러오기 실패:', err));
+    if(currentLevel > 0) {
+        div.classList.add('reply-item');
+        if (currentLevel >= 1) {
+            const levelClass = currentLevel;
+            div.classList.add('reply-level-' + levelClass);
+        }
     }
 
-    loadComments();
+    const metaDiv = document.createElement('div');
+    metaDiv.className = 'comment-meta';
 
-    const commentSubmit = document.getElementById('commentSubmit');
-    if(commentSubmit){
-        commentSubmit.addEventListener('click', function(){
-            const textArea = document.getElementById('commentText');
-            const text = textArea.value.trim();
-            if(!text){ alert('댓글을 입력하세요.'); return; }
+    const authorWrapper = document.createElement('span');
+    authorWrapper.className = 'comment-author-wrapper';
 
-            const parentIdx = textArea.dataset.parent || null;
+    const authorSpan = document.createElement('span');
+    authorSpan.className = 'comment-author';
 
-            fetch('/comment/add', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ snsIdx: snsIdx, commentContent: text, parentIdx: parentIdx })
-            })
-            .then(res => res.text())
-            .then(result => {
-                if(result === 'loginRequired'){ alert('로그인이 필요합니다.'); return; }
-                textArea.value = '';
-                textArea.removeAttribute('data-parent'); // 초기화
-                loadComments();
-            })
-            .catch(err => console.error('댓글 등록 실패:', err));
+    const displayName = c.userNickname || '익명';
+    authorSpan.textContent = (currentLevel > 0 ? '↳ ' : '') + displayName;
+
+    authorWrapper.appendChild(authorSpan);
+
+
+    const rightMetaDiv = document.createElement('div');
+    rightMetaDiv.className = 'comment-meta-right';
+
+    const dateSpan = document.createElement('span');
+    dateSpan.className = 'comment-date';
+    dateSpan.textContent = c.createdAt || '';
+
+    rightMetaDiv.appendChild(dateSpan);
+
+
+    // 3. 답글 버튼
+    if(sessionUser && sessionUser !== 'null') {
+        const replyBtn = document.createElement('span');
+        replyBtn.className = 'reply-btn';
+        replyBtn.dataset.idx = c.commentIdx;
+
+        const replyTargetNickname = c.userNickname;
+
+        // 닉네임이 유효할 때만 dataset에 저장
+        if (replyTargetNickname) {
+            replyBtn.dataset.nickname = replyTargetNickname;
+        }
+
+        replyBtn.textContent = '답글';
+        replyBtn.addEventListener('click', () => {
+            const parentInput = document.getElementById('commentText');
+            // 저장된 닉네임을 가져오기
+            let targetNickname = replyBtn.dataset.nickname;
+
+            // 닉네임이 있을 경우에만 @닉네임 포맷을 사용합니다.
+            if (targetNickname) {
+                // 초강력 안정화 조치: 모든 공백을 제거하여 순수한 닉네임 문자열 생성
+                const cleanNickname = String(targetNickname).replace(/\s/g, '').trim();
+
+                // 💡 디버깅 로그: 닉네임이 정확히 무엇인지 콘솔에 출력 (문제 해결의 핵심 단서)
+                console.log('클릭된 닉네임 데이터 (Clean):', cleanNickname, '| 길이:', cleanNickname.length);
+
+                if (cleanNickname) {
+                    // 🚨 문자열 결합(`+`) 방식으로 대체 (템플릿 리터럴 회피)
+                    parentInput.value = '@' + cleanNickname + ' ';
+                    parentInput.dataset.parent = c.commentIdx;
+                } else {
+                    // 닉네임이 공백만 있었을 경우 처리
+                    parentInput.value = '';
+                    alert("답글 대상 닉네임이 유효하지 않아 맨션 기능을 사용할 수 없습니다. 답글 내용은 직접 입력해주세요.");
+                    parentInput.dataset.parent = c.commentIdx;
+                }
+            } else {
+                // 닉네임이 없는 댓글에 답글 버튼을 누른 경우:
+                parentInput.value = '';
+                alert("해당 댓글은 '익명'으로 작성되어 맨션 기능을 사용할 수 없습니다. 답글 내용은 직접 입력해주세요.");
+                parentInput.dataset.parent = c.commentIdx; // 부모 idx는 유지하여 대댓글로 등록되게 함
+            }
+            parentInput.focus();
         });
+        rightMetaDiv.appendChild(replyBtn);
     }
+
+    // 🚨🚨🚨 복구된 핵심 로직: metaDiv에 자식 요소를 추가합니다.
+    metaDiv.appendChild(authorWrapper);
+    metaDiv.appendChild(rightMetaDiv);
+
+
+    const bodyDiv = document.createElement('div');
+    bodyDiv.className = 'comment-body';
+    bodyDiv.textContent = c.commentContent || '';
+
+    div.appendChild(metaDiv);
+    div.appendChild(bodyDiv);
+
+    parentElement.appendChild(div);
+
+    if(c.children && c.children.length > 0) {
+        c.children.forEach(child => renderComment(child, parentElement, currentLevel + 1));
+    }
+}
+
+// 댓글 총 개수 계산 (대댓글 포함)
+function countCommentsRecursively(comments) {
+    let count = comments.length;
+    comments.forEach(c => {
+        if(c.children) {
+            count += countCommentsRecursively(c.children);
+        }
+    });
+    return count;
+}
+
+// 댓글 불러오기
+function loadComments() {
+    fetch(`/comment/${snsIdx}`)
+        .then(res => res.json())
+        .then(list => {
+            const listBox = document.getElementById('commentList');
+            listBox.innerHTML = '';
+            list.forEach(c => renderComment(c, listBox));
+
+            document.getElementById('commentCount').innerText = countCommentsRecursively(list);
+        })
+        .catch(error => {
+            console.error('댓글 로드 중 오류 발생:', error);
+            document.getElementById('commentList').innerHTML = '<p style="color:#b60000;">댓글을 불러올 수 없습니다.</p>';
+        });
+}
+
+loadComments(); // 최초 로드
+
+// 댓글 등록
+const commentSubmit = document.getElementById('commentSubmit');
+if(commentSubmit) {
+    commentSubmit.addEventListener('click', () => {
+        const textArea = document.getElementById('commentText');
+        let text = textArea.value.trim();
+        if(!text) {
+            alert('댓글을 입력하세요.');
+            return;
+        }
+
+        let parentIdx = textArea.dataset.parent || null;
+        let contentToSend = text; // 기본값은 전체 텍스트
+
+        // 맨션 처리 로직
+        if (parentIdx) {
+            // 정규식으로 맨션(@닉네임 ) 제거
+            const mentionRegex = /^@\w+\s/;
+            contentToSend = text.replace(mentionRegex, '').trim();
+        }
+
+        // 멘션을 제거한 후 내용이 비어있다면 오류 방지
+        if(parentIdx && contentToSend.length === 0) {
+            alert('댓글 내용을 입력하세요.');
+            return;
+        }
+
+        // 멘션(@닉네임)만 입력하고 내용이 없는 경우를 막음
+        if(contentToSend.length === 0 && text.startsWith('@')) {
+             alert('댓글 내용을 입력하세요.');
+             return;
+        }
+
+        fetch('/comment/add', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                snsIdx: snsIdx,
+                commentContent: contentToSend, // 멘션이 제거된 내용 전송
+                parentIdx: parentIdx
+            })
+        })
+        .then(res => res.text())
+        .then(result => {
+            if(result === 'loginRequired') {
+                alert('로그인이 필요합니다.');
+                return;
+            }
+            if(result === 'success') {
+                textArea.value = '';
+                textArea.removeAttribute('data-parent'); // 부모 인덱스 초기화
+                loadComments();
+            } else {
+                alert('댓글 등록에 실패했습니다. 결과: ' + result);
+            }
+        })
+        .catch(error => {
+            console.error('댓글 등록 오류:', error);
+            alert('댓글 등록 중 오류가 발생했습니다.');
+        });
+    });
+}
 </script>
 
 </body>
