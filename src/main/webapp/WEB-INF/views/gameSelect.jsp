@@ -6,24 +6,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>방 선택 | 거점 탐험전</title>
+    <title>게임방 선택 | 거점 탐험전</title>
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/css/game-select.css">
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
 </head>
 <body>
-
 <div id="page-wrapper">
     <main class="select-layout">
         <div class="select-grid">
 
-            <!-- 방 목록 -->
+            <!-- 좌측: 방 목록 -->
             <section class="wait-box">
                 <h3>생성된 방</h3>
                 <p>현재 활성화된 게임 방 목록</p>
                 <div class="wait-num" id="waitCount">
                     <c:out value="${fn:length(roomList)}"/> 개
                 </div>
-
                 <div class="room-list" id="roomListContainer">
                     <c:choose>
                         <c:when test="${empty roomList}">
@@ -32,10 +32,16 @@
                         <c:otherwise>
                             <c:forEach var="room" items="${roomList}">
                                 <div class="room-item">
-                                    <strong>${room.title}</strong><br>
-                                    <span>모드: ${room.mode}</span><br>
-                                    <span>${room.current}/${room.max != null ? room.max : '-' } 명</span>
-                                    <button onclick="enterRoom('${room.id}')">입장</button>
+                                    <strong><c:out value="${room.title}"/></strong><br>
+                                    <span>모드: <c:out value="${room.mode}"/></span><br>
+                                    <span><c:out value="${room.current}"/>/<c:out value="${room.max}"/> 명</span><br>
+                                    <span>비밀번호:
+                                        <c:choose>
+                                            <c:when test="${not empty room.password}">있음</c:when>
+                                            <c:otherwise>없음</c:otherwise>
+                                        </c:choose>
+                                    </span><br>
+                                    <button onclick="enterRoom('<c:out value="${room.id}"/>')">입장</button>
                                 </div>
                             </c:forEach>
                         </c:otherwise>
@@ -43,7 +49,7 @@
                 </div>
             </section>
 
-            <!-- 방 생성 -->
+            <!-- 우측: 방 생성 -->
             <section class="game-select-box">
                 <h2>방 만들기</h2>
                 <form id="createRoomForm">
@@ -57,11 +63,9 @@
                             <strong>🧟 좀비 아포칼립스</strong>
                         </label>
                     </div>
-
                     <input type="text" name="title" placeholder="방 제목 입력" required>
                     <input type="number" name="max" placeholder="최대 인원 수 입력 (선택)" min="2">
                     <input type="password" name="password" placeholder="비밀번호 (선택)">
-
                     <button type="submit" class="start-btn">방 만들기</button>
                 </form>
             </section>
@@ -71,60 +75,58 @@
 </div>
 
 <script>
-    // 방 입장
-    function enterRoom(roomId){
-        location.href = "/room/enter?roomId=" + roomId;
-    }
+const userNickname = "${user.nickname}";
+let roomId = null;
 
-    // 방 생성
-    document.getElementById("createRoomForm").addEventListener("submit", function(e){
-        e.preventDefault();
-        const formData = new FormData(this);
+// 방 입장
+function enterRoom(rid){
+    roomId = rid;
+    location.href = "/room/game?roomId=" + rid;
+}
 
-        fetch("/room/create", {
-            method: "POST",
-            body: formData
-        })
+// 방 생성 + 자동 입장
+document.getElementById("createRoomForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    const formData = new FormData(this);
+    fetch("/room/createAndEnter", {method: "POST", body: formData})
         .then(r => r.json())
         .then(data => {
             if(data.success){
-                location.href = "/room/enter?roomId=" + data.roomId;
+                enterRoom(data.roomId);
             } else {
                 alert("방 생성 실패: " + data.message);
             }
-        });
-    });
+        })
+        .catch(e => console.error(e));
+});
 
-    // 방 목록 갱신 함수
-    function refreshRoomList() {
-        fetch("/room/list/json")
-            .then(res => res.json())
-            .then(roomList => {
-                const container = document.getElementById("roomListContainer");
-                const waitCount = document.getElementById("waitCount");
-                container.innerHTML = ""; // 기존 목록 초기화
-
-                if(roomList.length === 0) {
-                    container.innerHTML = "<p>현재 생성된 방이 없습니다.</p>";
-                } else {
-                    roomList.forEach(room => {
-                        const div = document.createElement("div");
-                        div.className = "room-item";
-                        div.innerHTML = `<strong>${room.title}</strong><br>
-                                         <span>모드: ${room.mode}</span><br>
-                                         <span>${room.current}/${room.max != null ? room.max : '-' } 명</span>
-                                         <button onclick="enterRoom('${room.id}')">입장</button>`;
-                        container.appendChild(div);
-                    });
-                }
-
-                waitCount.textContent = roomList.length + " 개";
-            });
-    }
-
-    // 3초마다 방 목록 갱신
-    setInterval(refreshRoomList, 3000);
+// 방 목록 자동 갱신
+function refreshRoomList() {
+    fetch("/room/list/json")
+        .then(res => res.json())
+        .then(roomList => {
+            const container = document.getElementById("roomListContainer");
+            const waitCount = document.getElementById("waitCount");
+            container.innerHTML = "";
+            if(roomList.length === 0){
+                container.innerHTML = "<p>현재 생성된 방이 없습니다.</p>";
+            } else {
+                roomList.forEach(room => {
+                    const div = document.createElement("div");
+                    div.className = "room-item";
+                    div.innerHTML = `<strong>${room.title}</strong><br>
+                                     <span>모드: ${room.mode}</span><br>
+                                     <span>${room.current}/${room.max != null ? room.max : '-' } 명</span><br>
+                                     <span>비밀번호: ${room.password ? '있음' : '없음'}</span><br>
+                                     <button onclick="enterRoom('${room.id}')">입장</button>`;
+                    container.appendChild(div);
+                });
+            }
+            waitCount.textContent = roomList.length + " 개";
+        })
+        .catch(e => console.error(e));
+}
+setInterval(refreshRoomList, 3000);
 </script>
-
 </body>
 </html>

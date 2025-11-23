@@ -13,7 +13,6 @@ import java.util.*;
 @RequestMapping("/room")
 public class RoomController {
 
-    // 서버 메모리에 방 목록 저장 (앱 종료 시 초기화)
     private final Map<String, Room> roomMap = new LinkedHashMap<>();
 
     // 방 목록 페이지
@@ -23,29 +22,31 @@ public class RoomController {
         if (user == null) return "redirect:/login";
 
         model.addAttribute("roomList", new ArrayList<>(roomMap.values()));
-        return "gameSelect"; // JSP 이름
+        return "gameSelect";
     }
+
+    // 방 목록 JSON
     @GetMapping("/list/json")
     @ResponseBody
     public List<Room> roomListJson() {
         return new ArrayList<>(roomMap.values());
     }
 
-    // 방 생성
-    @PostMapping("/create")
+    // 방 생성 + 자동 입장
+    @PostMapping("/createAndEnter")
     @ResponseBody
-    public Map<String, Object> createRoom(
+    public Map<String, Object> createAndEnterRoom(
             @RequestParam String title,
             @RequestParam String mode,
             @RequestParam(required = false) Integer max,
             @RequestParam(required = false) String password,
-            HttpSession session
-    ) {
+            HttpSession session) {
+
         Map<String, Object> result = new HashMap<>();
         User user = (User) session.getAttribute("user");
-        if (user == null) {
+        if(user == null){
             result.put("success", false);
-            result.put("message", "로그인 필요");
+            result.put("message", "로그인이 필요합니다.");
             return result;
         }
 
@@ -56,11 +57,12 @@ public class RoomController {
 
         result.put("success", true);
         result.put("roomId", roomId);
+        result.put("enterUrl", "/room/game?roomId=" + roomId);
         return result;
     }
 
-    // 방 입장
-    @GetMapping("/enter")
+    // 게임 방 입장
+    @GetMapping("/game")
     public String enterRoom(@RequestParam String roomId, HttpSession session, Model model) {
         User user = (User) session.getAttribute("user");
         if (user == null) return "redirect:/login";
@@ -75,9 +77,8 @@ public class RoomController {
 
         model.addAttribute("room", room);
         model.addAttribute("user", user);
-        return "gameRoom"; // JSP
+        return "gameRoom";
     }
-
 
     // 방 나가기
     @PostMapping("/leave")
@@ -87,7 +88,7 @@ public class RoomController {
         User user = (User) session.getAttribute("user");
         if (user == null) {
             result.put("success", false);
-            result.put("message", "로그인 필요");
+            result.put("message", "로그인이 필요합니다.");
             return result;
         }
 
@@ -101,6 +102,7 @@ public class RoomController {
         room.getPlayers().remove(user.getNickname());
         room.setCurrent(room.getCurrent() - 1);
 
+        // 방에 플레이어 없으면 삭제
         if (room.getPlayers().isEmpty()) {
             roomMap.remove(roomId);
         }
