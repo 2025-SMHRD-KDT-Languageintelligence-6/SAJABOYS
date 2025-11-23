@@ -24,12 +24,13 @@
   position: relative;
 }
 
+/* 좌측 방 목록과 가운데 방 만들기 카드 동일 크기 */
 .select-grid {
   display: grid;
-  grid-template-columns: 260px minmax(0, 420px) 260px;
+  grid-template-columns: 1fr 1fr; /* 좌측 방 목록과 가운데 카드 균등 분할 */
   gap: 2rem;
   width: 100%;
-  max-width: 1200px;
+  max-width: 900px;
   align-items: stretch;
 }
 
@@ -40,17 +41,17 @@
   padding: 2.4rem 1.8rem;
   border-radius: 32px;
   box-shadow: var(--game-shadow-soft);
-  height: 600px;
   position: relative;
 }
 
-/* 왼쪽: 방 목록 */
+/* 좌측: 방 목록 */
 .wait-box {
   background: linear-gradient(145deg, var(--game-blue-left), var(--game-blue-left-d));
   color: #fff;
   justify-content: flex-start;
   align-items: center;
   text-align: center;
+  height: 600px; /* 가운데 카드와 동일 높이 */
 }
 
 .wait-box::before {
@@ -89,10 +90,10 @@
 }
 
 .room-list {
-  margin-top: 1.5rem;
-  overflow-y: auto;
   flex: 1;
   width: 100%;
+  margin-top: 1.5rem;
+  overflow-y: auto;
 }
 
 .room-item {
@@ -114,12 +115,13 @@
   font-weight: bold;
 }
 
-/* 가운데: 방 생성 */
+/* 가운데: 방 생성 (그대로 유지) */
 .game-select-box {
   background: var(--game-card-bg);
   padding: 2.4rem 2.5rem 2rem;
   border-radius: 32px;
   box-shadow: var(--game-shadow-soft);
+  height: 600px; /* 좌측 카드와 동일 높이 */
 }
 
 .game-select-box h2 {
@@ -204,13 +206,14 @@
   box-shadow: 0 10px 20px rgba(255, 168, 69, 0.4);
 }
 
-/* 오른쪽: 채팅 */
+/* 오른쪽: 채팅 박스 */
 .chat-box {
   background: linear-gradient(145deg, var(--game-pink-right), var(--game-pink-right-d));
   color: #fff;
   justify-content: flex-start;
   padding: 2rem 1.6rem;
   box-shadow: var(--game-shadow-soft);
+  height: 600px; /* 좌측/가운데 카드와 동일 높이 */
 }
 
 .chat-box::before {
@@ -251,8 +254,8 @@
 /* ===== 반응형 ===== */
 @media (max-width: 1100px) {
   .select-grid {
-    grid-template-columns: 1fr 1.2fr;
-    max-width: 900px;
+    grid-template-columns: 1fr 1fr;
+    max-width: 700px;
   }
 }
 

@@ -1,0 +1,158 @@
+/* ===== 공통 색상 ===== */
+:root {
+    --blue: #3EC5FF;
+    --blue-dark: #0A9CF3;
+    --pink: #FF7AC5;
+    --pink-dark: #FF5E9B;
+    --card-bg: #FFFFFF;
+    --muted: #6b7280;
+    --shadow: 0 16px 32px rgba(0,0,0,0.22);
+}
+
+/* 메인 레이아웃 */
+.gr-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+    min-height: 70vh; /* gameSelect.css와 동일 */
+}
+
+/* 좌측 카드: 방 정보 + 플레이어 */
+.gr-info-box {
+    background: var(--card-bg);
+    padding: 2.4rem 2rem;
+    border-radius: 32px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.gr-info-box h2 {
+    font-size: 1.8rem;
+    font-weight: 900;
+    margin-bottom: 0.5rem;
+}
+
+.gr-sub {
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+}
+
+.gr-divider {
+    margin: 1rem 0;
+    border: none;
+    border-bottom: 1px solid #ddd;
+}
+
+.gr-player-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.gr-player-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.gr-player-list li {
+    padding: 6px 0;
+}
+
+/* 방 나가기 버튼 */
+.gr-leave-btn {
+    margin-top: 1.8rem;
+    padding: 0.9rem 0;
+    width: 100%;
+    border: none;
+    background: #ff7979;
+    color: white;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* 우측: 채팅 박스 */
+.gr-chat-box {
+    background: linear-gradient(145deg, var(--pink), var(--pink-dark));
+    color: #fff;
+    padding: 2.4rem 1.8rem;
+    border-radius: 32px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: 600px; /* 좌측와 동일 */
+}
+
+.gr-chat-box h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.6rem;
+    font-weight: 800;
+}
+
+.gr-chat-messages {
+    flex: 1;
+    background: rgba(255,255,255,0.15);
+    padding: 0.8rem;
+    border-radius: 12px;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+}
+
+.gr-chat-input-wrap {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.gr-chat-input {
+    flex: 1;
+    padding: 0.9rem 1rem;
+    border-radius: 12px;
+    border: none;
+}
+
+.gr-chat-send-btn {
+    width: 80px;
+    background: #ffe08a;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* ===== 애니메이션 ===== */
+@keyframes bounce-soft {
+    0%,100% { transform: translateY(0); }
+    45% { transform: translateY(-4px); }
+}
+
+/* ===== 반응형 ===== */
+@media (max-width: 1100px) {
+    .gr-layout {
+        grid-template-columns: 1fr 1fr;
+        max-width: 700px;
+    }
+}
+
+@media (max-width: 880px) {
+    .gr-layout {
+        grid-template-columns: 1fr;
+        max-width: 520px;
+    }
+    .gr-info-box,
+    .gr-chat-box {
+        border-radius: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .gr-info-box h2 { font-size: 1.45rem; }
+    .gr-chat-box h3 { font-size: 1.3rem; }
+}
