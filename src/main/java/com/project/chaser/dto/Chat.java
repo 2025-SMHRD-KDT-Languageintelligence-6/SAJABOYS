@@ -24,4 +24,7 @@ public class Chat {
     // 추가 필드: 방 현재 인원과 비밀번호 여부
     private Integer current;     // 현재 입장 인원
     private Boolean hasPassword; // 비밀번호 존재 여부
+
+    // 비밀번호 필드 추가 (setter/getter는 @Data가 자동 생성)
+    private String password;
 }

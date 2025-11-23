@@ -1,9 +1,10 @@
 package com.project.chaser.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.project.chaser.dto.Chat;
 import com.project.chaser.dto.Room;
 import com.project.chaser.dto.User;
 import com.project.chaser.service.RoomService;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,10 +20,12 @@ import java.util.UUID;
 public class RoomController {
 
     private final RoomService roomService;
-    private final ObjectMapper objectMapper = new ObjectMapper(); // JSON 변환용
+    private final SimpMessagingTemplate messagingTemplate;
 
-    public RoomController(RoomService roomService) {
+    // 생성자 주입
+    public RoomController(RoomService roomService, SimpMessagingTemplate messagingTemplate) {
         this.roomService = roomService;
+        this.messagingTemplate = messagingTemplate;
     }
 
     // 방 목록 페이지
@@ -31,12 +34,11 @@ public class RoomController {
         User user = (User) session.getAttribute("user");
         if (user == null) return "redirect:/login";
 
-        List<Room> rooms = roomService.getAllRooms();
-        model.addAttribute("roomList", rooms);
+        model.addAttribute("roomList", roomService.getAllRooms());
         return "gameSelect";
     }
 
-    // 방 목록 JSON
+    // **JSON 방 목록**
     @GetMapping("/list/json")
     @ResponseBody
     public List<Room> roomListJson() {
@@ -62,11 +64,9 @@ public class RoomController {
         }
 
         String roomId = UUID.randomUUID().toString();
-        Room room = new Room(roomId, title, mode, max, 0, password); // current 0
+        Room room = new Room(roomId, title, mode, max, 1, password);
+        room.getPlayers().add(user.getNickname());
         roomService.addRoom(room);
-
-        // 방 생성 직후 본인 입장
-        roomService.enterRoom(roomId, user.getNickname());
 
         result.put("success", true);
         result.put("roomId", roomId);
@@ -83,29 +83,24 @@ public class RoomController {
         Room room = roomService.getRoom(roomId);
         if (room == null) return "redirect:/room/list";
 
-        // 플레이어 추가 (중복 방지)
-        roomService.enterRoom(roomId, user.getNickname());
-
-        // 최신 플레이어 리스트 JSON
-        String playersJson = objectMapper.writeValueAsString(roomService.getPlayers(roomId));
+        // 플레이어 추가
+        if (!room.getPlayers().contains(user.getNickname())) {
+            roomService.enterRoom(roomId, user.getNickname());
+        }
 
         model.addAttribute("room", room);
         model.addAttribute("user", user);
-        model.addAttribute("playersJson", playersJson);
         return "gameRoom";
     }
 
     // 방 나가기
     @PostMapping("/leave")
     @ResponseBody
-    public Map<String, Object> leaveRoom(@RequestParam String roomId, HttpSession session) {
+    public Map<String, Object> leaveRoom(@RequestBody Map<String, String> payload) {
+        String roomId = payload.get("roomId");
+        String nickname = payload.get("nickname");
+
         Map<String, Object> result = new HashMap<>();
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
-            result.put("success", false);
-            result.put("message", "로그인이 필요합니다.");
-            return result;
-        }
 
         Room room = roomService.getRoom(roomId);
         if (room == null) {
@@ -114,7 +109,21 @@ public class RoomController {
             return result;
         }
 
-        roomService.leaveRoom(roomId, user.getNickname());
+        roomService.leaveRoom(roomId, nickname);
+
+        // 퇴장 메시지 및 상태 갱신
+        Chat chat = new Chat();
+        chat.setType("leave");
+        chat.setRoomId(roomId);
+        chat.setSender(nickname);
+        chat.setMessage(nickname + "님이 퇴장했습니다.");
+        chat.setPlayers(roomService.getPlayers(roomId));
+        chat.setCurrent(room.getCurrent());
+        chat.setHasPassword(room.getPassword() != null && !room.getPassword().isEmpty());
+
+        messagingTemplate.convertAndSend("/topic/room/" + roomId + "/state", chat);
+        messagingTemplate.convertAndSend("/topic/room/" + roomId + "/chat", chat);
+
         result.put("success", true);
         return result;
     }

@@ -27,7 +27,7 @@ public class RoomService {
 
     public List<String> getPlayers(String roomId) {
         Room room = roomMap.get(roomId);
-        return room != null ? room.getPlayers() : new CopyOnWriteArrayList<>();
+        return room != null ? new CopyOnWriteArrayList<>(room.getPlayers()) : new CopyOnWriteArrayList<>();
     }
 
     public void enterRoom(String roomId, String nickname) {
@@ -43,16 +43,13 @@ public class RoomService {
     public void leaveRoom(String roomId, String nickname) {
         Room room = roomMap.get(roomId);
         if (room == null) return;
-        room.getPlayers().remove(nickname);
-        room.setCurrent(room.getCurrent() - 1);
+        if (room.getPlayers().contains(nickname)) {
+            room.getPlayers().remove(nickname);
+            room.setCurrent(room.getCurrent() - 1);
+        }
+        // 마지막 사람만 나가면 삭제
         if (room.getCurrent() <= 0) {
             roomMap.remove(roomId);
         }
-    }
-
-    // 새로 추가: 비밀번호 존재 여부 확인
-    public boolean hasPassword(String roomId) {
-        Room room = roomMap.get(roomId);
-        return room != null && room.getPassword() != null && !room.getPassword().isEmpty();
     }
 }
