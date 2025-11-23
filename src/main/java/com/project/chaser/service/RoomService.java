@@ -49,4 +49,10 @@ public class RoomService {
             roomMap.remove(roomId);
         }
     }
+
+    // 새로 추가: 비밀번호 존재 여부 확인
+    public boolean hasPassword(String roomId) {
+        Room room = roomMap.get(roomId);
+        return room != null && room.getPassword() != null && !room.getPassword().isEmpty();
+    }
 }

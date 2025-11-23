@@ -1,19 +1,29 @@
 package com.project.chaser.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.chaser.dto.Room;
 import com.project.chaser.dto.User;
+import com.project.chaser.service.RoomService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import jakarta.servlet.http.HttpSession;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/room")
 public class RoomController {
 
-    private final Map<String, Room> roomMap = new LinkedHashMap<>();
+    private final RoomService roomService;
+    private final ObjectMapper objectMapper = new ObjectMapper(); // JSON 변환용
+
+    public RoomController(RoomService roomService) {
+        this.roomService = roomService;
+    }
 
     // 방 목록 페이지
     @GetMapping("/list")
@@ -21,7 +31,8 @@ public class RoomController {
         User user = (User) session.getAttribute("user");
         if (user == null) return "redirect:/login";
 
-        model.addAttribute("roomList", new ArrayList<>(roomMap.values()));
+        List<Room> rooms = roomService.getAllRooms();
+        model.addAttribute("roomList", rooms);
         return "gameSelect";
     }
 
@@ -29,7 +40,7 @@ public class RoomController {
     @GetMapping("/list/json")
     @ResponseBody
     public List<Room> roomListJson() {
-        return new ArrayList<>(roomMap.values());
+        return roomService.getAllRooms();
     }
 
     // 방 생성 + 자동 입장
@@ -51,9 +62,11 @@ public class RoomController {
         }
 
         String roomId = UUID.randomUUID().toString();
-        Room room = new Room(roomId, title, mode, max, 1, password);
-        room.getPlayers().add(user.getNickname());
-        roomMap.put(roomId, room);
+        Room room = new Room(roomId, title, mode, max, 0, password); // current 0
+        roomService.addRoom(room);
+
+        // 방 생성 직후 본인 입장
+        roomService.enterRoom(roomId, user.getNickname());
 
         result.put("success", true);
         result.put("roomId", roomId);
@@ -63,20 +76,22 @@ public class RoomController {
 
     // 게임 방 입장
     @GetMapping("/game")
-    public String enterRoom(@RequestParam String roomId, HttpSession session, Model model) {
+    public String enterRoom(@RequestParam String roomId, HttpSession session, Model model) throws Exception {
         User user = (User) session.getAttribute("user");
         if (user == null) return "redirect:/login";
 
-        Room room = roomMap.get(roomId);
+        Room room = roomService.getRoom(roomId);
         if (room == null) return "redirect:/room/list";
 
-        if (!room.getPlayers().contains(user.getNickname())) {
-            room.getPlayers().add(user.getNickname());
-            room.setCurrent(room.getCurrent() + 1);
-        }
+        // 플레이어 추가 (중복 방지)
+        roomService.enterRoom(roomId, user.getNickname());
+
+        // 최신 플레이어 리스트 JSON
+        String playersJson = objectMapper.writeValueAsString(roomService.getPlayers(roomId));
 
         model.addAttribute("room", room);
         model.addAttribute("user", user);
+        model.addAttribute("playersJson", playersJson);
         return "gameRoom";
     }
 
@@ -92,21 +107,14 @@ public class RoomController {
             return result;
         }
 
-        Room room = roomMap.get(roomId);
+        Room room = roomService.getRoom(roomId);
         if (room == null) {
             result.put("success", false);
             result.put("message", "방이 존재하지 않습니다.");
             return result;
         }
 
-        room.getPlayers().remove(user.getNickname());
-        room.setCurrent(room.getCurrent() - 1);
-
-        // 방에 플레이어 없으면 삭제
-        if (room.getPlayers().isEmpty()) {
-            roomMap.remove(roomId);
-        }
-
+        roomService.leaveRoom(roomId, user.getNickname());
         result.put("success", true);
         return result;
     }

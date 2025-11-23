@@ -12,17 +12,11 @@
 <body>
 <div class="gr-layout">
 
-    <!-- 좌측 상태 -->
     <section class="gr-info-box">
         <h2 id="roomTitle"><c:out value="${room.title}"/></h2>
         <p class="gr-sub">모드: <span id="roomMode"><c:out value="${room.mode}"/></span></p>
-        <p class="gr-sub">인원: <span id="playerCount"><c:out value="${room.current}"/></span>/<span id="maxCount"><c:out value="${room.max}"/></span></p>
-        <p class="gr-sub">비밀번호: <span id="roomPassword">
-            <c:choose>
-                <c:when test="${not empty room.password}">있음</c:when>
-                <c:otherwise>없음</c:otherwise>
-            </c:choose>
-        </span></p>
+        <p class="gr-sub">인원: <span id="playerCount"><c:out value="${room.current}"/></span>/<span id="maxCount"><c:out value="${room.max != null ? room.max : '-'}"/></span></p>
+        <p class="gr-sub">비밀번호: <span id="roomPassword"><c:choose><c:when test="${not empty room.password}">있음</c:when><c:otherwise>없음</c:otherwise></c:choose></span></p>
         <hr class="gr-divider">
         <h3 class="gr-player-title">참여 플레이어</h3>
         <ul id="playerList" class="gr-player-list">
@@ -33,7 +27,6 @@
         <button id="leaveRoomBtn" class="gr-leave-btn">방 나가기</button>
     </section>
 
-    <!-- 우측 채팅 -->
     <section class="gr-chat-box">
         <h3>채팅</h3>
         <div id="chatMessages" class="gr-chat-messages"></div>
@@ -42,12 +35,14 @@
             <button id="sendBtn" class="gr-chat-send-btn">전송</button>
         </div>
     </section>
-
 </div>
 
 <script>
-const roomId = "${room.id}";
-const userNickname = "${user.nickname}";
+const roomId = "<c:out value='${room.id}'/>";
+const userNickname = "<c:out value='${user.nickname}'/>";
+
+// 플레이어 리스트는 JSP에서 렌더링한 그대로 사용
+const ul = document.getElementById("playerList");
 
 const socket = new SockJS('/ws');
 const stompClient = Stomp.over(socket);
@@ -57,14 +52,18 @@ stompClient.connect({}, function(frame) {
     // 방 상태 구독
     stompClient.subscribe('/topic/room/' + roomId + '/state', function(message) {
         const data = JSON.parse(message.body);
-        const ul = document.getElementById("playerList");
+        const players = Array.isArray(data.players) ? data.players : [];
+
+        // 플레이어 리스트 갱신
         ul.innerHTML = "";
-        data.players.forEach(p => {
+        players.forEach(p => {
             const li = document.createElement("li");
             li.textContent = p;
             ul.appendChild(li);
         });
-        document.getElementById("playerCount").textContent = data.players.length;
+
+        // 인원 / 비밀번호 업데이트
+        document.getElementById("playerCount").textContent = players.length;
         document.getElementById("roomPassword").textContent = data.password ? '있음' : '없음';
     });
 
@@ -87,16 +86,15 @@ stompClient.connect({}, function(frame) {
 
 // 채팅 전송
 document.getElementById("sendBtn").addEventListener("click", function(){
-    const input = document.getElementById("chatInput");
-    const msg = input.value.trim();
-    if(msg === "") return;
+    const msg = document.getElementById("chatInput").value.trim();
+    if(!msg) return;
     stompClient.send("/app/chat", {}, JSON.stringify({
         type: "chat",
         roomId: roomId,
         sender: userNickname,
         message: msg
     }));
-    input.value = "";
+    document.getElementById("chatInput").value = "";
 });
 
 // 방 나가기
@@ -104,15 +102,12 @@ document.getElementById("leaveRoomBtn").addEventListener("click", function(){
     fetch("/room/leave", {
         method: "POST",
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        body: new URLSearchParams({roomId: roomId})
+        body: new URLSearchParams({roomId})
     })
     .then(r => r.json())
     .then(data => {
-        if(data.success){
-            location.href = "/room/list";
-        } else {
-            alert("방 나가기 실패: " + data.message);
-        }
+        if(data.success) location.href = "/room/list";
+        else alert("방 나가기 실패: " + data.message);
     });
 });
 </script>

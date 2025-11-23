@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Chat {
 
-    // 메시지 종류: chat / join / leave / playerList
+    // 메시지 종류: chat / join / leave / state
     private String type;
 
     private String roomId;
@@ -20,4 +20,8 @@ public class Chat {
 
     // 플레이어 목록 동기화에 사용
     private List<String> players;
+
+    // 추가 필드: 방 현재 인원과 비밀번호 여부
+    private Integer current;     // 현재 입장 인원
+    private Boolean hasPassword; // 비밀번호 존재 여부
 }

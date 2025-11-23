@@ -114,11 +114,21 @@ function refreshRoomList() {
                 roomList.forEach(room => {
                     const div = document.createElement("div");
                     div.className = "room-item";
-                    div.innerHTML = `<strong>${room.title}</strong><br>
-                                     <span>모드: ${room.mode}</span><br>
-                                     <span>${room.current}/${room.max != null ? room.max : '-' } 명</span><br>
-                                     <span>비밀번호: ${room.password ? '있음' : '없음'}</span><br>
-                                     <button onclick="enterRoom('${room.id}')">입장</button>`;
+                    div.innerHTML = `<strong>\${room.title}</strong><br>
+                                     <span>모드: \${room.mode}</span><br>
+                                     <span>\${room.current}/\${room.max != null ? room.max : '-' } 명</span><br>
+                                     <span>비밀번호: \${room.password ? '있음' : '없음'}</span><br>
+                                     <button onclick="enterRoom('\${room.id}')">입장</button>`;
+
+                    // 실제 값으로 치환
+                    div.innerHTML = div.innerHTML
+                        .replace("\${room.title}", room.title)
+                        .replace("\${room.mode}", room.mode)
+                        .replace("\${room.current}", room.current)
+                        .replace("\${room.max}", room.max != null ? room.max : "-")
+                        .replace("\${room.password}", room.password)
+                        .replace("\${room.id}", room.id);
+
                     container.appendChild(div);
                 });
             }
