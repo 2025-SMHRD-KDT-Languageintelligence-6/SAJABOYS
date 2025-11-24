@@ -1,10 +1,13 @@
 package com.project.chaser.controller;
 
+import com.project.chaser.dto.RecommendFestivalDto;
 import com.project.chaser.dto.User;
 import com.project.chaser.service.EmailService;
+import com.project.chaser.service.FestivalRecommendClient;
 import com.project.chaser.service.JwtUtil;
 import com.project.chaser.mapper.UserMapper;
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -14,8 +17,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.net.URLDecoder;
+import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class UserController {
 
     @Autowired // 의존성 주입(Dependency Injection : DI)
@@ -30,8 +35,19 @@ public class UserController {
     @Autowired
     private EmailService emailService;
 
+    @Autowired
+    private final FestivalRecommendClient recommendClient;
+
     @GetMapping("/main")
-    public String goMain() {
+    public String goMain(Model model) {
+        double lat = 35.15;   // 기본값
+        double lon = 126.85;  // 기본값
+        int topK = 3;
+
+        List<RecommendFestivalDto> recommendList =
+        recommendClient.getRecommendedFestivals(lat, lon, topK);
+
+        model.addAttribute("recommendList", recommendList);
         return "index";
     }
     @GetMapping("/header")

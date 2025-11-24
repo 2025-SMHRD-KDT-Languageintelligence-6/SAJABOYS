@@ -1,51 +1,55 @@
 package com.project.chaser.service;
 
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.project.chaser.dto.RecommendFestivalDto;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
-import java.util.HashMap;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class FestivalRecommendClient {
 
-    private final RestTemplate restTemplate;
+    // Flask 서버 URL (app.py에서 설정한 포트와 경로)
+    private static final String FLASK_URL = "http://127.0.0.1:9000/recommend";
 
-    // Flask 서버 주소 (app.py가 띄워져 있어야 함!)
-    private static final String BASE_URL = "http://localhost:5000";
+    private final HttpClient httpClient = HttpClient.newHttpClient();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
-    public FestivalRecommendClient(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
-    }
+    // ★ 여기! Controller에서 부를 메서드
+    public List<RecommendFestivalDto> getRecommendedFestivals(double lat, double lon, int topK) {
 
-    public List<Map<String, Object>> getRecommendedFestivals(
-            double lat,
-            double lon,
-            Integer topN,
-            String feeType
-    ) {
-        String url = BASE_URL + "/api/festivals/recommend"
-                + "?lat={lat}&lon={lon}&topN={topN}&feeType={feeType}";
+        try {
+            String url = String.format("%s?lat=%f&lon=%f&top_k=%d",
+                    FLASK_URL, lat, lon, topK);
 
-        Map<String, Object> uriVars = new HashMap<>();
-        uriVars.put("lat", lat);
-        uriVars.put("lon", lon);
-        uriVars.put("topN", topN != null ? topN : 10);
-        uriVars.put("feeType", feeType != null ? feeType : "all");
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(url))
+                    .GET()
+                    .build();
 
-        ResponseEntity<List<Map<String, Object>>> response =
-                restTemplate.exchange(
-                        url,
-                        HttpMethod.GET,
-                        null,
-                        new ParameterizedTypeReference<List<Map<String, Object>>>() {},
-                        uriVars
-                );
+            HttpResponse<String> response =
+                    httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-        return response.getBody();
+            if (response.statusCode() != 200) {
+                System.out.println("[FestivalRecommendClient] Flask 응답 코드 = " + response.statusCode());
+                return Collections.emptyList();
+            }
+
+            // JSON → List<RecommendFestivalDto> 로 변환
+            return objectMapper.readValue(
+                    response.body(),
+                    new TypeReference<List<RecommendFestivalDto>>() {}
+            );
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
     }
 }

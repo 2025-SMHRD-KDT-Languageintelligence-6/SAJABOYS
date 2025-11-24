@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML>
 <!--
   Verti by HTML5 UP
@@ -112,21 +113,18 @@
     		<section class="festival-section">
 
     			<div class="festival-grid">
-    				<div class="festival-card">
-    					<img class="festival-img" src="/images/no-image.png" alt="전남 축제 포스터 1"
-    						onerror="this.src='/images/no-image.png';">
-    				</div>
+                    <!-- 머신러닝 추천 결과가 있을 때 -->
+                    <c:if test="${not empty recommendList}">
+                        <c:forEach var="f" items="${recommendList}">
+                            <div class="festival-card">
+                                <img class="festival-img"
+                                     src="/img/festival/<fmt:formatNumber value='${f.fesIdx}' pattern='000'/>.png"
+                                     alt="${f.fesName}"
+                                     onerror="this.src='/images/no-image.png';"/>
+                            </div>
+                        </c:forEach>
+                    </c:if>
 
-    				<div class="festival-card">
-    					<img class="festival-img" src="/no-image.png" alt="전남 축제 포스터 2"
-    						onerror="this.src='/images/no-image.png';">
-    				</div>
-
-    				<div class="festival-card">
-    					<img class="festival-img" src="#" alt="전남 축제 포스터 3"
-    						onerror="this.src='/images/no-image.png';">
-    				</div>
-    			</div>
 
     			<a href="/festival" class="button icon fa-file-alt">더 많은 축제 보러가기</a>
     		</section>
