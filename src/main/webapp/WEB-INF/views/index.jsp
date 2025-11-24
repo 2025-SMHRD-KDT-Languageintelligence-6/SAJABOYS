@@ -58,17 +58,21 @@
                                         </button>
                                     </div>
 
-                                    <a href="/1_Game.html"
-                                       class="button alt"
-                                       style="display:block; text-align:center;">
-                                        다른 게임을 하러가기
-                                    </a>
+                                    <div class="wally-btn-group">
+                                        <a href="/1_Game.html" class="button alt">
+                                            다른 게임을 하러가기
+                                        </a>
 
-                                    <a href="/1_1_5Rule.html"
-                                       class="button"
-                                       style="display:block; text-align:center;">
-                                        Game Rule
-                                    </a>
+                                        <a href="/1_1_5Rule.html" class="button">
+                                            Game Rule
+                                        </a>
+                                    </div>
+
+                                    <div class="wally-sub-image">
+                                        <img src="/images/no-image.png"
+                                             alt="윌리가 있는 축제 정보"
+                                             onerror="this.src='/images/no-image.png';" />
+                                    </div>
                                 </div>
 
                             </div>
