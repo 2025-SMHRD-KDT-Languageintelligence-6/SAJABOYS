@@ -74,7 +74,7 @@
                                     </h4>
 
                                     <div class="wally-sub-image">
-                                        <img src="/images/no-image.png"
+                                        <img src="/img/festival/121.png"
                                              alt="윌리가 있는 축제 정보"
                                              onerror="this.src='/images/no-image.png';" />
                                     </div>
