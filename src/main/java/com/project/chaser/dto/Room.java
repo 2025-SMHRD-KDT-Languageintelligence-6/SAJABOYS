@@ -28,4 +28,6 @@ public class Room {
         this.current = current;
         this.password = password;
     }
+    // 추가
+    private boolean gameStarted = false; // ⚠ 추가
 }

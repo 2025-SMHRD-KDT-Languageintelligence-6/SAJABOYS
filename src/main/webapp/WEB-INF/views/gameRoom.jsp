@@ -38,36 +38,32 @@
 
 </div>
 
-<!-- 카카오 지도 API (body 끝에) -->
+<!-- 카카오 지도 API -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=96386b6e873f709dc1378cbf43e8fff6&libraries=services"></script>
 
 <script>
-// ----------------------
-// 전역 변수
-// ----------------------
 const roomId = "<c:out value='${room.id}'/>";
 const userNickname = "<c:out value='${user.nickname}'/>";
-const initialPlayers = JSON.parse('${playersJson != null && playersJson != "" ? playersJson : "[]"}');
+const initialPlayers = ${playersJson != null && playersJson != "" ? playersJson : "[]"};
 const ul = document.getElementById("playerList");
 
-let map, marker;
+let map;
+const markers = {};
+let gameStarted = <c:out value='${room.gameStarted != null ? room.gameStarted : false}'/>;
 
-// ----------------------
 // 초기 플레이어 렌더링
-// ----------------------
 initialPlayers.forEach(p => {
     const li = document.createElement("li");
     li.textContent = p;
     ul.appendChild(li);
 });
 
-// ----------------------
 // WebSocket 연결
-// ----------------------
 const socket = new SockJS('/ws');
 const stompClient = Stomp.over(socket);
 
 stompClient.connect({}, function(frame) {
+
     // 방 상태 구독
     stompClient.subscribe('/topic/room/' + roomId + '/state', function(message) {
         const data = JSON.parse(message.body);
@@ -78,9 +74,9 @@ stompClient.connect({}, function(frame) {
             li.textContent = p;
             ul.appendChild(li);
         });
-
         document.getElementById("playerCount").textContent = data.current ?? players.length;
         document.getElementById("roomPassword").textContent = data.password ? '있음' : '없음';
+        if(data.gameStarted) gameStarted = true;
     });
 
     // 채팅 구독
@@ -92,24 +88,35 @@ stompClient.connect({}, function(frame) {
         document.getElementById("chatMessages").scrollTop = document.getElementById("chatMessages").scrollHeight;
     });
 
+    // 위치 구독
+    stompClient.subscribe('/topic/room/' + roomId + '/location', function(message) {
+        const data = JSON.parse(message.body);
+        data.forEach(p => {
+            if (!markers[p.nickname]) {
+                markers[p.nickname] = new kakao.maps.Marker({
+                    position: new kakao.maps.LatLng(p.lat, p.lng),
+                    map: map,
+                    title: p.nickname
+                });
+            } else {
+                markers[p.nickname].setPosition(new kakao.maps.LatLng(p.lat, p.lng));
+            }
+        });
+    });
+
     // 게임 시작 구독
     stompClient.subscribe('/topic/room/' + roomId + '/game', function(message) {
         const data = JSON.parse(message.body);
         if (data.type === "start") {
-            // 1️⃣ 기존 UI 전환 즉시
+            gameStarted = true;
             startGameUIBasic();
-
-            // 2️⃣ 지도 초기화는 SDK 로드 후 안전하게
-            if (typeof kakao !== "undefined" && kakao.maps) {
-                initRealtimeMap();
-            } else {
-                const interval = setInterval(() => {
-                    if (typeof kakao !== "undefined" && kakao.maps) {
-                        clearInterval(interval);
-                        initRealtimeMap();
-                    }
-                }, 100);
-            }
+            // 지도 초기화 후 위치 추적
+            const interval = setInterval(() => {
+                if (typeof kakao !== "undefined" && kakao.maps) {
+                    clearInterval(interval);
+                    initRealtimeMap();
+                }
+            }, 100);
         }
     });
 
@@ -121,9 +128,7 @@ stompClient.connect({}, function(frame) {
     }));
 });
 
-// ----------------------
 // 채팅 전송
-// ----------------------
 document.getElementById("sendBtn").addEventListener("click", function(){
     const input = document.getElementById("chatInput");
     const msg = input.value.trim();
@@ -137,9 +142,7 @@ document.getElementById("sendBtn").addEventListener("click", function(){
     input.value = "";
 });
 
-// ----------------------
 // 방 나가기
-// ----------------------
 document.getElementById("leaveRoomBtn").addEventListener("click", function(){
     fetch("/room/leave", {
         method: "POST",
@@ -156,19 +159,24 @@ document.getElementById("leaveRoomBtn").addEventListener("click", function(){
     });
 });
 
-// ----------------------
 // 게임 시작 버튼
-// ----------------------
 document.getElementById("startGameBtn").addEventListener("click", function() {
-    stompClient.send("/app/game/start", {}, JSON.stringify({
-        roomId: roomId,
-        sender: userNickname
-    }));
+    if(gameStarted) return;
+    fetch("/room/game/start", {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ roomId: roomId, sender: userNickname })
+    })
+    .then(r => r.json())
+    .then(data => {
+        if(!data.success){
+            alert("게임 시작 실패: " + data.message);
+        }
+    })
+    .catch(console.error);
 });
 
-// ----------------------
 // 게임 UI 기본 전환
-// ----------------------
 function startGameUIBasic() {
     document.querySelector(".gr-info-box").style.display = "none";
     const gameArea = document.createElement("div");
@@ -181,9 +189,7 @@ function startGameUIBasic() {
     document.querySelector(".gr-layout").appendChild(gameArea);
 }
 
-// ----------------------
-// 지도 초기화 + 실시간 위치 추적
-// ----------------------
+// 지도 초기화 + 실시간 위치 전송
 function initRealtimeMap() {
     if (!navigator.geolocation) {
         alert("GPS를 지원하지 않는 브라우저입니다.");
@@ -193,31 +199,54 @@ function initRealtimeMap() {
     navigator.geolocation.getCurrentPosition(function(position) {
         const lat = position.coords.latitude;
         const lng = position.coords.longitude;
-
         const mapContainer = document.getElementById('map');
-        const mapOption = {
-            center: new kakao.maps.LatLng(lat, lng),
-            level: 5
-        };
-
+        const mapOption = { center: new kakao.maps.LatLng(lat, lng), level: 5 };
         map = new kakao.maps.Map(mapContainer, mapOption);
-        marker = new kakao.maps.Marker({ position: new kakao.maps.LatLng(lat, lng) });
-        marker.setMap(map);
+
+        // 자기 마커
+        markers[userNickname] = new kakao.maps.Marker({
+            position: new kakao.maps.LatLng(lat, lng),
+            map: map,
+            title: userNickname
+        });
+
+        // 위치 전송
+        stompClient.send("/app/room/" + roomId + "/location", {}, JSON.stringify({
+            nickname: userNickname,
+            lat: lat,
+            lng: lng
+        }));
     });
 
-    navigator.geolocation.watchPosition(updateMarkerPosition, function(error) {
+    navigator.geolocation.watchPosition(function(position) {
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+
+        if (markers[userNickname]) markers[userNickname].setPosition(new kakao.maps.LatLng(lat, lng));
+
+        stompClient.send("/app/room/" + roomId + "/location", {}, JSON.stringify({
+            nickname: userNickname,
+            lat: lat,
+            lng: lng
+        }));
+    }, function(error) {
         console.error("위치 추적 오류:", error);
     }, { enableHighAccuracy: true, maximumAge: 0, timeout: 5000 });
 }
+// 페이지 벗어날 때도 방 나가기 요청 보내기
+window.addEventListener("beforeunload", function(event) {
+    if (roomId && userNickname && stompClient && stompClient.connected) {
+        stompClient.send("/app/chat", {}, JSON.stringify({
+            type: "leave",
+            roomId: roomId,
+            sender: userNickname
+        }));
 
-function updateMarkerPosition(position) {
-    const lat = position.coords.latitude;
-    const lng = position.coords.longitude;
-    const newPosition = new kakao.maps.LatLng(lat, lng);
-
-    if (marker) marker.setPosition(newPosition);
-    if (map) map.setCenter(newPosition);
-}
+        // 서버로 leave 요청
+        const data = new URLSearchParams({ roomId, nickname: userNickname });
+        navigator.sendBeacon('/room/leave', data);
+    }
+});
 </script>
 </body>
 </html>

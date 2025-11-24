@@ -59,7 +59,9 @@ public class RoomService {
     }
     // 새로 추가
     public void startGame(String roomId) {
-        // DB에 started = true 업데이트
-        roomMapper.updateRoomStarted(roomId, true);
+        Room room = roomMap.get(roomId);
+        if(room != null) {
+            room.setGameStarted(true);
+        }
     }
 }

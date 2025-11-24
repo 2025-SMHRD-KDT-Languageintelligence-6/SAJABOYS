@@ -127,4 +127,35 @@ public class RoomController {
         result.put("success", true);
         return result;
     }
+    // 게임 시작
+    @PostMapping("/game/start")
+    @ResponseBody
+    public Map<String, Object> startGame(@RequestBody Map<String, String> payload) {
+        String roomId = payload.get("roomId");
+        String sender = payload.get("sender");
+
+        Map<String, Object> result = new HashMap<>();
+        Room room = roomService.getRoom(roomId);
+        if(room == null){
+            result.put("success", false);
+            result.put("message", "방이 존재하지 않습니다.");
+            return result;
+        }
+
+        if(room.isGameStarted()){
+            result.put("success", false);
+            result.put("message", "게임이 이미 시작되었습니다.");
+            return result;
+        }
+
+        roomService.startGame(roomId);
+
+        // WebSocket 브로드캐스트
+        Map<String, Object> gameStartMsg = new HashMap<>();
+        gameStartMsg.put("type", "start");
+        messagingTemplate.convertAndSend("/topic/room/" + roomId + "/game", gameStartMsg);
+
+        result.put("success", true);
+        return result;
+    }
 }
