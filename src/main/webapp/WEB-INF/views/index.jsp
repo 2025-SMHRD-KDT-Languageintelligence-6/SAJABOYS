@@ -27,7 +27,7 @@
     <div id="site-header"></div>
     <script src="/assets/js/header.js"></script>
 
-    <div id="page-wrapper">
+
 
         <!-- =================== MAIN WRAPPER =================== -->
         <div id="main-wrapper">
@@ -74,42 +74,21 @@
                             </div>
                         </section>
 
-                        <!-- 축제 추천 -->
-                        <section class="festival-section">
-                            <h3>이런 축제 어떠세요?</h3>
 
-                            <div class="festival-grid">
-                                <div class="festival-card">
-                                    <img class="festival-img" src="/images/pic01.jpg" alt="전남 축제 포스터 1"
-                                         onerror="this.src='/images/no-image.png';">
-                                </div>
-
-                                <div class="festival-card">
-                                    <img class="festival-img" src="/images/pic01.jpg" alt="전남 축제 포스터 2"
-                                         onerror="this.src='/images/no-image.png';">
-                                </div>
-
-                                <div class="festival-card">
-                                    <img class="festival-img" src="/images/pic01.jpg" alt="전남 축제 포스터 3"
-                                         onerror="this.src='/images/no-image.png';">
-                                </div>
-                            </div>
-
-                            <a href="#" class="button icon fa-file-alt">더 많은 축제 보러가기</a>
-                        </section>
                     </div>
 
                     <!-- ===== 오른쪽: 채팅 박스 ===== -->
                     <div class="col-4 col-12-medium">
                         <section class="gr-chat-box">
-                            <h3>자유채팅</h3>
-                            <p style="margin-top:-0.5rem; margin-bottom:0.5rem; font-size:0.9rem; color:#999;">
-                                [88명 참여중] 축제 후기, 공략, 팀 모집 등 자유롭게 이야기해보세요.
-                            </p>
-                            <div id="chatMessages" class="gr-chat-messages"></div>
+                            <h3>채팅</h3>
+
+                            <div id="chatMessages" class="gr-chat-messages">
+                                <div style="margin-bottom: 5px;">박현우닉넴님이 입장했습니다.</div>
+                            </div>
+
                             <div class="gr-chat-input-wrap">
-                                <input type="text" id="chatInput" placeholder="메시지 입력..." class="gr-chat-input" />
-                                <button id="sendBtn" class="gr-chat-send-btn button alt">전송</button>
+                                <input type="text" id="chatInput" placeholder="메시지 입력..." class="gr-chat-input" onkeypress="handleEnter(event)">
+                                <button id="sendBtn" class="gr-chat-send-btn" onclick="sendMessage()">전송</button>
                             </div>
                         </section>
                     </div>
@@ -119,7 +98,7 @@
 
     	<!--================ 축제 ================================================-->
 
-    	<div id="main-wrapper">
+    	<div id="main-wrapper2">
     	<h3>이런 축제 어떠세요?</h3>
     		<section class="festival-section">
 
