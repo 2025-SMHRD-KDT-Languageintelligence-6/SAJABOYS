@@ -59,11 +59,11 @@
                                     </div>
 
                                     <div class="wally-btn-group">
-                                        <a href="/1_Game.html" class="button alt">
+                                        <a href="/gameSelect.jsp" class="button alt">
                                             다른 게임을 하러가기
                                         </a>
 
-                                        <a href="/1_1_5Rule.html" class="button">
+                                        <a href="#" class="button">
                                             Game Rule
                                         </a>
                                     </div>
@@ -128,7 +128,7 @@
     				</div>
     			</div>
 
-    			<a href="#" class="button icon fa-file-alt">더 많은 축제 보러가기</a>
+    			<a href="/festival.jsp" class="button icon fa-file-alt">더 많은 축제 보러가기</a>
     		</section>
 
         </div>
