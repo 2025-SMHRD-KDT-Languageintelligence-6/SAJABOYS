@@ -11,6 +11,14 @@
  }
 
  /* 왼쪽: 월리 이미지 */
+
+ .wally-sub-h4{
+    margin:0 0 0.5rem 0;
+    font-weight:700;
+    font-size:1.2rem;
+    color:#333;
+ }
+
  .wally-image-wrap {
      flex: 1; /* 너비 유동적 */
      min-width: 300px;
@@ -108,7 +116,7 @@
 
      /* [중요] 높이 고정 및 왼쪽 컬럼과 맞추기 */
      height: 100%;       /* 부모(.col-4)의 높이를 가득 채움 */
-     min-height: 500px;  /* 최소 높이 보장 */
+     min-height: 1000px;  /* 최소 높이 보장 */
 
      box-shadow: 0 4px 15px rgba(255, 107, 157, 0.4);
      color: #fff;

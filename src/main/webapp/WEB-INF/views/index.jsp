@@ -68,6 +68,11 @@
                                         </a>
                                     </div>
 
+                                    <!-- 서브 이미지 제목 -->
+                                    <h4 class="wally-sub-h4" >
+                                        윌리가 있는 축제장
+                                    </h4>
+
                                     <div class="wally-sub-image">
                                         <img src="/images/no-image.png"
                                              alt="윌리가 있는 축제 정보"
