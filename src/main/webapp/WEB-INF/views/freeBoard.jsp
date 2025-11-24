@@ -54,11 +54,13 @@
 
   <!-- 자유게시판 영역 -->
   <main class="board-wrap">
+  <section class="board-box">
     <header class="board-header">
       <div class="board-title">
         <h2>자유게시판</h2>
         <p>축제 이야기, 잡담, 질문 등 자유롭게 소통해 보세요.</p>
       </div>
+
       <div class="board-tools">
         <select id="categorySelect">
           <option value="전체">전체</option>
