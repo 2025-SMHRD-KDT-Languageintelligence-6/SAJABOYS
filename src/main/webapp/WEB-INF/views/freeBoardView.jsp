@@ -19,7 +19,7 @@
 
         .view-wrap { max-width:900px; margin:2.5rem auto 3rem; }
         .view-header { margin-bottom:1rem; }
-        .view-header h2 { margin:0; font-size:1.8rem; font-weight:800; }
+        .view-header h2 { margin:0; font-weight:800; }
         .view-header p { margin:.2rem 0 0; font-size:.9rem; color:#777; }
         .board-box{ background:#fff; border-radius:16px; box-shadow:0 4px 12px rgba(0,0,0,.12); padding:1.2rem 1.4rem 1.4rem; }
         .view-box { background:#fff; border-radius:18px; box-shadow:0 4px 14px rgba(0,0,0,.12); padding:1.5rem 1.6rem 1.3rem; }

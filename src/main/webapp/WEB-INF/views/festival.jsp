@@ -44,7 +44,6 @@
 
         .section-header h2 {
             margin:0;
-            font-size:1.4rem;
             font-weight:800;
         }
 

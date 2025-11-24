@@ -14,7 +14,7 @@
   <style>
     .board-wrap{ max-width:1100px; margin:2.5rem auto 3rem; }
     .board-header{ display:flex; justify-content:space-between; align-items:flex-end; gap:1rem; margin-bottom:1rem; flex-wrap:wrap; }
-    .board-title h2{ margin:0; font-size:1.8rem; font-weight:800; }
+    .board-title h2{ margin:0; font-weight:800; }
     .board-title p{ margin:.2rem 0 0; color:#464646; }
     .board-tools{ display:flex; gap:.5rem; flex-wrap:wrap; align-items:center; }
     .board-tools select,

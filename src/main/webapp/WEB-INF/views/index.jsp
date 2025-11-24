@@ -108,7 +108,7 @@
     	<!--================ 축제 ================================================-->
 
     	<div id="main-wrapper2">
-    	<h3>이런 축제 어떠세요?</h3>
+    	<h2>이런 축제 어떠세요?</h2>
     		<section class="festival-section">
 
     			<div class="festival-grid">
