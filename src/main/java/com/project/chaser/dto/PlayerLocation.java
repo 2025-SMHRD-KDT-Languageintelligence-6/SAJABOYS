@@ -7,6 +7,7 @@ public class PlayerLocation {
     private String nickname;
     private double lat;
     private double lng;
+    private String team;
 
     public PlayerLocation() {}
 
