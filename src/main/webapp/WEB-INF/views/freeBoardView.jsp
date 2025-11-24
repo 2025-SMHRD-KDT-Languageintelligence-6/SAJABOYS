@@ -21,6 +21,7 @@
         .view-header { margin-bottom:1rem; }
         .view-header h2 { margin:0; font-size:1.8rem; font-weight:800; }
         .view-header p { margin:.2rem 0 0; font-size:.9rem; color:#777; }
+        .board-box{ background:#fff; border-radius:16px; box-shadow:0 4px 12px rgba(0,0,0,.12); padding:1.2rem 1.4rem 1.4rem; }
         .view-box { background:#fff; border-radius:18px; box-shadow:0 4px 14px rgba(0,0,0,.12); padding:1.5rem 1.6rem 1.3rem; }
         .post-top { border-bottom:1px solid #e3e8ef; padding-bottom:.8rem; margin-bottom:1rem; }
         .post-title { font-size:1.4rem; font-weight:800; margin-bottom:.4rem; word-break:keep-all; }
@@ -192,6 +193,7 @@
     <script src="/assets/js/header.js"></script>
 
     <main class="view-wrap">
+    <section class="board-box">
         <header class="view-header">
             <h2>자유게시판</h2>
             <p>축제, 게임, 일상 등 어떤 이야기든 자유롭게 나눠보세요.</p>
@@ -256,6 +258,8 @@
                 </c:if>
             </div>
         </section>
+    </section>
+
         <section class="comment-wrap">
             <div class="comment-header">
                 <h3>댓글</h3>
