@@ -1,6 +1,8 @@
 package com.project.chaser.service;
 
 import com.project.chaser.dto.Room;
+import com.project.chaser.mapper.RoomMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,7 +11,10 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor // final 필드를 자동으로 생성자에 주입
 public class RoomService {
+
+    private final RoomMapper roomMapper; // MyBatis Mapper
 
     private final ConcurrentHashMap<String, Room> roomMap = new ConcurrentHashMap<>();
 
@@ -51,5 +56,10 @@ public class RoomService {
         if (room.getCurrent() <= 0) {
             roomMap.remove(roomId);
         }
+    }
+    // 새로 추가
+    public void startGame(String roomId) {
+        // DB에 started = true 업데이트
+        roomMapper.updateRoomStarted(roomId, true);
     }
 }

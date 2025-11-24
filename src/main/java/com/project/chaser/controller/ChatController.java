@@ -1,11 +1,14 @@
 package com.project.chaser.controller;
 
 import com.project.chaser.dto.Chat;
+import com.project.chaser.dto.GameStartMessage;
 import com.project.chaser.dto.Room;
 import com.project.chaser.service.RoomService;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
+
+import java.util.Map;
 
 @Controller
 public class ChatController {
@@ -41,5 +44,24 @@ public class ChatController {
                 messagingTemplate.convertAndSend("/topic/room/" + chat.getRoomId() + "/chat", chat);
                 break;
         }
+    }
+
+    // ⭐ 게임 시작 메시지 처리 추가
+    @MessageMapping("/game/start")
+    public void startGame(GameStartMessage msg) {
+        // DB 업데이트 제거 → 그냥 브로드캐스트만
+        // roomService.startGame(msg.getRoomId());
+
+        // 방 전체에 게임 시작 메시지 브로드캐스트
+        messagingTemplate.convertAndSend(
+                "/topic/room/" + msg.getRoomId() + "/game",
+                Map.of(
+                        "type", "start",
+                        "roomId", msg.getRoomId(),
+                        "sender", msg.getSender()
+                )
+        );
+
+        System.out.println("게임 시작 메시지 브로드캐스트: " + msg.getRoomId());
     }
 }
