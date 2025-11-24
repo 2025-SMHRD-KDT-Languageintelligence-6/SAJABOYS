@@ -14,6 +14,7 @@
 
     <!-- Verti 기본 CSS -->
     <link rel="stylesheet" href="/assets/css/main.css" />
+    <link rel="stylesheet" href="/assets/css/index.css" />
     <link rel="stylesheet" href="/assets/css/main-festival3.css" />
 
     <!-- Swiper CSS -->
@@ -26,67 +27,97 @@
     <div id="site-header"></div>
     <script src="/assets/js/header.js"></script>
 
-    <!-- =================== BANNER : 메인 액션 =================== -->
-    <section class="box" style="padding:2rem; margin-bottom:2rem;">
-      <div style="display:flex; gap:2rem; align-items:flex-start; flex-wrap:wrap;">
+    <div id="page-wrapper">
 
-        <!-- 왼쪽: 월리 이미지 -->
-        <div style="flex:1; min-width:260px;">
-          <div style="background:#f4a261; padding:0.8rem; text-align:center; font-size:1.4rem; font-weight:700;">
-            오늘의 월리
-          </div>
-          <img src="/images/wally.png"
-               alt="오늘의 월리"
-               style="width:100%; display:block; margin-top:0;">
-        </div>
+        <!-- =================== MAIN WRAPPER =================== -->
+        <div id="main-wrapper">
+            <div class="container">
+                <div class="row gtr-200">
+                    <!-- ===== 왼쪽: 월리 + 축제 추천 ===== -->
+                    <div class="col-8 col-12-medium">
+                        <!-- 오늘의 월리 -->
+                        <section class="box wally-section">
+                            <div class="wally-layout">
 
-        <!-- 오른쪽: 버튼 구성 -->
-        <div style="flex:1; min-width:260px;">
+                                <!-- 이미지 영역 -->
+                                <div class="wally-image-wrap">
+                                    <div class="wally-title-bar">
+                                        오늘의 월리
+                                    </div>
+                                    <img src="/images/wally.png"
+                                         alt="오늘의 월리"
+                                         class="wally-image" />
+                                </div>
 
-          <!-- 월리 찾았다! -->
-          <div style="background:#f7a48a; padding:1.2rem; margin-bottom:1rem; border-radius:12px;">
-            <h3 style="margin:0 0 .8rem 0; font-weight:800;">월리를 찾았다!</h3>
+                                <!-- 버튼/텍스트 영역 -->
+                                <div class="wally-actions">
+                                    <div class="wally-found-card">
+                                        <h3>월리를 찾았다!</h3>
+                                        <button type="button" class="wally-camera-btn" onclick="openCamera()">
+                                            카메라 열기
+                                        </button>
+                                    </div>
 
-            <button onclick="openCamera()"
-                    style="background:#ffe8a1; border:none; padding:0.8rem 1.2rem; font-size:1.1rem; font-weight:700; border-radius:8px; cursor:pointer;">
-              카메라 열기
-            </button>
-          </div>
+                                    <a href="/1_Game.html"
+                                       class="button alt"
+                                       style="display:block; text-align:center;">
+                                        다른 게임을 하러가기
+                                    </a>
 
-          <!-- 다른 게임 -->
-          <a href="/1_Game.html" class="button alt" style="display:block; margin-bottom:1rem; text-align:center;">
-            다른 게임을 하러가기
-          </a>
+                                    <a href="/1_1_5Rule.html"
+                                       class="button"
+                                       style="display:block; text-align:center;">
+                                        Game Rule
+                                    </a>
+                                </div>
 
-          <!-- 게임 룰 -->
-          <a href="/1_1_5Rule.html" class="button" style="display:block; text-align:center;">
-            Game Rule
-          </a>
+                            </div>
+                        </section>
 
-        </div>
+                        <!-- 축제 추천 -->
+                        <section class="festival-section">
+                            <h3>이런 축제 어떠세요?</h3>
 
-      </div>
-    </section>
+                            <div class="festival-grid">
+                                <div class="festival-card">
+                                    <img class="festival-img" src="/images/pic01.jpg" alt="전남 축제 포스터 1"
+                                         onerror="this.src='/images/no-image.png';">
+                                </div>
 
-    <script>
-      function openCamera(){
-        alert("카메라 기능은 추후 연동 예정입니다!");
-      }
-    </script>
+                                <div class="festival-card">
+                                    <img class="festival-img" src="/images/pic01.jpg" alt="전남 축제 포스터 2"
+                                         onerror="this.src='/images/no-image.png';">
+                                </div>
 
+                                <div class="festival-card">
+                                    <img class="festival-img" src="/images/pic01.jpg" alt="전남 축제 포스터 3"
+                                         onerror="this.src='/images/no-image.png';">
+                                </div>
+                            </div>
 
-    <!-- =================== 우측 자유 채팅 영역 =================== -->
+                            <a href="#" class="button icon fa-file-alt">더 많은 축제 보러가기</a>
+                        </section>
+                    </div>
 
-        <section class="gr-chat-box">
-            <h3>채팅</h3>
-            <div id="chatMessages" class="gr-chat-messages"></div>
-            <div class="gr-chat-input-wrap">
-                <input type="text" id="chatInput" placeholder="메시지 입력..." class="gr-chat-input">
-                <button id="sendBtn" class="gr-chat-send-btn">전송</button>
+                    <!-- ===== 오른쪽: 채팅 박스 ===== -->
+                    <div class="col-4 col-12-medium">
+                        <section class="gr-chat-box">
+                            <h3>자유채팅</h3>
+                            <p style="margin-top:-0.5rem; margin-bottom:0.5rem; font-size:0.9rem; color:#999;">
+                                [88명 참여중] 축제 후기, 공략, 팀 모집 등 자유롭게 이야기해보세요.
+                            </p>
+                            <div id="chatMessages" class="gr-chat-messages"></div>
+                            <div class="gr-chat-input-wrap">
+                                <input type="text" id="chatInput" placeholder="메시지 입력..." class="gr-chat-input" />
+                                <button id="sendBtn" class="gr-chat-send-btn button alt">전송</button>
+                            </div>
+                        </section>
+                    </div>
+                </div>
             </div>
-        </section>
+        </div>
 
-    	<!-- 축제 -->
+    	<!--================ 축제 ================================================-->
 
     	<div id="main-wrapper">
     	<h3>이런 축제 어떠세요?</h3>
@@ -94,24 +125,25 @@
 
     			<div class="festival-grid">
     				<div class="festival-card">
-    					<img class="festival-img" src="/images/pic01.jpg" alt="전남 축제 포스터 1"
+    					<img class="festival-img" src="/images/no-image.png" alt="전남 축제 포스터 1"
     						onerror="this.src='/images/no-image.png';">
     				</div>
 
     				<div class="festival-card">
-    					<img class="festival-img" src="/images/pic01.jpg" alt="전남 축제 포스터 2"
+    					<img class="festival-img" src="/no-image.png" alt="전남 축제 포스터 2"
     						onerror="this.src='/images/no-image.png';">
     				</div>
 
     				<div class="festival-card">
-    					<img class="festival-img" src="/images/pic01.jpg" alt="전남 축제 포스터 3"
+    					<img class="festival-img" src="#" alt="전남 축제 포스터 3"
     						onerror="this.src='/images/no-image.png';">
     				</div>
     			</div>
 
     			<a href="#" class="button icon fa-file-alt">더 많은 축제 보러가기</a>
     		</section>
-    	</div>
+
+        </div>
 
 
 
