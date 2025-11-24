@@ -23,60 +23,68 @@
 <body class="is-preload homepage">
 
     <!-- =================== HEADER =================== -->
-    <!-- header.js 가 /partials/header.html 을 로드한다고 가정 -->
     <div id="site-header"></div>
     <script src="/assets/js/header.js"></script>
 
     <!-- =================== BANNER : 메인 액션 =================== -->
-    <div id="banner-wrapper">
-        <div id="banner" class="box container">
-            <div class="row">
-                <div class="col-7 col-12-medium">
-                    <h2>바로 게임하러가자~</h2>
-                    <p>전남 곳곳에서 열리는 축제를 배경으로 실시간 술래잡기 게임을 즐겨보세요.</p>
-                </div>
-                <div class="col-5 col-12-medium">
-                    <ul>
-                        <li>
-                            <a href="/1_Game.html"
-                               class="button large icon solid fa-arrow-circle-right">
-                                Game Start!
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/1_1Rule.html"
-                               class="button alt large icon solid fa-question-circle">
-                                Game Rule
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+    <section class="box" style="padding:2rem; margin-bottom:2rem;">
+      <div style="display:flex; gap:2rem; align-items:flex-start; flex-wrap:wrap;">
 
-    <!-- =================== 자유 채팅 영역 =================== -->
-    <div id="features-wrapper">
-        <div class="container">
-            <!-- 가운데 정렬 -->
-            <div class="row aln-center">
-                <div class="col-4 col-12-medium">
-                    <section class="box feature">
-                        <div class="inner">
-                            <header>
-                                <h2>자유채팅</h2>
-                                <p>[88명 참여중]</p>
-                            </header>
-                            <p>
-                                축제 현장 후기, 게임 공략, 팀원 모집 등 자유롭게 이야기를 나눠보세요.
-                                (실제 채팅 기능은 추후 연동 예정)
-                            </p>
-                        </div>
-                    </section>
-                </div>
-            </div>
+        <!-- 왼쪽: 월리 이미지 -->
+        <div style="flex:1; min-width:260px;">
+          <div style="background:#f4a261; padding:0.8rem; text-align:center; font-size:1.4rem; font-weight:700;">
+            오늘의 월리
+          </div>
+          <img src="/images/wally.png"
+               alt="오늘의 월리"
+               style="width:100%; display:block; margin-top:0;">
         </div>
-    </div>
+
+        <!-- 오른쪽: 버튼 구성 -->
+        <div style="flex:1; min-width:260px;">
+
+          <!-- 월리 찾았다! -->
+          <div style="background:#f7a48a; padding:1.2rem; margin-bottom:1rem; border-radius:12px;">
+            <h3 style="margin:0 0 .8rem 0; font-weight:800;">월리를 찾았다!</h3>
+
+            <button onclick="openCamera()"
+                    style="background:#ffe8a1; border:none; padding:0.8rem 1.2rem; font-size:1.1rem; font-weight:700; border-radius:8px; cursor:pointer;">
+              카메라 열기
+            </button>
+          </div>
+
+          <!-- 다른 게임 -->
+          <a href="/1_Game.html" class="button alt" style="display:block; margin-bottom:1rem; text-align:center;">
+            다른 게임을 하러가기
+          </a>
+
+          <!-- 게임 룰 -->
+          <a href="/1_1_5Rule.html" class="button" style="display:block; text-align:center;">
+            Game Rule
+          </a>
+
+        </div>
+
+      </div>
+    </section>
+
+    <script>
+      function openCamera(){
+        alert("카메라 기능은 추후 연동 예정입니다!");
+      }
+    </script>
+
+
+    <!-- =================== 우측 자유 채팅 영역 =================== -->
+
+        <section class="gr-chat-box">
+            <h3>채팅</h3>
+            <div id="chatMessages" class="gr-chat-messages"></div>
+            <div class="gr-chat-input-wrap">
+                <input type="text" id="chatInput" placeholder="메시지 입력..." class="gr-chat-input">
+                <button id="sendBtn" class="gr-chat-send-btn">전송</button>
+            </div>
+        </section>
 
     	<!-- 축제 -->
 
