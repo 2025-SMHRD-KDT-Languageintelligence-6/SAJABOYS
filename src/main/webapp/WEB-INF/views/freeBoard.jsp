@@ -15,19 +15,20 @@
     .board-wrap{ max-width:1100px; margin:2.5rem auto 3rem; }
     .board-header{ display:flex; justify-content:space-between; align-items:flex-end; gap:1rem; margin-bottom:1rem; flex-wrap:wrap; }
     .board-title h2{ margin:0; font-size:1.8rem; font-weight:800; }
-    .board-title p{ margin:.2rem 0 0; font-size:.9rem; color:#777; }
+    .board-title p{ margin:.2rem 0 0; color:#464646; }
     .board-tools{ display:flex; gap:.5rem; flex-wrap:wrap; align-items:center; }
     .board-tools select,
     .board-tools input{ border-radius:6px; border:1px solid #ccc; padding:.35rem .5rem; font-size:.9rem; }
     .board-tools input{ min-width:160px; }
     .board-tools button{ font-size:.9rem; padding:.35rem .8rem; }
     .board-box{ background:#fff; border-radius:16px; box-shadow:0 4px 12px rgba(0,0,0,.12); padding:1.2rem 1.4rem 1.4rem; }
-    .board-table{ width:100%; border-collapse:collapse; font-size:.9rem; }
+    .board-table{ width:100%; border-collapse:collapse;  }
+    <!-- font-size:.9rem; -->
     .board-table thead{ background:#404248; color:#fff; }
     .board-table th,
     .board-table td{ padding:.55rem .6rem; border-bottom:1px solid #eee; text-align:center; }
     .board-table td.title{ text-align:left; }
-    .board-table a{ text-decoration:none; }
+    .board-table a{ text-decoration:none; font-weight: bold;}
     .board-empty{ text-align:center; padding:2rem 0; color:#666; font-size:.9rem; }
     .board-bottom{ margin-top:1rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:.5rem; }
     .pagination{ display:flex; gap:.25rem; align-items:center; font-size:.85rem; }
