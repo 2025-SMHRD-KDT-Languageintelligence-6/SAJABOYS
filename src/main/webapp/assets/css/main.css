@@ -137,7 +137,7 @@ input, select, textarea {
 
 	input, select, textarea {
 		font-family: 'Open Sans', sans-serif;
-		font-size: 23pt;
+
 		color: #696969;
 		font-weight: 300;
 		line-height: 2.25em;
@@ -1513,7 +1513,7 @@ input, select, textarea {
 		display: block;
 		font-weight: 800;
 		margin: 0 0 1em 0;
-		font-size: 2em;
+
 		color: #444;
 	}
 
