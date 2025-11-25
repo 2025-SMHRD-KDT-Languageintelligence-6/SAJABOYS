@@ -20,6 +20,16 @@ public class WallyController {
     @Autowired
     private final WallyService wallyService;
 
+    @GetMapping("/")
+    public String wallyStamp(HttpSession session){
+        User loginUser = (User) session.getAttribute("user");
+        if (loginUser == null) {
+            return "redirect:/login";
+        }
+
+        return "wallyStamp";
+    }
+
     @GetMapping("/createQr")
     public String createWallyQr(){
         return "createWallyQr";
