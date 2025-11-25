@@ -116,7 +116,7 @@
 
      /* [중요] 높이 고정 및 왼쪽 컬럼과 맞추기 */
      height: 100%;       /* 부모(.col-4)의 높이를 가득 채움 */
-     min-height: 1000px;  /* 최소 높이 보장 */
+     min-height: 900px;  /* 최소 높이 보장 */
 
      box-shadow: 0 4px 15px rgba(255, 107, 157, 0.4);
      color: #fff;
