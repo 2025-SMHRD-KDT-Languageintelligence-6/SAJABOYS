@@ -8,6 +8,7 @@ import com.project.chaser.service.EmailService;
 import com.project.chaser.service.FestivalRecommendClient;
 import com.project.chaser.service.JwtUtil;
 import com.project.chaser.mapper.UserMapper;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
 import java.net.URLDecoder;
 import java.util.List;
 
@@ -208,11 +211,21 @@ public class UserController {
     }
     // 비밀번호 찾기 → 이메일 링크
     @PostMapping("/findPw")
-    public String findPw(String UserId, String Email, RedirectAttributes redirect) {
+// 💡 HttpServletRequest request를 인자로 추가합니다.
+    public String findPw(String UserId, String Email, RedirectAttributes redirect, HttpServletRequest request) {
         User user = mapper.findByUserIdAndEmail(UserId, Email);
+
         if(user != null) {
+            // 1. 동적 Base URL 생성 (http://호스트:포트)
+            String dynamicBaseUrl = ServletUriComponentsBuilder.fromCurrentContextPath()
+                    .build()
+                    .toUriString();
+
             String token = jwtUtil.generateToken(user.getUserId(), 30);
-            emailService.sendResetPasswordEmail(user.getEmail(), token);
+
+            // 2. emailService 호출 변경: dynamicBaseUrl을 세 번째 인자로 전달
+            emailService.sendResetPasswordEmail(user.getEmail(), token, dynamicBaseUrl); // 👈 수정됨
+
             redirect.addFlashAttribute("msg", "비밀번호 재설정 링크를 이메일로 발송했습니다.");
         } else {
             redirect.addFlashAttribute("pwError", "일치하는 정보가 없습니다.");
