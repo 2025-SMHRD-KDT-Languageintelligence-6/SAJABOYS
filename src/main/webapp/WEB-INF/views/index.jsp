@@ -75,7 +75,7 @@
                                             ${applicationScope.festivalName}
                                         </c:if>
                                         <c:if test="${empty applicationScope.festivalName}">
-                                            윌리가 있는 축제장
+                                            월리가 있는 축제장
                                         </c:if>
                                     </h4>
 

@@ -107,7 +107,7 @@
 
     <article class="rule-card">
         <span class="rule-label">추격 · 체포 게임</span>
-        <h3><span class="rule-icon">🚓</span>도둑과 경찰</h3>
+        <h3><span class="rule-icon">🚓</span>경찰과 도둑</h3>
         <p class="rule-meta">인원 4명 이상 · 30~60분 · 팀 기반 추격전</p>
 
         <div>

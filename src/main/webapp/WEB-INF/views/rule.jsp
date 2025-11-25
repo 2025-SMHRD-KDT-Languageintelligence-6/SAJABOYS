@@ -31,7 +31,7 @@
             <section id="banner" class="box">
                 <header>
                     <h2>축제 게임 룰북 허브</h2>
-                    <p>좀비 아포칼립스 · 윌리를 찾아라 · 도둑과 경찰</p>
+                    <p>좀비 아포칼립스 · 월리를 찾아라 · 도둑과 경찰</p>
                 </header>
             </section>
         </div>
@@ -65,19 +65,19 @@
                     </section>
                 </div>
 
-                <!-- 2. 윌리를 찾아라 -->
+                <!-- 2. 월리를 찾아라 -->
                 <div class="col-4 col-12-medium">
                     <section class="box feature">
-                        <a href="/wally" class="image featured" aria-label="윌리를 찾아라">
-                            <img src="images/where's wally.png" alt="윌리를 찾아라 표지" />
+                        <a href="/wally" class="image featured" aria-label="월리를 찾아라">
+                            <img src="images/where's wally.png" alt="월리를 찾아라 표지" />
                         </a>
                         <div class="inner">
                             <header>
-                                <h2>🧭 윌리를 찾아라!</h2>
+                                <h2>🧭 월리를 찾아라!</h2>
                                 <p>인원 무제한 · 시간 무제한 · 탐색/인증</p>
                             </header>
                             <p>
-                                축제장 곳곳에 숨겨진 ‘윌리’ 포인트를 찾아 QR로 인증하는 탐색형 게임입니다.
+                                축제장 곳곳에 숨겨진 ‘월리’ 포인트를 찾아 QR로 인증하는 탐색형 게임입니다.
                                 힌트 지도, 위치 정보, 포토 인증을 활용해 가족·연인·친구 누구나 가볍게 즐길 수 있습니다.
                             </p>
                             <ul class="actions">
@@ -90,8 +90,8 @@
                 <!-- 3. 경찰과 도둑 -->
                 <div class="col-4 col-12-medium">
                     <section class="box feature">
-                        <a href="/police" class="image featured" aria-label="도둑과 경찰">
-                            <img src="images/police.png" alt="도둑과 경찰 표지" />
+                        <a href="/police" class="image featured" aria-label="경찰과 도둑">
+                            <img src="images/police.png" alt="경찰과 도둑 표지" />
                         </a>
                         <div class="inner">
                             <header>
@@ -130,8 +130,8 @@
                                 <tr>
                                     <th>구분</th>
                                     <th>좀비 아포칼립스</th>
-                                    <th>윌리를 찾아라</th>
-                                    <th>도둑과 경찰</th>
+                                    <th>월리를 찾아라</th>
+                                    <th>경찰과 도둑</th>
                                 </tr>
                                 </thead>
                                 <tbody>

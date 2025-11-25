@@ -5,7 +5,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8" />
-    <title>윌리를 찾아라 룰북 | 추적자들</title>
+    <title>월리를 찾아라 룰북 | 추적자들</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="/assets/css/main.css" />
 
@@ -107,7 +107,7 @@
 
     <article class="rule-card">
         <span class="rule-label">탐색 · 인증 게임</span>
-        <h3><span class="rule-icon">🕵️‍♂️</span>윌리를 찾아라</h3>
+        <h3><span class="rule-icon">🕵️‍♂️</span>월리를 찾아라</h3>
         <p class="rule-meta">인원 제한 없음 · 제한 시간 없음 · 탐색/인증형 미션</p>
 
         <div>
