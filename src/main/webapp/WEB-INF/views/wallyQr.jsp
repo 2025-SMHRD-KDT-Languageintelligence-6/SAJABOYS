@@ -30,7 +30,7 @@
 <body>
 
 <div class="qr-panel">
-    <h2>QR 코드 스캔</h2>
+    <h2>월리 QR 코드 스캔</h2>
     <div class="qr-video" id="qrPreview">📷 카메라 미리보기</div>
     <div class="qr-buttons">
         <button class="button" id="startScanBtn">카메라 열기</button>
