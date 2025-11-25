@@ -31,7 +31,7 @@
             <section id="banner" class="box">
                 <header>
                     <h2>축제 게임 룰북 허브</h2>
-                    <p>좀비 아포칼립스 · 월리를 찾아라 · 도둑과 경찰</p>
+                    <p>좀비 아포칼립스 · 월리를 찾아라 · 경찰과 도둑</p>
                 </header>
             </section>
         </div>
