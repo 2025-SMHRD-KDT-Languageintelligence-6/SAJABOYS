@@ -218,7 +218,7 @@ function initRealtimeMap() {
         const lat = position.coords.latitude;
         const lng = position.coords.longitude;
         const mapContainer = document.getElementById('map');
-        const mapOption = { center: new kakao.maps.LatLng(lat, lng), level: 3 };
+        const mapOption = { center: new kakao.maps.LatLng(lat, lng), level: 2 };
         map = new kakao.maps.Map(mapContainer, mapOption);
 
         // 자기 마커
