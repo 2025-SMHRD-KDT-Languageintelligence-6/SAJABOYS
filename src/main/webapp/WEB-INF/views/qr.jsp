@@ -112,7 +112,7 @@
     // 테스트 버튼 (GET 요청으로 처리)
     document.getElementById('mockScanBtn').onclick = () => {
         // 현재 수동으로 성공한 조합과 다른 새로운 번호로 테스트해보세요.
-        const mockUrl = "/stamp/scan?fesIdx=6&stampNumber=99";
+        const mockUrl = "/stamp/scan?fesIdx=1&stampNumber=1";
         executeScan(mockUrl);
     };
 </script>
