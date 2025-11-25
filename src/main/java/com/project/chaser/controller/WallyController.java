@@ -25,6 +25,14 @@ public class WallyController {
         return "createWallyQr";
     }
 
+    @GetMapping("/qr")
+    public String qrPage(HttpSession session, Model model) {
+        User loginUser = (User) session.getAttribute("user");
+        if (loginUser == null) return "redirect:/login";
+
+        return "wallyQr";  // wallyQr.jsp
+    }
+
     /**
      * QR 코드 스캔 후 게임 적립
      */

@@ -54,7 +54,7 @@
                                 <div class="wally-actions">
                                     <div class="wally-found-card">
                                         <h3>월리를 찾았다!</h3>
-                                        <button type="button" class="wally-camera-btn" onclick="location.href='/stamp/qr'">
+                                        <button type="button" class="wally-camera-btn" onclick="location.href='/wally/qr'">
                                             카메라 열기
                                         </button>
                                     </div>
