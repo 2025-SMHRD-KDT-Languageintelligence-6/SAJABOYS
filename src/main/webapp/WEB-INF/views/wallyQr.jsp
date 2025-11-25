@@ -3,7 +3,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>스탬프 QR 코드 스캔</title>
+    <title>월리 QR 코드 스캔</title>
     <link rel="stylesheet" href="/assets/css/main.css">
     <style>
         .qr-panel {
@@ -37,7 +37,7 @@
         <button class="button alt" id="mockScanBtn">스캔 완료 (테스트)</button>
     </div>
     <div class="back-btn">
-        <button class="button" onclick="location.href='/stamp'">← 스탬프 현황으로 돌아가기</button>
+        <button class="button" onclick="location.href='/main'">← 메인으로 돌아가기</button>
     </div>
 </div>
 
@@ -74,10 +74,10 @@
         // 1단계: 유효성 검사 (QR이 올바른 형식인지 확인)
         // 이 검사를 통과하지 못하면 /scan으로 이동하지 않습니다.
         const scannedFesIdx = getQueryParamFromUrl(scannedUrl, 'fesIdx');
-        const scannedStampNumber = getQueryParamFromUrl(scannedUrl, 'stampNumber');
+        const scannedGameResult = getQueryParamFromUrl(scannedUrl, 'gameResult');
 
-        if (!scannedFesIdx || !scannedStampNumber) {
-            alert("QR 코드가 유효하지 않습니다. [fesIdx] 또는 [stampNumber]가 누락되었습니다.");
+        if (!scannedFesIdx || !scannedGameResult) {
+            alert("QR 코드가 유효하지 않습니다. [fesIdx] 또는 [gameResult]가 누락되었습니다.");
             return;
         }
 

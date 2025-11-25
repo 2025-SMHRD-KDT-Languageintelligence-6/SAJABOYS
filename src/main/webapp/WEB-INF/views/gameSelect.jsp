@@ -56,7 +56,7 @@
                     <div class="mode-wrap">
                         <label class="mode-option">
                             <input type="radio" name="mode" value="police" required>
-                            <strong>🥷 술래잡기 (도둑과 경찰)</strong>
+                            <strong>🥷 술래잡기 (경찰과 도둑)</strong>
                         </label>
                         <label class="mode-option">
                             <input type="radio" name="mode" value="zombie">

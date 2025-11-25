@@ -1,0 +1,162 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <title>경찰과 도둑 룰북 | 추적자들</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/assets/css/main.css" />
+
+    <style>
+        .rulebook-wrap{
+          max-width: 900px;
+          margin: 3rem auto;
+          padding: 0 1rem;
+          font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+        .rulebook-header{
+          text-align: center;
+          margin-bottom: 2.5rem;
+        }
+        .rulebook-header h2{
+          font-size: 2rem;
+          font-weight: 800;
+          margin-bottom: 0.4rem;
+        }
+        .rulebook-header p{
+          color: #555;
+          font-size: 0.95rem;
+        }
+
+        .rule-card{
+          background: #ffffff;
+          border-radius: 16px;
+          padding: 1.8rem 1.6rem;
+          box-shadow: 0 10px 25px rgba(15,23,42,0.08);
+          border: 1px solid #e5e7eb;
+          display: flex;
+          flex-direction: column;
+          gap: 0.75rem;
+        }
+        .rule-card h3{
+          font-size: 1.4rem;
+          font-weight: 800;
+          margin: 0;
+          display: flex;
+          align-items: center;
+          gap: 0.4rem;
+        }
+        .rule-meta{
+          font-size: 0.86rem;
+          color: #4b5563;
+          font-weight: 600;
+        }
+        .rule-label{
+          display: inline-flex;
+          align-items: center;
+          padding: 0.22rem 0.7rem;
+          border-radius: 999px;
+          font-size: 0.76rem;
+          font-weight: 700;
+          background: #eff6ff;
+          color: #1d4ed8;
+          margin-bottom: 0.3rem;
+        }
+        .rule-icon{
+          font-size: 1.2rem;
+        }
+
+        .rule-section-title{
+          font-size: 0.9rem;
+          font-weight: 700;
+          margin-top: 0.5rem;
+          margin-bottom: 0.15rem;
+          color: #111827;
+        }
+        .rule-card p{
+          font-size: 0.88rem;
+          line-height: 1.6;
+          color: #374151;
+          margin: 0;
+        }
+        .rule-card ul{
+          margin: 0.15rem 0 0.35rem 1.1rem;
+          padding: 0;
+        }
+        .rule-card li{
+          font-size: 0.86rem;
+          line-height: 1.5;
+          color: #4b5563;
+        }
+
+        .rule-footer-note{
+          margin-top: 1.5rem;
+          font-size: 0.8rem;
+          color: #9ca3af;
+          text-align: right;
+        }
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+<script src="/assets/js/header.js"></script>
+
+<section class="rulebook-wrap" id="rulebook-cops">
+
+    <article class="rule-card">
+        <span class="rule-label">추격 · 체포 게임</span>
+        <h3><span class="rule-icon">🚓</span>도둑과 경찰</h3>
+        <p class="rule-meta">인원 4명 이상 · 30~60분 · 팀 기반 추격전</p>
+
+        <div>
+            <div class="rule-section-title">게임 개요</div>
+            <p>
+                참가자는 도둑팀과 경찰팀으로 나뉘어 실시간으로 추격·체포를 진행합니다.
+                도둑은 경찰을 피해 도망 다니고, 경찰은 지도 기반 힌트를 활용해 도둑을 찾아 체포해야 합니다.
+            </p>
+        </div>
+
+        <div>
+            <div class="rule-section-title">목적</div>
+            <ul>
+                <li><strong>도둑팀</strong>: 지정된 게임 시간(30~60분) 동안 경찰에게 체포되지 않으면 승리</li>
+                <li><strong>경찰팀</strong>: 도둑과 2m 이내 접근하거나 체포 구역 QR을 먼저 스캔해 체포에 성공하면 승리</li>
+            </ul>
+        </div>
+
+        <div>
+            <div class="rule-section-title">진행 방식</div>
+            <ul>
+                <li>도둑팀이 먼저 출발하고, 일정 시간(예: 1~3분) 뒤 경찰팀이 추격을 시작합니다.</li>
+                <li>경찰은 일정 주기로 갱신되는 도둑의 대략 위치 힌트를 보며 추적합니다.</li>
+                <li>경찰이 체포 조건을 만족하면 즉시 게임 종료 및 경찰팀 승리로 처리됩니다.</li>
+            </ul>
+        </div>
+
+        <div>
+            <div class="rule-section-title">승리 조건</div>
+            <ul>
+                <li>도둑팀: 게임 시간 동안 한 번도 체포되지 않으면 승리</li>
+                <li>경찰팀: 도둑 체포에 성공하면 즉시 승리</li>
+            </ul>
+        </div>
+
+        <div>
+            <div class="rule-section-title">안전 수칙</div>
+            <ul>
+                <li>과도한 몸싸움, 밀치기, 잡아당기기 등은 금지합니다.</li>
+                <li>차량 통행 구역, 계단, 미끄러운 구역 등 위험 지역에서는 속도를 줄입니다.</li>
+                <li>진행 스태프의 통제와 안내를 반드시 따릅니다.</li>
+            </ul>
+        </div>
+    </article>
+
+    <p class="rule-footer-note">
+        ※ 실제 운영 시 축제장 구조와 참가자 연령에 따라 세부 규칙은 조정될 수 있습니다.
+    </p>
+</section>
+
+</body>
+</html>

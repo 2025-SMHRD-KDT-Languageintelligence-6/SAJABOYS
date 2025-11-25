@@ -13,162 +13,185 @@
     <link rel="stylesheet" href="/assets/css/main.css" />
 
     <style>
-        .wally-admin-layout{
-          max-width:1200px;
-          margin:2rem auto 3rem;
-          padding:0 1rem;
-          display:grid;
-          grid-template-columns: 1.3fr 1.7fr;
-          gap:1.5rem;
+        /* 메인 레이아웃 설정 */
+        .wally-admin-layout {
+            max-width: 1200px;
+            margin: 2rem auto 3rem;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: 1.3fr 1.7fr;
+            gap: 1.5rem;
         }
 
-        .admin-panel{
-          background:#ffffff;
-          border-radius:14px;
-          padding:1.4rem 1.6rem;
-          box-shadow:0 8px 20px rgba(15,23,42,0.08);
-        }
-        .admin-panel + .admin-panel{ margin-top:1rem; }
-
-        .admin-panel h2{
-          margin:0 0 .6rem;
-          font-size:1.3rem;
-          font-weight:800;
-        }
-        .admin-panel p.sub{
-          margin:0 0 1rem;
-          font-size:0.9rem;
-          color:#6b7280;
+        /* 각 패널 디자인 */
+        .admin-panel {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 1.4rem 1.6rem;
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
         }
 
-        .field-group{
-          display:flex;
-          flex-direction:column;
-          gap:.35rem;
-          margin-bottom:1rem;
+        .admin-panel + .admin-panel {
+            margin-top: 1rem;
         }
-        .field-group label{
-          font-weight:600;
-          font-size:0.95rem;
+
+        .admin-panel h2 {
+            margin: 0 0 .6rem;
+            font-size: 1.3rem;
+            font-weight: 800;
         }
+
+        .admin-panel p.sub {
+            margin: 0 0 1rem;
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+
+        /* 필드 그룹 스타일 */
+        .field-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            margin-bottom: 1rem;
+        }
+
+        .field-group label {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
         .field-group input[type="text"],
         .field-group input[type="number"],
         .field-group input[type="file"],
-        .field-group textarea{
-          font-size:0.95rem;
-          padding:0.45rem 0.55rem;
-          border-radius:8px;
-          border:1px solid #d1d5db;
-          background:#f9fafb;
-        }
-        .field-group small{
-          font-size:0.8rem;
-          color:#9ca3af;
+        .field-group textarea {
+            font-size: 0.95rem;
+            padding: 0.45rem 0.55rem;
+            border-radius: 8px;
+            border: 1px solid #d1d5db;
+            background: #f9fafb;
         }
 
-        .btn-row{
-          display:flex;
-          flex-wrap:wrap;
-          gap:.6rem;
-          margin-top:.3rem;
-        }
-        .btn{
-          display:inline-flex;
-          align-items:center;
-          justify-content:center;
-          padding:.45rem .9rem;
-          border-radius:999px;
-          border:none;
-          cursor:pointer;
-          font-size:0.9rem;
-          font-weight:600;
-          text-decoration:none;
-          white-space:nowrap;
-        }
-        .btn-primary{
-          background:#fb923c;
-          color:#fff;
-        }
-        .btn-secondary{
-          background:#e5e7eb;
-          color:#374151;
+        .field-group small {
+            font-size: 0.8rem;
+            color: #9ca3af;
         }
 
-        .thumbnail{
-          width:100%;
-          max-width:220px;
-          aspect-ratio:3/4;
-          border-radius:12px;
-          border:1px dashed #d1d5db;
-          background:#f9fafb;
-          display:flex;
-          align-items:center;
-          justify-content:center;
-          font-size:0.85rem;
-          color:#9ca3af;
-          overflow:hidden;
-          margin-top:.4rem;
-        }
-        .thumbnail img{
-          width:100%;
-          height:100%;
-          object-fit:cover;
+        /* 버튼 행 스타일 */
+        .btn-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 0.3rem;
         }
 
-        .qr-preview{
-          width:140px;
-          height:140px;
-          border-radius:16px;
-          border:1px dashed #d1d5db;
-          background:#f9fafb;
-          display:flex;
-          align-items:center;
-          justify-content:center;
-          font-size:0.85rem;
-          color:#9ca3af;
-          overflow:hidden;
-          margin-top:.4rem;
-        }
-        .qr-preview img{
-          width:100%;
-          height:100%;
-          object-fit:contain;
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.45rem 0.9rem;
+            border-radius: 999px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            white-space: nowrap;
         }
 
-        /* 오른쪽 영역 */
-        .wally-right-column .admin-panel{
-          height:100%;
+        .btn-primary {
+            background: #fb923c;
+            color: #fff;
         }
 
-        .finder-table{
-          width:100%;
-          border-collapse:collapse;
-          font-size:0.9rem;
-          margin-top:0.5rem;
+        .btn-secondary {
+            background: #e5e7eb;
+            color: #374151;
         }
-        .finder-table thead{
-          background:#f3f4f6;
+
+        /* 썸네일 이미지 스타일 */
+        .thumbnail {
+            width: 100%;
+            max-width: 220px;
+            aspect-ratio: 3/4;
+            border-radius: 12px;
+            border: 1px dashed #d1d5db;
+            background: #f9fafb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            color: #9ca3af;
+            overflow: hidden;
+            margin-top: 0.4rem;
         }
+
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* QR 코드 미리보기 */
+        .qr-preview {
+            width: 140px;
+            height: 140px;
+            border-radius: 16px;
+            border: 1px dashed #d1d5db;
+            background: #f9fafb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            color: #9ca3af;
+            overflow: hidden;
+            margin-top: 0.4rem;
+        }
+
+        .qr-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* 오른쪽 영역 패널 */
+        .wally-right-column .admin-panel {
+            height: 100%;
+        }
+
+        /* 테이블 스타일 */
+        .finder-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .finder-table thead {
+            background: #f3f4f6;
+        }
+
         .finder-table th,
-        .finder-table td{
-          border:1px solid #e5e7eb;
-          padding:0.4rem 0.5rem;
-          text-align:center;
-        }
-        .finder-table tbody tr:nth-child(even){
-          background:#f9fafb;
+        .finder-table td {
+            border: 1px solid #e5e7eb;
+            padding: 0.4rem 0.5rem;
+            text-align: center;
         }
 
-        .festival-note{
-          font-size:0.8rem;
-          color:#6b7280;
-          margin-top:0.25rem;
+        .finder-table tbody tr:nth-child(even) {
+            background: #f9fafb;
         }
 
-        @media (max-width: 900px){
-          .wally-admin-layout{
-            grid-template-columns:1fr;
-          }
+        .festival-note {
+            font-size: 0.8rem;
+            color: #6b7280;
+            margin-top: 0.25rem;
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 900px) {
+            .wally-admin-layout {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -177,9 +200,8 @@
 <div id="page-wrapper">
 
     <!-- (필요하다면 공용 헤더 include) -->
-    <!-- 공통 헤더 include -->
-        <div id="site-header"></div>
-        <script src="/assets/js/header.js"></script>
+    <div id="site-header"></div>
+    <script src="/assets/js/header.js"></script>
 
     <section class="container">
         <header class="major">
@@ -189,11 +211,10 @@
 
         <div class="wally-admin-layout">
 
-            <!-- ====== 좌측 : 윌리 & QR 관리 ====== -->
+            <!-- 좌측 : 윌리 & QR 관리 -->
             <div>
 
-                <!-- 1. 오늘의 윌리 설정 -->
-                <!-- admin.jsp: 오늘의 월리 이미지 업로드 -->
+                <!-- 오늘의 윌리 설정 -->
                 <div class="admin-panel">
                     <h2>1. 오늘의 윌리 설정</h2>
                     <p class="sub">INDEX 화면에 노출될 윌리 사진을 업로드합니다.</p>
@@ -221,66 +242,17 @@
                     </form>
                 </div>
 
-
-
-                <!-- 2. 월리가 가지고 다닐 QR 코드 / 4. QR 코드 생성 -->
+                <!-- QR 코드 관리 -->
                 <div class="admin-panel">
-                    <h2>2. 윌리가 가지고 다닐 QR 코드</h2>
-                    <p class="sub">윌리를 찾은 사람이 찍을 QR 코드를 관리합니다.</p>
-
-                    <!-- 현재 QR 미리보기 및 수동 업로드 -->
-                    <div class="field-group">
-                        <label>현재 적용 중인 QR 코드</label>
-                        <div class="qr-preview" id="currentQrPreview">
-                            <!-- 서버에서 불러온 QR 이미지가 있다면 <img src="..."> -->
-                            등록된 QR 코드 없음
-                        </div>
-                    </div>
-
-                    <form id="qrUploadForm" method="post" enctype="multipart/form-data">
-                        <div class="field-group">
-                            <label for="qrImage">QR 이미지 수동 업로드</label>
-                            <input type="file" id="qrImage" name="qrImage" accept="image/*" />
-                            <small>※ 외부에서 생성한 PNG/JPG QR 파일을 업로드할 수 있습니다.</small>
-                        </div>
-                        <div class="btn-row">
-                            <button type="submit" class="btn btn-secondary">QR 이미지 저장</button>
-                        </div>
-                    </form>
-
-                    <hr style="margin:1.2rem 0; border:none; border-top:1px dashed #e5e7eb;">
-
-                    <!-- 4. QR 코드 생성 창 -->
-                    <h2 style="margin-top:0;">4. QR 코드 생성</h2>
-                    <p class="sub">관리자 페이지에서 직접 QR 코드를 생성해 적용할 수도 있습니다.</p>
-
-                    <form id="qrGenerateForm" method="post">
-                        <div class="field-group">
-                            <label for="qrContent">QR 코드 내용 (URL 또는 텍스트)</label>
-                            <input type="text" id="qrContent" name="qrContent"
-                                   placeholder="예) https://chujak.com/event/wally/2025-01-01" />
-                        </div>
-
-                        <div class="field-group">
-                            <label for="qrMemo">관리용 메모</label>
-                            <textarea id="qrMemo" name="qrMemo" rows="2"
-                                      placeholder="예) 2025-01-01 야간축제 윌리 인증용 QR"></textarea>
-                        </div>
-
-                        <div class="btn-row">
-                            <button type="submit" class="btn btn-primary">QR 코드 생성 & 적용</button>
-                        </div>
-                    </form>
+                    <h2>2. 축제 QR 코드</h2>
+                    <button class="button alt" onclick="location.href='/stamp/createQr'">축제 QR 코드 생성하기</button>
+                    <button class="button alt" onclick="location.href='/wally/createQr'">월리 QR 코드 생성하기</button>
                 </div>
-
             </div>
 
-            <!-- ====== 우측 : 참여자 목록 & 축제 장소 ====== -->
+            <!-- 우측 : 참여자 목록 & 축제 장소 -->
             <div class="wally-right-column">
 
-
-
-                <!-- 3. 월리가 있는 축제 장소 입력 -->
                 <div class="admin-panel">
                     <h2>3. 월리가 있는 축제 장소</h2>
                     <p class="sub">
@@ -291,17 +263,14 @@
                     <form id="wallyFestivalForm" method="post" action="/admin/festival">
                         <div class="field-group">
                             <label for="festivalName">축제장 이름</label>
-                            <input type="text" id="festivalName" name="festivalName"
-                                   placeholder="예) 순천 불빛축제" />
+                            <input type="text" id="festivalName" name="festivalName" placeholder="예) 순천 불빛축제" />
                         </div>
 
                         <div class="field-group">
                             <label for="festivalId">축제장 번호 (DB 키값)</label>
-                            <input type="number" id="festivalId" name="festivalId"
-                                   placeholder="예) 103 (tb_festival.fes_idx)" />
+                            <input type="number" id="festivalId" name="festivalId" placeholder="예) 103 (tb_festival.fes_idx)" />
                             <p class="festival-note">
-                                · 입력한 축제장 번호로 DB에서 축제 정보를 조회하여
-                                INDEX &lt;윌리가 있는 축제장&gt; 영역에 자동 반영됩니다.
+                                · 입력한 축제장 번호로 DB에서 축제 정보를 조회하여 INDEX &lt;윌리가 있는 축제장&gt; 영역에 자동 반영됩니다.
                             </p>
                         </div>
 
@@ -313,11 +282,8 @@
                 </div>
 
             </div>
-
         </div>
     </section>
-
-
 </div>
 
 </body>

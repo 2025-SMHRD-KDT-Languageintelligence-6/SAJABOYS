@@ -1,0 +1,163 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <title>좀비 아포칼립스 룰북 | 추적자들</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/assets/css/main.css" />
+
+    <style>
+        .rulebook-wrap{
+          max-width: 900px;
+          margin: 3rem auto;
+          padding: 0 1rem;
+          font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+        .rulebook-header{
+          text-align: center;
+          margin-bottom: 2.5rem;
+        }
+        .rulebook-header h2{
+          font-size: 2rem;
+          font-weight: 800;
+          margin-bottom: 0.4rem;
+        }
+        .rulebook-header p{
+          color: #555;
+          font-size: 0.95rem;
+        }
+
+        .rule-card{
+          background: #ffffff;
+          border-radius: 16px;
+          padding: 1.8rem 1.6rem;
+          box-shadow: 0 10px 25px rgba(15,23,42,0.08);
+          border: 1px solid #e5e7eb;
+          display: flex;
+          flex-direction: column;
+          gap: 0.75rem;
+        }
+        .rule-card h3{
+          font-size: 1.4rem;
+          font-weight: 800;
+          margin: 0;
+          display: flex;
+          align-items: center;
+          gap: 0.4rem;
+        }
+        .rule-meta{
+          font-size: 0.86rem;
+          color: #4b5563;
+          font-weight: 600;
+        }
+        .rule-label{
+          display: inline-flex;
+          align-items: center;
+          padding: 0.22rem 0.7rem;
+          border-radius: 999px;
+          font-size: 0.76rem;
+          font-weight: 700;
+          background: #fef3c7;
+          color: #b45309;
+          margin-bottom: 0.3rem;
+        }
+        .rule-icon{
+          font-size: 1.2rem;
+        }
+
+        .rule-section-title{
+          font-size: 0.9rem;
+          font-weight: 700;
+          margin-top: 0.5rem;
+          margin-bottom: 0.15rem;
+          color: #111827;
+        }
+        .rule-card p{
+          font-size: 0.88rem;
+          line-height: 1.6;
+          color: #374151;
+          margin: 0;
+        }
+        .rule-card ul{
+          margin: 0.15rem 0 0.35rem 1.1rem;
+          padding: 0;
+        }
+        .rule-card li{
+          font-size: 0.86rem;
+          line-height: 1.5;
+          color: #4b5563;
+        }
+
+        .rule-footer-note{
+          margin-top: 1.5rem;
+          font-size: 0.8rem;
+          color: #9ca3af;
+          text-align: right;
+        }
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+<script src="/assets/js/header.js"></script>
+
+<section class="rulebook-wrap" id="rulebook-zombie">
+
+    <article class="rule-card">
+        <span class="rule-label">생존 · 서바이벌 게임</span>
+        <h3><span class="rule-icon">🧟‍♀️</span>좀비 아포칼립스</h3>
+        <p class="rule-meta">인원 5~10명 · 30~60분 · 생존 추격전</p>
+
+        <div>
+            <div class="rule-section-title">게임 개요</div>
+            <p>
+                참가자는 생존자와 좀비로 역할이 나누어지고, 생존자는 감염되지 않고 버티는 것이 목표,
+                좀비는 최대한 많은 생존자를 감염시키는 것이 목표인 서바이벌형 실시간 추격 게임입니다.
+            </p>
+        </div>
+
+        <div>
+            <div class="rule-section-title">목적</div>
+            <ul>
+                <li><strong>생존자</strong>: 제한 시간 종료까지 감염되지 않고 살아남기</li>
+                <li><strong>좀비</strong>: 가능한 많은 생존자를 감염시켜 팀을 늘리기</li>
+            </ul>
+        </div>
+
+        <div>
+            <div class="rule-section-title">진행 방식</div>
+            <ul>
+                <li>게임 시작 시 1명 또는 소수의 참가자가 초기 좀비로 지정되고, 나머지는 생존자로 시작합니다.</li>
+                <li>좀비가 생존자 2m 이내로 접근하면 감염 판정이 되며, 감염자는 좀비 QR을 스캔해 역할을 변경합니다.</li>
+                <li>생존자는 지도에 표시된 회복/보호 QR 스팟을 활용해 일정 시간 면역을 얻거나 힌트를 받을 수 있습니다.</li>
+                <li>시간이 지날수록 좀비 수가 늘어나며, 후반으로 갈수록 생존 난이도가 높아집니다.</li>
+            </ul>
+        </div>
+
+        <div>
+            <div class="rule-section-title">승리 조건</div>
+            <ul>
+                <li>생존자: 제한 시간 종료 시까지 감염되지 않은 플레이어가 한 명이라도 남아 있으면 생존자 승리</li>
+                <li>좀비: 제한 시간 내 모든 생존자를 감염시키면 좀비 승리</li>
+            </ul>
+        </div>
+
+        <div>
+            <div class="rule-section-title">안전 수칙</div>
+            <ul>
+                <li>서로를 밀치거나 잡아당기는 행위 등 과격한 신체 접촉은 금지합니다.</li>
+                <li>시야가 좁은 구역, 계단, 경사면에서는 속도를 줄이고 천천히 이동합니다.</li>
+                <li>컨디션 이상(어지러움, 호흡 곤란 등)을 느낄 경우 즉시 게임에서 이탈하고 스태프에게 알립니다.</li>
+            </ul>
+        </div>
+    </article>
+
+    <p class="rule-footer-note">
+        ※ 실제 운영 시 참가자 연령, 인원, 시간에 따라 좀비·생존자 비율과 난이도는 조정할 수 있습니다.
+    </p>
+</section>
+
+</body>
+</html>

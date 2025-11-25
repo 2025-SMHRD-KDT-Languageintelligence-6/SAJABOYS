@@ -64,7 +64,7 @@
                                             다른 게임을 하러가기
                                         </a>
 
-                                        <a href="#" class="button">
+                                        <a href="/rule" class="button">
                                             Game Rule
                                         </a>
                                     </div>
