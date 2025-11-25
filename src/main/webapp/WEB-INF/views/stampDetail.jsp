@@ -42,7 +42,7 @@
             </div>
 
             <div class="detail-row">
-                <span class="label"><i class="fas fa-location-dot"></i> 주소</span>
+                <span class="label"><i class="fas fa-map-pin"></i> 주소</span>
                 <span class="value">${festival.addr}</span>
             </div>
 

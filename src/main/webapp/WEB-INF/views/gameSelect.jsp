@@ -14,6 +14,8 @@
 </head>
 <body>
 <div id="page-wrapper">
+    <div id="site-header"></div>
+    <script src="/assets/js/header.js"></script>
     <main class="select-layout">
         <div class="select-grid">
 
