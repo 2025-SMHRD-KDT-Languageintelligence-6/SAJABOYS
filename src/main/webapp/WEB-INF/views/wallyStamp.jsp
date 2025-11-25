@@ -136,16 +136,21 @@
         <c:if test="${not empty gamingResults}">
             <div class="gaming-results">
                 <h3>게임 결과</h3>
-                <ul>
-                    <c:forEach var="gaming" items="${gamingResults}">
-                        <li>
-                            <strong>축제 번호: </strong>${gaming.fesIdx}<br/>
-                            <strong>게임 이름: </strong>${gaming.gameName}<br/>
-                            <strong>게임 결과: </strong>${gaming.gameResult == 1 ? '성공' : '실패'}<br/>
-                            <strong>적립 시간: </strong><fmt:formatDate value="${gaming.createdAt}" pattern="yyyy-MM-dd HH:mm:ss" /><br/>
-                        </li>
-                    </c:forEach>
-                </ul>
+                <div class="stamp-grid" id="stampGrid">
+                            <c:forEach var="gaming" items="${gamingResults}">
+                                <div class="stamp-cell
+                                <c:if test="${gaming.gameResult == 1}">collected</c:if>">
+                                    <div class="stamp-inner">
+                                        <div class="stamp-number">월리 No.${gaming.gamingIdx}</div>
+                                        <div class="stamp-number">축제 번호 : ${gaming.fesIdx}</div>
+                                        <div class="stamp-label">${gaming.gameResult == 1 ? '성공' : '실패'}</div>
+                                        <div class="stamp-label">
+                                            <fmt:formatDate value="${gaming.createdAt}" pattern="yyyy-MM-dd" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </div>
             </div>
         </c:if>
 
