@@ -9,4 +9,10 @@
         INSERT INTO gaming (UserIdx, FesIdx, GameName, GameResult)
         VALUES (#{userIdx}, #{fesIdx}, #{gameName}, #{gameResult});
     </insert>
+
+    <select id="selectGamingResultsByUser" resultType="com.project.chaser.dto.Gaming">
+        SELECT * FROM gaming
+        WHERE UserIdx = #{userIdx}
+        ORDER BY CreatedAt DESC
+    </select>
 </mapper>

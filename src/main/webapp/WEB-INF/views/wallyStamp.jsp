@@ -133,48 +133,24 @@
         <h2>월리 현황</h2>
         <p class="panel-desc">월리를 찾아보세요!</p>
 
-        <c:set var="percent" value="${totalCount > 0 ? collectedCount / totalCount * 100 : 0}" />
-
-        <!-- 진행 현황과 버튼을 같은 줄에 배치 -->
-        <div class="stamp-progress-wrapper">
-            <div class="stamp-progress">
-                <span>완료한 축제 : <strong id="stampCountText">${collectedCount} / ${totalCount}</strong></span>
-                <div class="stamp-bar-wrap">
-                    <div class="stamp-bar" id="stampBar" style="width:${percent}%"></div>
-                </div>
+        <c:if test="${not empty gamingResults}">
+            <div class="gaming-results">
+                <h3>게임 결과</h3>
+                <ul>
+                    <c:forEach var="gaming" items="${gamingResults}">
+                        <li>
+                            <strong>축제 번호: </strong>${gaming.fesIdx}<br/>
+                            <strong>게임 이름: </strong>${gaming.gameName}<br/>
+                            <strong>게임 결과: </strong>${gaming.gameResult == 1 ? '성공' : '실패'}<br/>
+                            <strong>적립 시간: </strong><fmt:formatDate value="${gaming.createdAt}" pattern="yyyy-MM-dd HH:mm:ss" /><br/>
+                        </li>
+                    </c:forEach>
+                </ul>
             </div>
-            <div class="go-scan">
-                <!-- 관리자 전용 버튼 -->
-                <c:if test="${user.admin}">
-                    <button class="button alt" onclick="location.href='/wally/createQr'">QR 코드 생성하기</button>
-                </c:if>
-                <!-- 모든 사용자 버튼 -->
-                <button class="button alt" onclick="location.href='/wally/qr'">QR 코드 스캔하기 →</button>
-            </div>
-        </div>
+        </c:if>
 
-        <div class="stamp-grid" id="stampGrid">
-            <c:forEach var="status" items="${festivalStatuses}">
-                <c:set var="isCompleted" value="${status.completed != 0}" />
-                <a href="/stamp/detail?fesIdx=${status.fesIdx}" class="stamp-cell-link">
-                    <div class="stamp-cell <c:if test='${isCompleted}'>collected</c:if>">
-                        <div class="stamp-inner">
-                            <div class="stamp-number">${status.fesIdx}</div>
-                            <div class="stamp-label">${status.fesName}</div>
-                        </div>
-                    </div>
-                </a>
-            </c:forEach>
-        </div>
-
-        <c:if test="${collectedCount == totalCount && totalCount > 0}">
-            <section id="rewardSection" class="reward-box">
-                <div>
-                    <strong>축하합니다! 스탬프 투어 모두 완료 🎉</strong>
-                    <p>상품 교환 부스 또는 온라인 교환 페이지로 이동하세요.</p>
-                </div>
-                <button type="button" class="button reward-btn" onclick="location.href='rewardExchange.html'">상품 교환하기</button>
-            </section>
+        <c:if test="${empty gamingResults}">
+            <p>현재 게임 기록이 없습니다.</p>
         </c:if>
     </section>
 </div>

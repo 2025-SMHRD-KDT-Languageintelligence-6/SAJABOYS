@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/wally")
@@ -20,12 +22,18 @@ public class WallyController {
     @Autowired
     private final WallyService wallyService;
 
-    @GetMapping("/")
-    public String wallyStamp(HttpSession session){
+    @GetMapping("")
+    public String wallyStamp(HttpSession session, Model model){
         User loginUser = (User) session.getAttribute("user");
         if (loginUser == null) {
             return "redirect:/login";
         }
+
+        // 로그인된 유저의 게임 결과 불러오기
+        List<Gaming> gamingResults = wallyService.getGamingResults(loginUser.getUserIdx());
+
+        // 모델에 게임 결과 전달
+        model.addAttribute("gamingResults", gamingResults);
 
         return "wallyStamp";
     }

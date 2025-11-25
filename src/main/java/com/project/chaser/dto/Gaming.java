@@ -1,6 +1,9 @@
 package com.project.chaser.dto;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 
 @Data
 @NoArgsConstructor  // 기본 생성자
@@ -17,6 +20,7 @@ public class Gaming {
     private String GameName;
     @NonNull
     private int GameResult;
-    private String CreatedAt;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date CreatedAt;
 }
 
