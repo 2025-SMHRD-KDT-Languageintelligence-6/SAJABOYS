@@ -45,9 +45,9 @@
                                     <div class="wally-title-bar">
                                         오늘의 월리
                                     </div>
-                                    <img src="/images/wally.png"
-                                         alt="오늘의 월리"
-                                         class="wally-image" />
+                                    <!-- 오늘의 월리 이미지 -->
+                                    <img src="<c:out value='${sessionScope.wallyImagePath != null ? sessionScope.wallyImagePath : applicationScope.wallyImagePath != null ? applicationScope.wallyImagePath : "/images/wally.png"}' />"
+                                         alt="오늘의 월리" class="wally-image" />
                                 </div>
 
                                 <!-- 버튼/텍스트 영역 -->
@@ -70,13 +70,19 @@
                                     </div>
 
                                     <!-- 서브 이미지 제목 -->
-                                    <h4 class="wally-sub-h4" >
-                                        윌리가 있는 축제장
+                                    <h4 class="wally-sub-h4">
+                                        <c:if test="${not empty applicationScope.festivalName}">
+                                            ${applicationScope.festivalName}
+                                        </c:if>
+                                        <c:if test="${empty applicationScope.festivalName}">
+                                            윌리가 있는 축제장
+                                        </c:if>
                                     </h4>
 
                                     <div class="wally-sub-image">
-                                        <img src="/img/festival/121.png"
-                                             alt="윌리가 있는 축제 정보"
+                                        <!-- 축제 이미지 -->
+                                        <img src="<c:out value='${applicationScope.festivalImagePath != null ? applicationScope.festivalImagePath : "/images/no-image.png"}' />"
+                                             alt="<c:out value='${applicationScope.festivalName != null ? applicationScope.festivalName : "축제 정보 없음"}' />"
                                              onerror="this.src='/images/no-image.png';" />
                                     </div>
                                 </div>

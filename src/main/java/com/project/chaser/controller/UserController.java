@@ -1,7 +1,9 @@
 package com.project.chaser.controller;
 
+import com.project.chaser.dto.Festival;
 import com.project.chaser.dto.RecommendFestivalDto;
 import com.project.chaser.dto.User;
+import com.project.chaser.mapper.FestivalMapper;
 import com.project.chaser.service.EmailService;
 import com.project.chaser.service.FestivalRecommendClient;
 import com.project.chaser.service.JwtUtil;
@@ -23,6 +25,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserController {
 
+    // 서버 메모리에 오늘의 윌리 축제 ID 저장
+    private static int todayFestivalId = -1;
+
     @Autowired // 의존성 주입(Dependency Injection : DI)
     private UserMapper mapper;
 
@@ -38,18 +43,28 @@ public class UserController {
     @Autowired
     private final FestivalRecommendClient recommendClient;
 
+    @Autowired
+    private FestivalMapper festivalMapper; // <- 추가
+
     @GetMapping("/main")
     public String goMain(Model model) {
+        // 추천 축제
         double lat = 35.15;   // 기본값
         double lon = 126.85;  // 기본값
         int topK = 3;
-
         List<RecommendFestivalDto> recommendList =
-        recommendClient.getRecommendedFestivals(lat, lon, topK);
-
+                recommendClient.getRecommendedFestivals(lat, lon, topK);
         model.addAttribute("recommendList", recommendList);
+
+        // 오늘의 윌리 축제
+        if (todayFestivalId != -1) {
+            Festival todayFestival = festivalMapper.getFestival(todayFestivalId);
+            model.addAttribute("todayFestival", todayFestival);
+        }
+
         return "index";
     }
+
     @GetMapping("/header")
     public String header() {
         return "header";  // /  WEB-INF/views/header.jsp 렌더링됨
@@ -244,4 +259,5 @@ public class UserController {
         redirect.addFlashAttribute("msg", "비밀번호가 성공적으로 변경되었습니다.");
         return "redirect:/login";
     }
+
 }
