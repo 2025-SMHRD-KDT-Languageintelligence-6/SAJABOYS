@@ -10,8 +10,6 @@
     <link rel="stylesheet" href="/assets/css/main.css" />
 
     <style>
-        /* ... (CSS 코드는 이전과 동일) ... */
-        body{ background:#f5fafc; }
 
         .qrgen-wrap{
           min-height:100dvh;
