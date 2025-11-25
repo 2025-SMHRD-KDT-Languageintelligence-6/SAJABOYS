@@ -1,0 +1,190 @@
+
+/* ============================
+   📱 모바일 최적화 (max-width: 768px)
+   ============================ */
+@media screen and (max-width: 768px) {
+
+    /* 전체 컨테이너 폭 자동 확장 */
+    .container {
+        width: 100% !important;
+        max-width: 100%;
+        padding: 0 1rem;
+    }
+
+    /* row 간격 최소화 */
+    .row {
+        margin-top: -20px !important;
+        margin-left: 0 !important;
+    }
+
+    .row > * {
+        padding: 20px 0 0 0 !important;
+    }
+
+    /* ---------------------------
+       🟥 1) “왼쪽: 월리 영역”
+       --------------------------- */
+    .col-8,
+    .col-4 {
+        width: 100% !important;
+    }
+
+    .wally-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+    }
+
+    .wally-image-wrap {
+        width: 100%;
+    }
+
+    .wally-image {
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+    }
+
+    .wally-title-bar {
+        text-align: center;
+        padding: 0.6rem;
+        font-size: 1.2rem;
+        border-radius: 12px 12px 0 0;
+    }
+
+    .wally-actions {
+        width: 100%;
+    }
+
+    .wally-found-card h3 {
+        text-align: center;
+    }
+
+    .wally-camera-btn {
+        width: 100%;
+        font-size: 1.1rem;
+    }
+
+    .wally-btn-group a.button {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 0.7rem;
+    }
+
+    .wally-sub-h4 {
+        text-align: center;
+        margin-top: 1rem;
+        font-size: 1.15rem;
+        font-weight: 700;
+    }
+
+    .wally-sub-image img {
+        width: 100%;
+        border-radius: 12px;
+        margin-top: 0.3rem;
+    }
+
+    /* ---------------------------
+       🟦 2) “오른쪽 채팅 박스”
+       --------------------------- */
+    .gr-chat-box {
+        height: auto !important;
+        min-height: 380px !important;
+        padding: 1.2rem !important;
+    }
+
+    .gr-chat-messages {
+        max-height: 250px !important;
+        overflow-y: auto;
+        margin-bottom: 1rem;
+        background: rgba(255,255,255,0.15);
+        padding: 0.7rem;
+        border-radius: 10px;
+    }
+
+    .gr-chat-input-wrap {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .gr-chat-input {
+        flex: 1;
+        font-size: 1rem;
+    }
+
+    .gr-chat-send-btn {
+        padding: 0.6rem 1rem;
+        font-size: 1rem;
+    }
+
+    /* ---------------------------
+       🟩 3) 축제 추천 그리드
+       --------------------------- */
+    .festival-section {
+        padding: 1rem 0;
+    }
+
+    .festival-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* 모바일에서 2개씩 */
+        gap: 1rem;
+        justify-items: center;
+    }
+
+    .festival-card img {
+        width: 100%;
+        max-width: 140px;
+        border-radius: 12px;
+    }
+
+    #main-wrapper2 h2 {
+        text-align: center;
+        font-size: 1.6rem;
+        margin-bottom: 1.5rem;
+    }
+
+    /* '더 많은 축제 보러가기' 버튼 */
+    .festival-section .button {
+        width: 100%;
+        text-align: center;
+        margin-top: 1.5rem;
+    }
+
+    /* ---------------------------
+       🟨 4) 기타 공통 모바일 최적화
+       --------------------------- */
+    h2 {
+        font-size: 1.7rem;
+    }
+
+    .box {
+        padding: 1.4rem !important;
+    }
+
+    #header-wrapper {
+        padding: 1.8rem 0 1rem 0 !important;
+    }
+
+    #footer-wrapper {
+        padding: 3rem 0 3rem 0 !important;
+    }
+
+    #footer .col-3 {
+        width: 50% !important;
+        margin-bottom: 2rem;
+    }
+
+    #copyright {
+        padding-top: 0 !important;
+        font-size: 0.85rem;
+    }
+
+
+    /* ---------------------------
+           🟨 챗창 모바일 최적화
+           --------------------------- */
+    .row.gtr-200 > * {
+       padding: 80px 0 0 20px;
+   }
+
+}
