@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>왈리 QR 코드 생성 | 추적자</title>
+    <title>월리 QR 코드 생성 | 추적자</title>
 
     <link rel="stylesheet" href="/assets/css/main.css" />
 
@@ -113,7 +113,7 @@
         <section class="box qrgen-card">
 
             <div>
-                <h2>QR 코드 생성기</h2>
+                <h2>월리 QR 코드 생성기</h2>
 
                 <div class="qr-form-group">
                     <label for="fesNo">축제 번호</label>
@@ -121,7 +121,7 @@
                 </div>
 
                 <div class="qr-form-group">
-                    <label for="gameResult">윌리 여부(0은 가짜, 1은 진짜)</label>
+                    <label for="gameResult">월리 여부(0은 가짜, 1은 진짜)</label>
                     <input type="text" id="gameResult" style="width:100%;" placeholder="0은 가짜, 1은 진짜" autocomplete="off">
                 </div>
 

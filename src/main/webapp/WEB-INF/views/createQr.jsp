@@ -113,7 +113,7 @@
         <section class="box qrgen-card">
 
             <div>
-                <h2>QR 코드 생성기</h2>
+                <h2>스탬프 QR 코드 생성기</h2>
 
                 <div class="qr-form-group">
                     <label for="fesNo">축제 번호</label>
