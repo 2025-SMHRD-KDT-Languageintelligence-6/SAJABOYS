@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>스탬프 투어 | 진행 현황</title>
+    <title>월리 | 진행 현황</title>
 
     <link rel="stylesheet" href="/assets/css/main.css" />
     <style>
@@ -130,8 +130,8 @@
     <script src="/assets/js/header.js"></script>
 
     <section class="stamp-panel">
-        <h2>스탬프 투어 진행 현황</h2>
-        <p class="panel-desc">QR코드를 통해 스탬프를 수집하세요!</p>
+        <h2>월리 현황</h2>
+        <p class="panel-desc">월리를 찾아보세요!</p>
 
         <c:set var="percent" value="${totalCount > 0 ? collectedCount / totalCount * 100 : 0}" />
 
