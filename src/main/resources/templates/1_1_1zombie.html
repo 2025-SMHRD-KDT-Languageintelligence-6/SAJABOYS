@@ -1,287 +1,161 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>📱 좀비 아포칼립스: 모바일 연동형 생존 게임 룰북</title>
-  <meta name="description" content="모바일 연동형 야외 생존 게임 &quot;좀비 아포칼립스&quot; 룰북" />
-  <style>
-    :root{
-      --bg:#0f1115;--card:#151923;--muted:#9aa4b2;--text:#e9ecf1;--accent:#7dd3fc;--accent-2:#a78bfa;--ok:#34d399;--warn:#fbbf24;--bad:#f87171;
-      --radius:16px;--radius-sm:12px;--shadow:0 10px 30px rgba(0,0,0,.35);
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:linear-gradient(180deg,#0b0d12,#0f1115);color:var(--text);font-family:ui-sans-serif,system-ui,AppleSDGothicNeo,"Noto Sans KR",Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji"}
-    a{color:var(--accent)}
-    .wrap{max-width:1100px;margin:0 auto;padding:28px}
-    header.hero{position:sticky;top:0;background:rgba(15,17,21,.8);backdrop-filter:saturate(140%) blur(10px);z-index:10;border-bottom:1px solid rgba(255,255,255,.06)}
-    .hero .inner{display:flex;gap:20px;align-items:center;justify-content:space-between;max-width:1100px;margin:0 auto;padding:12px 20px}
-    .title{display:flex;gap:12px;align-items:center}
-    .title h1{font-size:18px;margin:0}
-    .badge{border:1px solid rgba(255,255,255,.12);padding:6px 10px;border-radius:999px;color:var(--muted);font-size:12px}
-    .toc{margin:18px 0;padding:14px;border:1px solid rgba(255,255,255,.08);border-radius:var(--radius-sm);background:rgba(255,255,255,.02)}
-    .toc h2{font-size:15px;margin:0 0 8px 0;color:var(--muted)}
-    .toc ol{margin:0;padding-left:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:6px 16px}
-    .grid{display:grid;gap:18px}
-    @media(min-width:900px){.grid{grid-template-columns:2fr 1fr}}
-    section.card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
-    section.card h2{margin:0 0 10px 0;font-size:20px}
-    section.card h3{margin:18px 0 6px 0;font-size:16px;color:var(--accent)}
-    p,li{line-height:1.6}
-    .kvs{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:12px 0}
-    .kv{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:12px}
-    .kv b{display:block;font-size:12px;color:var(--muted)}
-    .pill{display:inline-block;padding:4px 10px;border-radius:999px;background:rgba(125,211,252,.15);border:1px solid rgba(125,211,252,.35);color:#c9f1ff;font-size:12px;margin-right:6px}
-    .tag{display:inline-block;padding:3px 8px;border-radius:6px;background:rgba(255,255,255,.06);color:var(--muted);font-size:12px;margin:2px 4px 0 0}
-    .callout{border-left:4px solid var(--accent-2);background:rgba(167,139,250,.12);padding:10px 12px;border-radius:10px;margin:10px 0}
-    .list-two{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:8px 18px}
-    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
-    details{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:10px;margin:10px 0}
-    details summary{cursor:pointer;outline:none}
-    footer{color:var(--muted);text-align:center;padding:30px 0}
-    .chip-row{display:flex;flex-wrap:wrap;gap:6px}
-    .chip{border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:6px 10px;font-size:12px;color:var(--muted);background:rgba(255,255,255,.03)}
-    .num{color:var(--accent-2);font-weight:700}
-    .ok{color:var(--ok)} .warn{color:var(--warn)} .bad{color:var(--bad)}
-    .hr{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent);margin:14px 0}
-    .sr{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden}
-  </style>
+    <meta charset="UTF-8" />
+    <title>좀비 아포칼립스 룰북 | 추적자들</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <style>
+        .rulebook-wrap{
+          max-width: 900px;
+          margin: 3rem auto;
+          padding: 0 1rem;
+          font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+        .rulebook-header{
+          text-align: center;
+          margin-bottom: 2.5rem;
+        }
+        .rulebook-header h2{
+          font-size: 2rem;
+          font-weight: 800;
+          margin-bottom: 0.4rem;
+        }
+        .rulebook-header p{
+          color: #555;
+          font-size: 0.95rem;
+        }
+
+        .rule-card{
+          background: #ffffff;
+          border-radius: 16px;
+          padding: 1.8rem 1.6rem;
+          box-shadow: 0 10px 25px rgba(15,23,42,0.08);
+          border: 1px solid #e5e7eb;
+          display: flex;
+          flex-direction: column;
+          gap: 0.75rem;
+        }
+        .rule-card h3{
+          font-size: 1.4rem;
+          font-weight: 800;
+          margin: 0;
+          display: flex;
+          align-items: center;
+          gap: 0.4rem;
+        }
+        .rule-meta{
+          font-size: 0.86rem;
+          color: #4b5563;
+          font-weight: 600;
+        }
+        .rule-label{
+          display: inline-flex;
+          align-items: center;
+          padding: 0.22rem 0.7rem;
+          border-radius: 999px;
+          font-size: 0.76rem;
+          font-weight: 700;
+          background: #fef3c7;
+          color: #b45309;
+          margin-bottom: 0.3rem;
+        }
+        .rule-icon{
+          font-size: 1.2rem;
+        }
+
+        .rule-section-title{
+          font-size: 0.9rem;
+          font-weight: 700;
+          margin-top: 0.5rem;
+          margin-bottom: 0.15rem;
+          color: #111827;
+        }
+        .rule-card p{
+          font-size: 0.88rem;
+          line-height: 1.6;
+          color: #374151;
+          margin: 0;
+        }
+        .rule-card ul{
+          margin: 0.15rem 0 0.35rem 1.1rem;
+          padding: 0;
+        }
+        .rule-card li{
+          font-size: 0.86rem;
+          line-height: 1.5;
+          color: #4b5563;
+        }
+
+        .rule-footer-note{
+          margin-top: 1.5rem;
+          font-size: 0.8rem;
+          color: #9ca3af;
+          text-align: right;
+        }
+    </style>
 </head>
 <body>
-  <!-- 헤더 -->
-  <header class="hero">
-    <div class="inner">
-      <div class="title">
-        <span aria-hidden="true">🧟‍♂️</span>
-        <h1>좀비 아포칼립스: 모바일 연동형 생존 게임 룰북</h1>
-      </div>
-      <div class="chip-row" aria-label="게임 요약 정보">
-        <span class="chip">인원 20–100명</span>
-        <span class="chip">진행 30–60분</span>
-        <span class="chip">장소 야외(공원/캠핑장/운동장)</span>
-        <span class="chip">필수: 스마트폰·QR·운영자 기기</span>
-      </div>
+
+<section class="rulebook-wrap" id="rulebook-zombie">
+    <div class="rulebook-header">
+        <h2>좀비 아포칼립스 룰북</h2>
+        <p>생존자와 좀비로 나뉘어 제한 시간 동안 감염과 생존을 놓고 경쟁하는 서바이벌 추격전 게임입니다.</p>
     </div>
-  </header>
 
-  <main class="wrap">
-    <!-- 목차 -->
-    <nav class="toc" aria-label="목차">
-      <h2>목차</h2>
-      <ol>
-        <li><a href="#overview">1. 게임 개요</a></li>
-        <li><a href="#roles">2. 역할 및 모바일 기능</a></li>
-        <li><a href="#zones">3. 게임 구역 및 모바일 연동</a></li>
-        <li><a href="#flow">4. 게임 진행 방식</a></li>
-        <li><a href="#items">5. 아이템 시스템</a></li>
-        <li><a href="#fairplay">6. 페널티 및 공정성</a></li>
-        <li><a href="#tips">7. 전략 팁</a></li>
-        <li><a href="#festival">8. 축제 연계 요소</a></li>
-        <li><a href="#qr-gps">부록A. QR·GPS·카메라·NFC/비콘</a></li>
-        <li><a href="#live">부록B. 실시간 랭킹·방송·사후 리포트</a></li>
-      </ol>
-    </nav>
+    <article class="rule-card">
+        <span class="rule-label">생존 · 서바이벌 게임</span>
+        <h3><span class="rule-icon">🧟‍♀️</span>좀비 아포칼립스</h3>
+        <p class="rule-meta">인원 5~10명 · 30~60분 · 생존 추격전</p>
 
-    <div class="grid">
-      <!-- 좌측 메인 컬럼 -->
-      <div class="grid-col">
-        <!-- 1. 게임 개요 -->
-        <section id="overview" class="card" aria-labelledby="h-overview">
-          <h2 id="h-overview">1. 🎯 게임 개요</h2>
-          <p><b>“좀비 아포칼립스”</b>는 <b>생존자</b>와 <b>좀비</b>로 나뉘어 진행되는 추격형 야외 게임입니다. 생존자는 미션을 수행해 <b>탈출</b>을 노리고, 좀비는 생존자를 <b>감염</b>시키는 것이 목표예요. 모바일 기기를 통해 <span class="pill">역할 배정</span><span class="pill">미션·아이템</span><span class="pill">감염 추적</span><span class="pill">실시간 알림</span>을 관리합니다.</p>
-          <div class="kvs">
-            <div class="kv"><b>인원</b> 20명 이상(최대 100명)</div>
-            <div class="kv"><b>시간</b> 30–60분</div>
-            <div class="kv"><b>장소</b> 공원, 캠핑장, 운동장 등</div>
-            <div class="kv"><b>장비</b> 참가자 스마트폰, QR 미션 스탠드, 운영자용 태블릿/노트북</div>
-          </div>
-        </section>
+        <div>
+            <div class="rule-section-title">게임 개요</div>
+            <p>
+                참가자는 생존자와 좀비로 역할이 나누어지고, 생존자는 감염되지 않고 버티는 것이 목표,
+                좀비는 최대한 많은 생존자를 감염시키는 것이 목표인 서바이벌형 실시간 추격 게임입니다.
+            </p>
+        </div>
 
-        <!-- 2. 역할 및 모바일 기능 -->
-        <section id="roles" class="card" aria-labelledby="h-roles">
-          <h2 id="h-roles">2. 🧑‍🤝‍🧑 역할 및 모바일 기능</h2>
-          <h3>역할 배정</h3>
-          <p>게임 시작 전 <b>모바일 앱/웹</b>에서 자동 배정됩니다.</p>
-          <h3>복장 표기</h3>
-          <p>모바일에서 자신의 역할을 확인한 뒤, 현장에서 <b>조끼/팔찌/스티커</b>로 표시합니다.</p>
-          <div class="hr"></div>
-          <div class="list-two">
+        <div>
+            <div class="rule-section-title">목적</div>
             <ul>
-              <li><span class="tag">생존자</span> 미션 수행, 아이템 사용, 탈출 시도</li>
-              <li><span class="tag">좀비</span> 생존자 추격, 접촉 감염 등록</li>
+                <li><strong>생존자</strong>: 제한 시간 종료까지 감염되지 않고 살아남기</li>
+                <li><strong>좀비</strong>: 가능한 많은 생존자를 감염시켜 팀을 늘리기</li>
             </ul>
+        </div>
+
+        <div>
+            <div class="rule-section-title">진행 방식</div>
             <ul>
-              <li><span class="tag">운영자</span> 실시간 방송, 페널티 처리, 수동 아이템 지급</li>
-              <li><span class="tag">관람객/NPC</span> QR 제공자 또는 NPC로 참여 가능</li>
+                <li>게임 시작 시 1명 또는 소수의 참가자가 초기 좀비로 지정되고, 나머지는 생존자로 시작합니다.</li>
+                <li>좀비가 생존자 2m 이내로 접근하면 감염 판정이 되며, 감염자는 좀비 QR을 스캔해 역할을 변경합니다.</li>
+                <li>생존자는 지도에 표시된 회복/보호 QR 스팟을 활용해 일정 시간 면역을 얻거나 힌트를 받을 수 있습니다.</li>
+                <li>시간이 지날수록 좀비 수가 늘어나며, 후반으로 갈수록 생존 난이도가 높아집니다.</li>
             </ul>
-          </div>
-        </section>
+        </div>
 
-        <!-- 3. 게임 구역 및 모바일 연동 -->
-        <section id="zones" class="card" aria-labelledby="h-zones">
-          <h2 id="h-zones">3. 🗺️ 게임 구역 및 모바일 연동</h2>
-          <h3>구역 설정</h3>
-          <ul>
-            <li><b>시작 지점</b></li>
-            <li><b>미션 지점</b> (QR 코드 부착)</li>
-            <li><b>탈출 지점</b></li>
-            <li><b>감염 구역</b> (좀비 부활 장소)</li>
-          </ul>
-          <h3>모바일 기능</h3>
-          <ul>
-            <li>지도 기반 위치 안내</li>
-            <li>미션 지점 근처 도달 시 <b>푸시 알림</b></li>
-            <li>탈출 가능 여부 <b>실시간 표시</b></li>
-          </ul>
-        </section>
-
-        <!-- 4. 게임 진행 방식 -->
-        <section id="flow" class="card" aria-labelledby="h-flow">
-          <h2 id="h-flow">4. 📜 게임 진행 방식</h2>
-          <h3>4.1 시작</h3>
-          <ol>
-            <li>참가자는 모바일로 <b>역할 확인</b> 후 지정된 시작 지점으로 이동</li>
-            <li>생존자는 미션 지점에서 <b>QR 스캔</b> 후 미션 수행</li>
-            <li>좀비는 생존자를 <b>추적</b>하여 감염 시도</li>
-          </ol>
-          <h3>4.2 감염 규칙</h3>
-          <ul>
-            <li>좀비가 생존자에게 <b>손을 대고</b> 앱에서 <b>“감염 등록”</b> 버튼 클릭</li>
-            <li>생존자는 앱에서 <b>감염 여부 확인</b></li>
-            <li><b>해독제</b> 보유 시 즉시 해제 가능(앱에서 사용)</li>
-          </ul>
-          <h3>4.3 미션 예시 (모바일 연동)</h3>
-          <ul>
-            <li>QR 스캔 후 <b>퀴즈</b> 풀이</li>
-            <li><b>AR</b>로 숨겨진 아이템 찾기</li>
-            <li><b>사진 인증</b> 미션(앱 업로드)</li>
-            <li><b>NPC</b> 역할 운영자에게 암호 전달 → 앱에서 확인</li>
-          </ul>
-        </section>
-
-        <!-- 5. 아이템 시스템 -->
-        <section id="items" class="card" aria-labelledby="h-items">
-          <h2 id="h-items">5. 🎲 아이템 시스템</h2>
-          <ul>
-            <li>아이템은 미션 성공 시 <b>자동 지급</b> 또는 운영자 <b>수동 지급</b></li>
-            <li>사용 시 앱에서 <b>효과 발동</b> 및 <b>지속 시간 표시</b></li>
-          </ul>
-          <details>
-            <summary>예시 아이템 보기</summary>
+        <div>
+            <div class="rule-section-title">승리 조건</div>
             <ul>
-              <li><b>해독제</b> — 감염 즉시 해제(재사용 대기시간 적용 가능)</li>
-              <li><b>방어막</b> — 일정 시간 감염 무효</li>
-              <li><b>가속화</b> — 일정 시간 스태미나/이동속도 버프(룰 한정)</li>
+                <li>생존자: 제한 시간 종료 시까지 감염되지 않은 플레이어가 한 명이라도 남아 있으면 생존자 승리</li>
+                <li>좀비: 제한 시간 내 모든 생존자를 감염시키면 좀비 승리</li>
             </ul>
-          </details>
-        </section>
+        </div>
 
-        <!-- 6. 페널티 및 공정성 -->
-        <section id="fairplay" class="card" aria-labelledby="h-fairplay">
-          <h2 id="h-fairplay">6. ⚖️ 페널티 및 공정성</h2>
-          <ul>
-            <li>금지 구역 접근 시 앱에서 <b>경고</b> 및 <b>이동 제한</b></li>
-            <li>과격한 접촉 시 운영자 <b>경고</b> 및 <b>퇴장 처리</b></li>
-            <li>아이템 <b>중복 사용</b> 시 앱에서 <b>자동 무효화</b></li>
-          </ul>
-          <div class="callout">
-            안전이 최우선! 접촉은 손끝으로 가볍게, 넘어짐·부딪힘 위험 행동 금지.
-          </div>
-        </section>
+        <div>
+            <div class="rule-section-title">안전 수칙</div>
+            <ul>
+                <li>서로를 밀치거나 잡아당기는 행위 등 과격한 신체 접촉은 금지합니다.</li>
+                <li>시야가 좁은 구역, 계단, 경사면에서는 속도를 줄이고 천천히 이동합니다.</li>
+                <li>컨디션 이상(어지러움, 호흡 곤란 등)을 느낄 경우 즉시 게임에서 이탈하고 스태프에게 알립니다.</li>
+            </ul>
+        </div>
+    </article>
 
-        <!-- 7. 전략 팁 -->
-        <section id="tips" class="card" aria-labelledby="h-tips">
-          <h2 id="h-tips">7. 🧠 전략 팁</h2>
-          <ul>
-            <li><b>생존자</b>: 팀을 나눠 미션 분담 후 <b>탈출 지점 합류</b></li>
-            <li><b>좀비</b>: <b>협력 포위</b> 전략으로 동선 차단</li>
-            <li><b>해독제</b>: 아끼지 말고 <b>즉시 사용</b></li>
-            <li><b>운영자</b>: “좀비 강화 시작!” 등 <b>실시간 방송 메시지</b>로 페이싱 조율</li>
-          </ul>
-        </section>
+    <p class="rule-footer-note">
+        ※ 실제 운영 시 참가자 연령, 인원, 시간에 따라 좀비·생존자 비율과 난이도는 조정할 수 있습니다.
+    </p>
+</section>
 
-        <!-- 8. 축제 연계 요소 -->
-        <section id="festival" class="card" aria-labelledby="h-festival">
-          <h2 id="h-festival">8. 🎉 축제 연계 요소</h2>
-          <ul>
-            <li><b>코스튬 콘테스트</b>: 모바일 참가 신청 & 투표</li>
-            <li><b>포토 미션</b>: 인증샷 업로드 → <b>베스트샷</b> 선정</li>
-            <li><b>실시간 랭킹</b>: 생존 시간·감염 수 등 앱에서 표시</li>
-            <li><b>관람객 참여</b>: QR 미션 제공자 또는 <b>NPC</b>로 참여 가능</li>
-          </ul>
-        </section>
-      </div>
-
-      <!-- 우측 서브 컬럼 -->
-      <aside class="grid-col" aria-label="부록 및 운영 가이드">
-        <!-- 부록 A: QR/GPS/카메라/NFC -->
-        <section id="qr-gps" class="card" aria-labelledby="h-qrgps">
-          <h2 id="h-qrgps">🧾 부록A. QR·GPS·카메라·NFC/비콘</h2>
-
-          <h3>1) QR코드 활용</h3>
-          <ul>
-            <li><b>미션 인증</b>: QR 스캔 시 퀴즈·퍼즐·사진 미션 자동 시작</li>
-            <li><b>아이템 획득</b>: 스캔 시 해독제·방어막 등 지급</li>
-            <li><b>NPC 시나리오</b>: 스캔 시 가상 대화/암호 진행</li>
-            <li><b>감염 등록</b>: 감염 후 QR 스캔으로 상태 업데이트</li>
-          </ul>
-          <p class="mono">운영 팁: QR은 미션 장소·운영본부·아이템 박스에 부착. 스캔 → 미션/지급 자동 트리거.</p>
-
-          <h3>2) GPS 위치 기반</h3>
-          <ul>
-            <li><b>도달 확인</b>: 특정 좌표 도달 시 미션 자동 시작</li>
-            <li><b>탈출 판정</b>: 탈출 지점 GPS 도달 시 승리 처리</li>
-            <li><b>근접 경고</b>: 좀비가 일정 거리 내 접근 시 생존자 알림</li>
-            <li><b>금지 구역</b>: 출입 시 경고 또는 페널티 부여</li>
-          </ul>
-          <p class="mono">권장 설정: GPS 정확도 ±10m, 지도 UI로 참가자 위치 실시간 표기</p>
-
-          <h3>3) 모바일 카메라</h3>
-          <ul>
-            <li><b>사진 인증</b>: 특정 배경/장소 인증 업로드</li>
-            <li><b>AR</b>: 숨겨진 아이템·좀비 찾기</li>
-            <li><b>포토 콘테스트</b>: 분장 사진 업로드 → 투표</li>
-            <li><b>감염 인증샷</b>: 감염 순간 기록</li>
-          </ul>
-
-          <h3>4) NFC/블루투스 비콘(선택)</h3>
-          <ul>
-            <li><b>NFC 아이템</b>: 태그 터치로 즉시 지급</li>
-            <li><b>비콘 시작</b>: 근접 시 미션 자동 시작</li>
-            <li><b>강화 구역</b>: 특정 존 입장 시 좀비 능력 강화</li>
-          </ul>
-        </section>
-
-        <!-- 부록 B: 실시간/사후 기능 -->
-        <section id="live" class="card" aria-labelledby="h-live">
-          <h2 id="h-live">📊 부록B. 실시간 랭킹·방송·사후 리포트</h2>
-          <h3>실시간 랭킹 & 상태</h3>
-          <ul>
-            <li>생존자 <b>생존 시간</b></li>
-            <li>좀비 <b>감염 수</b></li>
-            <li><b>미션 성공률</b></li>
-            <li><b>아이템 사용 기록</b></li>
-          </ul>
-          <h3>실시간 방송/알림</h3>
-          <ul>
-            <li>“<b>좀비 강화 시작!</b>”</li>
-            <li>“<b>탈출 지점 개방!</b>”</li>
-            <li>“<b>감염자 수 증가 중!</b>”</li>
-            <li>“<b>미션 힌트 공개!</b>”</li>
-          </ul>
-          <h3>게임 종료 후</h3>
-          <ul>
-            <li><b>자동 리포트</b>: 참가자별 활동 요약</li>
-            <li><b>MVP 선정</b>: 생존·감염·미션 기준 자동 분석</li>
-            <li><b>포토 갤러리</b>: 업로드 사진 공유</li>
-          </ul>
-        </section>
-
-        <!-- 운영 체크리스트 -->
-        <section class="card" aria-labelledby="h-check">
-          <h2 id="h-check">🧰 운영 체크리스트</h2>
-          <ul>
-            <li>QR 스탠드/비콘/NFC 태그 <span class="ok">배치 확인</span></li>
-            <li>금지 구역 <span class="warn">지정·앱 경고</span></li>
-            <li>아이템 지급 <span class="ok">자동/수동 트리거</span></li>
-            <li>방송 문구 프리셋: “강화/개방/경고/힌트”</l
+</body>
+</html>
