@@ -17,15 +17,15 @@ public class GameController {
     public String rule(){
     return "rule";
     }
-    @GetMapping("/zombie")
+    @GetMapping("/rule/zombie")
     public String zombie(){
         return "zombie";
     }
-    @GetMapping("/wally")
+    @GetMapping("/rule/wally")
     public String wally(){
         return "wally";
     }
-    @GetMapping("/police")
+    @GetMapping("/rule/police")
     public String police(){
         return "police";
     }

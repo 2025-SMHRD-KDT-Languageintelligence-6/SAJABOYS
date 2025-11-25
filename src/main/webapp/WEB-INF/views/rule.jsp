@@ -45,7 +45,7 @@
                 <!-- 1. 좀비 아포칼립스 -->
                 <div class="col-4 col-12-medium">
                     <section class="box feature">
-                        <a href="/zombie" class="image featured" aria-label="좀비 아포칼립스">
+                        <a href="/rule/zombie" class="image featured" aria-label="좀비 아포칼립스">
                             <img src="images/zombie.png" alt="좀비 아포칼립스 표지" />
                         </a>
                         <div class="inner">
@@ -59,7 +59,7 @@
                                 QR과 지도, GPS를 활용해 감염/회복·위치 정보가 실시간으로 반영됩니다.
                             </p>
                             <ul class="actions">
-                                <li><a href="/zombie" class="button icon solid fa-book-open">룰북 보기</a></li>
+                                <li><a href="/rule/zombie" class="button icon solid fa-book-open">룰북 보기</a></li>
                             </ul>
                         </div>
                     </section>
@@ -68,7 +68,7 @@
                 <!-- 2. 월리를 찾아라 -->
                 <div class="col-4 col-12-medium">
                     <section class="box feature">
-                        <a href="/wally" class="image featured" aria-label="월리를 찾아라">
+                        <a href="/rule/wally" class="image featured" aria-label="월리를 찾아라">
                             <img src="images/where's wally.png" alt="월리를 찾아라 표지" />
                         </a>
                         <div class="inner">
@@ -81,7 +81,7 @@
                                 힌트 지도, 위치 정보, 포토 인증을 활용해 가족·연인·친구 누구나 가볍게 즐길 수 있습니다.
                             </p>
                             <ul class="actions">
-                                <li><a href="/wally" class="button icon solid fa-book-open">룰북 보기</a></li>
+                                <li><a href="/rule/wally" class="button icon solid fa-book-open">룰북 보기</a></li>
                             </ul>
                         </div>
                     </section>
@@ -90,7 +90,7 @@
                 <!-- 3. 경찰과 도둑 -->
                 <div class="col-4 col-12-medium">
                     <section class="box feature">
-                        <a href="/police" class="image featured" aria-label="경찰과 도둑">
+                        <a href="/rule/police" class="image featured" aria-label="경찰과 도둑">
                             <img src="images/police.png" alt="경찰과 도둑 표지" />
                         </a>
                         <div class="inner">
@@ -104,7 +104,7 @@
                                 도둑을 잡아야 합니다.
                             </p>
                             <ul class="actions">
-                                <li><a href="/police" class="button icon solid fa-book-open">룰북 보기</a></li>
+                                <li><a href="/rule/police" class="button icon solid fa-book-open">룰북 보기</a></li>
                             </ul>
                         </div>
                     </section>

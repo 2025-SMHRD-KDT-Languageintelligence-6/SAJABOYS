@@ -41,6 +41,15 @@
                                     </li>
                                     <li>
                                         <c:choose>
+                                            <c:when test = "${!empty user}">
+                                                <a href="/wally">월리</a>
+                                            </c:when>
+                                            <c:otherwise>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </li>
+                                    <li>
+                                        <c:choose>
                                             <c:when test = "${!empty user && user.admin}">
                                                 <a href="/admin">관리자</a>
                                             </c:when>
