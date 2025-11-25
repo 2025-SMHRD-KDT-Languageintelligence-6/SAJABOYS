@@ -6,7 +6,7 @@
 
     <!-- 게임 데이터를 DB에 저장하는 SQL 쿼리 -->
     <insert id="insertGaming" parameterType="com.project.chaser.dto.Gaming">
-        INSERT INTO gaming (user_idx, fes_idx, game_name, game_result, created_at)
-        VALUES (#{userIdx}, #{fesIdx}, #{gameName}, #{gameResult}, #{createdAt});
+        INSERT INTO gaming (UserIdx, FesIdx, GameName, GameResult)
+        VALUES (#{userIdx}, #{fesIdx}, #{gameName}, #{gameResult});
     </insert>
 </mapper>
