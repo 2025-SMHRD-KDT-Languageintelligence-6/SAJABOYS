@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>QR 코드 생성 | 추적자</title>
+    <title>왈리 QR 코드 생성 | 추적자</title>
 
     <link rel="stylesheet" href="/assets/css/main.css" />
 
