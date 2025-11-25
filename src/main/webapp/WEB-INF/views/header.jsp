@@ -23,8 +23,7 @@
                                     <li>
                                         <a href="/gameSelect">게임</a>
                                         <ul>
-                                            <li><a href="#">게임 룰</a></li>
-
+                                            <li><a href="/wally">월리</a></li>
                                         </ul>
                                     </li>
                                     <li><a href="/stamp">스탬프 투어</a></li>
@@ -34,15 +33,6 @@
                                         <c:choose>
                                             <c:when test = "${!empty user}">
                                                 <a href="/update">개인정보수정</a>
-                                            </c:when>
-                                            <c:otherwise>
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </li>
-                                    <li>
-                                        <c:choose>
-                                            <c:when test = "${!empty user}">
-                                                <a href="/wally">월리</a>
                                             </c:when>
                                             <c:otherwise>
                                             </c:otherwise>
