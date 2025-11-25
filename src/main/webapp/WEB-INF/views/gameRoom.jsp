@@ -227,7 +227,7 @@ function initRealtimeMap() {
             map: map,
             title: userNickname,
             image: new kakao.maps.MarkerImage(
-                '/assets/img/marker-green.png',
+                '/images/marker-green.png',
                 new kakao.maps.Size(32,32)
             )
         });
