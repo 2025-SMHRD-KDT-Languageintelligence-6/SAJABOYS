@@ -41,6 +41,15 @@
                                     </li>
                                     <li>
                                         <c:choose>
+                                            <c:when test = "${!empty user && user.admin}">
+                                                <a href="/update">관리자</a>
+                                            </c:when>
+                                            <c:otherwise>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </li>
+                                    <li>
+                                        <c:choose>
                                             <c:when test = "${!empty user}">
                                                 <a href="/logout">로그아웃</a>
                                             </c:when>

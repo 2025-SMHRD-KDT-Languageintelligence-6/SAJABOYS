@@ -93,7 +93,6 @@
                             <h3>채팅</h3>
 
                             <div id="chatMessages" class="gr-chat-messages">
-                                <div style="margin-bottom: 5px;">박현우닉넴님이 입장했습니다.</div>
                             </div>
 
                             <div class="gr-chat-input-wrap">
@@ -243,6 +242,78 @@
             galleryThumbs.controller.control = galleryTop;
         });
     </script>
+    <!-- ===== 메인 채팅 WebSocket ===== -->
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
+
+    <script>
+    const mainUserNickname = "<c:out value='${user != null ? user.nickname : ""}'/>";
+
+    let mainSocket = new SockJS('/ws');
+    let mainStomp = Stomp.over(mainSocket);
+
+    mainStomp.connect({}, function () {
+
+        // 채팅 구독
+        mainStomp.subscribe('/topic/main/chat', function (message) {
+            const chat = JSON.parse(message.body);
+            const div = document.createElement("div");
+
+            if (chat.type === 'chat') {
+                div.textContent = chat.sender + ": " + chat.message;
+            } else {
+                div.textContent = chat.message;
+            }
+
+            document.getElementById("chatMessages").appendChild(div);
+            document.getElementById("chatMessages").scrollTop =
+                document.getElementById("chatMessages").scrollHeight;
+        });
+
+        // 로그인한 사용자만 입장 메시지
+        if (mainUserNickname !== "") {
+            mainStomp.send("/app/main/chat", {}, JSON.stringify({
+                type: "join",
+                sender: mainUserNickname,
+                message: mainUserNickname + "님이 입장했습니다."
+            }));
+        }
+    });
+
+    // 전송 함수
+    function sendMessage() {
+        const input = document.getElementById("chatInput");
+        const msg = input.value.trim();
+        if (msg === "") return;
+
+        if (mainUserNickname === "") {
+            alert("로그인 후 채팅을 사용할 수 있습니다.");
+            return;
+        }
+
+        mainStomp.send("/app/main/chat", {}, JSON.stringify({
+            type: "chat",
+            sender: mainUserNickname,
+            message: msg
+        }));
+
+        input.value = "";
+    }
+
+    // 엔터키
+    function handleEnter(e) {
+        if (e.key === 'Enter') sendMessage();
+    }
+
+    // 비로그인 시 입력 차단
+    document.addEventListener("DOMContentLoaded", function () {
+        if (mainUserNickname === "") {
+            document.getElementById("chatInput").disabled = true;
+            document.getElementById("sendBtn").disabled = true;
+        }
+    });
+    </script>
+
 
 </body>
 </html>
