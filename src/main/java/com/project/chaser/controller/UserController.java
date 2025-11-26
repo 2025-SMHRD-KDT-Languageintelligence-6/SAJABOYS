@@ -52,8 +52,8 @@ public class UserController {
     @GetMapping("/main")
     public String goMain(Model model) {
         // 추천 축제
-        double lat = 34.929646;   // 기본값
-        double lon = 127.490435;  // 기본값
+        double lat = 35.15;   // 기본값
+        double lon = 126.85;  // 기본값
         int topK = 3;
         List<RecommendFestivalDto> recommendList =
                 recommendClient.getRecommendedFestivals(lat, lon, topK);
