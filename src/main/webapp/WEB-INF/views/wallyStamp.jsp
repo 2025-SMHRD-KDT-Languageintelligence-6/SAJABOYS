@@ -132,6 +132,14 @@
     <section class="stamp-panel">
         <h2>월리 현황</h2>
         <p class="panel-desc">월리를 찾아보세요!</p>
+        <div class="go-scan">
+            <!-- 관리자 전용 버튼 -->
+            <c:if test="${user.admin}">
+                <button class="button alt" onclick="location.href='/wally/createQr'">QR 코드 생성하기</button>
+            </c:if>
+            <!-- 모든 사용자 버튼 -->
+            <button class="button alt" onclick="location.href='/wally/qr'">QR 코드 스캔하기 →</button>
+        </div>
 
         <c:if test="${not empty gamingResults}">
             <div class="gaming-results">

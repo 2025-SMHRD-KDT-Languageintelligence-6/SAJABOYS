@@ -204,10 +204,7 @@
     <script src="/assets/js/header.js"></script>
 
     <section class="container">
-        <header class="major">
-            <h2>「윌리를 찾아라」 관리자 페이지</h2>
-            <p>INDEX 메인에 노출될 윌리 이미지 · QR코드 · 참여자 · 축제 장소를 관리합니다.</p>
-        </header>
+
 
         <div class="wally-admin-layout">
 
