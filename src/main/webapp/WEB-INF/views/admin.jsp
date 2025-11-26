@@ -242,8 +242,10 @@
                 <!-- QR 코드 관리 -->
                 <div class="admin-panel">
                     <h2>2. 축제 QR 코드</h2>
+                    <div class="btn-row">
                     <button class="button alt" onclick="location.href='/stamp/createQr'">축제 QR 코드 생성하기</button>
                     <button class="button alt" onclick="location.href='/wally/createQr'">월리 QR 코드 생성하기</button>
+                    </div>
                 </div>
             </div>
 
