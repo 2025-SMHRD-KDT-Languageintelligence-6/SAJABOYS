@@ -54,7 +54,7 @@
                     <!-- 아이디 -->
                     <label for="uid">*아이디</label>
                     <div class="row-inline">
-                        <input type="text" id="uid" name="UserId" placeholder="예) smart"
+                        <input type="text" id="uid" name="UserId" placeholder="예) smart(4~16자)"
                                required minlength="4" maxlength="16"
                                pattern="[a-zA-Z0-9_]{4,16}" style="flex:1" />
                         <button type="button" class="button alt" id="checkBtn">중복체크</button>
@@ -84,7 +84,7 @@
                     <!-- Nickname -->
                     <label for="nickname">*닉네임</label>
                     <div class="row-inline">
-                    <input type="text" id="nickname" name="Nickname" placeholder="예) 피카츄"
+                    <input type="text" id="nickname" name="Nickname" placeholder="예) 피카츄(2~16자)"
                             required minlength="2" maxlength="16" style="flex:1"/>
                      <button type="button" class="button alt" id="checkBtn2">중복체크</button>
                     </div>
