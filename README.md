@@ -73,3 +73,7 @@
     <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" width="45" height="45"><br>Flask</td>
   </tr>
 </table>
+
+<a href="https://skillicons.dev">
+  <img src="https://skillicons.dev/icons?i=java,spring,mysql,html,css,js,github,vscode,idea,python&theme=light" />
+</a>
