@@ -24,41 +24,110 @@
 - **DB 연동을 통한 종합 축제 정보 조회**
   - 데이터베이스를 기반으로 전라남도 지역의 다채로운 축제 정보를 한눈에 확인할 수 있도록 제공
 
-## 4. 기술 스택
 ### 4.1 Back-End
 <table>
   <tr>
-    <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" width="45" height="45"><br>Java</td>
-    <td align="center" width="110"><img src="https://cdn.simpleicons.org/springboot/6DB33F" width="45" height="45"><br>Spring Boot</td>
+    <td align="center" width="110">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=java&theme=dark">
+        <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=java&theme=light">
+        <img src="https://skillicons.dev/icons?i=java&theme=light" width="45" height="45">
+      </picture>
+      <br>Java
+    </td>
+    <td align="center" width="110">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=spring&theme=dark">
+        <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=spring&theme=light">
+        <img src="https://skillicons.dev/icons?i=spring&theme=light" width="45" height="45">
+      </picture>
+      <br>Spring Boot
+    </td>
     <td align="center" width="110"><img src="https://cdn.simpleicons.org/springsecurity/6DB33F" width="45" height="45"><br>Spring Security</td>
     <td align="center" width="110"><img src="https://raw.githubusercontent.com/mybatis/logo/master/logo-bird-ninja.svg" width="45" height="45"><br>MyBatis</td>
     <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tomcat/tomcat-original.svg" width="45" height="45"><br>Tomcat</td>
-    <td align="center" width="110"><img src="https://cdn.simpleicons.org/socketdotio/black" width="45" height="45"><br>WebSocket</td>
+    <td align="center" width="110">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="https://cdn.simpleicons.org/socketdotio/white">
+        <source media="(prefers-color-scheme: light)" srcset="https://cdn.simpleicons.org/socketdotio/black">
+        <img src="https://cdn.simpleicons.org/socketdotio/black" width="45" height="45">
+      </picture>
+      <br>WebSocket
+    </td>
   </tr>
 </table>
 
 ### 4.2 Front-End
 <table>
   <tr>
-    <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="45" height="45"><br>HTML5</td>
-    <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" width="45" height="45"><br>CSS3</td>
-    <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="45" height="45"><br>JavaScript</td>
+    <td align="center" width="110">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=html&theme=dark">
+        <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=html&theme=light">
+        <img src="https://skillicons.dev/icons?i=html&theme=light" width="45" height="45">
+      </picture>
+      <br>HTML5
+    </td>
+    <td align="center" width="110">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=css&theme=dark">
+        <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=css&theme=light">
+        <img src="https://skillicons.dev/icons?i=css&theme=light" width="45" height="45">
+      </picture>
+      <br>CSS3
+    </td>
+    <td align="center" width="110">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=js&theme=dark">
+        <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=js&theme=light">
+        <img src="https://skillicons.dev/icons?i=js&theme=light" width="45" height="45">
+      </picture>
+      <br>JavaScript
+    </td>
   </tr>
 </table>
 
 ### 4.3 DB
 <table>
   <tr>
-    <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" width="45" height="45"><br>MySQL</td>
+    <td align="center" width="110">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=mysql&theme=dark">
+        <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=mysql&theme=light">
+        <img src="https://skillicons.dev/icons?i=mysql&theme=light" width="45" height="45">
+      </picture>
+      <br>MySQL
+    </td>
   </tr>
 </table>
 
 ### 4.4 Tools
 <table>
   <tr>
-    <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" width="45" height="45"><br>GitHub</td>
-    <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" width="45" height="45"><br>VS Code</td>
-    <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-original.svg" width="45" height="45"><br>IntelliJ IDEA</td>
+    <td align="center" width="110">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=github&theme=dark">
+        <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=github&theme=light">
+        <img src="https://skillicons.dev/icons?i=github&theme=light" width="45" height="45">
+      </picture>
+      <br>GitHub
+    </td>
+    <td align="center" width="110">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=vscode&theme=dark">
+        <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=vscode&theme=light">
+        <img src="https://skillicons.dev/icons?i=vscode&theme=light" width="45" height="45">
+      </picture>
+      <br>VS Code
+    </td>
+    <td align="center" width="110">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=idea&theme=dark">
+        <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=idea&theme=light">
+        <img src="https://skillicons.dev/icons?i=idea&theme=light" width="45" height="45">
+      </picture>
+      <br>IntelliJ IDEA
+    </td>
     <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg" width="45" height="45"><br>Jupyter Notebook</td>
   </tr>
 </table>
@@ -66,14 +135,31 @@
 ### 4.5 AI&Model Serving
 <table>
   <tr>
-    <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="45" height="45"><br>Python</td>
+    <td align="center" width="110">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=python&theme=dark">
+        <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=python&theme=light">
+        <img src="https://skillicons.dev/icons?i=python&theme=light" width="45" height="45">
+      </picture>
+      <br>Python
+    </td>
     <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" width="45" height="45"><br>Pandas</td>
     <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scikitlearn/scikitlearn-original.svg" width="45" height="45"><br>Scikit-learn</td>
-    <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" width="45" height="45"><br>FastAPI</td>
-    <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" width="45" height="45"><br>Flask</td>
+    <td align="center" width="110">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=fastapi&theme=dark">
+        <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=fastapi&theme=light">
+        <img src="https://skillicons.dev/icons?i=fastapi&theme=light" width="45" height="45">
+      </picture>
+      <br>FastAPI
+    </td>
+    <td align="center" width="110">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=flask&theme=dark">
+        <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=flask&theme=light">
+        <img src="https://skillicons.dev/icons?i=flask&theme=light" width="45" height="45">
+      </picture>
+      <br>Flask
+    </td>
   </tr>
 </table>
-
-<a href="https://skillicons.dev">
-  <img src="https://skillicons.dev/icons?i=java,spring,mysql,html,css,js,github,vscode,idea,python&theme=light" />
-</a>
