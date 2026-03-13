@@ -29,7 +29,7 @@
   <tr>
     <td align="center" width="110">
       <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=java&theme=dark">
+        <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=java&theme=light">
         <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=java&theme=light">
         <img src="https://skillicons.dev/icons?i=java&theme=light" width="45" height="45">
       </picture>
@@ -37,7 +37,7 @@
     </td>
     <td align="center" width="110">
       <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=spring&theme=dark">
+        <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=spring&theme=light">
         <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=spring&theme=light">
         <img src="https://skillicons.dev/icons?i=spring&theme=light" width="45" height="45">
       </picture>
@@ -62,7 +62,7 @@
   <tr>
     <td align="center" width="110">
       <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=html&theme=dark">
+        <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=html&theme=light">
         <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=html&theme=light">
         <img src="https://skillicons.dev/icons?i=html&theme=light" width="45" height="45">
       </picture>
@@ -70,7 +70,7 @@
     </td>
     <td align="center" width="110">
       <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=css&theme=dark">
+        <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=css&theme=light">
         <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=css&theme=light">
         <img src="https://skillicons.dev/icons?i=css&theme=light" width="45" height="45">
       </picture>
@@ -78,7 +78,7 @@
     </td>
     <td align="center" width="110">
       <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=js&theme=dark">
+        <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=js&theme=light">
         <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=js&theme=light">
         <img src="https://skillicons.dev/icons?i=js&theme=light" width="45" height="45">
       </picture>
@@ -92,7 +92,7 @@
   <tr>
     <td align="center" width="110">
       <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=mysql&theme=dark">
+        <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=mysql&theme=light">
         <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=mysql&theme=light">
         <img src="https://skillicons.dev/icons?i=mysql&theme=light" width="45" height="45">
       </picture>
@@ -106,7 +106,7 @@
   <tr>
     <td align="center" width="110">
       <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=github&theme=dark">
+        <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=github&theme=light">
         <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=github&theme=light">
         <img src="https://skillicons.dev/icons?i=github&theme=light" width="45" height="45">
       </picture>
@@ -114,7 +114,7 @@
     </td>
     <td align="center" width="110">
       <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=vscode&theme=dark">
+        <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=vscode&theme=light">
         <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=vscode&theme=light">
         <img src="https://skillicons.dev/icons?i=vscode&theme=light" width="45" height="45">
       </picture>
@@ -122,7 +122,7 @@
     </td>
     <td align="center" width="110">
       <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=idea&theme=dark">
+        <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=idea&theme=light">
         <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=idea&theme=light">
         <img src="https://skillicons.dev/icons?i=idea&theme=light" width="45" height="45">
       </picture>
@@ -137,7 +137,7 @@
   <tr>
     <td align="center" width="110">
       <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=python&theme=dark">
+        <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=python&theme=light">
         <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=python&theme=light">
         <img src="https://skillicons.dev/icons?i=python&theme=light" width="45" height="45">
       </picture>
@@ -147,7 +147,7 @@
     <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scikitlearn/scikitlearn-original.svg" width="45" height="45"><br>Scikit-learn</td>
     <td align="center" width="110">
       <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=fastapi&theme=dark">
+        <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=fastapi&theme=light">
         <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=fastapi&theme=light">
         <img src="https://skillicons.dev/icons?i=fastapi&theme=light" width="45" height="45">
       </picture>
@@ -155,7 +155,7 @@
     </td>
     <td align="center" width="110">
       <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=flask&theme=dark">
+        <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=flask&theme=light">
         <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=flask&theme=light">
         <img src="https://skillicons.dev/icons?i=flask&theme=light" width="45" height="45">
       </picture>
