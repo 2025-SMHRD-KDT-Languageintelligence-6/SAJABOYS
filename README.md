@@ -24,8 +24,10 @@
 - **DB 연동을 통한 종합 축제 정보 조회**
   <br> 데이터베이스를 기반으로 전라남도 지역의 다채로운 축제 정보를 한눈에 확인할 수 있도록 제공
 
-## 4. 기술 스택
-### 4.1 Back-End
+## 4. 화면 구성
+
+## 5. 기술 스택
+### 5.1 Back-End
 <table>
   <tr>
     <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" width="45" height="45"><br>Java</td>
@@ -37,7 +39,7 @@
   </tr>
 </table>
 
-### 4.2 Front-End
+### 5.2 Front-End
 <table>
   <tr>
     <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="45" height="45"><br>HTML5</td>
@@ -46,14 +48,14 @@
   </tr>
 </table>
 
-### 4.3 DB
+### 5.3 DB
 <table>
   <tr>
     <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" width="45" height="45"><br>MySQL</td>
   </tr>
 </table>
 
-### 4.4 Tools
+### 5.4 Tools
 <table>
   <tr>
     <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" width="45" height="45"><br>GitHub</td>
@@ -63,7 +65,7 @@
   </tr>
 </table>
 
-### 4.5 AI&Model Serving
+### 5.5 AI&Model Serving
 <table>
   <tr>
     <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="45" height="45"><br>Python</td>
