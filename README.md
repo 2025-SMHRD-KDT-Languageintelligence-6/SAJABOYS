@@ -26,7 +26,6 @@
 
 ## 4. 기술 스택
 ### 4.1 Back-End
-### 4.1 Back-End
 <table>
   <tr>
     <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" width="45" height="45"><br>Java</td>
