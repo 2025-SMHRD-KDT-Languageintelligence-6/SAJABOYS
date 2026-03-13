@@ -26,39 +26,51 @@
 
 ## 4. 기술 스택
 ### 4.1 Back-End
+### 4.1 Back-End
 <table>
   <tr>
-    <td align="center" width="110"><img src="https://cdn.simpleicons.org/java/ED8B00" width="45" height="45"><br>Java</td>
+    <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" width="45" height="45"><br>Java</td>
     <td align="center" width="110"><img src="https://cdn.simpleicons.org/springboot/6DB33F" width="45" height="45"><br>Spring Boot</td>
     <td align="center" width="110"><img src="https://cdn.simpleicons.org/springsecurity/6DB33F" width="45" height="45"><br>Spring Security</td>
-    <td align="center" width="110"><img src="https://ui-avatars.com/api/?name=MB&background=000&color=fff&font-size=0.4" width="45" height="45"><br>MyBatis</td>
-    <td align="center" width="110"><img src="https://ui-avatars.com/api/?name=JSP&background=ED8B00&color=fff&font-size=0.4" width="45" height="45"><br>JSP</td>
-    <td align="center" width="110"><img src="https://ui-avatars.com/api/?name=WS&background=010101&color=fff&font-size=0.4" width="45" height="45"><br>WebSocket</td>
+    <td align="center" width="110"><img src="https://raw.githubusercontent.com/mybatis/logo/master/logo-bird-ninja.svg" width="45" height="45"><br>MyBatis</td>
+    <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tomcat/tomcat-original.svg" width="45" height="45"><br>Tomcat</td>
+    <td align="center" width="110"><img src="https://cdn.simpleicons.org/socketdotio/black" width="45" height="45"><br>WebSocket</td>
   </tr>
 </table>
 
 ### 4.2 Front-End
 <table>
   <tr>
-    <td align="center" width="110"><img src="https://cdn.simpleicons.org/html5/E34F26" width="45" height="45"><br>HTML5</td>
-    <td align="center" width="110"><img src="https://cdn.simpleicons.org/css3/1572B6" width="45" height="45"><br>CSS3</td>
-    <td align="center" width="110"><img src="https://cdn.simpleicons.org/javascript/F7DF1E" width="45" height="45"><br>JavaScript</td>
+    <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="45" height="45"><br>HTML5</td>
+    <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" width="45" height="45"><br>CSS3</td>
+    <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="45" height="45"><br>JavaScript</td>
   </tr>
 </table>
 
 ### 4.3 DB
 <table>
   <tr>
-    <td align="center" width="110"><img src="https://cdn.simpleicons.org/mysql/4479A1" width="45" height="45"><br>MySQL</td>
+    <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" width="45" height="45"><br>MySQL</td>
   </tr>
 </table>
 
 ### 4.4 Tools
 <table>
   <tr>
-    <td align="center" width="110"><img src="https://cdn.simpleicons.org/github/181717" width="45" height="45"><br>GitHub</td>
-    <td align="center" width="110"><img src="https://cdn.simpleicons.org/visualstudiocode/007ACC" width="45" height="45"><br>VS Code</td>
-    <td align="center" width="110"><img src="https://cdn.simpleicons.org/intellijidea/000000" width="45" height="45"><br>IntelliJ IDEA</td>
-    <td align="center" width="110"><img src="https://cdn.simpleicons.org/jupyter/F37626" width="45" height="45"><br>Jupyter Notebook</td>
+    <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" width="45" height="45"><br>GitHub</td>
+    <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" width="45" height="45"><br>VS Code</td>
+    <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-original.svg" width="45" height="45"><br>IntelliJ IDEA</td>
+    <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg" width="45" height="45"><br>Jupyter Notebook</td>
+  </tr>
+</table>
+
+### 4.5 AI&Model Serving
+<table>
+  <tr>
+    <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="45" height="45"><br>Python</td>
+    <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" width="45" height="45"><br>Pandas</td>
+    <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scikitlearn/scikitlearn-original.svg" width="45" height="45"><br>Scikit-learn</td>
+    <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" width="45" height="45"><br>FastAPI</td>
+    <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" width="45" height="45"><br>Flask</td>
   </tr>
 </table>
