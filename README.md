@@ -26,6 +26,63 @@
 
 ## 4. 화면 구성
 
+<table width="100%">
+  <tr>
+    <th align="center">메인 화면</th>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="./images/1.png" width="80%">
+    </td>
+  </tr>
+
+  <tr>
+    <th align="center">게임 대기 화면</th>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="./images/2.png" width="80%">
+    </td>
+  </tr>
+
+  <tr>
+    <th align="center">게임 화면(카카오 맵 부분)</th>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="./images/3.png" width="80%">
+    </td>
+  </tr>
+
+  <tr>
+    <th align="center">스탬프 QR코드 생성(관리자)</th>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="./images/4.png" width="80%">
+    </td>
+  </tr>
+
+  <tr>
+    <th align="center">스탬프 촬영</th>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="./images/5.png" width="80%">
+    </td>
+  </tr>
+
+  <tr>
+    <th align="center">축제 정보 리스트</th>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="./images/6.png" width="80%">
+    </td>
+  </tr>
+
+</table>
+
 ## 5. 기술 스택
 
 ### 5.1 Back-End
