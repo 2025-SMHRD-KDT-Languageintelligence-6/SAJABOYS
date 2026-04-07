@@ -26,7 +26,7 @@
 
 ## 4. 화면 구성
 
-<table width="50%">
+<table width="100%">
   <tr>
     <th align="center">메인 화면</th>
   </tr>
