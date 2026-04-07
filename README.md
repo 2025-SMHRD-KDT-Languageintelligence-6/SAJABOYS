@@ -32,47 +32,47 @@
 <table>
   <tr>
     <td align="center" width="110"><img src="./images/Java.svg" width="45" height="45"><br>Java</td>
-    <td align="center" width="110"><img src="https://cdn.simpleicons.org/springboot/6DB33F" width="45" height="45"><br>Spring Boot</td>
-    <td align="center" width="110"><img src="https://cdn.simpleicons.org/springsecurity/6DB33F" width="45" height="45"><br>Spring Security</td>
-    <td align="center" width="110"><img src="https://raw.githubusercontent.com/mybatis/logo/master/logo-bird-ninja.svg" width="45" height="45"><br>MyBatis</td>
-    <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tomcat/tomcat-original.svg" width="45" height="45"><br>Tomcat</td>
-    <td align="center" width="110"><img src="https://cdn.simpleicons.org/socketdotio/black" width="45" height="45"><br>WebSocket</td>
+    <td align="center" width="110"><img src="./images/Spring Boot.svg" width="45" height="45"><br>Spring Boot</td>
+    <td align="center" width="110"><img src="./images/Spring Security.svg" width="45" height="45"><br>Spring Security</td>
+    <td align="center" width="110"><img src="./images/MyBatis.svg" width="45" height="45"><br>MyBatis</td>
+    <td align="center" width="110"><img src="./images/Tomcat.svg" width="45" height="45"><br>Tomcat</td>
+    <td align="center" width="110"><img src="./images/WebSocket.svg" width="45" height="45"><br>WebSocket</td>
   </tr>
 </table>
 
 ### 5.2 Front-End
 <table>
   <tr>
-    <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="45" height="45"><br>HTML5</td>
-    <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" width="45" height="45"><br>CSS3</td>
-    <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="45" height="45"><br>JavaScript</td>
+    <td align="center" width="110"><img src="./images/HTML.svg" width="45" height="45"><br>HTML5</td>
+    <td align="center" width="110"><img src="./images/CSS.svg" width="45" height="45"><br>CSS3</td>
+    <td align="center" width="110"><img src="./images/JavaScript.svg" width="45" height="45"><br>JavaScript</td>
   </tr>
 </table>
 
 ### 5.3 DB
 <table>
   <tr>
-    <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" width="45" height="45"><br>MySQL</td>
+    <td align="center" width="110"><img src="./images/MySQL.svg" width="45" height="45"><br>MySQL</td>
   </tr>
 </table>
 
 ### 5.4 Tools
 <table>
   <tr>
-    <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" width="45" height="45"><br>GitHub</td>
-    <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" width="45" height="45"><br>VS Code</td>
-    <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-original.svg" width="45" height="45"><br>IntelliJ IDEA</td>
-    <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg" width="45" height="45"><br>Jupyter Notebook</td>
+    <td align="center" width="110"><img src="./images/GitHub.svg" width="45" height="45"><br>GitHub</td>
+    <td align="center" width="110"><img src="./images/VS Code.svg" width="45" height="45"><br>VS Code</td>
+    <td align="center" width="110"><img src="./images/IntelliJ IDEA.svg" width="45" height="45"><br>IntelliJ IDEA</td>
+    <td align="center" width="110"><img src="./images/Jupyter Notebook.svg" width="45" height="45"><br>Jupyter Notebook</td>
   </tr>
 </table>
 
 ### 5.5 AI&Model Serving
 <table>
   <tr>
-    <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="45" height="45"><br>Python</td>
-    <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" width="45" height="45"><br>Pandas</td>
-    <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scikitlearn/scikitlearn-original.svg" width="45" height="45"><br>Scikit-learn</td>
-    <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" width="45" height="45"><br>FastAPI</td>
-    <td align="center" width="110"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" width="45" height="45"><br>Flask</td>
+    <td align="center" width="110"><img src="./images/Python.svg" width="45" height="45"><br>Python</td>
+    <td align="center" width="110"><img src="./images/Pandas.svg" width="45" height="45"><br>Pandas</td>
+    <td align="center" width="110"><img src="./images/Scikit-learn.svg" width="45" height="45"><br>Scikit-learn</td>
+    <td align="center" width="110"><img src="./images/FastAPI.svg" width="45" height="45"><br>FastAPI</td>
+    <td align="center" width="110"><img src="./images/Flask.svg" width="45" height="45"><br>Flask</td>
   </tr>
 </table>
