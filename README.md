@@ -26,13 +26,13 @@
 
 ## 4. 화면 구성
 
-<table width="100%">
+<table width="50%">
   <tr>
     <th align="center">메인 화면</th>
   </tr>
   <tr>
     <td align="center">
-      <img src="./images/1.png" width="50%">
+      <img src="./images/1.png" width="80%">
     </td>
   </tr>
 
@@ -41,7 +41,7 @@
   </tr>
   <tr>
     <td align="center">
-      <img src="./images/2.png" width="50%">
+      <img src="./images/2.png" width="80%">
     </td>
   </tr>
 
@@ -50,7 +50,7 @@
   </tr>
   <tr>
     <td align="center">
-      <img src="./images/3.png" width="50%">
+      <img src="./images/3.png" width="80%">
     </td>
   </tr>
 
@@ -59,7 +59,7 @@
   </tr>
   <tr>
     <td align="center">
-      <img src="./images/4.png" width="50%">
+      <img src="./images/4.png" width="80%">
     </td>
   </tr>
 
@@ -68,7 +68,7 @@
   </tr>
   <tr>
     <td align="center">
-      <img src="./images/5.png" width="50%">
+      <img src="./images/5.png" width="80%">
     </td>
   </tr>
 
@@ -77,7 +77,7 @@
   </tr>
   <tr>
     <td align="center">
-      <img src="./images/6.png" width="50%">
+      <img src="./images/6.png" width="80%">
     </td>
   </tr>
 
