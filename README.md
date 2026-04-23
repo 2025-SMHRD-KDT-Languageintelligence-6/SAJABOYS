@@ -129,7 +129,6 @@
     <td align="center" width="110"><img src="./images/Python.svg" width="45" height="45"><br>Python</td>
     <td align="center" width="110"><img src="./images/Pandas.svg" width="45" height="45"><br>Pandas</td>
     <td align="center" width="110"><img src="./images/Scikit-learn.svg" width="45" height="45"><br>Scikit-learn</td>
-    <td align="center" width="110"><img src="./images/FastAPI.svg" width="45" height="45"><br>FastAPI</td>
     <td align="center" width="110"><img src="./images/Flask.svg" width="45" height="45"><br>Flask</td>
   </tr>
 </table>
